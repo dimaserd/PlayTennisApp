@@ -1,0 +1,427 @@
+import 'package:flutter/material.dart';
+import 'package:play_tennis/baseApiResponseUtils.dart';
+import '../../../logic/ptc/models/PlayerRegistrationRequest.dart';
+import '../../../main-settings.dart';
+import '../../../main.dart';
+import '../../ptc/widgets/CountryAndCitySelectWidget.dart';
+import 'Inputs/DatePickerInput.dart';
+import 'Inputs/DropdownWidget.dart';
+import 'Inputs/PasswordInput.dart';
+import 'Inputs/PhoneNumberInput.dart';
+import 'Inputs/TextInput.dart';
+import 'Loading.dart';
+
+class RegistrationForm extends StatefulWidget {
+  final Function onLogin;
+  const RegistrationForm({super.key, required this.onLogin});
+
+  @override
+  State<RegistrationForm> createState() => _RegistrationFormState();
+}
+
+class _RegistrationFormState extends State<RegistrationForm> {
+  bool isRegistrationInProgress = false;
+  int step = 0;
+
+  DropdownWidgetItem? selectedSex;
+  DropdownWidgetItem selectedNTRP = DropdownWidgetItem(
+    label: "1.0",
+    value: "1.0",
+  );
+  final CountryAndCitySelectController countryAndCitySelectController =
+      CountryAndCitySelectController();
+  final TextEditingController emailTextController = TextEditingController();
+
+  final TextEditingController passTextController = TextEditingController();
+
+  final TextEditingController nameTextController = TextEditingController();
+
+  final TextEditingController surnameTextController = TextEditingController();
+
+  final TextEditingController patronymicTextController =
+      TextEditingController();
+
+  final TextEditingController phoneTextController = TextEditingController();
+  final TextEditingController aboutMeTextController = TextEditingController();
+
+  final EdgeInsets padding =
+      const EdgeInsets.only(top: 10, left: 20, right: 20);
+
+  late DateTime birthDate = DateTime.now();
+
+  List<Widget> getFormWidgets() {
+    if (isRegistrationInProgress) {
+      return [
+        const Loading(text: "Регистрируемся"),
+      ];
+    }
+
+    if (step == 0) {
+      return getFirstStepWidgets();
+    }
+
+    if (step == 1) {
+      return getSecondStepWidgets();
+    }
+
+    return getThirdStepWidgets();
+  }
+
+  submitFirstStep() {
+    if (!validateFirstStep()) {
+      return;
+    }
+
+    setState(() {
+      step = 1;
+    });
+  }
+
+  bool validateFirstStep() {
+    if (countryAndCitySelectController.country == null ||
+        countryAndCitySelectController.city == null) {
+      showError("Вы не указали страну или город");
+      return false;
+    }
+
+    return true;
+  }
+
+  showError(String errorMessage) {
+    BaseApiResponseUtils.showError(context, errorMessage);
+  }
+
+  submitSecondStep() {
+    if (!validateSecondStep()) {
+      return;
+    }
+
+    setState(() {
+      step = 2;
+    });
+  }
+
+  bool validateSecondStep() {
+    if (surnameTextController.text == "") {
+      showError("Вы не указали вашу фамилию");
+      return false;
+    }
+
+    if (nameTextController.text == "") {
+      showError("Вы не указали ваше имя");
+      return false;
+    }
+
+    if (patronymicTextController.text == "") {
+      showError("Вы не указали ваше отчество");
+      return false;
+    }
+
+    if (selectedSex == null) {
+      showError("Вы не указали ваш пол");
+      return false;
+    }
+
+    if (aboutMeTextController.text == "") {
+      showError("Вы ничего не указали в разделе Обо мне");
+      return false;
+    }
+
+    return true;
+  }
+
+  List<Widget> getThirdStepWidgets() {
+    return [
+      Padding(
+        padding: padding,
+        child: TextInput(
+          labelText: "Адрес электронной почты",
+          textController: emailTextController,
+        ),
+      ),
+      Padding(
+        padding: padding,
+        child: PhoneNumberInput(
+          labelText: "Номер телефона",
+          textController: phoneTextController,
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.only(top: 0, left: 20, right: 20, bottom: 10),
+        child: PasswordInput(
+          textController: passTextController,
+        ),
+      ),
+      getRegistrationBtn(),
+      getBackBtn(),
+    ];
+  }
+
+  List<Widget> getSecondStepWidgets() {
+    return [
+      Padding(
+        padding: padding,
+        child: TextInput(
+          labelText: "Фамилия",
+          textController: surnameTextController,
+        ),
+      ),
+      Padding(
+        padding: padding,
+        child: TextInput(
+          labelText: "Имя",
+          textController: nameTextController,
+        ),
+      ),
+      Padding(
+        padding: padding,
+        child: TextInput(
+          labelText: "Отчество",
+          textController: patronymicTextController,
+        ),
+      ),
+      Padding(
+        padding: padding,
+        child: DropdownWidget(
+          label: "Пол",
+          items: [
+            DropdownWidgetItem(label: "Мужской", value: "true"),
+            DropdownWidgetItem(label: "Женский", value: "false"),
+          ],
+          changedHandler: (p) => selectedSex = p,
+          value: selectedSex,
+        ),
+      ),
+      Padding(
+        padding: padding,
+        child: DatePickerInput(
+          label: "Дата рождения",
+          dateChanged: (p) {
+            if (p != null) {
+              birthDate = p;
+            }
+          },
+          defaultValue: birthDate,
+        ),
+      ),
+      Padding(
+        padding: padding,
+        child: DropdownWidget(
+          label: "NTRP уровень",
+          items: [
+            DropdownWidgetItem(label: "1.0", value: "1.0"),
+            DropdownWidgetItem(label: "1.5", value: "1.5"),
+            DropdownWidgetItem(label: "2.0", value: "2.0"),
+            DropdownWidgetItem(label: "2.5", value: "2.5"),
+            DropdownWidgetItem(label: "3.0", value: "3.0"),
+            DropdownWidgetItem(label: "3.5", value: "3.5"),
+            DropdownWidgetItem(label: "4.0", value: "4.0"),
+            DropdownWidgetItem(label: "4.5", value: "4.5"),
+            DropdownWidgetItem(label: "5.0", value: "5.0"),
+            DropdownWidgetItem(label: "5.5", value: "5.5"),
+            DropdownWidgetItem(label: "6.0", value: "6.0"),
+            DropdownWidgetItem(label: "6.5", value: "6.5"),
+            DropdownWidgetItem(label: "7.0", value: "7.0"),
+          ],
+          changedHandler: (p) {
+            if (p != null) {
+              selectedNTRP = p;
+            }
+          },
+          value: selectedNTRP,
+        ),
+      ),
+      Padding(
+        padding: padding,
+        child: TextAreaInput(
+          labelText: "Обо мне",
+          textController: aboutMeTextController,
+          maxLines: 4,
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.only(top: 8.0, left: 20, right: 20),
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.black,
+            minimumSize: const Size.fromHeight(40), // NEW
+          ),
+          onPressed: () => submitSecondStep(),
+          child: const Text("Далее"),
+        ),
+      ),
+      getBackBtn(),
+      getAuthorizationBtn()
+    ];
+  }
+
+  List<Widget> getFirstStepWidgets() {
+    return [
+      Padding(
+        padding: padding,
+        child: CountryAndCitySelect(
+          onCountryChanged: (p) {},
+          onCityChanged: (p) {},
+          controller: countryAndCitySelectController,
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.only(top: 8.0, left: 20, right: 20),
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.black,
+            minimumSize: const Size.fromHeight(40), // NEW
+          ),
+          onPressed: () => submitFirstStep(),
+          child: const Text("Далее"),
+        ),
+      ),
+      getAuthorizationBtn()
+    ];
+  }
+
+  Widget getAuthorizationBtn() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 18.0),
+      child: TextButton(
+        child: const Text("Авторизоваться"),
+        onPressed: () {
+          Navigator.of(context).pushNamedAndRemoveUntil("/login", (r) => false);
+        },
+      ),
+    );
+  }
+
+  Widget getBackBtn() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10.0, left: 20, right: 20),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.lightBlue,
+          minimumSize: const Size.fromHeight(40), // NEW
+        ),
+        onPressed: () => {
+          setState(() {
+            step--;
+          })
+        },
+        child: const Text("Назад"),
+      ),
+    );
+  }
+
+  Widget getRegistrationBtn() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 5.0, left: 20, right: 20),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.black,
+          minimumSize: const Size.fromHeight(40), // NEW
+        ),
+        onPressed: () => onPressed(context),
+        child: const Text("Зарегистрироваться"),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.only(bottom: 15, top: 20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SizedBox(
+              height: 30,
+            ),
+            const Text(
+              MainSettings.appName,
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
+            ),
+            Image.asset(
+              MainSettings.imageLogoPath,
+              height: 150,
+              width: 150,
+            ),
+            ...getFormWidgets(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> onPressed(BuildContext context) async {
+    if (isRegistrationInProgress) {
+      return;
+    }
+    setState(() {
+      isRegistrationInProgress = true;
+    });
+
+    try {
+      var model = PlayerRegistrationRequest();
+      model.email = emailTextController.text;
+      model.name = nameTextController.text;
+      model.surname = surnameTextController.text;
+      model.patronymic = patronymicTextController.text;
+      model.phoneNumber = phoneTextController.text
+          .replaceAll("(", "")
+          .replaceAll(")", "")
+          .replaceAll("-", "");
+
+      model.password = passTextController.text;
+
+      model.cityId = countryAndCitySelectController.city!.id;
+      model.countryId = countryAndCitySelectController.country!.id;
+      model.noCityOrCountryFilled = false;
+      model.cityOrCountry = "";
+
+      model.aboutMe = aboutMeTextController.text;
+      model.ntrpRating = selectedNTRP.value;
+      model.sex = selectedSex!.value == "true";
+      model.birthDate = birthDate;
+
+      var regResponse = await MyApp.playerRegistrationService.register(model);
+
+      if (!regResponse.isSucceeded) {
+        setState(() {
+          isRegistrationInProgress = false;
+        });
+
+        _errorHandler(regResponse.message);
+        return;
+      }
+
+      var authResponse = await MyApp.loginService.checkLogin();
+
+      if (!authResponse) {
+        _errorHandler("Произошла ошибка при авторизации");
+
+        setState(() {
+          isRegistrationInProgress = false;
+        });
+        return;
+      }
+
+      _errorHandler("Регистрация и авторизация прошла успешно");
+
+      widget.onLogin();
+
+      setState(() {
+        isRegistrationInProgress = false;
+      });
+    } catch (e) {
+      _errorHandler(
+          "Произошла ошибка при регистрации. Проверьте интернет соединение.");
+      setState(() {
+        isRegistrationInProgress = false;
+      });
+    } finally {}
+  }
+
+  void _errorHandler(String error) {
+    BaseApiResponseUtils.showError(context, error);
+  }
+}

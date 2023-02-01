@@ -1,0 +1,164 @@
+import 'dart:async';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+import '../../../../logic/clt/models/CurrentLoginData.dart';
+import 'package:url_launcher/url_launcher.dart';
+import '../../../../logic/ptc/models/game-requests/GameRequestSimpleModel.dart';
+import '../../../../logic/ptc/models/game-requests/SearchGameRequests.dart';
+import '../../../../main-settings.dart';
+import '../../../../main.dart';
+import '../CountryAndCitySelectWidget.dart';
+import 'GameRequestsList.dart';
+
+class SearchGameRequestsForm extends StatefulWidget {
+  final bool showMine;
+  final CountryAndCitySelectController countryAndCitySelectController;
+
+  const SearchGameRequestsForm({
+    super.key,
+    required this.countryAndCitySelectController,
+    required this.showMine,
+  });
+
+  @override
+  State<SearchGameRequestsForm> createState() => _SearchGameRequestsFormState();
+}
+
+class _SearchGameRequestsFormState extends State<SearchGameRequestsForm> {
+  final ButtonStyle style = ElevatedButton.styleFrom(
+    textStyle: const TextStyle(fontSize: 20),
+  );
+
+  final TextEditingController queryController = TextEditingController();
+
+  CurrentLoginData? loginData;
+  bool isLoaded = false;
+
+  List<GameRequestSimpleModel> requests = [];
+  Timer? timer;
+
+  @override
+  void initState() {
+    super.initState();
+    MyApp.loginService.getLoginData().then((value) {
+      loginData = value;
+      setState(() {
+        isLoaded = true;
+      });
+      getData();
+    });
+
+    timer = Timer.periodic(const Duration(seconds: 2), (Timer t) => getData());
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        CountryAndCitySelect(
+          onCityChanged: (p) {},
+          onCountryChanged: (p) {},
+          controller: widget.countryAndCitySelectController,
+        ),
+        MainSettings.showSiteUrls
+            ? Padding(
+                padding:
+                    const EdgeInsets.only(left: 10.0, right: 10.0, top: 10),
+                child: RichText(
+                  text: TextSpan(
+                    children: [
+                      const TextSpan(
+                        text: 'Все заявки на игры попадают в специальный ',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      TextSpan(
+                        text: 'чат',
+                        style: const TextStyle(color: Colors.blue),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            _launchUrl(Uri.parse(
+                                "https://docs.flutter.io/flutter/services/UrlLauncher-class.html"));
+                          },
+                      ),
+                      const TextSpan(
+                        text: '.',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            : const SizedBox.shrink(),
+        Container(
+          margin: const EdgeInsets.only(top: 5),
+          width: double.infinity,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 8.0,
+                ),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black,
+                    minimumSize: const Size.fromHeight(36), // NEW
+                  ),
+                  onPressed: () {
+                    getData();
+                  },
+                  child: const Text("Поиск"),
+                ),
+              ),
+            ],
+          ),
+        ),
+        isLoaded
+            ? Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: GameRequestsList(
+                  requests: requests,
+                  loginData: loginData!,
+                  onChange: getData,
+                ),
+              )
+            : const SizedBox.shrink(),
+      ],
+    );
+  }
+
+  getData() {
+    var playerRequest = SearchGameRequests(
+      q: queryController.text,
+      countryId: widget.countryAndCitySelectController.country != null
+          ? widget.countryAndCitySelectController.country!.id
+          : null,
+      cityId: widget.countryAndCitySelectController.city != null
+          ? widget.countryAndCitySelectController.city!.id
+          : null,
+      showMine: widget.showMine,
+      count: 30,
+      offSet: 0,
+    );
+
+    MyApp.gameRequestsService.search(playerRequest).then((value) {
+      if (!mounted) return;
+      setState(() {
+        requests = value.list;
+      });
+    });
+  }
+
+  @override
+  dispose() {
+    timer?.cancel();
+    super.dispose();
+  }
+
+  Future<void> _launchUrl(Uri url) async {
+    if (!await launchUrl(url)) {
+      throw 'Could not launch $url';
+    }
+  }
+}
