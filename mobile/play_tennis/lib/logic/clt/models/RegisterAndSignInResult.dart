@@ -10,14 +10,12 @@ class RegisterAndSignInResult {
     required this.loginResult,
   });
 
-  factory RegisterAndSignInResult.fromJson(Map<String, dynamic> json) =>
-      new RegisterAndSignInResult(
+  factory RegisterAndSignInResult.fromJson(Map<String, dynamic> json) => RegisterAndSignInResult(
         registrationResult: json["registrationResult"] != null
             ? RegistrationResult?.fromJson(json["registrationResult"])
             : null,
-        loginResult: json["loginResult"] != null
-            ? LoginResultModel?.fromJson(json["loginResult"])
-            : null,
+        loginResult:
+            json["loginResult"] != null ? LoginResultModel?.fromJson(json["loginResult"]) : null,
       );
 
   Map<String, dynamic> toJson() => {

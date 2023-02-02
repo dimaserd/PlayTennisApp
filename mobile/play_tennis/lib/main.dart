@@ -21,20 +21,15 @@ void main() {
 
 class MyApp extends StatelessWidget {
   static bool inProccess = false;
-  static final NetworkService networkService =
-      NetworkService(MainSettings.domain);
+  static final NetworkService networkService = NetworkService(MainSettings.domain);
   static final LoginService loginService = LoginService(networkService);
-  static final RegistrationService registrationService =
-      RegistrationService(networkService);
+  static final RegistrationService registrationService = RegistrationService(networkService);
   static final ClientService clientService = ClientService(networkService);
   static final PlayerRegistrationService playerRegistrationService =
       PlayerRegistrationService(networkService);
   static final FilesService filesService = FilesService(networkService);
-
   static final CountryService countryService = CountryService(networkService);
-
-  static final GameRequestsService gameRequestsService =
-      GameRequestsService(networkService);
+  static final GameRequestsService gameRequestsService = GameRequestsService(networkService);
 
   static final PlayerService playerService = PlayerService(networkService);
   static final GameService gameService = GameService(networkService);

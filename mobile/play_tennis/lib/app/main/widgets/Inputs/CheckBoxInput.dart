@@ -13,6 +13,7 @@ import '../palette.dart';
 class CheckBoxInput extends StatefulWidget {
   late final bool isChecked;
   final Function(bool) onChangeFunction;
+
   CheckBoxInput({
     super.key,
     required this.isChecked,

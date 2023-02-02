@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerData.dart';
+import 'package:play_tennis/logic/ptc/services/PlayerService.dart';
+import 'package:play_tennis/main.dart';
 import 'CountryAndCitySelectWidget.dart';
 import 'EditMainDataWidget.dart';
 import 'EditPlayerAvatarWidget.dart';
@@ -37,6 +40,8 @@ class EditProfileWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<EditProfileWidget> {
   final List<Item> _data = generateItems(3);
+
+  final countryAndCitySelectController = CountryAndCitySelectController();
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +88,7 @@ class _MyStatefulWidgetState extends State<EditProfileWidget> {
                 child: CountryAndCitySelect(
                   onCountryChanged: (p) {},
                   onCityChanged: (p) {},
-                  controller: CountryAndCitySelectController(),
+                  controller: countryAndCitySelectController,
                 ),
               ),
               Padding(
@@ -96,7 +101,30 @@ class _MyStatefulWidgetState extends State<EditProfileWidget> {
                     backgroundColor: Colors.black,
                     minimumSize: const Size.fromHeight(40), // NEW
                   ),
-                  onPressed: () {},
+                  onPressed: () async {
+                    final country = countryAndCitySelectController.country;
+                    final city = countryAndCitySelectController.city;
+
+                    // print("  >> country name : ${country != null ? country.name : "none"}");
+                    // print("  >>    city name : ${city != null ? city.name : "none"}");
+
+                    final String? countryId = country?.id;
+                    final String? cityId = city?.id;
+
+                    final model = UpdateCountryAndCityDataRequest(
+                      countryId: countryId,
+                      cityId: cityId,
+                    );
+
+                    final data = await MyApp.playerService.updateCityAndCountryData(model);
+
+                    if (mounted) {
+                      BaseApiResponseUtils.handleResponse(
+                        context,
+                        data,
+                      );
+                    }
+                  },
                   child: const Text("Сохранить"),
                 ),
               ),
