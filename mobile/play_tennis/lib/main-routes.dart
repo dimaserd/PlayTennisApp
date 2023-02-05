@@ -3,6 +3,7 @@ import 'package:play_tennis/app/main/screens/ChangeAvatarScreen.dart';
 import 'package:play_tennis/app/ptc/screens/AddGameRequestScreen.dart';
 import 'package:play_tennis/app/ptc/screens/CreateGameScreen.dart';
 import 'package:play_tennis/app/ptc/screens/MyGamesScreen.dart';
+import 'package:play_tennis/app/ptc/screens/TrainersPage.dart';
 import 'app/main/screens/CheckAuthScreen.dart';
 import 'app/main/screens/LoginScreen.dart';
 import 'app/main/screens/ProfileScreen.dart';
@@ -48,13 +49,11 @@ class MainRoutes {
     }
 
     if (settings.name == '/registration') {
-      return MaterialPageRoute(
-          builder: (context) => const RegistrationScreen());
+      return MaterialPageRoute(builder: (context) => const RegistrationScreen());
     }
 
     if (settings.name == '/change-avatar') {
-      return MaterialPageRoute(
-          builder: (context) => const ChangeAvatarScreen());
+      return MaterialPageRoute(builder: (context) => const ChangeAvatarScreen());
     }
 
     if (settings.name == '/profile') {
@@ -69,12 +68,15 @@ class MainRoutes {
       return MaterialPageRoute(builder: (context) => const MyGamesScreen());
     }
 
+    if (settings.name == '/trainers') {
+      return MaterialPageRoute(builder: (context) => const TrainersPage());
+    }
+
     //Многоуровневые маршруты
     var uri = Uri.parse(settings.name!);
 
     // Обработка '/subject/:id'
-    if (uri.pathSegments.length == 2 &&
-        uri.pathSegments.first == 'show-image') {
+    if (uri.pathSegments.length == 2 && uri.pathSegments.first == 'show-image') {
       var fileId = int.parse(uri.pathSegments[1]);
       print("show-image logic $fileId");
       return MaterialPageRoute(
@@ -92,8 +94,7 @@ class MainRoutes {
       );
     }
 
-    if (uri.pathSegments.length == 2 &&
-        uri.pathSegments.first == 'game-request') {
+    if (uri.pathSegments.length == 2 && uri.pathSegments.first == 'game-request') {
       var id = uri.pathSegments[1];
       return MaterialPageRoute(
         builder: (context) => GameRequestScreen(id: id),
@@ -101,15 +102,13 @@ class MainRoutes {
     }
 
     if (settings.name == '/game-requests/add') {
-      return MaterialPageRoute(
-          builder: (context) => const AddGameRequestScreen());
+      return MaterialPageRoute(builder: (context) => const AddGameRequestScreen());
     }
 
     if (settings.name == '/games/add') {
       return MaterialPageRoute(builder: (context) => const CreateGameScreen());
     }
 
-    return MaterialPageRoute(
-        builder: (context) => RouteNotFoundScreen(settings.name));
+    return MaterialPageRoute(builder: (context) => RouteNotFoundScreen(settings.name));
   }
 }

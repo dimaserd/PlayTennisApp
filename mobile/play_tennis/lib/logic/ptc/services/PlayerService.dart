@@ -7,16 +7,52 @@ import '../models/PlayerModel.dart';
 import '../models/SearchPlayersRequest.dart';
 import '../models/players/UpdateDataByPlayerRequest.dart';
 
+class UpdateCountryAndCityDataRequest {
+  late String? countryId;
+  late String? cityId;
+
+  UpdateCountryAndCityDataRequest({
+    required this.countryId,
+    required this.cityId,
+  });
+
+  factory UpdateCountryAndCityDataRequest.fromJson(Map<String, dynamic> json) =>
+      UpdateCountryAndCityDataRequest(
+        countryId: json["countryId"],
+        cityId: json["cityId"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        'countryId': countryId,
+        'cityId': cityId,
+      };
+}
+
 class PlayerService {
   final NetworkService networkService;
+
   PlayerService(this.networkService);
+
+  Future<BaseApiResponse> updateCityAndCountryData(UpdateCountryAndCityDataRequest model) async {
+    Map<String, dynamic> map = model.toJson();
+    String bodyJson = jsonEncode(map);
+
+    print("bodyJson = $bodyJson");
+
+    var response = await networkService.postData('/api/ptc/player/Data/City/Update', bodyJson);
+
+    var json = jsonDecode(response);
+
+    print("responseJson = $json");
+
+    return BaseApiResponse.fromJson(json);
+  }
 
   Future<GetListResult<PlayerModel>> search(SearchPlayersRequest model) async {
     var map = model.toJson();
     var bodyJson = jsonEncode(map);
 
-    var responseBody =
-        await networkService.postData('/api/ptc/player/search', bodyJson);
+    var responseBody = await networkService.postData('/api/ptc/player/search', bodyJson);
 
     var json = jsonDecode(responseBody);
 
@@ -37,8 +73,8 @@ class PlayerService {
       return BaseApiResponse(isSucceeded: false, message: "Код не указан");
     }
 
-    var responseBody = await networkService.postData(
-        '/api/ptc/player/Data/Email/Confirm/$code', "{}");
+    var responseBody =
+        await networkService.postData('/api/ptc/player/Data/Email/Confirm/$code', "{}");
 
     var json = jsonDecode(responseBody);
 
@@ -75,8 +111,7 @@ class PlayerService {
     var map = model.toJson();
     var bodyJson = jsonEncode(map);
 
-    var response =
-        await networkService.postData('/api/ptc/player/Data/Update', bodyJson);
+    var response = await networkService.postData('/api/ptc/player/Data/Update', bodyJson);
 
     var json = jsonDecode(response);
 
@@ -84,8 +119,7 @@ class PlayerService {
   }
 
   Future<PlayerLocationData?> getLocationData() async {
-    var response =
-        await networkService.getData('/api/ptc/player/Data/Location/Get');
+    var response = await networkService.getData('/api/ptc/player/Data/Location/Get');
 
     if (response == "null") {
       return null;

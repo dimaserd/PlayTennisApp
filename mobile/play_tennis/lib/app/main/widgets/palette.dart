@@ -2,21 +2,20 @@ import 'package:flutter/material.dart';
 
 //http://hex2rgba.devoth.com/ hex to rgba
 
-Color mainColor = const Color.fromRGBO(48, 51, 54, 1);
+const Color mainColor = Color.fromRGBO(48, 51, 54, 1);
 
-Map<int, Color> godografColorMap = {
-  50: const Color.fromRGBO(48, 51, 54, .1),
-  100: const Color.fromRGBO(48, 51, 54, .2),
-  200: const Color.fromRGBO(48, 51, 54, .3),
-  300: const Color.fromRGBO(48, 51, 54, .4),
-  400: const Color.fromRGBO(48, 51, 54, .5),
-  500: const Color.fromRGBO(48, 51, 54, .6),
-  600: const Color.fromRGBO(48, 51, 54, .7),
-  700: const Color.fromRGBO(48, 51, 54, .8),
-  800: const Color.fromRGBO(48, 51, 54, .9),
-  900: const Color.fromRGBO(48, 51, 54, 1),
+const Map<int, Color> godografColorMap = {
+  50: Color.fromRGBO(48, 51, 54, .1),
+  100: Color.fromRGBO(48, 51, 54, .2),
+  200: Color.fromRGBO(48, 51, 54, .3),
+  300: Color.fromRGBO(48, 51, 54, .4),
+  400: Color.fromRGBO(48, 51, 54, .5),
+  500: Color.fromRGBO(48, 51, 54, .6),
+  600: Color.fromRGBO(48, 51, 54, .7),
+  700: Color.fromRGBO(48, 51, 54, .8),
+  800: Color.fromRGBO(48, 51, 54, .9),
+  900: Color.fromRGBO(48, 51, 54, 1),
 };
-MaterialColor godografMaterialColor =
-    MaterialColor(0xFF303336, godografColorMap);
 
-MaterialColor mainMaterialColor = godografMaterialColor;
+const MaterialColor godografMaterialColor = MaterialColor(0xFF303336, godografColorMap);
+const MaterialColor mainMaterialColor = godografMaterialColor;
