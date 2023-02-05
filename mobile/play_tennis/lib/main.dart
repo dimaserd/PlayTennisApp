@@ -16,23 +16,25 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'main-settings.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   static bool inProccess = false;
-  static final NetworkService networkService = NetworkService(MainSettings.domain);
+
+  const MyApp({super.key});
+
+  static final GameService gameService = GameService(networkService);
   static final LoginService loginService = LoginService(networkService);
-  static final RegistrationService registrationService = RegistrationService(networkService);
   static final ClientService clientService = ClientService(networkService);
+  static final CountryService countryService = CountryService(networkService);
+  static final RegistrationService registrationService = RegistrationService(networkService);
+  static final GameRequestsService gameRequestsService = GameRequestsService(networkService);
+  static final NetworkService networkService = NetworkService(MainSettings.domain);
+  static final PlayerService playerService = PlayerService(networkService);
+  static final FilesService filesService = FilesService(networkService);
   static final PlayerRegistrationService playerRegistrationService =
       PlayerRegistrationService(networkService);
-  static final FilesService filesService = FilesService(networkService);
-  static final CountryService countryService = CountryService(networkService);
-  static final GameRequestsService gameRequestsService = GameRequestsService(networkService);
-
-  static final PlayerService playerService = PlayerService(networkService);
-  static final GameService gameService = GameService(networkService);
 
   @override
   Widget build(BuildContext context) {
