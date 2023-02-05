@@ -14,8 +14,8 @@ class DropdownWidget extends StatefulWidget {
   final Function(DropdownWidgetItem?) changedHandler;
   late DropdownWidgetItem? value;
 
-  double maxHeight = 0;
-  double defaultMaxHeight = 350;
+  late double maxHeight = 0;
+  late final double defaultMaxHeight = 350;
 
   DropdownWidget({
     super.key,
