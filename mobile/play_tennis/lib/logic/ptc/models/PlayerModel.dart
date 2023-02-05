@@ -35,7 +35,7 @@ class PlayerModel {
     required this.avatarFileId,
   });
 
-  factory PlayerModel.fromJson(Map<String, dynamic> json) => new PlayerModel(
+  factory PlayerModel.fromJson(Map<String, dynamic> json) => PlayerModel(
         id: json["id"],
         aboutMe: json["aboutMe"],
         sex: json["sex"],

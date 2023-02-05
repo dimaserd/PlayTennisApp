@@ -8,7 +8,7 @@ class AcceptGameRequestResponse {
   });
 
   factory AcceptGameRequestResponse.fromJson(Map<String, dynamic> json) =>
-      new AcceptGameRequestResponse(
+      AcceptGameRequestResponse(
         gameRequestId: json["gameRequestId"],
         playerId: json["playerId"],
       );

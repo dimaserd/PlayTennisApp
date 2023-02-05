@@ -18,7 +18,7 @@ class GameRequestSimpleModel {
   });
 
   factory GameRequestSimpleModel.fromJson(Map<String, dynamic> json) =>
-      new GameRequestSimpleModel(
+      GameRequestSimpleModel(
         id: json["id"],
         author: json["author"] != null
             ? PlayerModel?.fromJson(json["author"])
