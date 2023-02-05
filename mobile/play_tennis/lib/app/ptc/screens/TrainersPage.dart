@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/side_drawer.dart';
+import 'package:play_tennis/main-settings.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class TrainersPage extends StatelessWidget {
@@ -24,7 +25,7 @@ class TrainersPage extends StatelessWidget {
             ),
             recognizer: TapGestureRecognizer()
               ..onTap = () => _launchUrl(
-                    Uri.parse("https://play-tennis.online/ptc/trainers"),
+                    Uri.parse("${MainSettings.domain}/ptc/trainers"),
                   ),
           ),
         ),
