@@ -8,7 +8,8 @@ class GameRequestResponsesList extends StatelessWidget {
   final CurrentLoginData loginData;
   final String requestId;
 
-  GameRequestResponsesList({
+  const GameRequestResponsesList({
+    super.key,
     required this.requestId,
     required this.responses,
     required this.loginData,

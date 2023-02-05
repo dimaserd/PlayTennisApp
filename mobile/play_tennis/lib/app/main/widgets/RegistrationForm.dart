@@ -361,27 +361,32 @@ class _RegistrationFormState extends State<RegistrationForm> {
     });
 
     try {
-      var model = PlayerRegistrationRequest();
-      model.email = emailTextController.text;
-      model.name = nameTextController.text;
-      model.surname = surnameTextController.text;
-      model.patronymic = patronymicTextController.text;
-      model.phoneNumber = phoneTextController.text
+      var phone = phoneTextController.text
           .replaceAll("(", "")
           .replaceAll(")", "")
           .replaceAll("-", "");
 
-      model.password = passTextController.text;
-
-      model.cityId = countryAndCitySelectController.city!.id;
-      model.countryId = countryAndCitySelectController.country!.id;
-      model.noCityOrCountryFilled = false;
-      model.cityOrCountry = "";
-
-      model.aboutMe = aboutMeTextController.text;
-      model.ntrpRating = selectedNTRP.value;
-      model.sex = selectedSex!.value == "true";
-      model.birthDate = birthDate;
+      var model = PlayerRegistrationRequest(
+        email: emailTextController.text,
+        name: nameTextController.text,
+        surname: surnameTextController.text,
+        patronymic: patronymicTextController.text,
+        phoneNumber: phone,
+        password: passTextController.text,
+        cityId: countryAndCitySelectController.city!.id,
+        countryId: countryAndCitySelectController.country!.id,
+        noCityOrCountryFilled: false,
+        cityOrCountry: "",
+        aboutMe: aboutMeTextController.text,
+        ntrpRating: selectedNTRP.value,
+        sex: selectedSex!.value == "true",
+        birthDate: birthDate,
+        noEmail: false,
+        birthDateNotSet: false,
+        useRegistrationLink: false,
+        registrationLinkId: null,
+        registrationSource: "PlayTennisApp",
+      );
 
       var regResponse = await MyApp.playerRegistrationService.register(model);
 

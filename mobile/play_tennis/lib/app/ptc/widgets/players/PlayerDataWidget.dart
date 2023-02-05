@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/images/PlayerAvatar.dart';
 import '../../../../logic/ptc/models/PlayerModel.dart';
-import '../../../main/widgets/images/CrocoAppImage.dart';
 
 class PlayerDataWidget extends StatelessWidget {
   PlayerModel player;

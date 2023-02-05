@@ -41,7 +41,7 @@ class PlayerData {
     required this.createdOn,
   });
 
-  factory PlayerData.fromJson(Map<String, dynamic> json) => new PlayerData(
+  factory PlayerData.fromJson(Map<String, dynamic> json) => PlayerData(
         aboutMe: json["aboutMe"],
         sex: json["sex"],
         dataFilled: json["dataFilled"],

@@ -15,7 +15,7 @@ class EditMainDataWidget extends StatefulWidget {
   late TextEditingController aboutMeTextController;
   late DateTime birthDate;
   late DropdownWidgetItem selectedSex;
-  EditMainDataWidget({required this.playerData}) : super() {
+  EditMainDataWidget({super.key, required this.playerData}) {
     surnameTextController = TextEditingController(text: playerData.surname);
     nameTextController = TextEditingController(text: playerData.name);
     patronymicTextController =
