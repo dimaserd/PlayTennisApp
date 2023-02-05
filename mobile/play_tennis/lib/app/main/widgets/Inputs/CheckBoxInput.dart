@@ -11,26 +11,14 @@ import '../palette.dart';
 
 /// This is the stateful widget that the main application instantiates.
 class CheckBoxInput extends StatefulWidget {
-  late final bool isChecked;
+  final bool isChecked;
   final Function(bool) onChangeFunction;
 
-  CheckBoxInput({
+  const CheckBoxInput({
     super.key,
     required this.isChecked,
     required this.onChangeFunction,
   });
-
-  static Color getColor(Set<MaterialState> states) {
-    const Set<MaterialState> interactiveStates = <MaterialState>{
-      MaterialState.pressed,
-      MaterialState.hovered,
-      MaterialState.focused,
-    };
-    if (states.any(interactiveStates.contains)) {
-      return Colors.blue;
-    }
-    return mainColor;
-  }
 
   @override
   State<CheckBoxInput> createState() => _CheckBoxInputState();
@@ -39,7 +27,10 @@ class CheckBoxInput extends StatefulWidget {
 /// This is the private State class that goes with MyStatefulWidget.
 class _CheckBoxInputState extends State<CheckBoxInput> {
   bool isChecked = false;
-  _CheckBoxInputState() {
+
+  @override
+  void initState() {
+    super.initState();
     isChecked = widget.isChecked;
   }
 
@@ -47,15 +38,29 @@ class _CheckBoxInputState extends State<CheckBoxInput> {
   Widget build(BuildContext context) {
     return Checkbox(
       checkColor: Colors.white,
-      fillColor: MaterialStateProperty.resolveWith(CheckBoxInput.getColor),
+      fillColor: MaterialStateProperty.resolveWith(_getColor),
       value: isChecked,
       onChanged: (bool? value) {
-        var val = value!;
+        final bool newValue = value!;
         setState(() {
-          isChecked = val;
+          isChecked = newValue;
         });
-        widget.onChangeFunction(val);
+        widget.onChangeFunction(newValue);
       },
     );
+  }
+
+  static Color _getColor(Set<MaterialState> states) {
+    const Set<MaterialState> interactiveStates = <MaterialState>{
+      MaterialState.pressed,
+      MaterialState.hovered,
+      MaterialState.focused,
+    };
+
+    if (states.any(interactiveStates.contains)) {
+      return Colors.blue;
+    }
+
+    return mainColor;
   }
 }
