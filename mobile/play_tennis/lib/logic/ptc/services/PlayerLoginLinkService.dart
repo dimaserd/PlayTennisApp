@@ -1,7 +1,5 @@
 import 'dart:convert';
-
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../clt/consts/SharedKeys.dart';
 import '../../core/NetworkService.dart';
 
@@ -79,11 +77,11 @@ class PlayerLoginLinkService {
     var bodyJson = jsonEncode(map);
 
     var response = await networkService.postDataInner(
-        'api/ptc/player-login/link/create', bodyJson, onError);
+        '/api/ptc/player-login/link/create', bodyJson, onError);
 
     if (response == null) {
       return CreateLoginLinkResult(
-        errorMessage: "Ссылка для авторизации не была получена c серверf",
+        errorMessage: "Ссылка для авторизации не была получена c сервера",
         isSucceeded: false,
         loginId: null,
         password: null,
