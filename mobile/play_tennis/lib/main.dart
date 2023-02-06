@@ -3,6 +3,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:play_tennis/app/main/widgets/palette.dart';
 import 'package:play_tennis/logic/files/services/FilesService.dart';
 import 'package:play_tennis/logic/ptc/services/GameService.dart';
+import 'package:play_tennis/logic/ptc/services/PlayerLoginLinkService.dart';
 import 'logic/clt/services/ClientService.dart';
 import 'logic/clt/services/RegistrationService.dart';
 import 'logic/clt/services/LoginService.dart';
@@ -28,13 +29,18 @@ class MyApp extends StatelessWidget {
   static final LoginService loginService = LoginService(networkService);
   static final ClientService clientService = ClientService(networkService);
   static final CountryService countryService = CountryService(networkService);
-  static final RegistrationService registrationService = RegistrationService(networkService);
-  static final GameRequestsService gameRequestsService = GameRequestsService(networkService);
-  static final NetworkService networkService = NetworkService(MainSettings.domain);
+  static final RegistrationService registrationService =
+      RegistrationService(networkService);
+  static final GameRequestsService gameRequestsService =
+      GameRequestsService(networkService);
+  static final NetworkService networkService =
+      NetworkService(MainSettings.domain);
   static final PlayerService playerService = PlayerService(networkService);
   static final FilesService filesService = FilesService(networkService);
   static final PlayerRegistrationService playerRegistrationService =
       PlayerRegistrationService(networkService);
+  static final PlayerLoginLinkService playerLoginLinkService =
+      PlayerLoginLinkService(networkService);
 
   @override
   Widget build(BuildContext context) {

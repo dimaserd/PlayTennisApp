@@ -4,6 +4,7 @@ import 'package:play_tennis/app/ptc/screens/AddGameRequestScreen.dart';
 import 'package:play_tennis/app/ptc/screens/CreateGameScreen.dart';
 import 'package:play_tennis/app/ptc/screens/MyGamesScreen.dart';
 import 'package:play_tennis/app/ptc/screens/TrainersPage.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'app/main/screens/CheckAuthScreen.dart';
 import 'app/main/screens/LoginScreen.dart';
 import 'app/main/screens/ProfileScreen.dart';
@@ -15,6 +16,9 @@ import 'app/ptc/screens/GameRequestScreen.dart';
 import 'app/ptc/screens/GamesRequestsScreen.dart';
 import 'app/ptc/screens/PlayerScreen.dart';
 import 'app/ptc/screens/PlayersScreen.dart';
+import 'baseApiResponseUtils.dart';
+import 'main-settings.dart';
+import 'main.dart';
 
 class MainRoutes {
   static MaterialPageRoute onGenerateRoute(RouteSettings settings) {
@@ -49,11 +53,13 @@ class MainRoutes {
     }
 
     if (settings.name == '/registration') {
-      return MaterialPageRoute(builder: (context) => const RegistrationScreen());
+      return MaterialPageRoute(
+          builder: (context) => const RegistrationScreen());
     }
 
     if (settings.name == '/change-avatar') {
-      return MaterialPageRoute(builder: (context) => const ChangeAvatarScreen());
+      return MaterialPageRoute(
+          builder: (context) => const ChangeAvatarScreen());
     }
 
     if (settings.name == '/profile') {
@@ -76,7 +82,8 @@ class MainRoutes {
     var uri = Uri.parse(settings.name!);
 
     // Обработка '/subject/:id'
-    if (uri.pathSegments.length == 2 && uri.pathSegments.first == 'show-image') {
+    if (uri.pathSegments.length == 2 &&
+        uri.pathSegments.first == 'show-image') {
       var fileId = int.parse(uri.pathSegments[1]);
       print("show-image logic $fileId");
       return MaterialPageRoute(
@@ -94,7 +101,8 @@ class MainRoutes {
       );
     }
 
-    if (uri.pathSegments.length == 2 && uri.pathSegments.first == 'game-request') {
+    if (uri.pathSegments.length == 2 &&
+        uri.pathSegments.first == 'game-request') {
       var id = uri.pathSegments[1];
       return MaterialPageRoute(
         builder: (context) => GameRequestScreen(id: id),
@@ -102,13 +110,15 @@ class MainRoutes {
     }
 
     if (settings.name == '/game-requests/add') {
-      return MaterialPageRoute(builder: (context) => const AddGameRequestScreen());
+      return MaterialPageRoute(
+          builder: (context) => const AddGameRequestScreen());
     }
 
     if (settings.name == '/games/add') {
       return MaterialPageRoute(builder: (context) => const CreateGameScreen());
     }
 
-    return MaterialPageRoute(builder: (context) => RouteNotFoundScreen(settings.name));
+    return MaterialPageRoute(
+        builder: (context) => RouteNotFoundScreen(settings.name));
   }
 }

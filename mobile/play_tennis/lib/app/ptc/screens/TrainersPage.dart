@@ -1,8 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/side_drawer.dart';
-import 'package:play_tennis/main-settings.dart';
-import 'package:url_launcher/url_launcher.dart';
+import '../../../main-extensions.dart';
 
 class TrainersPage extends StatelessWidget {
   const TrainersPage({super.key});
@@ -24,18 +23,11 @@ class TrainersPage extends StatelessWidget {
               decoration: TextDecoration.underline,
             ),
             recognizer: TapGestureRecognizer()
-              ..onTap = () => _launchUrl(
-                    Uri.parse("${MainSettings.domain}/ptc/trainers"),
-                  ),
+              ..onTap = () =>
+                  MainAppExtensions.trylaunchAppUrl(context, "ptc/trainers"),
           ),
         ),
       ),
     );
-  }
-
-  Future<void> _launchUrl(Uri url) async {
-    if (!await launchUrl(url)) {
-      throw 'Could not launch $url';
-    }
   }
 }
