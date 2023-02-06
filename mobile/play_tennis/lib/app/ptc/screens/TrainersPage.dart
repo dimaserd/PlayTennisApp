@@ -23,8 +23,7 @@ class TrainersPage extends StatelessWidget {
               decoration: TextDecoration.underline,
             ),
             recognizer: TapGestureRecognizer()
-              ..onTap = () =>
-                  MainAppExtensions.trylaunchAppUrl(context, "ptc/trainers"),
+              ..onTap = () => MainAppExtensions.trylaunchAppUrl(context, "ptc/trainers"),
           ),
         ),
       ),

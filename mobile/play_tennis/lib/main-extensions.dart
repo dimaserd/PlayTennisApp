@@ -10,18 +10,26 @@ class MainAppExtensions {
     BuildContext context,
     String appRelativeUrl,
   ) async {
-    var result = await MyApp.playerLoginLinkService.createLoginLink((p0) => {});
+    final result = await MyApp.playerLoginLinkService.createLoginLink((p0) => {});
 
     if (!result.isSucceeded) {
-      BaseApiResponseUtils.showError(
-          context, result.errorMessage ?? "Ошибка при авторизации по кнопке");
+      print("in MainAppExtensions.trylaunchAppUrl: Ошибка при авторизации по кнопке");
+
+      if (context.mounted) {
+        BaseApiResponseUtils.showError(
+          context,
+          result.errorMessage ?? "Ошибка при авторизации по кнопке",
+        );
+      }
+
       return;
     }
 
     var dottedUrl = appRelativeUrl.replaceAll(RegExp(r'/'), '.');
 
     var url = Uri.parse(
-        "${MainSettings.domain}/ptc/player-login/${result.loginId!}/${result.password!}/$dottedUrl");
+      "${MainSettings.domain}/ptc/player-login/${result.loginId!}/${result.password!}/$dottedUrl",
+    );
 
     await _launchUrl(url);
   }
