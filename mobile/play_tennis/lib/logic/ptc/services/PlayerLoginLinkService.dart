@@ -83,7 +83,7 @@ class PlayerLoginLinkService {
 
     if (response == null) {
       return CreateLoginLinkResult(
-        errorMessage: "Ссылка для авторизации не была получена сервером",
+        errorMessage: "Ссылка для авторизации не была получена c серверf",
         isSucceeded: false,
         loginId: null,
         password: null,
