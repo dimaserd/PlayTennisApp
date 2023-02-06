@@ -8,7 +8,7 @@ class AddGameRequestScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: AddGameRequestForm(),
+      body: const AddGameRequestForm(),
       drawer: const SideDrawer(),
       appBar: AppBar(
         leading: const BackButton(),
