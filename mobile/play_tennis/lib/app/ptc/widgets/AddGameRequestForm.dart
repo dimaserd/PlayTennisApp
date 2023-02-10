@@ -9,9 +9,15 @@ import 'CountryAndCitySelectWidget.dart';
 import 'CustomDateAndTimePickerWidget.dart';
 
 class AddGameRequestForm extends StatefulWidget {
+  const AddGameRequestForm({super.key});
+
+  @override
+  State<AddGameRequestForm> createState() => _AddGameRequestFormState();
+}
+
+class _AddGameRequestFormState extends State<AddGameRequestForm> {
   TextEditingController textEditingController = TextEditingController(text: "");
-  CountryAndCitySelectController countryAndCitySelectController =
-      CountryAndCitySelectController();
+  CountryAndCitySelectController countryAndCitySelectController = CountryAndCitySelectController();
 
   CustomDateAndTimePickerWidgetController dateAndTimeWidgetController =
       CustomDateAndTimePickerWidgetController(
@@ -20,24 +26,18 @@ class AddGameRequestForm extends StatefulWidget {
 
   DateTime selectedDate = DateTime.now();
 
-  AddGameRequestForm({super.key});
-
-  @override
-  State<AddGameRequestForm> createState() => _AddGameRequestFormState();
-}
-
-class _AddGameRequestFormState extends State<AddGameRequestForm> {
   PlayerLocationData? locationData;
 
   @override
   void initState() {
     super.initState();
     MyApp.playerService.getLocationData().then((value) {
-      widget.countryAndCitySelectController.city = locationData!.city;
-      var country = locationData!.country!;
-      widget.countryAndCitySelectController.setCountry(country);
+      if (!mounted) return;
+      if (value == null) return;
+
       setState(() {
         locationData = value;
+        countryAndCitySelectController.setLocationData(locationData!);
       });
     });
   }
@@ -70,7 +70,7 @@ class _AddGameRequestFormState extends State<AddGameRequestForm> {
       CountryAndCitySelect(
         onCityChanged: (p) {},
         onCountryChanged: (p) {},
-        controller: widget.countryAndCitySelectController,
+        controller: countryAndCitySelectController,
       ),
       const SizedBox(
         height: 10,
@@ -80,11 +80,11 @@ class _AddGameRequestFormState extends State<AddGameRequestForm> {
         dateLabel: "Выбрать дату игры",
         timeLabel: "Время игры",
         dateDropDownLabel: "Дата игры",
-        controller: widget.dateAndTimeWidgetController,
+        controller: dateAndTimeWidgetController,
       ),
       TextAreaInput(
         labelText: "Текст заявки",
-        textController: widget.textEditingController,
+        textController: textEditingController,
         maxLines: 3,
       ),
       const SizedBox(
@@ -106,16 +106,15 @@ class _AddGameRequestFormState extends State<AddGameRequestForm> {
       return;
     }
 
-    var dateTimeData = widget.dateAndTimeWidgetController.value;
+    var dateTimeData = dateAndTimeWidgetController.value;
 
     if (dateTimeData.selectedTime == null) {
-      BaseApiResponseUtils.showError(
-          context, "Вы не указали время начала игры");
+      BaseApiResponseUtils.showError(context, "Вы не указали время начала игры");
       return;
     }
 
-    if (widget.countryAndCitySelectController.city == null ||
-        widget.countryAndCitySelectController.country == null) {
+    if (countryAndCitySelectController.city == null ||
+        countryAndCitySelectController.country == null) {
       BaseApiResponseUtils.showError(context, "Вы не указали местоположение");
       return;
     }
@@ -123,13 +122,13 @@ class _AddGameRequestFormState extends State<AddGameRequestForm> {
     MyApp.inProccess = true;
 
     var model = CreateGameRequest(
-      countryId: widget.countryAndCitySelectController.country!.id,
-      cityId: widget.countryAndCitySelectController.city!.id,
-      //по-умолчанию ставится московский часовой пояс
+      countryId: countryAndCitySelectController.country!.id,
+      cityId: countryAndCitySelectController.city!.id,
+      // по-умолчанию ставится московский часовой пояс
       matchDateUtc: dateTimeData.dateTime.subtract(
         const Duration(hours: 3),
       ),
-      description: widget.textEditingController.text,
+      description: textEditingController.text,
     );
 
     MyApp.gameRequestsService.create(model).then((value) {

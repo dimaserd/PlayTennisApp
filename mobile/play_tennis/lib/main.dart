@@ -29,12 +29,9 @@ class MyApp extends StatelessWidget {
   static final LoginService loginService = LoginService(networkService);
   static final ClientService clientService = ClientService(networkService);
   static final CountryService countryService = CountryService(networkService);
-  static final RegistrationService registrationService =
-      RegistrationService(networkService);
-  static final GameRequestsService gameRequestsService =
-      GameRequestsService(networkService);
-  static final NetworkService networkService =
-      NetworkService(MainSettings.domain);
+  static final RegistrationService registrationService = RegistrationService(networkService);
+  static final GameRequestsService gameRequestsService = GameRequestsService(networkService);
+  static final NetworkService networkService = NetworkService(MainSettings.domain);
   static final PlayerService playerService = PlayerService(networkService);
   static final FilesService filesService = FilesService(networkService);
   static final PlayerRegistrationService playerRegistrationService =
@@ -57,8 +54,8 @@ class MyApp extends StatelessWidget {
           Locale('ru', ''),
         ],
         theme: ThemeData(
-          bottomAppBarColor: mainMaterialColor,
           fontFamily: 'Roboto',
+          bottomAppBarTheme: const BottomAppBarTheme(color: mainMaterialColor),
           colorScheme: ColorScheme.fromSwatch(primarySwatch: mainMaterialColor)
               .copyWith(secondary: Colors.amber),
         ),
