@@ -1,28 +1,20 @@
-import 'package:flutter/cupertino.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import 'baseApiResponseUtils.dart';
 import 'main-settings.dart';
 import 'main.dart';
 
 class MainAppExtensions {
   static Future<void> trylaunchAppUrl(
-    BuildContext context,
     String appRelativeUrl,
+    Function(String) onError,
   ) async {
-    final result = await MyApp.playerLoginLinkService.createLoginLink((p0) => {});
+    final result =
+        await MyApp.playerLoginLinkService.createLoginLink((p0) => {});
 
     if (!result.isSucceeded) {
-      print("in MainAppExtensions.trylaunchAppUrl: Ошибка при авторизации по кнопке");
+      print(
+          "in MainAppExtensions.trylaunchAppUrl: Ошибка при авторизации по кнопке");
 
-      if (context.mounted) {
-        BaseApiResponseUtils.showError(
-          context,
-          result.errorMessage ?? "Ошибка при авторизации по кнопке",
-        );
-      }
-
-      return;
+      onError(result.errorMessage ?? "Ошибка при авторизации по кнопке");
     }
 
     var dottedUrl = appRelativeUrl.replaceAll(RegExp(r'/'), '.');

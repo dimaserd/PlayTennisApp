@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/side_drawer.dart';
+import 'package:play_tennis/baseApiResponseUtils.dart';
 import '../../../main-extensions.dart';
 
 class TrainersPage extends StatelessWidget {
@@ -23,7 +24,12 @@ class TrainersPage extends StatelessWidget {
               decoration: TextDecoration.underline,
             ),
             recognizer: TapGestureRecognizer()
-              ..onTap = () => MainAppExtensions.trylaunchAppUrl(context, "ptc/trainers"),
+              ..onTap = () => MainAppExtensions.trylaunchAppUrl(
+                    "ptc/trainers",
+                    (er) {
+                      BaseApiResponseUtils.showSuccess(context, er);
+                    },
+                  ),
           ),
         ),
       ),
