@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
-import '../../../logic/ptc/models/CityModel.dart';
-import '../../../logic/ptc/models/CountrySimpleModel.dart';
-import '../../../logic/ptc/models/SearchCities.dart';
-import '../../../logic/ptc/models/SearchCountries.dart';
+import '../../../logic/ptc/models/cities/CityModel.dart';
+import '../../../logic/ptc/models/cities/CountrySimpleModel.dart';
+import '../../../logic/ptc/models/cities/SearchCities.dart';
+import '../../../logic/ptc/models/cities/SearchCountries.dart';
 import '../../../main.dart';
 
 class CountryAndCitySelectController {

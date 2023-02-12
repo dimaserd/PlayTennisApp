@@ -16,9 +16,6 @@ import 'app/ptc/screens/GameRequestScreen.dart';
 import 'app/ptc/screens/GamesRequestsScreen.dart';
 import 'app/ptc/screens/PlayerScreen.dart';
 import 'app/ptc/screens/PlayersScreen.dart';
-import 'baseApiResponseUtils.dart';
-import 'main-settings.dart';
-import 'main.dart';
 
 class MainRoutes {
   static MaterialPageRoute onGenerateRoute(RouteSettings settings) {

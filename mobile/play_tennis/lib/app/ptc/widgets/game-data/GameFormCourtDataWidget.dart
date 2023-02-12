@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../logic/ptc/models/CityModel.dart';
-import '../../../../logic/ptc/models/CountrySimpleModel.dart';
+import '../../../../logic/ptc/models/cities/CityModel.dart';
+import '../../../../logic/ptc/models/cities/CountrySimpleModel.dart';
 import '../../../main/widgets/Inputs/TextInput.dart';
 import '../CountryAndCitySelectWidget.dart';
 import '../CourtTypeSelect.dart';

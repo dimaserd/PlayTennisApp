@@ -1,4 +1,4 @@
-import 'CityModel.dart';
+import 'cities/CityModel.dart';
 
 class PlayerLocationData {
   late String? id;

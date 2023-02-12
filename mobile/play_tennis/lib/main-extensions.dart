@@ -19,15 +19,15 @@ class MainAppExtensions {
 
     var dottedUrl = appRelativeUrl.replaceAll(RegExp(r'/'), '.');
 
-    var url = Uri.parse(
-      "${MainSettings.domain}/ptc/player-login/${result.loginId!}/${result.password!}/$dottedUrl",
-    );
+    var url =
+        "${MainSettings.domain}/ptc/player-login/${result.loginId!}/${result.password!}/$dottedUrl";
 
-    await _launchUrl(url);
+    await launchUrlInBrowser(url);
   }
 
-  static Future<void> _launchUrl(Uri url) async {
-    if (!await launchUrl(url)) {
+  static Future<void> launchUrlInBrowser(String url) async {
+    var uri = Uri.parse(url);
+    if (!await launchUrl(uri)) {
       throw 'Could not launch $url';
     }
   }

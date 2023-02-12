@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
@@ -108,6 +109,21 @@ class NetworkService {
       return response.body;
     } catch (e) {
       print(e);
+    } finally {
+      client.close();
+    }
+  }
+
+  Future<String?> getDataInner(String url, Function(String) onError) async {
+    var client = http.Client();
+    try {
+      var uri = Uri.parse(domain + url);
+
+      var response = await client.get(uri, headers: headers);
+      _updateCookie(response);
+      return response.body;
+    } catch (e) {
+      onError("Произошла ошибка при выполнении запроса. ${e.toString()}");
     } finally {
       client.close();
     }

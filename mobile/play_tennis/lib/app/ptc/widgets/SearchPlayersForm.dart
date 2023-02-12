@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:play_tennis/app/ptc/widgets/cities/CityChatAndChannelWidget.dart';
 import '../../../logic/ptc/models/PlayerLocationData.dart';
 import '../../../logic/ptc/models/PlayerModel.dart';
 import '../../../logic/ptc/models/SearchPlayersRequest.dart';
+import '../../../logic/ptc/models/cities/PublicTelegramChatForCityModel.dart';
 import '../../../main.dart';
 import '../../main/widgets/Inputs/TextInput.dart';
 import 'CountryAndCitySelectWidget.dart';
@@ -33,6 +35,7 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
       CountryAndCitySelectController();
 
   List<PlayerModel> players = [];
+  PublicTelegramChatForCityModel? cityModel;
 
   @override
   void initState() {
@@ -61,6 +64,12 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
           labelText: "Поисковая строка",
           textController: queryController,
         ),
+        cityModel != null
+            ? CityChatAndChannelWidget(
+                model: cityModel!,
+                cityName: countryAndCitySelectController.city?.name ?? "Город",
+              )
+            : const SizedBox.shrink(),
         Container(
           margin: const EdgeInsets.only(top: 5),
           width: double.infinity,
@@ -75,7 +84,7 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
-                    minimumSize: const Size.fromHeight(40), // NEW
+                    minimumSize: const Size.fromHeight(40),
                   ),
                   onPressed: () {
                     getData();
@@ -102,15 +111,16 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
 
   getData() {
     print("getData() called");
+
+    var cityId = countryAndCitySelectController.city?.id;
+
     var playerRequest = SearchPlayersRequest(
       q: queryController.text,
       sex: null,
       emailConfirmed: true,
       accountConfirmed: true,
       dataFilled: true,
-      cityId: countryAndCitySelectController.city != null
-          ? countryAndCitySelectController.city!.id
-          : null,
+      cityId: cityId,
       count: 30,
       offSet: 0,
     );
@@ -120,5 +130,17 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
         players = value.list;
       });
     });
+
+    if (cityId != null) {
+      MyApp.cityService.getById(cityId, (p0) {}).then((value) {
+        setState(() {
+          cityModel = value;
+        });
+      });
+    } else {
+      setState(() {
+        cityModel = null;
+      });
+    }
   }
 }

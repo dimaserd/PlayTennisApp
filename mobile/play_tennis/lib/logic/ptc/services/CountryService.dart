@@ -1,10 +1,10 @@
 import 'dart:convert';
 import '../../clt/models/BaseApiResponse.dart';
 import '../../core/NetworkService.dart';
-import '../models/CityModel.dart';
-import '../models/CountrySimpleModel.dart';
-import '../models/SearchCities.dart';
-import '../models/SearchCountries.dart';
+import '../models/cities/CityModel.dart';
+import '../models/cities/CountrySimpleModel.dart';
+import '../models/cities/SearchCities.dart';
+import '../models/cities/SearchCountries.dart';
 
 class CountryService {
   final NetworkService networkService;

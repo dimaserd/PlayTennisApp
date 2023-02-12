@@ -1,5 +1,5 @@
-import '../CityModel.dart';
 import '../PlayerModel.dart';
+import '../cities/CityModel.dart';
 
 class GameRequestDetailedModel {
   late String? id;
