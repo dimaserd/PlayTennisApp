@@ -7,20 +7,17 @@ class GamesList extends StatelessWidget {
   final List<SinglesGameSimpleModel> games;
   final CurrentLoginData loginData;
   final Function onChange;
-  final double widgetHeight;
 
   const GamesList({
     super.key,
     required this.games,
     required this.loginData,
     required this.onChange,
-    required this.widgetHeight,
   });
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-        height: widgetHeight,
+    return Expanded(
         child: games.isEmpty
             ? Column(children: const [
                 Center(

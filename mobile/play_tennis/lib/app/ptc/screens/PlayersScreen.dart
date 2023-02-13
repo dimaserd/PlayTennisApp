@@ -41,8 +41,6 @@ class _PlayersScreenState extends State<PlayersScreen> {
         child: locationData != null
             ? SearchPlayersForm(
                 locationData: locationData!,
-                playersListWidgetHeight:
-                    MediaQuery.of(context).size.height - 420,
                 onTapHandler: (p) {
                   Navigator.of(context).pushNamed("/player/${p.id!}");
                 },

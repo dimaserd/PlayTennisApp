@@ -4,11 +4,9 @@ import 'PlayerToSelect.dart';
 
 class PlayersList extends StatelessWidget {
   final List<PlayerModel> players;
-  double height;
   void Function(PlayerModel player) onTapHandler;
   PlayersList({
     super.key,
-    required this.height,
     required this.onTapHandler,
     required this.players,
   });
@@ -35,9 +33,6 @@ class PlayersList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: height,
-      child: getChild(),
-    );
+    return getChild();
   }
 }

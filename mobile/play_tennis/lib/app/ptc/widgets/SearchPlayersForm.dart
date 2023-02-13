@@ -11,14 +11,12 @@ import 'PlayersList.dart';
 
 class SearchPlayersForm extends StatefulWidget {
   final PlayerLocationData locationData;
-  final double playersListWidgetHeight;
   final void Function(PlayerModel player) onTapHandler;
 
   const SearchPlayersForm({
     super.key,
     required this.locationData,
     required this.onTapHandler,
-    required this.playersListWidgetHeight,
   });
 
   @override
@@ -95,16 +93,15 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 8.0),
-          child: PlayersList(
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.only(top: 8.0),
+            child: PlayersList(
             players: players,
-            height: widget.playersListWidgetHeight,
             onTapHandler: (id) {
               widget.onTapHandler(id);
-            },
+            },),),
           ),
-        ),
       ],
     );
   }

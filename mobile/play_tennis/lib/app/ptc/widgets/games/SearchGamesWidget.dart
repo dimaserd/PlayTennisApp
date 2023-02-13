@@ -34,7 +34,6 @@ class _SearchGamesWidgetState extends State<SearchGamesWidget> {
                 games: games,
                 loginData: widget.loginData,
                 onChange: (p) {},
-                widgetHeight: MediaQuery.of(context).size.height - 170,
               )
             : const SizedBox.shrink(),
       ],
