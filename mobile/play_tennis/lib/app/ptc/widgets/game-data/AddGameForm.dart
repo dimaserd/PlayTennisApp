@@ -141,7 +141,6 @@ class _AddGameFormState extends State<AddGameForm> {
         ),
         SearchPlayersForm(
           locationData: locationData!,
-          playersListWidgetHeight: MediaQuery.of(context).size.height - 400,
           onTapHandler: (p) {
             opponent = p;
             setState(() {
