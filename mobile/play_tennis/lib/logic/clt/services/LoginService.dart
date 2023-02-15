@@ -49,8 +49,6 @@ class LoginService {
     var responseBody =
         await networkService.postData('/api/account/login', bodyJson);
 
-    print("LoginResult");
-    print(responseBody);
     var decoded = jsonDecode(responseBody);
     var result = LoginResultModel.fromJson(decoded);
 

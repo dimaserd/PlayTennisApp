@@ -119,9 +119,6 @@ class _MyStatefulWidgetState extends State<EditProfileWidget> {
                     final country = countryAndCitySelectController.country;
                     final city = countryAndCitySelectController.city;
 
-                    // print("  >> country name : ${country != null ? country.name : "none"}");
-                    // print("  >>    city name : ${city != null ? city.name : "none"}");
-
                     final String? countryId = country?.id;
                     final String? cityId = city?.id;
 
