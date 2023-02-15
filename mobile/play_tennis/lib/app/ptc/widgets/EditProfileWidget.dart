@@ -44,6 +44,20 @@ class _MyStatefulWidgetState extends State<EditProfileWidget> {
   final countryAndCitySelectController = CountryAndCitySelectController();
 
   @override
+  void initState() {
+    if (!mounted) {
+      return;
+    }
+
+    MyApp.playerService.getLocationData().then((value) {
+      if (value != null && mounted) {
+        countryAndCitySelectController.setLocationData(value);
+      }
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
@@ -116,7 +130,8 @@ class _MyStatefulWidgetState extends State<EditProfileWidget> {
                       cityId: cityId,
                     );
 
-                    final data = await MyApp.playerService.updateCityAndCountryData(model);
+                    final data = await MyApp.playerService
+                        .updateCityAndCountryData(model);
 
                     if (mounted) {
                       BaseApiResponseUtils.handleResponse(
