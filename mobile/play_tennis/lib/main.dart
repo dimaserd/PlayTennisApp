@@ -55,7 +55,11 @@ void main() async {
   } else {
     print('User did not grant permission to receive notifications');
   }
-  await messaging.getToken().then((token) => print('Token: $token'));
+  await messaging.getToken().then((token) {
+    print('Token: $token');
+
+    //TODO сохранить токен
+  });
 
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     print('Got a message whilst in the foreground!');
