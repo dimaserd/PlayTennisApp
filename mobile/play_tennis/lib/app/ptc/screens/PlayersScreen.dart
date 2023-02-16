@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:play_tennis/app/ptc/widgets/PlayerTabBar.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import '../../../logic/ptc/models/PlayerLocationData.dart';
 import '../../../main.dart';
 import '../../main/widgets/Loading.dart';
 import '../../main/widgets/side_drawer.dart';
 import '../widgets/SearchPlayersForm.dart';
+import '../widgets/PlayerTabBar.dart';
 
 class PlayersScreen extends StatefulWidget {
   const PlayersScreen({super.key});
@@ -38,14 +40,8 @@ class _PlayersScreenState extends State<PlayersScreen> {
       key: GlobalKey<ScaffoldState>(),
       body: Padding(
         padding: const EdgeInsets.all(20),
-        child: locationData != null
-            ? SearchPlayersForm(
-                locationData: locationData!,
-                onTapHandler: (p) {
-                  Navigator.of(context).pushNamed("/player/${p.id!}");
-                },
-              )
-            : const Loading(text: "Загрузка"),
+        child: MyTabbedPage(locationData: locationData)
+        
       ),
       drawer: const SideDrawer(),
       appBar: AppBar(

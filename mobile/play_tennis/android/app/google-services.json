@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "624649898842",
+    "project_id": "playtennisapp-e9987",
+    "storage_bucket": "playtennisapp-e9987.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:624649898842:android:33b91483d2a68930574163",
+        "android_client_info": {
+          "package_name": "com.example.play_tennis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "624649898842-3iluqunoferkp7abv9oba079osm8ov18.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDosy4Bd_GxGoxhdnDppx9G2GusvC58aCg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "624649898842-3iluqunoferkp7abv9oba079osm8ov18.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "624649898842-u45lhetp0f25j7mjj2cuvffl0fdkb49r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.playTennis"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
