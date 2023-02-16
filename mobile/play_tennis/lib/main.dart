@@ -18,7 +18,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'main-settings.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_core/firebase_core.dart';
-// import 'package:firebase_analytics/firebase_analytics.dart';
 import 'firebase_options.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {

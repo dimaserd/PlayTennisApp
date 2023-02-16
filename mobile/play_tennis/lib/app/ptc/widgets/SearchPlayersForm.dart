@@ -8,7 +8,6 @@ import '../../../main.dart';
 import '../../main/widgets/Inputs/TextInput.dart';
 import 'CountryAndCitySelectWidget.dart';
 import 'PlayersList.dart';
-import 'PlayerTabBar.dart';
 
 class SearchPlayersForm extends StatefulWidget {
   final PlayerLocationData locationData;
