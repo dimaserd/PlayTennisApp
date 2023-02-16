@@ -105,13 +105,6 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
             ),
           ),
         ),
-              players: players,
-              onTapHandler: (id) {
-                widget.onTapHandler(id);
-              },
-            ),
-          ),
-        )
       ],
     );
   }
