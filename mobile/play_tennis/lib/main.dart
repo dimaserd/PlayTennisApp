@@ -16,8 +16,60 @@ import 'logic/ptc/services/PlayerService.dart';
 import 'main-routes.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'main-settings.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_analytics/firebase_analytics.dart';
+import 'firebase_options.dart';
 
-void main() {
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // If you're going to use other Firebase services in the background, such as Firestore,
+  // make sure you call `initializeApp` before using other Firebase services.
+  // await Firebase.initializeApp();
+
+  print("Handling a background message: ${message.messageId}");
+}
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Инициализируйте Firebase Messaging.
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+  // Добавьте обработчик фоновых сообщений и бэкграугда.
+
+  // Запросите разрешение на получение уведомлений.
+  NotificationSettings settings = await messaging.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
+
+  // Если пользователь дал разрешение на получение уведомлений, получите токен.
+  if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+    print("authorized");
+  } else {
+    print('User did not grant permission to receive notifications');
+  }
+  await messaging.getToken().then((token) => print('Token: $token'));
+
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    print('Got a message whilst in the foreground!');
+    print('Message data: ${message.data}');
+
+    if (message.notification != null) {
+      print('Message also contained a notification: ${message.notification}');
+    }
+  });
+
+  await messaging.setForegroundNotificationPresentationOptions(alert: true);
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
   runApp(const MyApp());
 }
 
@@ -69,3 +121,5 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+class InitilizationPush {}

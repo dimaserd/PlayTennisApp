@@ -8,6 +8,7 @@ import '../../../main.dart';
 import '../../main/widgets/Inputs/TextInput.dart';
 import 'CountryAndCitySelectWidget.dart';
 import 'PlayersList.dart';
+import 'PlayerTabBar.dart';
 
 class SearchPlayersForm extends StatefulWidget {
   final PlayerLocationData locationData;
@@ -95,13 +96,15 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
         ),
         Expanded(
           child: Padding(
-            padding: EdgeInsets.only(top: 8.0),
+            padding: EdgeInsets.only(top: 8, bottom: 0),
             child: PlayersList(
-            players: players,
-            onTapHandler: (id) {
-              widget.onTapHandler(id);
-            },),),
+              players: players,
+              onTapHandler: (id) {
+                widget.onTapHandler(id);
+              },
+            ),
           ),
+        )
       ],
     );
   }
@@ -118,7 +121,7 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
       accountConfirmed: true,
       dataFilled: true,
       cityId: cityId,
-      count: 30,
+      count: null,
       offSet: 0,
     );
 
