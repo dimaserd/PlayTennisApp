@@ -11,9 +11,6 @@ class MainAppExtensions {
         await MyApp.playerLoginLinkService.createLoginLink((p0) => {});
 
     if (!result.isSucceeded) {
-      print(
-          "in MainAppExtensions.trylaunchAppUrl: Ошибка при авторизации по кнопке");
-
       onError(result.errorMessage ?? "Ошибка при авторизации по кнопке");
     }
 

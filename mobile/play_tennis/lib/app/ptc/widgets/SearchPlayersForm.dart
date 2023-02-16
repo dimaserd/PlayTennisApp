@@ -96,8 +96,15 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
         ),
         Expanded(
           child: Padding(
-            padding: EdgeInsets.only(top: 8, bottom: 0),
+            padding: const EdgeInsets.only(top: 8, bottom: 0),
             child: PlayersList(
+              players: players,
+              onTapHandler: (id) {
+                widget.onTapHandler(id);
+              },
+            ),
+          ),
+        ),
               players: players,
               onTapHandler: (id) {
                 widget.onTapHandler(id);
@@ -110,8 +117,6 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
   }
 
   getData() {
-    print("getData() called");
-
     var cityId = countryAndCitySelectController.city?.id;
 
     var playerRequest = SearchPlayersRequest(

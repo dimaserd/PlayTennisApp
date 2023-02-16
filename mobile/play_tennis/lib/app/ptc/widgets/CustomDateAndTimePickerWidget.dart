@@ -134,7 +134,6 @@ class _CustomDateAndTimePickerWidgetState
 
   @override
   Widget build(BuildContext context) {
-    print("selected " + selectedTime.toString());
     return Column(
       children: [
         DropdownWidget(

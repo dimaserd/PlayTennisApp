@@ -34,7 +34,6 @@ class _ImageInputState extends State<ImageInput> {
 
     MyApp.inProccess = true;
     try {
-      print("started");
       final image = await Utils.pickMedia(
         isGallery: isGallery,
         cropImage: Utils.cropSquareImage,
