@@ -11,10 +11,12 @@ class PlayersList extends StatelessWidget {
   void Function(PlayerModel player) onTapHandler;
   void Function(int offSet) getData;
 
-  int _offset = 0;
-  bool _isActiveLoader = true;
+  int offset;
+  bool isActiveLoader = true;
 
   PlayersList({
+    required this.isActiveLoader,
+    required this.offset,
     required this.onTapHandler,
     required this.players,
     required this.getData,
@@ -27,15 +29,14 @@ class PlayersList extends StatelessWidget {
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
-        // Прокрутили до конца списка
-        _offset += 10;
+        offset += 10;
         _loadMoreData();
       }
     });
   }
 
   void _loadMoreData() {
-    getData(_offset);
+    getData(offset);
   }
 
   Widget getChild() {
@@ -49,7 +50,7 @@ class PlayersList extends StatelessWidget {
             controller: _scrollController,
             itemBuilder: (context, index) {
               if (index == players.length) {
-                if (_isActiveLoader == false || players.length < 5) {
+                if (isActiveLoader == false || players.length < 5) {
                   return Container();
                 } else {
                   // Вернуть заглушку для отображения индикатора загрузки
@@ -93,4 +94,3 @@ class PlayersList extends StatelessWidget {
     return getChild();
   }
 }
-
