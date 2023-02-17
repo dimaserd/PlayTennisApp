@@ -1,15 +1,42 @@
 import 'package:flutter/material.dart';
 import '../../../logic/ptc/models/PlayerModel.dart';
 import 'PlayerToSelect.dart';
+import '../../../logic/ptc/models/SearchPlayersRequest.dart';
+import '../../../main.dart';
+import 'CountryAndCitySelectWidget.dart';
+import 'package:play_tennis/app/main/widgets/images/PlayerAvatar.dart';
 
 class PlayersList extends StatelessWidget {
-  final List<PlayerModel> players;
+  List<PlayerModel> players;
   void Function(PlayerModel player) onTapHandler;
+  void Function(int offSet) getData;
+
+  int _offset = 0;
+  bool _isActiveLoader = true;
+
   PlayersList({
-    super.key,
     required this.onTapHandler,
     required this.players,
-  });
+    required this.getData,
+  }) {
+    addScrollListener();
+  }
+  final ScrollController _scrollController = ScrollController();
+
+  void addScrollListener() {
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        // Прокрутили до конца списка
+        _offset += 10;
+        _loadMoreData();
+      }
+    });
+  }
+
+  void _loadMoreData() {
+    getData(_offset);
+  }
 
   Widget getChild() {
     return players.isEmpty
@@ -19,15 +46,45 @@ class PlayersList extends StatelessWidget {
             ),
           ])
         : ListView.builder(
-            itemBuilder: (ctx, index) {
-              return PlayerToSelect(
-                player: players[index],
-                onTapHandler: (p) {
-                  onTapHandler(p);
-                },
-              );
+            controller: _scrollController,
+            itemBuilder: (context, index) {
+              if (index == players.length) {
+                if (_isActiveLoader == false || players.length < 5) {
+                  return Container();
+                } else {
+                  // Вернуть заглушку для отображения индикатора загрузки
+                  return Center(child: CircularProgressIndicator());
+                }
+              } else {
+                return GestureDetector(
+                  onTap: () {
+                    onTapHandler(players[index]);
+                  },
+                  child: Card(
+                    margin:
+                        const EdgeInsets.symmetric(vertical: 4, horizontal: 5),
+                    elevation: 5,
+                    child: ListTile(
+                      leading: PlayerAvatar(
+                          avatarFileId: players[index].avatarFileId),
+                      title: Text(
+                        "${players[index].surname!} ${players[index].name!}",
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text("Ntrp: ${players[index].ntrpRating}"),
+                          Text("Рейтинг силы: ${players[index].rating}")
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              }
             },
-            itemCount: players.length,
+            itemCount: players.length + 1,
           );
   }
 
@@ -36,3 +93,4 @@ class PlayersList extends StatelessWidget {
     return getChild();
   }
 }
+
