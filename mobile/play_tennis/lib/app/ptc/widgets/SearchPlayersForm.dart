@@ -37,6 +37,7 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
 
   int _offSet = 0;
   bool _isTapSearch = false;
+  bool _isActiveLoader = true;
 
   @override
   void initState() {
@@ -101,8 +102,11 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
           child: Padding(
             padding: const EdgeInsets.only(top: 8, bottom: 0),
             child: PlayersList(
+              isActiveLoader: _isActiveLoader,
+              offset: _offSet,
               players: players,
               getData: (offSet) {
+                print("object $offSet");
                 _offSet = offSet;
                 getData();
               },
@@ -131,9 +135,14 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
     );
 
     MyApp.playerService.search(playerRequest).then((value) {
-      String t = queryController.text;
-      int len = value.list.length;
-      print("_isTapSearch $_isTapSearch len $len t $t offSet $_offSet");
+      if (value.list.isEmpty) {
+        setState(() {
+          _isActiveLoader = false;
+        });
+      }
+      // String t = queryController.text;
+      // int len = value.list.length;
+      // print("_isTapSearch $_isTapSearch len $len t $t offSet $_offSet");
       if (_offSet == 0 || _isTapSearch == true) {
         _isTapSearch = false;
         setState(() {
