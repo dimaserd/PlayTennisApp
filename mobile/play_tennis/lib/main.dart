@@ -124,5 +124,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-class InitilizationPush {}

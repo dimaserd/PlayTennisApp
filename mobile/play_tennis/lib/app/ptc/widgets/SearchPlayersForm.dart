@@ -35,6 +35,9 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
   List<PlayerModel> players = [];
   PublicTelegramChatForCityModel? cityModel;
 
+  int _offSet = 0;
+  bool _isTapSearch = false;
+
   @override
   void initState() {
     if (!mounted) {
@@ -85,6 +88,7 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
                     minimumSize: const Size.fromHeight(40),
                   ),
                   onPressed: () {
+                    _isTapSearch = true;
                     getData();
                   },
                   child: const Text("Поиск"),
@@ -98,6 +102,10 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
             padding: const EdgeInsets.only(top: 8, bottom: 0),
             child: PlayersList(
               players: players,
+              getData: (offSet) {
+                _offSet = offSet;
+                getData();
+              },
               onTapHandler: (id) {
                 widget.onTapHandler(id);
               },
@@ -118,16 +126,25 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
       accountConfirmed: true,
       dataFilled: true,
       cityId: cityId,
-      count: null,
-      offSet: 0,
+      count: 10,
+      offSet: _offSet,
     );
 
     MyApp.playerService.search(playerRequest).then((value) {
-      setState(() {
-        players = value.list;
-      });
+      String t = queryController.text;
+      int len = value.list.length;
+      print("_isTapSearch $_isTapSearch len $len t $t offSet $_offSet");
+      if (_offSet == 0 || _isTapSearch == true) {
+        _isTapSearch = false;
+        setState(() {
+          players = value.list;
+        });
+      } else {
+        setState(() {
+          players += value.list;
+        });
+      }
     });
-
     if (cityId != null) {
       MyApp.cityService.getById(cityId, (p0) {}).then((value) {
         setState(() {
