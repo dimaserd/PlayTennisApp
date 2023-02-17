@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:masked_text/masked_text.dart';
 
 class PhoneNumberInput extends StatelessWidget {
-  late String labelText;
-  TextEditingController? textController;
-  PhoneNumberInput({
+  final String labelText;
+  final TextEditingController? textController;
+  const PhoneNumberInput({
     super.key,
     required this.labelText,
     this.textController,
