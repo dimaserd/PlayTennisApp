@@ -52,14 +52,16 @@ void main() async {
 
   // Если пользователь дал разрешение на получение уведомлений, получите токен.
   if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-    print("authorized");
+    print("authorized for notifications");
   } else {
     print('User did not grant permission to receive notifications');
   }
   await messaging.getToken().then((token) {
     print('Token: $token');
 
-    //TODO сохранить токен
+    if (token != null) {
+      MyApp.appNotificationTokenService.addToken(token);
+    }
   });
 
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
