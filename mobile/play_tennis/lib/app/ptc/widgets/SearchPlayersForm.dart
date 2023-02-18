@@ -8,6 +8,7 @@ import '../../../main.dart';
 import '../../main/widgets/Inputs/TextInput.dart';
 import 'CountryAndCitySelectWidget.dart';
 import 'PlayersList.dart';
+import 'dart:async';
 
 class SearchPlayersForm extends StatefulWidget {
   final PlayerLocationData locationData;
@@ -26,11 +27,11 @@ class SearchPlayersForm extends StatefulWidget {
 class _SearchPlayersFormState extends State<SearchPlayersForm> {
   final ButtonStyle style =
       ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
-
-  final TextEditingController queryController = TextEditingController();
-
   final CountryAndCitySelectController countryAndCitySelectController =
       CountryAndCitySelectController();
+
+  final TextEditingController _searchController = TextEditingController();
+  Timer? _debounce;
 
   List<PlayerModel> players = [];
   PublicTelegramChatForCityModel? cityModel;
@@ -50,21 +51,34 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
   }
 
   @override
+  void dispose() {
+    _debounce?.cancel();
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         CountryAndCitySelect(
           onCityChanged: (p) {
+            _offSet = 0;
             getData();
           },
           onCountryChanged: (p) {
+            _offSet = 0;
             getData();
           },
           controller: countryAndCitySelectController,
         ),
-        TextInput(
-          labelText: "Поисковая строка",
-          textController: queryController,
+        TextField(
+          controller: _searchController,
+          onChanged: _onSearchChanged,
+          decoration: InputDecoration(
+            hintText: 'Поисковая строка',
+            suffixIcon: Icon(Icons.search),
+          ),
         ),
         cityModel != null
             ? CityChatAndChannelWidget(
@@ -72,32 +86,6 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
                 cityName: countryAndCitySelectController.city?.name ?? "Город",
               )
             : const SizedBox.shrink(),
-        Container(
-          margin: const EdgeInsets.only(top: 5),
-          width: double.infinity,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: 8.0,
-                ),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black,
-                    minimumSize: const Size.fromHeight(40),
-                  ),
-                  onPressed: () {
-                    _isTapSearch = true;
-                    getData();
-                  },
-                  child: const Text("Поиск"),
-                ),
-              ),
-            ],
-          ),
-        ),
         Expanded(
           child: Padding(
             padding: const EdgeInsets.only(top: 8, bottom: 0),
@@ -120,11 +108,19 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
     );
   }
 
+  void _onSearchChanged(String query) {
+    if (_debounce?.isActive ?? false) _debounce?.cancel();
+    _debounce = Timer(const Duration(milliseconds: 500), () {
+      // Здесь вы можете добавить логику поиска
+      getData();
+    });
+  }
+
   getData() {
     var cityId = countryAndCitySelectController.city?.id;
 
     var playerRequest = SearchPlayersRequest(
-      q: queryController.text,
+      q: _searchController.text,
       sex: null,
       emailConfirmed: true,
       accountConfirmed: true,
@@ -140,9 +136,7 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
           _isActiveLoader = false;
         });
       }
-      // String t = queryController.text;
-      // int len = value.list.length;
-      // print("_isTapSearch $_isTapSearch len $len t $t offSet $_offSet");
+
       if (_offSet == 0 || _isTapSearch == true) {
         _isTapSearch = false;
         setState(() {
