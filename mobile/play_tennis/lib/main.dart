@@ -10,6 +10,7 @@ import 'logic/clt/services/LoginService.dart';
 import 'logic/core/NetworkService.dart';
 import 'logic/ptc/services/CityService.dart';
 import 'logic/ptc/services/CountryService.dart';
+import 'logic/ptc/services/FlutterNotificationAppTokenService.dart';
 import 'logic/ptc/services/GameRequestsService.dart';
 import 'logic/ptc/services/PlayerRegistrationService.dart';
 import 'logic/ptc/services/PlayerService.dart';
@@ -83,6 +84,8 @@ class MyApp extends StatelessWidget {
 
   static final GameService gameService = GameService(networkService);
   static final LoginService loginService = LoginService(networkService);
+  static final FlutterNotificationAppTokenService appNotificationTokenService =
+      FlutterNotificationAppTokenService(networkService);
   static final ClientService clientService = ClientService(networkService);
   static final CountryService countryService = CountryService(networkService);
   static final RegistrationService registrationService =

@@ -11,6 +11,7 @@ class LoginService {
   LoginService(this.networkService);
 
   Future<bool> checkLogin() async {
+    print("Check login");
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? email = prefs.getString(SharedKeys.login);
     String? password = prefs.getString(SharedKeys.pass);
