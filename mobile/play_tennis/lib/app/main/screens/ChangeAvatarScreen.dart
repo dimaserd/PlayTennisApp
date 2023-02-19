@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:play_tennis/app/ptc/widgets/EditPlayerAvatarWidget.dart';
 import '../../../baseApiResponseUtils.dart';
 import '../../../logic/ptc/models/PlayerData.dart';
-import '../../../main.dart';
+import '../../../main-services.dart';
 import '../widgets/Loading.dart';
 
 class ChangeAvatarScreen extends StatefulWidget {
@@ -18,7 +18,7 @@ class _ChangeAvatarScreenState extends State<ChangeAvatarScreen> {
   @override
   void initState() {
     super.initState();
-    MyApp.playerService.getData().then((value) {
+    AppServices.playerService.getData().then((value) {
       if (value == null) {
         BaseApiResponseUtils.showError(context, "Кажется вы были разлогинены");
         Navigator.of(context)

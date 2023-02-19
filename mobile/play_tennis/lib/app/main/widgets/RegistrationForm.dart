@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import '../../../logic/ptc/models/PlayerRegistrationRequest.dart';
+import '../../../main-services.dart';
 import '../../../main-settings.dart';
-import '../../../main.dart';
 import '../../ptc/widgets/CountryAndCitySelectWidget.dart';
 import 'Inputs/DatePickerInput.dart';
 import 'Inputs/DropdownWidget.dart';
@@ -388,7 +388,8 @@ class _RegistrationFormState extends State<RegistrationForm> {
         registrationSource: "PlayTennisApp",
       );
 
-      var regResponse = await MyApp.playerRegistrationService.register(model);
+      var regResponse =
+          await AppServices.playerRegistrationService.register(model);
 
       if (!regResponse.isSucceeded) {
         setState(() {
@@ -399,7 +400,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
         return;
       }
 
-      var authResponse = await MyApp.loginService.checkLogin();
+      var authResponse = await AppServices.loginService.checkLogin();
 
       if (!authResponse) {
         _errorHandler("Произошла ошибка при авторизации");

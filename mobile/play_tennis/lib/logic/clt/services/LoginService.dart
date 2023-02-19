@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../../main-services.dart';
 import '../../../main.dart';
 import '../../core/NetworkService.dart';
 import '../consts/SharedKeys.dart';
@@ -28,7 +29,7 @@ class LoginService {
 
     if (!loginResult.succeeded) {
       if (loginResult.errorType == LoginErrorType.AlreadyAuthenticated) {
-        MyApp.appNotificationTokenService.isAuthorizedHandler();
+        AppServices.appNotificationTokenService.isAuthorizedHandler();
         return true;
       }
 
@@ -59,7 +60,7 @@ class LoginService {
       var prefs = await SharedPreferences.getInstance();
       prefs.setString(SharedKeys.login, emailOrPhoneNumber);
       prefs.setString(SharedKeys.pass, password);
-      MyApp.appNotificationTokenService.isAuthorizedHandler();
+      AppServices.appNotificationTokenService.isAuthorizedHandler();
     }
     return result;
   }

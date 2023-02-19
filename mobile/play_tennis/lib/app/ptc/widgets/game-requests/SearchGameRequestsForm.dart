@@ -5,8 +5,8 @@ import '../../../../logic/clt/models/CurrentLoginData.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../logic/ptc/models/game-requests/GameRequestSimpleModel.dart';
 import '../../../../logic/ptc/models/game-requests/SearchGameRequests.dart';
+import '../../../../main-services.dart';
 import '../../../../main-settings.dart';
-import '../../../../main.dart';
 import '../CountryAndCitySelectWidget.dart';
 import 'GameRequestsList.dart';
 
@@ -40,7 +40,7 @@ class _SearchGameRequestsFormState extends State<SearchGameRequestsForm> {
   @override
   void initState() {
     super.initState();
-    MyApp.loginService.getLoginData().then((value) {
+    AppServices.loginService.getLoginData().then((value) {
       loginData = value;
       setState(() {
         isLoaded = true;
@@ -142,7 +142,7 @@ class _SearchGameRequestsFormState extends State<SearchGameRequestsForm> {
       offSet: 0,
     );
 
-    MyApp.gameRequestsService.search(playerRequest).then((value) {
+    AppServices.gameRequestsService.search(playerRequest).then((value) {
       if (!mounted) return;
       setState(() {
         requests = value.list;

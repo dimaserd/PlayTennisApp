@@ -5,7 +5,7 @@ import '../../../logic/ptc/models/cities/CityModel.dart';
 import '../../../logic/ptc/models/cities/CountrySimpleModel.dart';
 import '../../../logic/ptc/models/cities/SearchCities.dart';
 import '../../../logic/ptc/models/cities/SearchCountries.dart';
-import '../../../main.dart';
+import '../../../main-services.dart';
 
 class CountryAndCitySelectController {
   CountrySimpleModel? country;
@@ -112,7 +112,7 @@ class _CountryAndCitySelectState extends State<CountryAndCitySelect> {
       offSet: 0,
     );
 
-    return MyApp.countryService.searchCountries(model).then((value) {
+    return AppServices.countryService.searchCountries(model).then((value) {
       return value.list;
     });
   }
@@ -129,7 +129,7 @@ class _CountryAndCitySelectState extends State<CountryAndCitySelect> {
       offSet: 0,
     );
 
-    return MyApp.countryService.searchCities(model).then((value) {
+    return AppServices.countryService.searchCities(model).then((value) {
       return value.list;
     });
   }

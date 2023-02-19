@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../../main-services.dart';
 import '../../../main-settings.dart';
-import '../../../main.dart';
 import 'palette.dart';
 
 class SideDrawer extends StatelessWidget {
@@ -35,50 +35,57 @@ class SideDrawer extends StatelessWidget {
             leading: const Icon(Icons.home),
             title: const Text('Главная'),
             onTap: () {
-              Navigator.of(context).pushNamedAndRemoveUntil("/players", (r) => false);
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil("/players", (r) => false);
             },
           ),
           ListTile(
             leading: const Icon(Icons.account_circle),
             title: const Text('Профиль'),
             onTap: () {
-              Navigator.of(context).pushNamedAndRemoveUntil("/profile", (r) => false);
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil("/profile", (r) => false);
             },
           ),
           ListTile(
             leading: const Icon(Icons.sports_tennis),
             title: const Text('Играть'),
             onTap: () {
-              Navigator.of(context).pushNamedAndRemoveUntil("/play", (r) => false);
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil("/play", (r) => false);
             },
           ),
           ListTile(
             leading: const Icon(Icons.list_outlined),
             title: const Text('Мои игры'),
             onTap: () {
-              Navigator.of(context).pushNamedAndRemoveUntil("/games", (r) => false);
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil("/games", (r) => false);
             },
           ),
           ListTile(
             leading: const Icon(Icons.list),
             title: const Text('Мои заявки на игру'),
             onTap: () {
-              Navigator.of(context).pushNamedAndRemoveUntil("/game-requests/mine", (r) => false);
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil("/game-requests/mine", (r) => false);
             },
           ),
           ListTile(
             leading: const Icon(Icons.handshake_outlined),
             title: const Text('Тренеры'),
             onTap: () {
-              Navigator.of(context).pushNamedAndRemoveUntil("/trainers", (r) => false);
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil("/trainers", (r) => false);
             },
           ),
           ListTile(
             leading: const Icon(Icons.exit_to_app),
             title: const Text('Выйти'),
             onTap: () {
-              MyApp.loginService.logOut().then((value) {
-                Navigator.of(context).pushNamedAndRemoveUntil("/", (r) => false);
+              AppServices.loginService.logOut().then((value) {
+                Navigator.of(context)
+                    .pushNamedAndRemoveUntil("/", (r) => false);
               });
             },
           ),

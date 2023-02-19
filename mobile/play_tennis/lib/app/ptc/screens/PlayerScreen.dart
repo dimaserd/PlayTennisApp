@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../logic/ptc/models/PlayerModel.dart';
-import '../../../main.dart';
+import '../../../main-services.dart';
 import '../../main/widgets/Loading.dart';
 import '../widgets/ShowPlayerData.dart';
 
@@ -19,7 +19,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
   @override
   void initState() {
     super.initState();
-    MyApp.playerService.getById(widget.id).then((value) {
+    AppServices.playerService.getById(widget.id).then((value) {
       setState(() {
         loaded = true;
         player = value;

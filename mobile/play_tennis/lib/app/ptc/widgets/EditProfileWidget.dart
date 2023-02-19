@@ -3,6 +3,7 @@ import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerData.dart';
 import 'package:play_tennis/logic/ptc/services/PlayerService.dart';
 import 'package:play_tennis/main.dart';
+import '../../../main-services.dart';
 import 'CountryAndCitySelectWidget.dart';
 import 'EditMainDataWidget.dart';
 import 'EditPlayerAvatarWidget.dart';
@@ -49,7 +50,7 @@ class _MyStatefulWidgetState extends State<EditProfileWidget> {
       return;
     }
 
-    MyApp.playerService.getLocationData().then((value) {
+    AppServices.playerService.getLocationData().then((value) {
       if (value != null && mounted) {
         countryAndCitySelectController.setLocationData(value);
       }
@@ -127,7 +128,7 @@ class _MyStatefulWidgetState extends State<EditProfileWidget> {
                       cityId: cityId,
                     );
 
-                    final data = await MyApp.playerService
+                    final data = await AppServices.playerService
                         .updateCityAndCountryData(model);
 
                     if (mounted) {

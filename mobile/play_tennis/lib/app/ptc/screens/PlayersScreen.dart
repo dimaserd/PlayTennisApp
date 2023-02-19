@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:play_tennis/app/ptc/widgets/PlayerTabBar.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import '../../../logic/ptc/models/PlayerLocationData.dart';
-import '../../../main.dart';
-import '../../main/widgets/Loading.dart';
+import '../../../main-services.dart';
 import '../../main/widgets/side_drawer.dart';
-import '../widgets/SearchPlayersForm.dart';
-import '../widgets/PlayerTabBar.dart';
 
 class PlayersScreen extends StatefulWidget {
   const PlayersScreen({super.key});
@@ -21,7 +18,7 @@ class _PlayersScreenState extends State<PlayersScreen> {
   @override
   void initState() {
     super.initState();
-    MyApp.playerService.getLocationData().then((value) {
+    AppServices.playerService.getLocationData().then((value) {
       if (value == null) {
         BaseApiResponseUtils.showError(context, "Кажется вы были разлогинены");
         Navigator.of(context)
@@ -39,10 +36,8 @@ class _PlayersScreenState extends State<PlayersScreen> {
     return Scaffold(
       key: GlobalKey<ScaffoldState>(),
       body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: MyTabbedPage(locationData: locationData)
-        
-      ),
+          padding: const EdgeInsets.all(20),
+          child: MyTabbedPage(locationData: locationData)),
       drawer: const SideDrawer(),
       appBar: AppBar(
         title: const Text("Игроки"),

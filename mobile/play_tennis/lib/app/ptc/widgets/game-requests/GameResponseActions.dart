@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../baseApiResponseUtils.dart';
 import '../../../../logic/ptc/models/game-requests/AcceptGameRequestResponse.dart';
 import '../../../../logic/ptc/models/game-requests/GameRequestResponseSimpleModel.dart';
+import '../../../../main-services.dart';
 import '../../../../main.dart';
 
 class GameResponseActions extends StatelessWidget {
@@ -48,7 +49,7 @@ class GameResponseActions extends StatelessWidget {
             MyApp.inProccess = true;
             var model = AcceptGameRequestResponse(
                 gameRequestId: requestId, playerId: response.author!.id!);
-            MyApp.gameRequestsService.acceptResponse(model).then((resp) {
+            AppServices.gameRequestsService.acceptResponse(model).then((resp) {
               MyApp.inProccess = false;
               BaseApiResponseUtils.handleResponse(context, resp);
             });

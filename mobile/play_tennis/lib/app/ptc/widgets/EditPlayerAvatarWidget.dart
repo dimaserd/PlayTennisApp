@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
-import '../../../main.dart';
+import '../../../main-services.dart';
 import '../../main/widgets/Inputs/ImageInput.dart';
 import '../../main/widgets/images/PlayerAvatar.dart';
 
@@ -83,14 +83,15 @@ class _EditPlayerAvatarWidgetState extends State<EditPlayerAvatarWidget> {
   }
 
   Future<BaseApiResponse> saveFile(File file) async {
-    var response = await MyApp.filesService.postFile(file);
+    var response = await AppServices.filesService.postFile(file);
     if (!response.isSucceeded) {
       return BaseApiResponse(
           isSucceeded: false, message: "Произошла ошибка при загрузке файла");
     }
     var newAvatarFileId = response.responseObject.first;
 
-    var avatarResponse = await MyApp.clientService.updatePhoto(newAvatarFileId);
+    var avatarResponse =
+        await AppServices.clientService.updatePhoto(newAvatarFileId);
 
     if (avatarResponse.isSucceeded) {
       setState(() {

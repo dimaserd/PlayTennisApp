@@ -4,6 +4,7 @@ import 'package:play_tennis/app/main/widgets/Loading.dart';
 import 'package:play_tennis/logic/ptc/models/game-requests/CreateGameRequest.dart';
 import '../../../baseApiResponseUtils.dart';
 import '../../../logic/ptc/models/PlayerLocationData.dart';
+import '../../../main-services.dart';
 import '../../../main.dart';
 import 'CountryAndCitySelectWidget.dart';
 import 'CustomDateAndTimePickerWidget.dart';
@@ -17,7 +18,8 @@ class AddGameRequestForm extends StatefulWidget {
 
 class _AddGameRequestFormState extends State<AddGameRequestForm> {
   TextEditingController textEditingController = TextEditingController(text: "");
-  CountryAndCitySelectController countryAndCitySelectController = CountryAndCitySelectController();
+  CountryAndCitySelectController countryAndCitySelectController =
+      CountryAndCitySelectController();
 
   CustomDateAndTimePickerWidgetController dateAndTimeWidgetController =
       CustomDateAndTimePickerWidgetController(
@@ -31,7 +33,7 @@ class _AddGameRequestFormState extends State<AddGameRequestForm> {
   @override
   void initState() {
     super.initState();
-    MyApp.playerService.getLocationData().then((value) {
+    AppServices.playerService.getLocationData().then((value) {
       if (!mounted) return;
       if (value == null) return;
 
@@ -109,7 +111,8 @@ class _AddGameRequestFormState extends State<AddGameRequestForm> {
     var dateTimeData = dateAndTimeWidgetController.value;
 
     if (dateTimeData.selectedTime == null) {
-      BaseApiResponseUtils.showError(context, "Вы не указали время начала игры");
+      BaseApiResponseUtils.showError(
+          context, "Вы не указали время начала игры");
       return;
     }
 
@@ -131,7 +134,7 @@ class _AddGameRequestFormState extends State<AddGameRequestForm> {
       description: textEditingController.text,
     );
 
-    MyApp.gameRequestsService.create(model).then((value) {
+    AppServices.gameRequestsService.create(model).then((value) {
       BaseApiResponseUtils.handleResponse(context, value);
       if (value.isSucceeded) {
         Navigator.of(context).pop();

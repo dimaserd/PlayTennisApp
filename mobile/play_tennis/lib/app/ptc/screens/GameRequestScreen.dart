@@ -4,6 +4,7 @@ import '../../../logic/clt/models/CurrentLoginData.dart';
 import '../../../logic/ptc/models/game-requests/GameRequestDetailedModel.dart';
 import '../../../logic/ptc/models/game-requests/GameRequestResponseSimpleModel.dart';
 import '../../../logic/ptc/models/game-requests/SearchGameRequestResponses.dart';
+import '../../../main-services.dart';
 import '../../../main.dart';
 import '../../main/widgets/Loading.dart';
 import '../widgets/game-requests/ShowGameRequestData.dart';
@@ -34,7 +35,7 @@ class _GameRequestScreenState extends State<GameRequestScreen> {
   }
 
   loadWidgetData() {
-    MyApp.loginService.getLoginData().then((value) {
+    AppServices.loginService.getLoginData().then((value) {
       loginData = value;
       loginDataLoaded = true;
     });
@@ -44,7 +45,7 @@ class _GameRequestScreenState extends State<GameRequestScreen> {
     if (!loginDataLoaded) {
       return;
     }
-    MyApp.gameRequestsService.getById(widget.id).then((value) {
+    AppServices.gameRequestsService.getById(widget.id).then((value) {
       request = value;
       loadResponses();
     });
@@ -57,7 +58,7 @@ class _GameRequestScreenState extends State<GameRequestScreen> {
       count: 10,
       offSet: 0,
     );
-    MyApp.gameRequestsService.searchResponses(model).then((value) {
+    AppServices.gameRequestsService.searchResponses(model).then((value) {
       responses = value.list;
       if (!mounted) {
         return;

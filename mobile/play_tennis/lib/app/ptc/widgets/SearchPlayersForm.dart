@@ -4,8 +4,7 @@ import '../../../logic/ptc/models/PlayerLocationData.dart';
 import '../../../logic/ptc/models/PlayerModel.dart';
 import '../../../logic/ptc/models/SearchPlayersRequest.dart';
 import '../../../logic/ptc/models/cities/PublicTelegramChatForCityModel.dart';
-import '../../../main.dart';
-import '../../main/widgets/Inputs/TextInput.dart';
+import '../../../main-services.dart';
 import 'CountryAndCitySelectWidget.dart';
 import 'PlayersList.dart';
 import 'dart:async';
@@ -130,7 +129,7 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
       offSet: _offSet,
     );
 
-    MyApp.playerService.search(playerRequest).then((value) {
+    AppServices.playerService.search(playerRequest).then((value) {
       if (value.list.isEmpty) {
         setState(() {
           _isActiveLoader = false;
@@ -149,7 +148,7 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
       }
     });
     if (cityId != null) {
-      MyApp.cityService.getById(cityId, (p0) {}).then((value) {
+      AppServices.cityService.getById(cityId, (p0) {}).then((value) {
         setState(() {
           cityModel = value;
         });

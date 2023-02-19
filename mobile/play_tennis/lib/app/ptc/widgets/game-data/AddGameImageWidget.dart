@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import '../../../../logic/clt/models/BaseApiResponse.dart';
-import '../../../../main.dart';
+import '../../../../main-services.dart';
 import '../../../main/widgets/Inputs/ImageInput.dart';
 
 class AddGameImageWidget extends StatefulWidget {
@@ -35,7 +35,7 @@ class _AddGameImageWidgetState extends State<AddGameImageWidget> {
   }
 
   Future<BaseApiResponse> saveFile(File file) async {
-    var response = await MyApp.filesService.postFile(file);
+    var response = await AppServices.filesService.postFile(file);
     if (!response.isSucceeded) {
       return BaseApiResponse(
         isSucceeded: false,

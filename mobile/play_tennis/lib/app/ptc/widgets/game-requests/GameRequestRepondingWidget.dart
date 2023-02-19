@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:play_tennis/app/main/extensions/TimePickerUtils.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
+import 'package:play_tennis/main.dart';
 import '../../../../logic/clt/models/CurrentLoginData.dart';
 import '../../../../logic/ptc/models/game-requests/GameRequestSimpleModel.dart';
-import '../../../../main.dart';
+import '../../../../main-services.dart';
 
 class GameRequestRepondingWidget extends StatelessWidget {
   final CurrentLoginData loginData;
@@ -123,7 +124,7 @@ class GameRequestRepondingWidget extends StatelessWidget {
 
     MyApp.inProccess = true;
 
-    MyApp.gameRequestsService.respond(request.id!).then((value) {
+    AppServices.gameRequestsService.respond(request.id!).then((value) {
       BaseApiResponseUtils.handleResponse(context, value);
       MyApp.inProccess = false;
     });
@@ -136,7 +137,7 @@ class GameRequestRepondingWidget extends StatelessWidget {
 
     MyApp.inProccess = true;
 
-    MyApp.gameRequestsService.remove(request.id!).then((value) {
+    AppServices.gameRequestsService.remove(request.id!).then((value) {
       BaseApiResponseUtils.handleResponse(context, value);
 
       if (value.isSucceeded) {

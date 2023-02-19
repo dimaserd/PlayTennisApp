@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
-import 'package:play_tennis/main.dart';
 import '../../../logic/ptc/models/PlayerData.dart';
 import '../../../logic/ptc/models/players/UpdateDataByPlayerRequest.dart';
+import '../../../main-services.dart';
 import '../../main/widgets/Inputs/DatePickerInput.dart';
 import '../../main/widgets/Inputs/DropdownWidget.dart';
 import '../../main/widgets/Inputs/TextInput.dart';
@@ -160,7 +160,7 @@ class _EditMainDataWidgetState extends State<EditMainDataWidget> {
       sex: widget.selectedSex.value == true.toString().toLowerCase(),
     );
 
-    MyApp.playerService.updateData(data).then((value) {
+    AppServices.playerService.updateData(data).then((value) {
       BaseApiResponseUtils.handleResponse(context, value);
       isBusy = false;
     });

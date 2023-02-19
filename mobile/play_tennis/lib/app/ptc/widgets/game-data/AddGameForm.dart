@@ -10,6 +10,7 @@ import '../../../../logic/ptc/models/PlayerLocationData.dart';
 import '../../../../logic/ptc/models/cities/CityModel.dart';
 import '../../../../logic/ptc/models/cities/CountrySimpleModel.dart';
 import '../../../../logic/ptc/models/games/TennisSetData.dart';
+import '../../../../main-services.dart';
 import '../../../../main.dart';
 import '../../../main/widgets/Loading.dart';
 import '../CourtTypeSelect.dart';
@@ -91,7 +92,7 @@ class _AddGameFormState extends State<AddGameForm> {
   @override
   void initState() {
     super.initState();
-    MyApp.playerService.getLocationData().then((value) {
+    AppServices.playerService.getLocationData().then((value) {
       if (value != null) {
         countryAndCitySelectController.city = value.city;
         countryAndCitySelectController.setCountry(value.country!);

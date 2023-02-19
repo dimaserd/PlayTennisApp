@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import '../../../logic/clt/models/CurrentLoginData.dart';
-import '../../../main.dart';
+import '../../../main-services.dart';
 
 class CheckAuthScreen extends StatefulWidget {
   const CheckAuthScreen({super.key});
@@ -33,6 +33,6 @@ class CheckAuthScreenState extends State<CheckAuthScreen> {
   }
 
   Future<bool> _getLoginData() {
-    return MyApp.loginService.checkLogin();
+    return AppServices.loginService.checkLogin();
   }
 }

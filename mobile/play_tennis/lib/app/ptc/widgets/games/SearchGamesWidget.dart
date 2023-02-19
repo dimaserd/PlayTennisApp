@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../logic/clt/models/CurrentLoginData.dart';
 import '../../../../logic/ptc/services/GameService.dart';
-import '../../../../main.dart';
+import '../../../../main-services.dart';
 import 'GamesList.dart';
 
 class SearchGamesWidget extends StatefulWidget {
@@ -46,7 +46,7 @@ class _SearchGamesWidgetState extends State<SearchGamesWidget> {
       offSet: 0,
     );
 
-    MyApp.gameService.searchMine(playerRequest).then((value) {
+    AppServices.gameService.searchMine(playerRequest).then((value) {
       games = value.list;
       setState(() {
         gamesLoaded = true;

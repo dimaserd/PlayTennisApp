@@ -1,6 +1,6 @@
 import 'package:url_launcher/url_launcher.dart';
+import 'main-services.dart';
 import 'main-settings.dart';
-import 'main.dart';
 
 class MainAppExtensions {
   static Future<void> trylaunchAppUrl(
@@ -8,7 +8,7 @@ class MainAppExtensions {
     Function(String) onError,
   ) async {
     final result =
-        await MyApp.playerLoginLinkService.createLoginLink((p0) => {});
+        await AppServices.playerLoginLinkService.createLoginLink((p0) => {});
 
     if (!result.isSucceeded) {
       onError(result.errorMessage ?? "Ошибка при авторизации по кнопке");

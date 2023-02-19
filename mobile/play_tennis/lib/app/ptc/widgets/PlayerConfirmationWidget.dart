@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../logic/ptc/models/PlayerData.dart';
-import '../../../main.dart';
+import '../../../main-services.dart';
 import '../../main/widgets/Inputs/TextInput.dart';
 
 class PlayerConfirmationWidget extends StatefulWidget {
@@ -115,7 +115,7 @@ class _EmailConfirmationWidgetState extends State<EmailConfirmationWidget> {
 
     isConfirming = true;
 
-    MyApp.playerService
+    AppServices.playerService
         .confirmEmail(codeConfirmationController.text)
         .then((value) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(

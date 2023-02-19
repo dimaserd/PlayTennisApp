@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/clt/models/models.dart';
+import '../../../main-services.dart';
 import '../../../main-settings.dart';
 import '../../../main.dart';
 import 'Inputs/PasswordInput.dart';
@@ -105,7 +106,7 @@ class _LoginFormState extends State<LoginForm> {
     });
 
     try {
-      var data = await MyApp.loginService.login(
+      var data = await AppServices.loginService.login(
         emailTextController.text,
         passTextController.text,
       );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/ptc/models/game-requests/AcceptGameRequestResponse.dart';
+import 'package:play_tennis/main-services.dart';
 import 'package:play_tennis/main.dart';
 import '../../../../logic/clt/models/CurrentLoginData.dart';
 import '../../../../logic/ptc/models/game-requests/GameRequestResponseSimpleModel.dart';
@@ -75,7 +76,7 @@ class GameResponseToSelect extends StatelessWidget {
       gameRequestId: requestId,
       playerId: response.author!.id,
     );
-    MyApp.gameRequestsService.acceptResponse(model).then((value) {
+    AppServices.gameRequestsService.acceptResponse(model).then((value) {
       BaseApiResponseUtils.handleResponse(context, value);
       MyApp.inProccess = false;
     });

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import '../../../logic/ptc/models/PlayerLocationData.dart';
-import '../../../main.dart';
+import '../../../main-services.dart';
 import '../../main/widgets/Loading.dart';
 import '../../main/widgets/side_drawer.dart';
 import '../widgets/CountryAndCitySelectWidget.dart';
@@ -26,7 +26,7 @@ class _GamesRequestsScreenState extends State<GamesRequestsScreen> {
   }
 
   getData() {
-    MyApp.playerService.getLocationData().then((value) {
+    AppServices.playerService.getLocationData().then((value) {
       if (value == null) {
         BaseApiResponseUtils.showError(context, "Кажется вы были разлогинены");
         Navigator.of(context)

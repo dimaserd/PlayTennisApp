@@ -3,7 +3,7 @@ import 'package:play_tennis/app/main/widgets/Loading.dart';
 import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
 import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
 import 'package:play_tennis/logic/ptc/models/games/CreateSinglesGame.dart';
-import 'package:play_tennis/main.dart';
+import '../../../main-services.dart';
 import '../../main/widgets/side_drawer.dart';
 import '../widgets/game-data/AddGameForm.dart';
 
@@ -19,7 +19,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
 
   @override
   void initState() {
-    MyApp.loginService.getLoginData().then((value) {
+    AppServices.loginService.getLoginData().then((value) {
       setState(() {
         loginData = value;
       });
@@ -64,6 +64,6 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
       gameData: matchData,
     );
 
-    return MyApp.gameService.create(model);
+    return AppServices.gameService.create(model);
   }
 }

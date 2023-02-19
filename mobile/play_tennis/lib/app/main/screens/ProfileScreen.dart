@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import '../../../logic/ptc/models/PlayerData.dart';
-import '../../../main.dart';
+import '../../../main-services.dart';
 import '../widgets/Loading.dart';
 import '../widgets/profile_data.dart';
 import '../widgets/side_drawer.dart';
@@ -19,7 +19,7 @@ class ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
-    MyApp.playerService.getData().then((value) {
+    AppServices.playerService.getData().then((value) {
       if (value == null) {
         BaseApiResponseUtils.showError(context, "Кажется вы были разлогинены");
         Navigator.of(context)
