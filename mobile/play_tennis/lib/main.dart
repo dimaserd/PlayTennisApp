@@ -48,7 +48,7 @@ void main() async {
     print('Token: $token');
 
     if (token != null) {
-      AppServices.appNotificationTokenService.addToken(token);
+      // AppServices.appNotificationTokenService.addToken(token);
     }
   });
 

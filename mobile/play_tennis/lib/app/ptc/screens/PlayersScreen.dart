@@ -14,6 +14,8 @@ class PlayersScreen extends StatefulWidget {
 
 class _PlayersScreenState extends State<PlayersScreen> {
   PlayerLocationData? locationData;
+  String title = "Игроки";
+  int selectedIndex = 0;
 
   @override
   void initState() {
@@ -37,11 +39,29 @@ class _PlayersScreenState extends State<PlayersScreen> {
       key: GlobalKey<ScaffoldState>(),
       body: Padding(
           padding: const EdgeInsets.all(20),
-          child: MyTabbedPage(locationData: locationData)),
+          child: MyTabbedPage(
+            selectedIndex: selectedIndex,
+            locationData: locationData,
+            onItemTapped: (index) {
+            _onItemTapped(index);
+          },)),
       drawer: const SideDrawer(),
       appBar: AppBar(
-        title: const Text("Игроки"),
+        title: Text(title),
       ),
     );
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      selectedIndex = index;
+      if (index == 0) {
+        title = "Игроки";
+      } else if (index == 1) {
+        title = "Сообщества";
+      } else if (index == 2) {
+        title = "Тренеры";
+      }
+    });
   }
 }

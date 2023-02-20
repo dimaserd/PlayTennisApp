@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/ptc/widgets/cities/CityChatAndChannelWidget.dart';
 import '../../../logic/ptc/models/PlayerLocationData.dart';
-import '../../../logic/ptc/models/PlayerModel.dart';
-import '../../../logic/ptc/models/SearchPlayersRequest.dart';
+import '../../../logic/ptc/services/CommunityCardService.dart';
 import '../../../logic/ptc/models/cities/PublicTelegramChatForCityModel.dart';
 import '../../../main-services.dart';
 import 'CountryAndCitySelectWidget.dart';
-import 'PlayersList.dart';
+import 'CommunityList.dart';
 import 'dart:async';
 
-class SearchPlayersForm extends StatefulWidget {
-  final PlayerLocationData locationData;
-  final void Function(PlayerModel player) onTapHandler;
 
-  const SearchPlayersForm({
+class SearchCommunityForm extends StatefulWidget {
+  final PlayerLocationData locationData;
+  final void Function(SearchCommunityCards player) onTapHandler;
+
+  const SearchCommunityForm({
     super.key,
     required this.locationData,
     required this.onTapHandler,
   });
 
   @override
-  State<SearchPlayersForm> createState() => _SearchPlayersFormState();
+  State<SearchCommunityForm> createState() => _SearchCommunityForm();
 }
 
-class _SearchPlayersFormState extends State<SearchPlayersForm> {
+class _SearchCommunityForm extends State<SearchCommunityForm> {
   final ButtonStyle style =
       ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
   final CountryAndCitySelectController countryAndCitySelectController =
@@ -32,7 +32,7 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
   final TextEditingController _searchController = TextEditingController();
   Timer? _debounce;
 
-  List<PlayerModel> players = [];
+  List<CommunityCardSimpleModel> community = [];
   PublicTelegramChatForCityModel? cityModel;
 
   int _offSet = 0;
@@ -53,7 +53,6 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
   void dispose() {
     _debounce?.cancel();
     _searchController.dispose();
-    
     super.dispose();
   }
 
@@ -89,12 +88,11 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
         Expanded(
           child: Padding(
             padding: const EdgeInsets.only(top: 8, bottom: 0),
-            child: PlayersList(
+            child: CommunityList(
               isActiveLoader: _isActiveLoader,
               offset: _offSet,
-              players: players,
+              community: community,
               getData: (offSet) {
-                print("object $offSet");
                 _offSet = offSet;
                 getData();
               },
@@ -116,35 +114,31 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
     });
   }
 
-  getData()  {
+  getData() {
     var cityId = countryAndCitySelectController.city?.id;
 
-    var playerRequest = SearchPlayersRequest(
-      q: _searchController.text,
-      sex: null,
-      emailConfirmed: true,
-      accountConfirmed: true,
-      dataFilled: true,
-      cityId: cityId,
-      count: 10,
-      offSet: _offSet,
-    );
+    var communityRequest = SearchCommunityCards(
+      q: _searchController.text, 
+      cityId: cityId, 
+      count: 10, 
+      offSet: _offSet);
 
-    AppServices.playerService.search(playerRequest).then((value) {
+    AppServices.communityService.search(communityRequest).then((value) {
       if (mounted) {
       if (value.list.isEmpty) {
         setState(() {
           _isActiveLoader = false;
         });
       }
+
       if (_offSet == 0 || _isTapSearch == true) {
         _isTapSearch = false;
         setState(() {
-          players = value.list;
+          community = value.list;
         });
       } else {
         setState(() {
-          players += value.list;
+          community += value.list;
         });
       }
       }

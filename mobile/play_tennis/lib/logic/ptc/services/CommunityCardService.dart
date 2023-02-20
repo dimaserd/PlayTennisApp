@@ -61,6 +61,7 @@ class SearchCommunityCards {
 }
 
 class CommunityCardService {
+  
   final NetworkService networkService;
   final String baseUrl = "/api/ptc/community-card/";
   CommunityCardService(this.networkService);
@@ -86,4 +87,5 @@ class CommunityCardService {
 
     return result;
   }
+
 }

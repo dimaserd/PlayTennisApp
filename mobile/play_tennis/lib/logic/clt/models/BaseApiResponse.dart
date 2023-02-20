@@ -7,11 +7,12 @@ class BaseApiResponse {
     required this.message,
   });
 
-  factory BaseApiResponse.fromJson(Map<String, dynamic> json) =>
-      BaseApiResponse(
+  factory BaseApiResponse.fromJson(Map<String, dynamic> json) {
+      return BaseApiResponse(
         isSucceeded: json["isSucceeded"],
         message: json["message"],
       );
+  }
 }
 
 class GenericBaseApiResponse<T> {
