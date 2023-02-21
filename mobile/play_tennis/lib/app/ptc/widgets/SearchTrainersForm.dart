@@ -62,28 +62,37 @@ class _SearchTrainersForm extends State<SearchTrainersForm> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CountryAndCitySelect(
-          onCityChanged: (p) {
-            onCountryChanged();
-          },
-          onCountryChanged: (p) {
-            onCountryChanged();
-          },
-          controller: countryAndCitySelectController,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 2),
+          child: CountryAndCitySelect(
+            onCityChanged: (p) {
+              onCountryChanged();
+            },
+            onCountryChanged: (p) {
+              onCountryChanged();
+            },
+            controller: countryAndCitySelectController,
+          ),
         ),
-        TextField(
-          controller: _searchController,
-          onChanged: _onSearchChanged,
-          decoration: InputDecoration(
-            hintText: 'Поисковая строка',
-            suffixIcon: Icon(Icons.search),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 2),
+          child: TextField(
+            controller: _searchController,
+            onChanged: _onSearchChanged,
+            decoration: InputDecoration(
+              hintText: 'Поисковая строка',
+              suffixIcon: Icon(Icons.search),
+            ),
           ),
         ),
         cityModel != null
-            ? CityChatAndChannelWidget(
-                model: cityModel!,
-                cityName: countryAndCitySelectController.city?.name ?? "Город",
-              )
+            ? Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 2),
+              child: CityChatAndChannelWidget(
+                  model: cityModel!,
+                  cityName: countryAndCitySelectController.city?.name ?? "Город",
+                ),
+            )
             : const SizedBox.shrink(),
         Expanded(
           child: Padding(
@@ -126,7 +135,7 @@ class _SearchTrainersForm extends State<SearchTrainersForm> {
         q: _searchController.text, cityId: cityId, count: 10, offSet: _offSet);
 
     AppServices.trainerCardService.search(trainerRequest).then((value) {
-      if (mounted) {
+      if(!mounted) { return; }
         var list = value.list;
         if (value.list.isEmpty) {
           setState(() {
@@ -144,22 +153,19 @@ class _SearchTrainersForm extends State<SearchTrainersForm> {
             trainers += value.list;
           });
         }
-      }
     });
     if (cityId != null) {
       AppServices.cityService.getById(cityId, (p0) {}).then((value) {
-        if (mounted) {
+        if(!mounted) { return; }
           setState(() {
             cityModel = value;
           });
-        }
       });
     } else {
-      if (mounted) {
+      if(!mounted) { return; }
         setState(() {
           cityModel = null;
         });
-      }
     }
   }
 }

@@ -70,10 +70,9 @@ class TrainerList extends StatelessWidget {
                   },
                   child: Card(
                       margin: const EdgeInsets.symmetric(
-                          vertical: 4, horizontal: 5),
-                      elevation: 5,
+                          vertical: 4, horizontal: 2),
+                      elevation: 4,
                       child: ListTile(
-                        leading: PlayerAvatar(avatarFileId: null),
                         title: Text(
                           "${trainers[index].surname!} ${trainers[index].name!}",
                           style: Theme.of(context).textTheme.headline6,

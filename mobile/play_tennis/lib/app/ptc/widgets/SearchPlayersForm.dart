@@ -60,29 +60,39 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        CountryAndCitySelect(
-          onCityChanged: (p) {
-            onCountryChanged();
-          },
-          onCountryChanged: (p) {
-            onCountryChanged();
-          },
-          controller: countryAndCitySelectController,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 2),
+          child: CountryAndCitySelect(
+            onCityChanged: (p) {
+              onCountryChanged();
+            },
+            onCountryChanged: (p) {
+              onCountryChanged();
+            },
+            controller: countryAndCitySelectController,
+          ),
         ),
-        TextField(
-          controller: _searchController,
-          onChanged: _onSearchChanged,
-          decoration: InputDecoration(
-            hintText: 'Поисковая строка',
-            suffixIcon: Icon(Icons.search),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 2),
+          child: TextField(
+            controller: _searchController,
+            onChanged: _onSearchChanged,
+            decoration: InputDecoration(
+              hintText: 'Поисковая строка',
+              suffixIcon: Icon(Icons.search),
+            ),
           ),
         ),
         cityModel != null
-            ? CityChatAndChannelWidget(
-                model: cityModel!,
-                cityName: countryAndCitySelectController.city?.name ?? "Город",
-              )
+            ? Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 2),
+              child: CityChatAndChannelWidget(
+                  model: cityModel!,
+                  cityName: countryAndCitySelectController.city?.name ?? "Город",
+                ),
+            )
             : const SizedBox.shrink(),
         Expanded(
           child: Padding(
@@ -134,7 +144,7 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
     );
 
     AppServices.playerService.search(playerRequest).then((value) {
-      if (mounted) {
+      if(!mounted) { return; }
       if (value.list.isEmpty) {
         setState(() {
           _isActiveLoader = false;
@@ -150,22 +160,19 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
           players += value.list;
         });
       }
-      }
     });
     if (cityId != null) {
       AppServices.cityService.getById(cityId, (p0) {}).then((value) {
-        if (mounted) {
+        if(!mounted) { return; }
         setState(() {
           cityModel = value;
         });
-        }
       });
     } else {
-      if (mounted) {
+      if(!mounted) { return; }
       setState(() {
         cityModel = null;
       });
-      }
     }
   }
 }

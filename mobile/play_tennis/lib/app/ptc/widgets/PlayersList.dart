@@ -63,8 +63,9 @@ class PlayersList extends StatelessWidget {
                   },
                   child: Card(
                     margin:
-                        const EdgeInsets.symmetric(vertical: 4, horizontal: 5),
-                    elevation: 5,
+                        const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
+                    elevation: 4,
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
                     child: ListTile(
                       leading: PlayerAvatar(
                           avatarFileId: players[index].avatarFileId),
