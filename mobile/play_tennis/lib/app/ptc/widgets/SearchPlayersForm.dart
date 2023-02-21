@@ -63,12 +63,10 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
       children: [
         CountryAndCitySelect(
           onCityChanged: (p) {
-            _offSet = 0;
-            getData();
+            onCountryChanged();
           },
           onCountryChanged: (p) {
-            _offSet = 0;
-            getData();
+            onCountryChanged();
           },
           controller: countryAndCitySelectController,
         ),
@@ -114,6 +112,11 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
       // Здесь вы можете добавить логику поиска
       getData();
     });
+  }
+
+  void onCountryChanged() {
+    _offSet = 0;
+    getData();
   }
 
   getData()  {

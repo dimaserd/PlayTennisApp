@@ -1,10 +1,10 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'PlayerToSelect.dart';
 import 'package:play_tennis/logic/ptc/services/TrainerCardService.dart';
-import '../../../logic/ptc/models/SearchPlayersRequest.dart';
-import '../../../main.dart';
-import 'CountryAndCitySelectWidget.dart';
+import 'package:play_tennis/app/main/widgets/palette.dart';
 import 'package:play_tennis/app/main/widgets/images/PlayerAvatar.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class TrainerList extends StatelessWidget {
   List<TrainerCardSimpleModel> trainers;
@@ -39,6 +39,13 @@ class TrainerList extends StatelessWidget {
     getData(offset);
   }
 
+  void _launchPhone(String phoneNumber) async {
+    final url = Uri.parse('tel:$phoneNumber');
+    if (await launchUrl(url)) {
+      await launchUrl(url);
+    }
+  }
+
   Widget getChild() {
     return trainers.isEmpty
         ? Column(children: const [
@@ -62,26 +69,42 @@ class TrainerList extends StatelessWidget {
                     // onTapHandler(trainers[index]);
                   },
                   child: Card(
-                    margin:
-                        const EdgeInsets.symmetric(vertical: 4, horizontal: 5),
-                    elevation: 5,
-                    child: ListTile(
-                      leading: PlayerAvatar(
-                          avatarFileId: null),
-                      title: Text(
-                        "${trainers[index].surname!} ${trainers[index].name!}",
-                        style: Theme.of(context).textTheme.headline6,
-                      ),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          // Text("Ntrp: ${trainers[index].ntrpRating}"),
-                          // Text("Рейтинг силы: ${trainers[index].rating}")
-                        ],
-                      ),
-                    ),
-                  ),
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 4, horizontal: 5),
+                      elevation: 5,
+                      child: ListTile(
+                        leading: PlayerAvatar(avatarFileId: null),
+                        title: Text(
+                          "${trainers[index].surname!} ${trainers[index].name!}",
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            RichText(
+                              text: TextSpan(
+                                text: "Номер телефона: ",
+                                style: const TextStyle(
+                                  color: mainColor                                ),
+                                children: [
+                                  TextSpan(
+                                    text: "${trainers[index].phoneNumber}",
+                                    style: TextStyle(color: Colors.blue),
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        print("ta");
+                                        _launchPhone("${trainers[index].phoneNumber}");
+                                      },
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Text("${trainers[index].description}")
+                          ],
+                          // ),
+                        ),
+                      )),
                 );
               }
             },

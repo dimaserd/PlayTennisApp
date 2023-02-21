@@ -64,12 +64,10 @@ class _SearchTrainersForm extends State<SearchTrainersForm> {
       children: [
         CountryAndCitySelect(
           onCityChanged: (p) {
-            _offSet = 0;
-            getData();
+            onCountryChanged();
           },
           onCountryChanged: (p) {
-            _offSet = 0;
-            getData();
+            onCountryChanged();
           },
           controller: countryAndCitySelectController,
         ),
@@ -95,7 +93,6 @@ class _SearchTrainersForm extends State<SearchTrainersForm> {
               offset: _offSet,
               trainers: trainers,
               getData: (offSet) {
-                print("object $offSet");
                 _offSet = offSet;
                 getData();
               },
@@ -117,6 +114,11 @@ class _SearchTrainersForm extends State<SearchTrainersForm> {
     });
   }
 
+  void onCountryChanged() {
+    _offSet = 0;
+    getData();
+  }
+
   getData() {
     var cityId = countryAndCitySelectController.city?.id;
 
@@ -125,38 +127,38 @@ class _SearchTrainersForm extends State<SearchTrainersForm> {
 
     AppServices.trainerCardService.search(trainerRequest).then((value) {
       if (mounted) {
-      var list = value.list;
-      if (value.list.isEmpty) {
-        setState(() {
-          _isActiveLoader = false;
-        });
-      }
+        var list = value.list;
+        if (value.list.isEmpty) {
+          setState(() {
+            _isActiveLoader = false;
+          });
+        }
 
-      if (_offSet == 0 || _isTapSearch == true) {
-        _isTapSearch = false;
-        setState(() {
-          trainers = value.list;
-        });
-      } else {
-        setState(() {
-          trainers += value.list;
-        });
-      }
+        if (_offSet == 0 || _isTapSearch == true) {
+          _isTapSearch = false;
+          setState(() {
+            trainers = value.list;
+          });
+        } else {
+          setState(() {
+            trainers += value.list;
+          });
+        }
       }
     });
     if (cityId != null) {
       AppServices.cityService.getById(cityId, (p0) {}).then((value) {
         if (mounted) {
-        setState(() {
-          cityModel = value;
-        });
+          setState(() {
+            cityModel = value;
+          });
         }
       });
     } else {
       if (mounted) {
-      setState(() {
-        cityModel = null;
-      });
+        setState(() {
+          cityModel = null;
+        });
       }
     }
   }

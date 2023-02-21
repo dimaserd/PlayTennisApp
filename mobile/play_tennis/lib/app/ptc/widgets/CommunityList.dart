@@ -1,10 +1,9 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'PlayerToSelect.dart';
-import 'package:play_tennis/logic/ptc/services/TrainerCardService.dart';
-import '../../../main.dart';
-import 'CountryAndCitySelectWidget.dart';
 import '../../../logic/ptc/services/CommunityCardService.dart';
 import 'package:play_tennis/app/main/widgets/images/PlayerAvatar.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter/services.dart';
 
 class CommunityList extends StatelessWidget {
   List<CommunityCardSimpleModel> community;
@@ -66,8 +65,7 @@ class CommunityList extends StatelessWidget {
                         const EdgeInsets.symmetric(vertical: 4, horizontal: 5),
                     elevation: 5,
                     child: ListTile(
-                      leading: PlayerAvatar(
-                          avatarFileId: 63),
+                      leading: PlayerAvatar(avatarFileId: 63),
                       title: Text(
                         "${community[index].name!}",
                         style: Theme.of(context).textTheme.headline6,
@@ -76,8 +74,21 @@ class CommunityList extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          // Text("Ntrp: ${trainers[index].ntrpRating}"),
-                          // Text("Рейтинг силы: ${trainers[index].rating}")
+                          GestureDetector(
+                            onTap: () {
+                              var url =
+                                  Uri.parse("${community[index].telegramLink}");
+                              launchUrl(url);
+                            },
+                            child: Text(
+                              "Ссылка на телеграм",
+                              style: TextStyle(
+                                color: Colors.blue,
+                                decoration: TextDecoration.underline,
+                              ),
+                            ),
+                          ),
+                          Text("${community[index].description}")
                         ],
                       ),
                     ),

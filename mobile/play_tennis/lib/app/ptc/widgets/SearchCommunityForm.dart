@@ -8,7 +8,6 @@ import 'CountryAndCitySelectWidget.dart';
 import 'CommunityList.dart';
 import 'dart:async';
 
-
 class SearchCommunityForm extends StatefulWidget {
   final PlayerLocationData locationData;
   final void Function(SearchCommunityCards player) onTapHandler;
@@ -62,12 +61,10 @@ class _SearchCommunityForm extends State<SearchCommunityForm> {
       children: [
         CountryAndCitySelect(
           onCityChanged: (p) {
-            _offSet = 0;
-            getData();
+            onCountryChanged() ;
           },
           onCountryChanged: (p) {
-            _offSet = 0;
-            getData();
+            onCountryChanged() ;
           },
           controller: countryAndCitySelectController,
         ),
@@ -114,17 +111,21 @@ class _SearchCommunityForm extends State<SearchCommunityForm> {
     });
   }
 
+  void onCountryChanged() {
+    _offSet = 0;
+    getData();
+  }
+
   getData() {
     var cityId = countryAndCitySelectController.city?.id;
 
     var communityRequest = SearchCommunityCards(
-      q: _searchController.text, 
-      cityId: cityId, 
-      count: 10, 
-      offSet: _offSet);
+        q: _searchController.text, cityId: cityId, count: 10, offSet: _offSet);
 
     AppServices.communityService.search(communityRequest).then((value) {
-      if (mounted) {
+      if (!mounted) {
+        return;
+      }
       if (value.list.isEmpty) {
         setState(() {
           _isActiveLoader = false;
@@ -141,22 +142,23 @@ class _SearchCommunityForm extends State<SearchCommunityForm> {
           community += value.list;
         });
       }
-      }
     });
     if (cityId != null) {
       AppServices.cityService.getById(cityId, (p0) {}).then((value) {
-        if (mounted) {
+        if (!mounted) {
+          return;
+        }
         setState(() {
           cityModel = value;
         });
-        }
       });
     } else {
-      if (mounted) {
+      if (!mounted) {
+        return;
+      }
       setState(() {
         cityModel = null;
       });
-      }
     }
   }
 }

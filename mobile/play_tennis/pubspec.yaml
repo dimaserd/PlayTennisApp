@@ -41,7 +41,7 @@ dependencies:
   badges: ^2.0.2
   dropdown_search: ^5.0.2
   masked_text: ^1.0.1
-  url_launcher: ^6.1.5
+  url_launcher: ^6.1.9
   image_picker: ^0.8.5+3
   image_cropper: ^3.0.0
   firebase_core: ^2.5.0
