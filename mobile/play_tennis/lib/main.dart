@@ -3,8 +3,8 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:play_tennis/app/main/widgets/palette.dart';
 import 'main-routes.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'main-services.dart';
 import 'main-settings.dart';
+import 'package:play_tennis/main-services.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -48,7 +48,7 @@ void main() async {
     print('Token: $token');
 
     if (token != null) {
-      AppServices.appNotificationTokenService.addToken(token);
+      // AppServices.appNotificationTokenService.addToken(token);
     }
   });
 

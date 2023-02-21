@@ -4,7 +4,6 @@ import 'package:play_tennis/app/ptc/screens/AddGameRequestScreen.dart';
 import 'package:play_tennis/app/ptc/screens/CreateGameScreen.dart';
 import 'package:play_tennis/app/ptc/screens/MyGamesScreen.dart';
 import 'package:play_tennis/app/ptc/screens/TrainersPage.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'app/main/screens/CheckAuthScreen.dart';
 import 'app/main/screens/LoginScreen.dart';
 import 'app/main/screens/ProfileScreen.dart';

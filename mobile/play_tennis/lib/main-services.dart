@@ -11,6 +11,8 @@ import 'logic/ptc/services/GameService.dart';
 import 'logic/ptc/services/PlayerLoginLinkService.dart';
 import 'logic/ptc/services/PlayerRegistrationService.dart';
 import 'logic/ptc/services/PlayerService.dart';
+import 'logic/ptc/services/CommunityCardService.dart';
+import 'logic/ptc/services/TrainerCardService.dart';
 import 'main-settings.dart';
 
 class AppServices {
@@ -35,4 +37,6 @@ class AppServices {
   static final PlayerLoginLinkService playerLoginLinkService =
       PlayerLoginLinkService(networkService);
   static final CityService cityService = CityService(networkService);
+  static final CommunityCardService communityService = CommunityCardService(networkService);
+  static final TrainerCardService trainerCardService = TrainerCardService(networkService);
 }
