@@ -1,27 +1,29 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:play_tennis/logic/ptc/services/TrainerCardService.dart';
 import 'package:play_tennis/app/main/widgets/palette.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class TrainerList extends StatelessWidget {
-  List<TrainerCardSimpleModel> trainers;
-  void Function(TrainerCardSimpleModel trainer) onTapHandler;
+import '../../../logic/ptc/services/CourtCardService.dart';
+
+class CourtsList extends StatelessWidget {
+  List<CourtCardSimpleModel> courts;
+  void Function(CourtCardSimpleModel trainer) onTapHandler;
   void Function(int offSet) getData;
 
   int offset;
   bool isActiveLoader = true;
 
-  TrainerList({
+  CourtsList({
     super.key,
     required this.isActiveLoader,
     required this.offset,
     required this.onTapHandler,
-    required this.trainers,
+    required this.courts,
     required this.getData,
   }) {
     addScrollListener();
   }
+
   final ScrollController _scrollController = ScrollController();
 
   void addScrollListener() {
@@ -46,17 +48,17 @@ class TrainerList extends StatelessWidget {
   }
 
   Widget getChild() {
-    return trainers.isEmpty
+    return courts.isEmpty
         ? Column(children: const [
             Center(
-              child: Text("Тренеры не найдены"),
+              child: Text("Корты не найдены"),
             ),
           ])
         : ListView.builder(
             controller: _scrollController,
             itemBuilder: (context, index) {
-              if (index == trainers.length) {
-                if (isActiveLoader == false || trainers.length < 5) {
+              if (index == courts.length) {
+                if (isActiveLoader == false || courts.length < 5) {
                   return Container();
                 } else {
                   // Вернуть заглушку для отображения индикатора загрузки
@@ -73,7 +75,7 @@ class TrainerList extends StatelessWidget {
                       elevation: 4,
                       child: ListTile(
                         title: Text(
-                          "${trainers[index].surname!} ${trainers[index].name!}",
+                          courts[index].name!,
                           style: Theme.of(context).textTheme.headline6,
                         ),
                         subtitle: Column(
@@ -86,19 +88,18 @@ class TrainerList extends StatelessWidget {
                                 style: const TextStyle(color: mainColor),
                                 children: [
                                   TextSpan(
-                                    text: "${trainers[index].phoneNumber}",
+                                    text: "+79166044960 фейк",
                                     style: const TextStyle(color: Colors.blue),
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {
                                         print("ta");
-                                        _launchPhone(
-                                            "${trainers[index].phoneNumber}");
+                                        _launchPhone("+79166044960");
                                       },
                                   ),
                                 ],
                               ),
                             ),
-                            Text("${trainers[index].description}")
+                            Text("${courts[index].description}")
                           ],
                           // ),
                         ),
@@ -106,7 +107,7 @@ class TrainerList extends StatelessWidget {
                 );
               }
             },
-            itemCount: trainers.length + 1,
+            itemCount: courts.length + 1,
           );
   }
 

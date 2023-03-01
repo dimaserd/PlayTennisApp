@@ -43,8 +43,9 @@ class _PlayersScreenState extends State<PlayersScreen> {
             selectedIndex: selectedIndex,
             locationData: locationData,
             onItemTapped: (index) {
-            _onItemTapped(index);
-          },)),
+              _onItemTapped(index);
+            },
+          )),
       drawer: const SideDrawer(),
       appBar: AppBar(
         title: Text(title),
@@ -61,6 +62,8 @@ class _PlayersScreenState extends State<PlayersScreen> {
         title = "Сообщества";
       } else if (index == 2) {
         title = "Тренеры";
+      } else if (index == 3) {
+        title = "Корты";
       }
     });
   }

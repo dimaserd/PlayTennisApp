@@ -1,3 +1,5 @@
+import 'package:play_tennis/logic/ptc/services/CourtCardService.dart';
+
 import 'logic/clt/services/ClientService.dart';
 import 'logic/clt/services/LoginService.dart';
 import 'logic/clt/services/RegistrationService.dart';
@@ -37,6 +39,10 @@ class AppServices {
   static final PlayerLoginLinkService playerLoginLinkService =
       PlayerLoginLinkService(networkService);
   static final CityService cityService = CityService(networkService);
-  static final CommunityCardService communityService = CommunityCardService(networkService);
-  static final TrainerCardService trainerCardService = TrainerCardService(networkService);
+  static final CommunityCardService communityService =
+      CommunityCardService(networkService);
+  static final TrainerCardService trainerCardService =
+      TrainerCardService(networkService);
+  static final CourtCardService courtCardService =
+      CourtCardService(networkService);
 }

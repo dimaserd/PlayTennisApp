@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:play_tennis/app/ptc/widgets/SearchCourtsForm.dart';
 import 'SearchPlayersForm.dart';
 import 'SearchCommunityForm.dart';
 import 'SearchTrainersForm.dart';
@@ -11,7 +12,7 @@ class MyTabbedPage extends StatefulWidget {
   // final List<PlayerModel> players;
   // final void Function(PlayerModel player) onTapHandler;
   final PlayerLocationData? locationData;
-  final Function (int index)onItemTapped;
+  final Function(int index) onItemTapped;
   final int selectedIndex;
 
   const MyTabbedPage({
@@ -21,17 +22,21 @@ class MyTabbedPage extends StatefulWidget {
     required this.selectedIndex,
   }) : super(key: key);
 
-  _MyTabbedPageState createState() =>
-      _MyTabbedPageState(locationData: locationData, onItemTapped: onItemTapped, selectedIndex: selectedIndex);
+  _MyTabbedPageState createState() => _MyTabbedPageState(
+      locationData: locationData,
+      onItemTapped: onItemTapped,
+      selectedIndex: selectedIndex);
 }
 
 class _MyTabbedPageState extends State<MyTabbedPage> {
-
-  _MyTabbedPageState({required this.locationData, required this.onItemTapped, required this.selectedIndex});
+  _MyTabbedPageState(
+      {required this.locationData,
+      required this.onItemTapped,
+      required this.selectedIndex});
 
   // final List<PlayerModel> players;
   PlayerLocationData? locationData;
-  Function (int index)onItemTapped;
+  Function(int index) onItemTapped;
   late List<Widget> widgetOptions;
   int selectedIndex;
 
@@ -63,6 +68,14 @@ class _MyTabbedPageState extends State<MyTabbedPage> {
                 // Navigator.of(context).pushNamed("/player/${p.id!}");
               },
             )
+          : const Loading(text: "Загрузка"),
+      locationData != null
+          ? SearchCourtsForm(
+              locationData: locationData!,
+              onTapHandler: (p) {
+                // Navigator.of(context).pushNamed("/player/${p.id!}");
+              },
+            )
           : const Loading(text: "Загрузка")
     ];
   }
@@ -84,7 +97,7 @@ class _MyTabbedPageState extends State<MyTabbedPage> {
           containerHeight: 50,
           selectedIndex: selectedIndex,
           onItemSelected: (value) {
-              onItemTapped(value);
+            onItemTapped(value);
           },
           items: [
             BottomNavyBarItem(
@@ -102,11 +115,19 @@ class _MyTabbedPageState extends State<MyTabbedPage> {
                   style: TextStyle(fontSize: 13),
                 ),
                 textAlign: TextAlign.center,
-                activeColor: Color.fromARGB(255, 212, 35, 76)),
+                activeColor: const Color.fromARGB(255, 212, 35, 76)),
+            BottomNavyBarItem(
+                icon: const Icon(Icons.contacts),
+                title: const Text(
+                  ' Тренеры',
+                  style: TextStyle(fontSize: 13),
+                ),
+                textAlign: TextAlign.center,
+                activeColor: Colors.blue),
             BottomNavyBarItem(
                 icon: const Icon(Icons.sports_tennis),
                 title: const Text(
-                  ' Тренеры',
+                  ' Корты',
                   style: TextStyle(fontSize: 13),
                 ),
                 textAlign: TextAlign.center,
