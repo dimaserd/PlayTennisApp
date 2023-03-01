@@ -2,6 +2,23 @@ import 'dart:convert';
 import '../../clt/models/BaseApiResponse.dart';
 import '../../core/NetworkService.dart';
 
+class FirebaseTokenModel {
+  late String? token;
+
+  FirebaseTokenModel({
+    required this.token,
+  });
+
+  factory FirebaseTokenModel.fromJson(Map<String, dynamic> json) =>
+      FirebaseTokenModel(
+        token: json["token"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        'token': token,
+      };
+}
+
 class FlutterNotificationAppTokenService {
   final NetworkService networkService;
 
@@ -11,14 +28,19 @@ class FlutterNotificationAppTokenService {
   FlutterNotificationAppTokenService(this.networkService);
 
   Future<BaseApiResponse> updateAppToken(String token) async {
+    var model = FirebaseTokenModel(token: token);
+
+    var bodyJson = jsonEncode(model.toJson());
     var response = await networkService.postData(
-        '/api/ptc/player/FlutterAppToken/Update/$token', "{}");
+        '/api/Client/Modifiers/FlutterApp', bodyJson);
 
     try {
       var json = jsonDecode(response);
 
       return BaseApiResponse.fromJson(json);
     } catch (e) {
+      print("Произошла ошибка при привязке токена");
+      print(e.toString());
       return BaseApiResponse(isSucceeded: false, message: "Произошла ошибка");
     }
   }
