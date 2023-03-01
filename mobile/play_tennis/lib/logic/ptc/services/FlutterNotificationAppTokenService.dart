@@ -14,9 +14,13 @@ class FlutterNotificationAppTokenService {
     var response = await networkService.postData(
         '/api/ptc/player/FlutterAppToken/Update/$token', "{}");
 
-    var json = jsonDecode(response);
+    try {
+      var json = jsonDecode(response);
 
-    return BaseApiResponse.fromJson(json);
+      return BaseApiResponse.fromJson(json);
+    } catch (e) {
+      return BaseApiResponse(isSucceeded: false, message: "Произошла ошибка");
+    }
   }
 
   addToken(String token) {
