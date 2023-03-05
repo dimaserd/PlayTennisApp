@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../logic/ptc/models/PlayerModel.dart';
-import 'PlayerToSelect.dart';
-import '../../../logic/ptc/models/SearchPlayersRequest.dart';
-import '../../../main.dart';
-import 'CountryAndCitySelectWidget.dart';
 import 'package:play_tennis/app/main/widgets/images/PlayerAvatar.dart';
 
 class PlayersList extends StatelessWidget {
