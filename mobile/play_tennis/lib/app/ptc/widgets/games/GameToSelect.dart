@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/ptc/widgets/GameDataWidget.dart';
+import 'package:play_tennis/app/ptc/widgets/PlayerGamesList.dart';
+import 'package:play_tennis/logic/ptc/models/GamePlayers.dart';
 import '../../../../logic/clt/models/CurrentLoginData.dart';
 import '../../../../logic/ptc/services/GameService.dart';
 import '../../../main/widgets/images/CrocoAppImage.dart';
@@ -8,7 +10,9 @@ class GameToSelect extends StatelessWidget {
   final SinglesGameSimpleModel game;
   final CurrentLoginData loginData;
   final Function onChange;
-  const GameToSelect({
+  final GameDataWidgetController gameDataWidgetController =
+      GameDataWidgetController();
+  GameToSelect({
     super.key,
     required this.game,
     required this.loginData,
@@ -20,6 +24,10 @@ class GameToSelect extends StatelessWidget {
     var player1 = game.players![0];
     var player2 = game.players![1];
 
+    var gamePlayer1 = gameScores(0);
+    var gamePlayer2 = gameScores(1);
+
+
     return GestureDetector(
       onTap: () {},
       child: Card(
@@ -30,7 +38,7 @@ class GameToSelect extends StatelessWidget {
         elevation: 5,
         child: Padding(
           padding: const EdgeInsets.only(
-            left: 10,
+           left: 10,
             right: 10,
             top: 10,
             bottom: 10,
@@ -50,15 +58,15 @@ class GameToSelect extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              Text(
-                GameDataWidgetExtensions.getStringValue(game.scoreData!.sets!
-                    .where((e) => e.score1 != "" && e.score2 != "")
-                    .toList()),
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
+              // Text(
+              //   GameDataWidgetExtensions.getStringValue(game.scoreData!.sets!
+              //       .where((e) => e.score1 != "" && e.score2 != "")
+              //       .toList()),
+              //   style: const TextStyle(
+              //     fontSize: 20,
+              //     fontWeight: FontWeight.w600,
+              //   ),
+              // ),
               game.imageFileId != null
                   ? CrocoAppImage(
                       imageFileId: game.imageFileId!,
@@ -67,10 +75,18 @@ class GameToSelect extends StatelessWidget {
               Container(
                 height: 5,
               ),
+              PlayerGamesList(game: game, numberPlayer: 0, gamePlayer: gamePlayer1),
+              PlayerGamesList(game: game, numberPlayer: 1, gamePlayer: gamePlayer2)
             ],
           ),
         ),
       ),
     );
   }
+
+  GamePlayers gameScores(int numberPlayer) {
+    var gameDataWidget = GameDataWidget(controller: gameDataWidgetController);
+    var gamePlayer = GameDataWidgetExtensions.getStringValueGames(game.scoreData!.sets!, numberPlayer);
+    return gamePlayer;
+}
 }
