@@ -23,7 +23,7 @@ class SideDrawer extends StatelessWidget {
                   ),
                   const Padding(padding: EdgeInsets.only(top: 10)),
                   Image.asset(
-                    MainSettings.imageLogoPath,
+                    MainSettings.imageRocket,
                     height: 80,
                     width: 80,
                   ),

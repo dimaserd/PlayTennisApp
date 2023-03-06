@@ -102,7 +102,6 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
               offset: _offSet,
               players: players,
               getData: (offSet) {
-                print("object $offSet");
                 _offSet = offSet;
                 getData();
               },
@@ -126,6 +125,9 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
 
   void onCountryChanged() {
     _offSet = 0;
+    setState(() {
+       players.clear();
+    });
     getData();
   }
 
@@ -149,6 +151,8 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
         setState(() {
           _isActiveLoader = false;
         });
+      } else {
+        _isActiveLoader = true;
       }
       if (_offSet == 0 || _isTapSearch == true) {
         _isTapSearch = false;
