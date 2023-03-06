@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:play_tennis/app/ptc/widgets/ShowAlertAddTrainer.dart';
 import 'package:play_tennis/logic/ptc/services/TrainerCardService.dart';
 import 'package:play_tennis/app/main/widgets/palette.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -8,7 +9,7 @@ class TrainerList extends StatelessWidget {
   List<TrainerCardSimpleModel> trainers;
   void Function(TrainerCardSimpleModel trainer) onTapHandler;
   void Function(int offSet) getData;
-
+  
   int offset;
   bool isActiveLoader = true;
 
@@ -57,7 +58,7 @@ class TrainerList extends StatelessWidget {
             itemBuilder: (context, index) {
               if (index == trainers.length) {
                 if (isActiveLoader == false || trainers.length < 5) {
-                  return Container();
+                  return ShowAlertAddTrainer();
                 } else {
                   // Вернуть заглушку для отображения индикатора загрузки
                   return const Center(child: CircularProgressIndicator());
@@ -115,3 +116,5 @@ class TrainerList extends StatelessWidget {
     return getChild();
   }
 }
+
+
