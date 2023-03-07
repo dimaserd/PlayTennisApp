@@ -27,7 +27,6 @@ class GameToSelect extends StatelessWidget {
     var gamePlayer1 = gameScores(0);
     var gamePlayer2 = gameScores(1);
 
-
     return GestureDetector(
       onTap: () {},
       child: Card(
@@ -38,7 +37,7 @@ class GameToSelect extends StatelessWidget {
         elevation: 5,
         child: Padding(
           padding: const EdgeInsets.only(
-           left: 10,
+            left: 10,
             right: 10,
             top: 10,
             bottom: 10,
@@ -75,8 +74,10 @@ class GameToSelect extends StatelessWidget {
               Container(
                 height: 5,
               ),
-              PlayerGamesList(game: game, numberPlayer: 0, gamePlayer: gamePlayer1),
-              PlayerGamesList(game: game, numberPlayer: 1, gamePlayer: gamePlayer2)
+              PlayerGamesList(
+                  game: game, numberPlayer: 0, gamePlayer: gamePlayer1),
+              PlayerGamesList(
+                  game: game, numberPlayer: 1, gamePlayer: gamePlayer2)
             ],
           ),
         ),
@@ -85,8 +86,8 @@ class GameToSelect extends StatelessWidget {
   }
 
   GamePlayers gameScores(int numberPlayer) {
-    var gameDataWidget = GameDataWidget(controller: gameDataWidgetController);
-    var gamePlayer = GameDataWidgetExtensions.getStringValueGames(game.scoreData!.sets!, numberPlayer);
+    var gamePlayer = GameDataWidgetExtensions.getStringValueGames(
+        game.scoreData!.sets!, numberPlayer);
     return gamePlayer;
-}
+  }
 }

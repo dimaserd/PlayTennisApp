@@ -2,7 +2,7 @@ import '../models/game-requests/GameRequestDetailedModel.dart';
 import '../models/game-requests/GameRequestSimpleModel.dart';
 
 class GameRequestMappingExtensions {
-  static GameRequestSimpleModel Map(GameRequestDetailedModel model) {
+  static GameRequestSimpleModel map(GameRequestDetailedModel model) {
     return GameRequestSimpleModel(
       id: model.id,
       author: model.author,

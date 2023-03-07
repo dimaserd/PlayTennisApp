@@ -1,9 +1,6 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import '../../../logic/ptc/services/CommunityCardService.dart';
-import 'package:play_tennis/app/main/widgets/images/PlayerAvatar.dart';
+import 'package:play_tennis/logic/ptc/services/CommunityCardService.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter/services.dart';
 
 class CommunityList extends StatelessWidget {
   List<CommunityCardSimpleModel> community;
@@ -14,6 +11,7 @@ class CommunityList extends StatelessWidget {
   bool isActiveLoader = true;
 
   CommunityList({
+    super.key,
     required this.isActiveLoader,
     required this.offset,
     required this.onTapHandler,
@@ -53,7 +51,7 @@ class CommunityList extends StatelessWidget {
                   return Container();
                 } else {
                   // Вернуть заглушку для отображения индикатора загрузки
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 }
               } else {
                 return GestureDetector(
@@ -66,8 +64,8 @@ class CommunityList extends StatelessWidget {
                     elevation: 4,
                     child: ListTile(
                       title: Text(
-                        "${community[index].name!}",
-                        style: Theme.of(context).textTheme.headline6,
+                        community[index].name!,
+                        style: Theme.of(context).textTheme.titleLarge,
                       ),
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,7 +77,7 @@ class CommunityList extends StatelessWidget {
                                   Uri.parse("${community[index].telegramLink}");
                               launchUrl(url);
                             },
-                            child: Text(
+                            child: const Text(
                               "Ссылка на телеграм",
                               style: TextStyle(
                                 color: Colors.blue,

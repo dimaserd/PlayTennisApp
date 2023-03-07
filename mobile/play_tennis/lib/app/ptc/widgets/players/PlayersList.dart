@@ -68,7 +68,7 @@ class PlayersList extends StatelessWidget {
                           avatarFileId: players[index].avatarFileId),
                       title: Text(
                         "${players[index].surname!} ${players[index].name!}",
-                        style: Theme.of(context).textTheme.headline6,
+                        style: Theme.of(context).textTheme.titleLarge,
                       ),
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,

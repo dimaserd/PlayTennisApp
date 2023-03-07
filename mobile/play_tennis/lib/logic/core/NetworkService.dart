@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
 class HeaderNames {
-  static const Authenticated = "X-Authenticated";
+  static const authenticated = "X-Authenticated";
 }
 
 class NetworkService {
@@ -57,11 +57,11 @@ class NetworkService {
   }
 
   bool? getIsAuthenticated(http.Response response) {
-    if (!response.headers.containsKey(HeaderNames.Authenticated)) {
+    if (!response.headers.containsKey(HeaderNames.authenticated)) {
       return null;
     }
 
-    return response.headers[HeaderNames.Authenticated]! == "true";
+    return response.headers[HeaderNames.authenticated]! == "true";
   }
 
   Future<String> postData(String uriPath, String bodyJson) async {
@@ -111,6 +111,8 @@ class NetworkService {
     } finally {
       client.close();
     }
+
+    return null;
   }
 
   Future<String?> getDataInner(String url, Function(String) onError) async {
@@ -126,6 +128,8 @@ class NetworkService {
     } finally {
       client.close();
     }
+
+    return null;
   }
 
   Future<String?> getDataWithRetry(
@@ -151,5 +155,7 @@ class NetworkService {
     } finally {
       client.close();
     }
+
+    return null;
   }
 }

@@ -79,7 +79,7 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
           child: TextField(
             controller: _searchController,
             onChanged: _onSearchChanged,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: 'Поисковая строка',
               suffixIcon: Icon(Icons.search),
             ),

@@ -12,7 +12,7 @@ class RegistrationResult {
   });
 
   factory RegistrationResult.fromJson(Map<String, dynamic> json) =>
-      new RegistrationResult(
+      RegistrationResult(
         succeeded: json["succeeded"],
         errorMessage: json["errorMessage"],
         errorType:
@@ -67,8 +67,7 @@ class RegisteredUser {
     required this.email,
   });
 
-  factory RegisteredUser.fromJson(Map<String, dynamic> json) =>
-      new RegisteredUser(
+  factory RegisteredUser.fromJson(Map<String, dynamic> json) => RegisteredUser(
         id: json["id"],
         phoneNumber: json["phoneNumber"],
         email: json["email"],

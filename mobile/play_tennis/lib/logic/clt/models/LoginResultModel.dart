@@ -10,7 +10,7 @@ class LoginResultModel {
   });
 
   factory LoginResultModel.fromJson(Map<String, dynamic> json) =>
-      new LoginResultModel(
+      LoginResultModel(
         errorType: LoginErrorTypeDartJsonGenerator.getFromStringOrNull(
             json["errorType"]),
         errorMessage: json["errorMessage"],

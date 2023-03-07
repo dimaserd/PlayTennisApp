@@ -4,8 +4,11 @@ import 'package:play_tennis/logic/ptc/models/GamePlayers.dart';
 import '../../../../logic/ptc/services/GameService.dart';
 
 class PlayerGamesList extends StatelessWidget {
- const  PlayerGamesList(
-      {super.key, required this.game, required this.numberPlayer, required this.gamePlayer});
+  const PlayerGamesList(
+      {super.key,
+      required this.game,
+      required this.numberPlayer,
+      required this.gamePlayer});
 
   final int numberPlayer;
   final SinglesGameSimpleModel game;
@@ -19,7 +22,7 @@ class PlayerGamesList extends StatelessWidget {
       child: Container(
         height: 40,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(3)),
+          borderRadius: const BorderRadius.all(Radius.circular(3)),
           border: Border.all(
             color: Colors.black,
             width: 1,
@@ -30,19 +33,18 @@ class PlayerGamesList extends StatelessWidget {
             Expanded(
               flex: 2,
               child: Container(
-                decoration: const BoxDecoration(
-                  border: Border(
-                    right: BorderSide(
-                      color: Colors.black,
-                      width: 1,
+                  decoration: const BoxDecoration(
+                    border: Border(
+                      right: BorderSide(
+                        color: Colors.black,
+                        width: 1,
+                      ),
                     ),
                   ),
-                ),               
                   child: PlayerAvatar(
-                  avatarFileId: player.player!.avatarFileId,
-                )                
-                ),
-              ),
+                    avatarFileId: player.player!.avatarFileId,
+                  )),
+            ),
             Expanded(
               flex: 6,
               child: Container(
@@ -59,7 +61,8 @@ class PlayerGamesList extends StatelessWidget {
                   child: Text(
                       "${player.player!.surname} ${player.player!.name}",
                       textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.black, fontSize: 14)),
+                      style:
+                          const TextStyle(color: Colors.black, fontSize: 14)),
                 ),
               ),
             ),
@@ -77,7 +80,8 @@ class PlayerGamesList extends StatelessWidget {
                 ),
                 child: Center(
                   child: Text(gamePlayer.firstGame,
-                      style: TextStyle(color: Colors.black, fontSize: 14)),
+                      style:
+                          const TextStyle(color: Colors.black, fontSize: 14)),
                 ),
               ),
             ),
@@ -95,17 +99,19 @@ class PlayerGamesList extends StatelessWidget {
                 ),
                 child: Center(
                   child: Text(gamePlayer.secondGame,
-                      style: TextStyle(color: Colors.black, fontSize: 14)),
+                      style:
+                          const TextStyle(color: Colors.black, fontSize: 14)),
                 ),
               ),
             ),
             Expanded(
               flex: 1,
-              child: Container(
+              child: SizedBox(
                 height: 50,
                 child: Center(
                   child: Text(gamePlayer.thirdGame,
-                      style: TextStyle(color: Colors.black, fontSize: 14)),
+                      style:
+                          const TextStyle(color: Colors.black, fontSize: 14)),
                 ),
               ),
             ),
@@ -114,5 +120,4 @@ class PlayerGamesList extends StatelessWidget {
       ),
     );
   }
-
 }

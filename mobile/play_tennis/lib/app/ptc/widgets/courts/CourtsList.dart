@@ -75,7 +75,7 @@ class CourtsList extends StatelessWidget {
                       child: ListTile(
                         title: Text(
                           courts[index].name!,
-                          style: Theme.of(context).textTheme.headline6,
+                          style: Theme.of(context).textTheme.titleLarge,
                         ),
                         subtitle: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

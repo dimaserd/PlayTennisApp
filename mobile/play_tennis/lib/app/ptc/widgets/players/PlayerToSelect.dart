@@ -20,7 +20,7 @@ class PlayerToSelect extends StatelessWidget {
           leading: PlayerAvatar(avatarFileId: player.avatarFileId),
           title: Text(
             "${player.surname!} ${player.name!}",
-            style: Theme.of(context).textTheme.headline6,
+            style: Theme.of(context).textTheme.titleLarge,
           ),
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

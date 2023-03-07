@@ -63,10 +63,10 @@ class _SearchCommunityForm extends State<SearchCommunityForm> {
           padding: const EdgeInsets.symmetric(horizontal: 2),
           child: CountryAndCitySelect(
             onCityChanged: (p) {
-              onCountryChanged() ;
+              onCountryChanged();
             },
             onCountryChanged: (p) {
-              onCountryChanged() ;
+              onCountryChanged();
             },
             controller: countryAndCitySelectController,
           ),
@@ -76,7 +76,7 @@ class _SearchCommunityForm extends State<SearchCommunityForm> {
           child: TextField(
             controller: _searchController,
             onChanged: _onSearchChanged,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: 'Поисковая строка',
               suffixIcon: Icon(Icons.search),
             ),
@@ -84,12 +84,13 @@ class _SearchCommunityForm extends State<SearchCommunityForm> {
         ),
         cityModel != null
             ? Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 2),
-              child: CityChatAndChannelWidget(
+                padding: const EdgeInsets.symmetric(horizontal: 2),
+                child: CityChatAndChannelWidget(
                   model: cityModel!,
-                  cityName: countryAndCitySelectController.city?.name ?? "Город",
+                  cityName:
+                      countryAndCitySelectController.city?.name ?? "Город",
                 ),
-            )
+              )
             : const SizedBox.shrink(),
         Expanded(
           child: Padding(
@@ -132,7 +133,9 @@ class _SearchCommunityForm extends State<SearchCommunityForm> {
         q: _searchController.text, cityId: cityId, count: 10, offSet: _offSet);
 
     AppServices.communityService.search(communityRequest).then((value) {
-      if(!mounted) { return; }
+      if (!mounted) {
+        return;
+      }
       if (value.list.isEmpty) {
         setState(() {
           _isActiveLoader = false;
@@ -152,13 +155,17 @@ class _SearchCommunityForm extends State<SearchCommunityForm> {
     });
     if (cityId != null) {
       AppServices.cityService.getById(cityId, (p0) {}).then((value) {
-        if(!mounted) { return; }
+        if (!mounted) {
+          return;
+        }
         setState(() {
           cityModel = value;
         });
       });
     } else {
-      if(!mounted) { return; }
+      if (!mounted) {
+        return;
+      }
       setState(() {
         cityModel = null;
       });

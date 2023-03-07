@@ -44,7 +44,7 @@ class ShowGameRequestData extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: GameRequestRepondingWidget(
                         loginData: loginData,
-                        request: GameRequestMappingExtensions.Map(request),
+                        request: GameRequestMappingExtensions.map(request),
                         onChange: onChange,
                       ),
                     ),
