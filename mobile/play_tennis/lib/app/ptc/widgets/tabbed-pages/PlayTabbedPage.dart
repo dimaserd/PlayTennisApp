@@ -11,8 +11,6 @@ class PlayTabbedPage extends StatefulWidget {
   final PlayerLocationData locationData;
   final Function(int index) onItemTapped;
   final int selectedIndex;
-  CountryAndCitySelectController countryAndCitySelectController =
-      CountryAndCitySelectController();
 
   PlayTabbedPage({
     Key? key,
@@ -43,7 +41,7 @@ class _PlayTabbedPageState extends State<PlayTabbedPage> {
     super.initState();
     widgetOptions = <Widget>[
       SearchGameRequestsForm(
-        countryAndCitySelectController: widget.countryAndCitySelectController,
+        countryAndCitySelectController: CountryAndCitySelectController(),
         showMine: false,
       ),
       SearchCommunityForm(
