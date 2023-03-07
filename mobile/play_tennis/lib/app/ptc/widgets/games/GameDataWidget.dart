@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:play_tennis/logic/ptc/models/PlayerSetScores.dart';
 import '../../../../baseApiResponseUtils.dart';
 import '../../../../logic/ptc/models/games/TennisSetData.dart';
 import '../../../main/widgets/Inputs/SetInput.dart';
-import 'package:play_tennis/logic/ptc/models/GamePlayers.dart';
 
 class GameDataWidgetExtensions {
   static String getStringValue(List<TennisSetData> value) {
@@ -20,10 +20,13 @@ class GameDataWidgetExtensions {
     return str;
   }
 
-  static GamePlayers getStringValueGames(
+  static PlayerSetScores getStringValueGames(
       List<TennisSetData> value, int numberPlayer) {
-    GamePlayers game =
-        GamePlayers(firstGame: "-", secondGame: "-", thirdGame: "-");
+    var game = PlayerSetScores(
+      first: "-",
+      second: "-",
+      third: "-",
+    );
 
     for (var i = 0; i < value.length; i++) {
       var setData = value[i];
@@ -31,13 +34,13 @@ class GameDataWidgetExtensions {
       var correctScore = score?.isEmpty ?? true ? "-" : score!;
       switch (i) {
         case 0:
-          game.firstGame = correctScore;
+          game.first = correctScore;
           break;
         case 1:
-          game.secondGame = correctScore;
+          game.second = correctScore;
           break;
         case 2:
-          game.thirdGame = correctScore;
+          game.third = correctScore;
           break;
         case 3:
           break;

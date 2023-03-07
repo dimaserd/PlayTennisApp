@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/images/PlayerAvatar.dart';
-import 'package:play_tennis/logic/ptc/models/GamePlayers.dart';
-import '../../../../logic/ptc/services/GameService.dart';
+import 'package:play_tennis/logic/ptc/models/PlayerSetScores.dart';
+import 'package:play_tennis/logic/ptc/services/GameService.dart';
 
-class PlayerGamesList extends StatelessWidget {
-  const PlayerGamesList(
-      {super.key,
-      required this.game,
-      required this.numberPlayer,
-      required this.gamePlayer});
+class PlayerSetsScoreList extends StatelessWidget {
+  const PlayerSetsScoreList({
+    super.key,
+    required this.player,
+    required this.gameScores,
+    required this.onTapped,
+  });
 
-  final int numberPlayer;
-  final SinglesGameSimpleModel game;
-  final GamePlayers gamePlayer;
+  final Function(PlayerSimpleModel) onTapped;
+  final PlayerSimpleModel player;
+  final PlayerSetScores gameScores;
 
   @override
   Widget build(BuildContext context) {
-    var player = game.players![numberPlayer];
     return Padding(
       padding: const EdgeInsets.only(top: 4, bottom: 4),
       child: Container(
@@ -33,17 +33,18 @@ class PlayerGamesList extends StatelessWidget {
             Expanded(
               flex: 2,
               child: Container(
-                  decoration: const BoxDecoration(
-                    border: Border(
-                      right: BorderSide(
-                        color: Colors.black,
-                        width: 1,
-                      ),
+                decoration: const BoxDecoration(
+                  border: Border(
+                    right: BorderSide(
+                      color: Colors.black,
+                      width: 1,
                     ),
                   ),
-                  child: PlayerAvatar(
-                    avatarFileId: player.player!.avatarFileId,
-                  )),
+                ),
+                child: PlayerAvatar(
+                  avatarFileId: player.avatarFileId,
+                ),
+              ),
             ),
             Expanded(
               flex: 6,
@@ -57,12 +58,43 @@ class PlayerGamesList extends StatelessWidget {
                     ),
                   ),
                 ),
+                child: InkWell(
+                  onTap: () {
+                    onTapped(player);
+                  },
+                  child: Center(
+                    child: Text(
+                      "${player.surname} ${player!.name}",
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Container(
+                height: 50,
+                decoration: const BoxDecoration(
+                  border: Border(
+                    right: BorderSide(
+                      color: Colors.black,
+                      width: 1,
+                    ),
+                  ),
+                ),
                 child: Center(
                   child: Text(
-                      "${player.player!.surname} ${player.player!.name}",
-                      textAlign: TextAlign.center,
-                      style:
-                          const TextStyle(color: Colors.black, fontSize: 14)),
+                    gameScores.first,
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 14,
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -79,28 +111,13 @@ class PlayerGamesList extends StatelessWidget {
                   ),
                 ),
                 child: Center(
-                  child: Text(gamePlayer.firstGame,
-                      style:
-                          const TextStyle(color: Colors.black, fontSize: 14)),
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Container(
-                height: 50,
-                decoration: const BoxDecoration(
-                  border: Border(
-                    right: BorderSide(
+                  child: Text(
+                    gameScores.second,
+                    style: const TextStyle(
                       color: Colors.black,
-                      width: 1,
+                      fontSize: 14,
                     ),
                   ),
-                ),
-                child: Center(
-                  child: Text(gamePlayer.secondGame,
-                      style:
-                          const TextStyle(color: Colors.black, fontSize: 14)),
                 ),
               ),
             ),
@@ -109,9 +126,13 @@ class PlayerGamesList extends StatelessWidget {
               child: SizedBox(
                 height: 50,
                 child: Center(
-                  child: Text(gamePlayer.thirdGame,
-                      style:
-                          const TextStyle(color: Colors.black, fontSize: 14)),
+                  child: Text(
+                    gameScores.third,
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 14,
+                    ),
+                  ),
                 ),
               ),
             ),
