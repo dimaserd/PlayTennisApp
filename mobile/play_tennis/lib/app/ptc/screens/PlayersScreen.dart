@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:play_tennis/app/main/widgets/Loading.dart';
 import 'package:play_tennis/app/main/widgets/side_drawer.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
@@ -39,13 +40,15 @@ class _PlayersScreenState extends State<PlayersScreen> {
       key: GlobalKey<ScaffoldState>(),
       body: Padding(
           padding: const EdgeInsets.all(20),
-          child: MainTabbedPage(
-            selectedIndex: selectedIndex,
-            locationData: locationData,
-            onItemTapped: (index) {
-              _onItemTapped(index);
-            },
-          )),
+          child: locationData != null
+              ? MainTabbedPage(
+                  selectedIndex: selectedIndex,
+                  locationData: locationData!,
+                  onItemTapped: (index) {
+                    _onItemTapped(index);
+                  },
+                )
+              : const Loading(text: 'Получение профиля')),
       drawer: const SideDrawer(),
       appBar: AppBar(
         title: Text(title),

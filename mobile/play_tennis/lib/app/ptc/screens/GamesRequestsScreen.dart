@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:play_tennis/app/ptc/widgets/tabbed-pages/PlayTabbedPage.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import '../../../logic/ptc/models/PlayerLocationData.dart';
 import '../../../main-services.dart';
 import '../../main/widgets/Loading.dart';
 import '../../main/widgets/side_drawer.dart';
 import '../widgets/CountryAndCitySelectWidget.dart';
-import '../widgets/game-requests/SearchGameRequestsForm.dart';
 
 class GamesRequestsScreen extends StatefulWidget {
   final bool showMine;
@@ -19,6 +19,10 @@ class _GamesRequestsScreenState extends State<GamesRequestsScreen> {
   PlayerLocationData? locationData;
   final CountryAndCitySelectController countryAndCitySelectController =
       CountryAndCitySelectController();
+
+  String title = "Игроки";
+  int selectedIndex = 0;
+
   @override
   void initState() {
     super.initState();
@@ -47,9 +51,10 @@ class _GamesRequestsScreenState extends State<GamesRequestsScreen> {
       body: Container(
         margin: const EdgeInsets.all(20),
         child: locationData != null
-            ? SearchGameRequestsForm(
-                countryAndCitySelectController: countryAndCitySelectController,
-                showMine: widget.showMine,
+            ? PlayTabbedPage(
+                locationData: locationData!,
+                onItemTapped: _onItemTapped,
+                selectedIndex: selectedIndex,
               )
             : const Loading(text: "Получение профиля"),
       ),
@@ -73,5 +78,20 @@ class _GamesRequestsScreenState extends State<GamesRequestsScreen> {
   @override
   void dispose() {
     super.dispose();
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      selectedIndex = index;
+      if (index == 0) {
+        title = "Игроки";
+      } else if (index == 1) {
+        title = "Сообщества";
+      } else if (index == 2) {
+        title = "Тренеры";
+      } else if (index == 3) {
+        title = "Корты";
+      }
+    });
   }
 }

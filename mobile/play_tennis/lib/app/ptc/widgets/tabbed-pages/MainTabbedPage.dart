@@ -5,10 +5,9 @@ import 'package:play_tennis/app/ptc/widgets/players/SearchPlayersForm.dart';
 import 'package:play_tennis/app/ptc/widgets/trainers/SearchTrainersForm.dart';
 import '../communities/SearchCommunityForm.dart';
 import '../../../../logic/ptc/models/PlayerLocationData.dart';
-import '../../../main/widgets/Loading.dart';
 
 class MainTabbedPage extends StatefulWidget {
-  final PlayerLocationData? locationData;
+  final PlayerLocationData locationData;
   final Function(int index) onItemTapped;
   final int selectedIndex;
 
@@ -31,7 +30,7 @@ class _MainTabbedPageState extends State<MainTabbedPage> {
       required this.onItemTapped,
       required this.selectedIndex});
 
-  PlayerLocationData? locationData;
+  PlayerLocationData locationData;
   Function(int index) onItemTapped;
   late List<Widget> widgetOptions;
   int selectedIndex;
@@ -40,38 +39,30 @@ class _MainTabbedPageState extends State<MainTabbedPage> {
   void initState() {
     super.initState();
     widgetOptions = <Widget>[
-      locationData != null
-          ? SearchPlayersForm(
-              locationData: locationData!,
-              onTapHandler: (p) {
-                Navigator.of(context).pushNamed("/player/${p.id!}");
-              },
-            )
-          : const Loading(text: "Загрузка"),
-      locationData != null
-          ? SearchCommunityForm(
-              locationData: locationData!,
-              onTapHandler: (p) {
-                // Navigator.of(context).pushNamed("/player/${p.id!}");
-              },
-            )
-          : const Loading(text: "Загрузка"),
-      locationData != null
-          ? SearchTrainersForm(
-              locationData: locationData!,
-              onTapHandler: (p) {
-                // Navigator.of(context).pushNamed("/player/${p.id!}");
-              },
-            )
-          : const Loading(text: "Загрузка"),
-      locationData != null
-          ? SearchCourtsForm(
-              locationData: locationData!,
-              onTapHandler: (p) {
-                // Navigator.of(context).pushNamed("/player/${p.id!}");
-              },
-            )
-          : const Loading(text: "Загрузка")
+      SearchPlayersForm(
+        locationData: locationData,
+        onTapHandler: (p) {
+          Navigator.of(context).pushNamed("/player/${p.id!}");
+        },
+      ),
+      SearchCommunityForm(
+        locationData: locationData,
+        onTapHandler: (p) {
+          // Navigator.of(context).pushNamed("/player/${p.id!}");
+        },
+      ),
+      SearchTrainersForm(
+        locationData: locationData,
+        onTapHandler: (p) {
+          // Navigator.of(context).pushNamed("/player/${p.id!}");
+        },
+      ),
+      SearchCourtsForm(
+        locationData: locationData,
+        onTapHandler: (p) {
+          // Navigator.of(context).pushNamed("/player/${p.id!}");
+        },
+      )
     ];
   }
 

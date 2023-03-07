@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:play_tennis/app/ptc/widgets/courts/SearchCourtsForm.dart';
-import 'package:play_tennis/app/ptc/widgets/players/SearchPlayersForm.dart';
 import 'package:play_tennis/app/ptc/widgets/trainers/SearchTrainersForm.dart';
+import '../CountryAndCitySelectWidget.dart';
 import '../communities/SearchCommunityForm.dart';
 import '../../../../logic/ptc/models/PlayerLocationData.dart';
-import '../../../main/widgets/Loading.dart';
+import '../game-requests/SearchGameRequestsForm.dart';
 
 class PlayTabbedPage extends StatefulWidget {
-  final PlayerLocationData? locationData;
+  final PlayerLocationData locationData;
   final Function(int index) onItemTapped;
   final int selectedIndex;
+  CountryAndCitySelectController countryAndCitySelectController =
+      CountryAndCitySelectController();
 
-  const PlayTabbedPage({
+  PlayTabbedPage({
     Key? key,
     required this.locationData,
     required this.onItemTapped,
@@ -31,7 +33,7 @@ class _PlayTabbedPageState extends State<PlayTabbedPage> {
       required this.onItemTapped,
       required this.selectedIndex});
 
-  PlayerLocationData? locationData;
+  PlayerLocationData locationData;
   Function(int index) onItemTapped;
   late List<Widget> widgetOptions;
   int selectedIndex;
@@ -40,38 +42,28 @@ class _PlayTabbedPageState extends State<PlayTabbedPage> {
   void initState() {
     super.initState();
     widgetOptions = <Widget>[
-      locationData != null
-          ? SearchPlayersForm(
-              locationData: locationData!,
-              onTapHandler: (p) {
-                Navigator.of(context).pushNamed("/player/${p.id!}");
-              },
-            )
-          : const Loading(text: "Загрузка"),
-      locationData != null
-          ? SearchCommunityForm(
-              locationData: locationData!,
-              onTapHandler: (p) {
-                // Navigator.of(context).pushNamed("/player/${p.id!}");
-              },
-            )
-          : const Loading(text: "Загрузка"),
-      locationData != null
-          ? SearchTrainersForm(
-              locationData: locationData!,
-              onTapHandler: (p) {
-                // Navigator.of(context).pushNamed("/player/${p.id!}");
-              },
-            )
-          : const Loading(text: "Загрузка"),
-      locationData != null
-          ? SearchCourtsForm(
-              locationData: locationData!,
-              onTapHandler: (p) {
-                // Navigator.of(context).pushNamed("/player/${p.id!}");
-              },
-            )
-          : const Loading(text: "Загрузка")
+      SearchGameRequestsForm(
+        countryAndCitySelectController: widget.countryAndCitySelectController,
+        showMine: false,
+      ),
+      SearchCommunityForm(
+        locationData: locationData,
+        onTapHandler: (p) {
+          // Navigator.of(context).pushNamed("/player/${p.id!}");
+        },
+      ),
+      SearchTrainersForm(
+        locationData: locationData,
+        onTapHandler: (p) {
+          // Navigator.of(context).pushNamed("/player/${p.id!}");
+        },
+      ),
+      SearchCourtsForm(
+        locationData: locationData,
+        onTapHandler: (p) {
+          // Navigator.of(context).pushNamed("/player/${p.id!}");
+        },
+      )
     ];
   }
 
