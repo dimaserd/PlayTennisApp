@@ -68,12 +68,16 @@ class GameToSelect extends StatelessWidget {
               PlayerSetsScoreList(
                 player: player1,
                 gameScores: gamePlayer1,
-                onTapped: (p) {},
+                onTapped: (p) {
+                  onTappedHandler(p, context);
+                },
               ),
               PlayerSetsScoreList(
                 player: player2,
                 gameScores: gamePlayer2,
-                onTapped: (p) {},
+                onTapped: (p) {
+                  onTappedHandler(p, context);
+                },
               )
             ],
           ),
@@ -82,7 +86,13 @@ class GameToSelect extends StatelessWidget {
     );
   }
 
-  onTappedHandler() {}
+  onTappedHandler(PlayerSimpleModel player, BuildContext context) {
+    if (player.id == loginData.userId) {
+      return;
+    }
+
+    Navigator.of(context).pushNamed("/player/${player.id!}");
+  }
 
   PlayerSetScores toGameScores(int numberPlayer) {
     var gamePlayer = GameDataWidgetExtensions.getStringValueGames(
