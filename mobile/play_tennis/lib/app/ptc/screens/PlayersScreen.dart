@@ -3,7 +3,7 @@ import 'package:play_tennis/app/main/widgets/side_drawer.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
 import 'package:play_tennis/main-services.dart';
-import 'package:play_tennis/app/ptc/widgets/MainTabbedPage.dart';
+import 'package:play_tennis/app/ptc/widgets/tabbed-pages/MainTabbedPage.dart';
 
 class PlayersScreen extends StatefulWidget {
   const PlayersScreen({super.key});

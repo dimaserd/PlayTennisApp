@@ -3,30 +3,30 @@ import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:play_tennis/app/ptc/widgets/courts/SearchCourtsForm.dart';
 import 'package:play_tennis/app/ptc/widgets/players/SearchPlayersForm.dart';
 import 'package:play_tennis/app/ptc/widgets/trainers/SearchTrainersForm.dart';
-import 'communities/SearchCommunityForm.dart';
-import '../../../logic/ptc/models/PlayerLocationData.dart';
-import '../../main/widgets/Loading.dart';
+import '../communities/SearchCommunityForm.dart';
+import '../../../../logic/ptc/models/PlayerLocationData.dart';
+import '../../../main/widgets/Loading.dart';
 
-class MainTabbedPage extends StatefulWidget {
+class PlayTabbedPage extends StatefulWidget {
   final PlayerLocationData? locationData;
   final Function(int index) onItemTapped;
   final int selectedIndex;
 
-  const MainTabbedPage({
+  const PlayTabbedPage({
     Key? key,
     required this.locationData,
     required this.onItemTapped,
     required this.selectedIndex,
   }) : super(key: key);
 
-  State<MainTabbedPage> createState() => _MainTabbedPageState(
+  State<PlayTabbedPage> createState() => _PlayTabbedPageState(
       locationData: locationData,
       onItemTapped: onItemTapped,
       selectedIndex: selectedIndex);
 }
 
-class _MainTabbedPageState extends State<MainTabbedPage> {
-  _MainTabbedPageState(
+class _PlayTabbedPageState extends State<PlayTabbedPage> {
+  _PlayTabbedPageState(
       {required this.locationData,
       required this.onItemTapped,
       required this.selectedIndex});
