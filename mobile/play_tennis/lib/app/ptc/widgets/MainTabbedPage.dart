@@ -7,34 +7,30 @@ import 'SearchCommunityForm.dart';
 import '../../../logic/ptc/models/PlayerLocationData.dart';
 import '../../main/widgets/Loading.dart';
 
-class MyTabbedPage extends StatefulWidget {
-  @override
-  // final List<PlayerModel> players;
-  // final void Function(PlayerModel player) onTapHandler;
+class MainTabbedPage extends StatefulWidget {
   final PlayerLocationData? locationData;
   final Function(int index) onItemTapped;
   final int selectedIndex;
 
-  const MyTabbedPage({
+  const MainTabbedPage({
     Key? key,
     required this.locationData,
     required this.onItemTapped,
     required this.selectedIndex,
   }) : super(key: key);
 
-  _MyTabbedPageState createState() => _MyTabbedPageState(
+  State<MainTabbedPage> createState() => _MainTabbedPageState(
       locationData: locationData,
       onItemTapped: onItemTapped,
       selectedIndex: selectedIndex);
 }
 
-class _MyTabbedPageState extends State<MyTabbedPage> {
-  _MyTabbedPageState(
+class _MainTabbedPageState extends State<MainTabbedPage> {
+  _MainTabbedPageState(
       {required this.locationData,
       required this.onItemTapped,
       required this.selectedIndex});
 
-  // final List<PlayerModel> players;
   PlayerLocationData? locationData;
   Function(int index) onItemTapped;
   late List<Widget> widgetOptions;
@@ -42,7 +38,6 @@ class _MyTabbedPageState extends State<MyTabbedPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     widgetOptions = <Widget>[
       locationData != null

@@ -59,7 +59,7 @@ class TrainerList extends StatelessWidget {
             itemBuilder: (context, index) {
               if (index == trainers.length) {
                 if (isActiveLoader == false || trainers.length < 5) {
-                  return ShowAlertAddTrainer();
+                  return const ShowAlertAddTrainer();
                 } else {
                   // Вернуть заглушку для отображения индикатора загрузки
                   return const Center(child: CircularProgressIndicator());
@@ -82,6 +82,9 @@ class TrainerList extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
+                            const SizedBox(
+                              height: 5,
+                            ),
                             RichText(
                               text: TextSpan(
                                 text: "Номер телефона: ",
@@ -99,6 +102,9 @@ class TrainerList extends StatelessWidget {
                                   ),
                                 ],
                               ),
+                            ),
+                            const SizedBox(
+                              height: 5,
                             ),
                             Text("${trainers[index].description}")
                           ],

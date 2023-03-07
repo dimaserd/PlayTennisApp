@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ShowAlertAddTrainer extends StatelessWidget {
+  const ShowAlertAddTrainer({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -12,16 +14,23 @@ class ShowAlertAddTrainer extends StatelessWidget {
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
-                  title:
-                      const Text('Спасибо, что вы здесь! Сообщение для вас!'),
+                  title: const Text('Добавить тренера'),
                   content: Column(
                     mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       const Text(
-                        'Для добавления тренера необходимо связаться с Дмитрием.',
+                        'Для добавления тренера пожалуйста напишите мне.',
                       ),
                       const SizedBox(height: 16),
-                      const Text('Свяжитесь с нами:'),
+                      const Text(
+                        'Дмитрий Сердюков:',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                        ),
+                      ),
                       const SizedBox(height: 8),
                       InkWell(
                         child: const Text(

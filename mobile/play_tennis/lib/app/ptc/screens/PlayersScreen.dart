@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:play_tennis/app/ptc/widgets/PlayerTabBar.dart';
+import 'package:play_tennis/app/main/widgets/side_drawer.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
-import '../../../logic/ptc/models/PlayerLocationData.dart';
-import '../../../main-services.dart';
-import '../../main/widgets/side_drawer.dart';
+import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
+import 'package:play_tennis/main-services.dart';
+import 'package:play_tennis/app/ptc/widgets/MainTabbedPage.dart';
 
 class PlayersScreen extends StatefulWidget {
   const PlayersScreen({super.key});
@@ -39,7 +39,7 @@ class _PlayersScreenState extends State<PlayersScreen> {
       key: GlobalKey<ScaffoldState>(),
       body: Padding(
           padding: const EdgeInsets.all(20),
-          child: MyTabbedPage(
+          child: MainTabbedPage(
             selectedIndex: selectedIndex,
             locationData: locationData,
             onItemTapped: (index) {
