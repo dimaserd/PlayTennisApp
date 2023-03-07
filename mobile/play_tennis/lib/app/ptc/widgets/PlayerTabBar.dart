@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
-import 'package:play_tennis/app/ptc/widgets/SearchCourtsForm.dart';
-import 'SearchPlayersForm.dart';
+import 'package:play_tennis/app/ptc/widgets/courts/SearchCourtsForm.dart';
+import 'package:play_tennis/app/ptc/widgets/players/SearchPlayersForm.dart';
+import 'package:play_tennis/app/ptc/widgets/trainers/SearchTrainersForm.dart';
 import 'SearchCommunityForm.dart';
-import 'SearchTrainersForm.dart';
 import '../../../logic/ptc/models/PlayerLocationData.dart';
 import '../../main/widgets/Loading.dart';
 

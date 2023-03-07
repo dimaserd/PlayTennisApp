@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../logic/ptc/models/PlayerModel.dart';
-import '../../../main-services.dart';
-import '../../main/widgets/Loading.dart';
-import '../widgets/ShowPlayerData.dart';
+import 'package:play_tennis/app/main/widgets/Loading.dart';
+import 'package:play_tennis/app/ptc/widgets/players/ShowPlayerData.dart';
+import 'package:play_tennis/logic/ptc/models/PlayerModel.dart';
+import 'package:play_tennis/main-services.dart';
 
 class PlayerScreen extends StatefulWidget {
   final String id;

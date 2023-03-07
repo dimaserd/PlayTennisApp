@@ -3,8 +3,8 @@ import '../../../../logic/ptc/models/cities/CityModel.dart';
 import '../../../../logic/ptc/models/cities/CountrySimpleModel.dart';
 import '../../../main/widgets/Inputs/TextInput.dart';
 import '../CountryAndCitySelectWidget.dart';
-import '../CourtTypeSelect.dart';
 import '../CustomDateAndTimePickerWidget.dart';
+import '../courts/CourtTypeSelect.dart';
 
 class GameFormCourtData {
   String courtName;

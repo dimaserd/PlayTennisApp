@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/ptc/widgets/cities/CityChatAndChannelWidget.dart';
-import 'package:play_tennis/logic/ptc/services/CourtCardService.dart';
-import '../../../logic/ptc/models/PlayerLocationData.dart';
-import '../../../logic/ptc/models/PlayerModel.dart';
-import '../../../logic/ptc/models/cities/PublicTelegramChatForCityModel.dart';
-import '../../../main-services.dart';
-import 'CountryAndCitySelectWidget.dart';
+import 'package:play_tennis/logic/ptc/services/TrainerCardService.dart';
+import 'package:play_tennis/main-services.dart';
+import '../../../../logic/ptc/models/PlayerLocationData.dart';
+import '../../../../logic/ptc/models/PlayerModel.dart';
+import '../../../../logic/ptc/models/cities/PublicTelegramChatForCityModel.dart';
+import '../CountryAndCitySelectWidget.dart';
 import 'dart:async';
 
-import 'CourtsList.dart';
+import 'TrainerList.dart';
 
-class SearchCourtsForm extends StatefulWidget {
+class SearchTrainersForm extends StatefulWidget {
   final PlayerLocationData locationData;
   final void Function(PlayerModel player) onTapHandler;
 
-  const SearchCourtsForm({
+  const SearchTrainersForm({
     super.key,
     required this.locationData,
     required this.onTapHandler,
   });
 
   @override
-  State<SearchCourtsForm> createState() => _SearchCourtsForm();
+  State<SearchTrainersForm> createState() => _SearchTrainersForm();
 }
 
-class _SearchCourtsForm extends State<SearchCourtsForm> {
+class _SearchTrainersForm extends State<SearchTrainersForm> {
   final ButtonStyle style =
       ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
   final CountryAndCitySelectController countryAndCitySelectController =
@@ -33,7 +33,7 @@ class _SearchCourtsForm extends State<SearchCourtsForm> {
   final TextEditingController _searchController = TextEditingController();
   Timer? _debounce;
 
-  List<CourtCardSimpleModel> courts = [];
+  List<TrainerCardSimpleModel> trainers = [];
   PublicTelegramChatForCityModel? cityModel;
 
   int _offSet = 0;
@@ -97,10 +97,10 @@ class _SearchCourtsForm extends State<SearchCourtsForm> {
         Expanded(
           child: Padding(
             padding: const EdgeInsets.only(top: 8, bottom: 0),
-            child: CourtsList(
+            child: TrainerList(
               isActiveLoader: _isActiveLoader,
               offset: _offSet,
-              courts: courts,
+              trainers: trainers,
               getData: (offSet) {
                 _offSet = offSet;
                 getData();
@@ -131,10 +131,10 @@ class _SearchCourtsForm extends State<SearchCourtsForm> {
   getData() {
     var cityId = countryAndCitySelectController.city?.id;
 
-    var trainerRequest = SearchCourtCards(
+    var trainerRequest = SearchTrainerCardsRequest(
         q: _searchController.text, cityId: cityId, count: 10, offSet: _offSet);
 
-    AppServices.courtCardService.search(trainerRequest).then((value) {
+    AppServices.trainerCardService.search(trainerRequest).then((value) {
       if (!mounted) {
         return;
       }
@@ -147,11 +147,11 @@ class _SearchCourtsForm extends State<SearchCourtsForm> {
       if (_offSet == 0 || _isTapSearch == true) {
         _isTapSearch = false;
         setState(() {
-          courts = value.list;
+          trainers = value.list;
         });
       } else {
         setState(() {
-          courts += value.list;
+          trainers += value.list;
         });
       }
     });

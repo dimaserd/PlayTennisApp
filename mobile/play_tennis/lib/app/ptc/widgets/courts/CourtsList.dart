@@ -2,8 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/palette.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../../../logic/ptc/services/CourtCardService.dart';
+import '../../../../logic/ptc/services/CourtCardService.dart';
 
 class CourtsList extends StatelessWidget {
   List<CourtCardSimpleModel> courts;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../logic/ptc/models/PlayerModel.dart';
+import 'package:play_tennis/logic/ptc/models/PlayerModel.dart';
 import 'package:play_tennis/app/main/widgets/images/PlayerAvatar.dart';
 
 class PlayersList extends StatelessWidget {
@@ -11,6 +11,7 @@ class PlayersList extends StatelessWidget {
   bool isActiveLoader = true;
 
   PlayersList({
+    super.key,
     required this.isActiveLoader,
     required this.offset,
     required this.onTapHandler,
@@ -50,7 +51,7 @@ class PlayersList extends StatelessWidget {
                   return Container();
                 } else {
                   // Вернуть заглушку для отображения индикатора загрузки
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 }
               } else {
                 return GestureDetector(

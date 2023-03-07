@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../logic/ptc/models/PlayerModel.dart';
-import 'PlayerActions.dart';
-import '../../main/widgets/images/PlayerAvatar.dart';
+import 'package:play_tennis/app/main/widgets/images/PlayerAvatar.dart';
+import 'package:play_tennis/app/ptc/widgets/PlayerActions.dart';
+import 'package:play_tennis/logic/ptc/models/PlayerModel.dart';
 
 class ShowPlayerData extends StatelessWidget {
   final PlayerModel player;
@@ -66,7 +66,7 @@ class PlayerCard extends StatelessWidget {
           children: [
             Text(
               "${player.surname!} ${player.name!}",
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
           ],
         ),

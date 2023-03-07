@@ -1,15 +1,16 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:play_tennis/app/ptc/widgets/ShowAlertAddTrainer.dart';
 import 'package:play_tennis/logic/ptc/services/TrainerCardService.dart';
 import 'package:play_tennis/app/main/widgets/palette.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import 'ShowAlertAddTrainer.dart';
 
 class TrainerList extends StatelessWidget {
   List<TrainerCardSimpleModel> trainers;
   void Function(TrainerCardSimpleModel trainer) onTapHandler;
   void Function(int offSet) getData;
-  
+
   int offset;
   bool isActiveLoader = true;
 
@@ -75,7 +76,7 @@ class TrainerList extends StatelessWidget {
                       child: ListTile(
                         title: Text(
                           "${trainers[index].surname!} ${trainers[index].name!}",
-                          style: Theme.of(context).textTheme.headline6,
+                          style: Theme.of(context).textTheme.titleLarge,
                         ),
                         subtitle: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -116,5 +117,3 @@ class TrainerList extends StatelessWidget {
     return getChild();
   }
 }
-
-
