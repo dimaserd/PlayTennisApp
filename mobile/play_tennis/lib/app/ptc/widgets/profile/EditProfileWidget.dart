@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerData.dart';
 import 'package:play_tennis/logic/ptc/services/PlayerService.dart';
-import '../../../main-services.dart';
-import 'CountryAndCitySelectWidget.dart';
+import '../../../../main-services.dart';
+import '../CountryAndCitySelectWidget.dart';
 import 'EditMainDataWidget.dart';
 import 'EditPlayerAvatarWidget.dart';
 

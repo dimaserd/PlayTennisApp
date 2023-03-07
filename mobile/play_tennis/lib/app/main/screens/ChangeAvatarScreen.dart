@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:play_tennis/app/ptc/widgets/EditPlayerAvatarWidget.dart';
+import 'package:play_tennis/app/ptc/widgets/profile/EditPlayerAvatarWidget.dart';
 import '../../../baseApiResponseUtils.dart';
 import '../../../logic/ptc/models/PlayerData.dart';
 import '../../../main-services.dart';

@@ -4,7 +4,7 @@ import '../../../logic/ptc/models/PlayerData.dart';
 import '../../../main-services.dart';
 import '../../main/widgets/Loading.dart';
 import '../../main/widgets/side_drawer.dart';
-import '../widgets/EditProfileWidget.dart';
+import '../widgets/profile/EditProfileWidget.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});

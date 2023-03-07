@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/images/PlayerAvatar.dart';
-import 'package:play_tennis/app/ptc/widgets/PlayerActions.dart';
+import 'package:play_tennis/app/ptc/widgets/profile/PlayerActions.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerModel.dart';
 
 class ShowPlayerData extends StatelessWidget {

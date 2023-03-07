@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../logic/ptc/models/PlayerData.dart';
-import '../../ptc/widgets/PlayerConfirmationWidget.dart';
+import '../../ptc/widgets/profile/PlayerConfirmationWidget.dart';
 import 'images/PlayerAvatar.dart';
 
 class ProfileData extends StatelessWidget {

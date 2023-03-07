@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../baseApiResponseUtils.dart';
-import '../../../logic/ptc/models/games/TennisSetData.dart';
-import '../../main/widgets/Inputs/SetInput.dart';
+import '../../../../baseApiResponseUtils.dart';
+import '../../../../logic/ptc/models/games/TennisSetData.dart';
+import '../../../main/widgets/Inputs/SetInput.dart';
 import 'package:play_tennis/logic/ptc/models/GamePlayers.dart';
 
 class GameDataWidgetExtensions {

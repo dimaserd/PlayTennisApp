@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:play_tennis/app/ptc/widgets/GameDataWidget.dart';
+import 'package:play_tennis/app/ptc/widgets/games/GameDataWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/PlayerGamesList.dart';
 import 'package:play_tennis/logic/ptc/models/GamePlayers.dart';
 import '../../../../logic/clt/models/CurrentLoginData.dart';

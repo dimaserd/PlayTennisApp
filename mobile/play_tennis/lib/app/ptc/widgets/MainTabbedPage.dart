@@ -3,7 +3,7 @@ import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:play_tennis/app/ptc/widgets/courts/SearchCourtsForm.dart';
 import 'package:play_tennis/app/ptc/widgets/players/SearchPlayersForm.dart';
 import 'package:play_tennis/app/ptc/widgets/trainers/SearchTrainersForm.dart';
-import 'SearchCommunityForm.dart';
+import 'communities/SearchCommunityForm.dart';
 import '../../../logic/ptc/models/PlayerLocationData.dart';
 import '../../main/widgets/Loading.dart';
 

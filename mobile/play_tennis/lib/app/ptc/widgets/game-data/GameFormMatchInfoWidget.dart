@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../logic/ptc/models/PlayerModel.dart';
-import '../GameDataWidget.dart';
+import '../games/GameDataWidget.dart';
 import 'GameFormExtensions.dart';
 
 class GameFormMatchInfoWidget extends StatelessWidget {

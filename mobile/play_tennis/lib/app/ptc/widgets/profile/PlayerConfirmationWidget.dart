@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../logic/ptc/models/PlayerData.dart';
-import '../../../main-services.dart';
-import '../../main/widgets/Inputs/TextInput.dart';
+import '../../../../logic/ptc/models/PlayerData.dart';
+import '../../../../main-services.dart';
+import '../../../main/widgets/Inputs/TextInput.dart';
 
 class PlayerConfirmationWidget extends StatefulWidget {
   PlayerData player;
