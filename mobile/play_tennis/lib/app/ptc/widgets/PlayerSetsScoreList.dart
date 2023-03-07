@@ -59,9 +59,7 @@ class PlayerSetsScoreList extends StatelessWidget {
                   ),
                 ),
                 child: InkWell(
-                  onTap: () {
-                    onTapped(player);
-                  },
+                  onTap: () => onTapped(player),
                   child: Center(
                     child: Text(
                       "${player.surname} ${player!.name}",

@@ -72,11 +72,11 @@ class SideDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.handshake_outlined),
-            title: const Text('Тренеры'),
+            leading: const Icon(Icons.star),
+            title: const Text('Турниры'),
             onTap: () {
               Navigator.of(context)
-                  .pushNamedAndRemoveUntil("/trainers", (r) => false);
+                  .pushNamedAndRemoveUntil("/tournaments", (r) => false);
             },
           ),
           ListTile(

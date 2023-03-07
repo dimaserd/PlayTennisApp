@@ -9,7 +9,12 @@ class Loading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(text),
+        Text(
+          text,
+          style: const TextStyle(
+            fontWeight: FontWeight.w600,
+          ),
+        ),
         Center(
           child: Image.asset(
             MainSettings.loadingPath,

@@ -2,16 +2,16 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/side_drawer.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
-import '../../../main-extensions.dart';
+import 'package:play_tennis/main-extensions.dart';
 
-class TrainersPage extends StatelessWidget {
-  const TrainersPage({super.key});
+class TournamentsScreen extends StatelessWidget {
+  const TournamentsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Тренеры"),
+        title: const Text("Турниры"),
       ),
       drawer: const SideDrawer(),
       body: Center(
@@ -25,7 +25,7 @@ class TrainersPage extends StatelessWidget {
             ),
             recognizer: TapGestureRecognizer()
               ..onTap = () => MainAppExtensions.trylaunchAppUrl(
-                    "ptc.tournaments",
+                    "ptc/trainers",
                     (er) {
                       BaseApiResponseUtils.showSuccess(context, er);
                     },

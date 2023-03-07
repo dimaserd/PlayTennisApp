@@ -3,6 +3,7 @@ import 'package:play_tennis/app/main/screens/ChangeAvatarScreen.dart';
 import 'package:play_tennis/app/ptc/screens/AddGameRequestScreen.dart';
 import 'package:play_tennis/app/ptc/screens/CreateGameScreen.dart';
 import 'package:play_tennis/app/ptc/screens/MyGamesScreen.dart';
+import 'package:play_tennis/app/ptc/screens/TournamentsScreen.dart';
 import 'package:play_tennis/app/ptc/screens/TrainersPage.dart';
 import 'app/main/screens/CheckAuthScreen.dart';
 import 'app/main/screens/LoginScreen.dart';
@@ -28,6 +29,10 @@ class MainRoutes {
 
     if (settings.name == '/players') {
       return MaterialPageRoute(builder: (context) => const PlayersScreen());
+    }
+
+    if (settings.name == '/tournaments') {
+      return MaterialPageRoute(builder: (context) => const TournamentsScreen());
     }
 
     if (settings.name == '/play') {
