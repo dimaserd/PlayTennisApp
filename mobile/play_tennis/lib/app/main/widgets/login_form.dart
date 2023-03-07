@@ -95,6 +95,11 @@ class _LoginFormState extends State<LoginForm> {
     ));
   }
 
+  onLoginHandler(bool isSucceeded, String message) {
+    BaseApiResponseUtils.handleResponse(
+        context, BaseApiResponse(isSucceeded: isSucceeded, message: message));
+  }
+
   Future<void> onPressed(BuildContext context) async {
     if (isLoginInProccess) {
       return;
@@ -113,8 +118,7 @@ class _LoginFormState extends State<LoginForm> {
       var message =
           data.succeeded ? "Вы успешно авторизованы" : data.errorMessage!;
 
-      BaseApiResponseUtils.handleResponse(context,
-          BaseApiResponse(isSucceeded: data.succeeded, message: message));
+      onLoginHandler(data.succeeded, message);
 
       if (data.succeeded) {
         widget.onLogin();

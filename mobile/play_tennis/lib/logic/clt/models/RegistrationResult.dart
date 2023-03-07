@@ -46,7 +46,7 @@ enum RegistrationErrorResultType {
 class RegistrationErrorResultTypeDartJsonGenerator {
   static getFromString(String value) {
     return RegistrationErrorResultType.values.firstWhere(
-        (e) => e.toString() == 'RegistrationErrorResultType.' + value);
+        (e) => e.toString() == 'RegistrationErrorResultType.$value');
   }
 
   static getFromStringOrNull(String? value) {

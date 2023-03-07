@@ -5,7 +5,6 @@ import '../../../logic/ptc/models/game-requests/GameRequestDetailedModel.dart';
 import '../../../logic/ptc/models/game-requests/GameRequestResponseSimpleModel.dart';
 import '../../../logic/ptc/models/game-requests/SearchGameRequestResponses.dart';
 import '../../../main-services.dart';
-import '../../../main.dart';
 import '../../main/widgets/Loading.dart';
 import '../widgets/game-requests/ShowGameRequestData.dart';
 
