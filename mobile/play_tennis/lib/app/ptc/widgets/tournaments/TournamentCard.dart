@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/palette.dart';
 import 'package:play_tennis/logic/ptc/services/TournamentService.dart';
 import 'package:play_tennis/app/ptc/widgets/html/HtmlViewWidget.dart';
+import 'package:play_tennis/main-extensions.dart';
 
 class TournamentCard extends StatelessWidget {
   final TournamentSimpleModel tournament;
@@ -32,28 +33,25 @@ class TournamentCard extends StatelessWidget {
                 const SizedBox(
                   height: 5,
                 ),
-                RichText(
-                  text: TextSpan(
-                    text: "Номер телефона: ",
-                    style: const TextStyle(color: mainColor),
-                    children: [
-                      TextSpan(
-                        text: "Перейти на сайт",
-                        style: const TextStyle(color: Colors.blue),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            _launchUrl();
-                          },
-                      ),
-                    ],
-                  ),
-                ),
                 const SizedBox(
                   height: 5,
                 ),
                 tournament.description != null
                     ? HtmlViewWidget(html: tournament.description!)
-                    : const SizedBox.shrink()
+                    : const SizedBox.shrink(),
+                const SizedBox(
+                  height: 5,
+                ),
+                RichText(
+                  text: TextSpan(
+                    text: "Перейти на сайт",
+                    style: const TextStyle(color: Colors.blue),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        _launchUrl();
+                      },
+                  ),
+                ),
               ],
               // ),
             ),
@@ -61,5 +59,9 @@ class TournamentCard extends StatelessWidget {
     );
   }
 
-  void _launchUrl() async {}
+  void _launchUrl() async {
+    var url = "ptc/tournament/${tournament.id}";
+    MainAppExtensions.trylaunchAppUrl(url, (p0) => null);
+    //
+  }
 }

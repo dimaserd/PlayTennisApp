@@ -49,7 +49,7 @@ class HtmlViewWidget extends StatelessWidget {
     return styleHtml;
   }
 
-  HtmlViewWidget({required String html}) {
+  HtmlViewWidget({super.key, required String html}) {
     html += getStyleTag();
     this.html = html;
   }
@@ -59,7 +59,7 @@ class HtmlViewWidget extends StatelessWidget {
     return Html(
       //Если поставить true то стили не будут приниматься
       shrinkWrap: false,
-      data: this.html,
+      data: html,
       customRender: {
         "file-image": (RenderContext context, Widget child) {
           var fileId = context.tree.element!.attributes['file-id']!;
