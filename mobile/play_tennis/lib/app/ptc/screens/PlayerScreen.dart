@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/Loading.dart';
+import 'package:play_tennis/app/ptc/widgets/games/SearchGamesWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/players/ShowPlayerData.dart';
+import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerModel.dart';
 import 'package:play_tennis/main-services.dart';
 
@@ -15,14 +17,28 @@ class PlayerScreen extends StatefulWidget {
 class _PlayerScreenState extends State<PlayerScreen> {
   PlayerModel? player;
   bool loaded = false;
+  CurrentLoginData? loginData;
 
   @override
   void initState() {
     super.initState();
+    getPlayer();
+    getLoginData();
+  }
+
+  void getPlayer() {
     AppServices.playerService.getById(widget.id).then((value) {
       setState(() {
         loaded = true;
         player = value;
+      });
+    });
+  }
+
+  void getLoginData() {
+    AppServices.loginService.getLoginData().then((value) {
+      setState(() {
+        loginData = value;
       });
     });
   }
@@ -59,7 +75,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
   }
 
   List<Widget> getWidgets() {
-    if (player == null) {
+    if (player == null || loginData == null) {
       return const [
         Loading(text: "Загрузка"),
         Loading(text: "Загрузка"),
@@ -68,7 +84,10 @@ class _PlayerScreenState extends State<PlayerScreen> {
 
     return [
       ShowPlayerData(player: player!),
-      const Loading(text: "Игры пока не реализованы"),
+      SearchGamesWidget(
+        loginData: loginData!,
+        playerId: player!.id!,
+      )
     ];
   }
 }

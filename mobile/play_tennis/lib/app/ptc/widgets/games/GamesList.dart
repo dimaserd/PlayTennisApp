@@ -21,7 +21,7 @@ class GamesList extends StatelessWidget {
         child: games.isEmpty
             ? Column(children: const [
                 Center(
-                  child: Text("У вас нет игр"),
+                  child: Text("Игры не найдены"),
                 ),
               ])
             : ListView.builder(

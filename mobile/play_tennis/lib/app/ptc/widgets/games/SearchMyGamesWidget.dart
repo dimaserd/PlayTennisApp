@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:play_tennis/app/ptc/widgets/games/GamesList.dart';
 import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
 import 'package:play_tennis/logic/ptc/services/GameService.dart';
 import 'package:play_tennis/main-services.dart';
-import 'GamesList.dart';
 
-class SearchGamesWidget extends StatefulWidget {
+class SearchMyGamesWidget extends StatefulWidget {
   final CurrentLoginData loginData;
-  final String playerId;
-
-  const SearchGamesWidget({
+  const SearchMyGamesWidget({
     super.key,
     required this.loginData,
-    required this.playerId,
   });
 
   @override
-  State<SearchGamesWidget> createState() => _SearchGamesWidgetState();
+  State<SearchMyGamesWidget> createState() => _SearchMyGamesWidgetState();
 }
 
-class _SearchGamesWidgetState extends State<SearchGamesWidget> {
+class _SearchMyGamesWidgetState extends State<SearchMyGamesWidget> {
   List<SinglesGameSimpleModel> games = [];
   bool gamesLoaded = false;
 
@@ -44,15 +41,12 @@ class _SearchGamesWidgetState extends State<SearchGamesWidget> {
   }
 
   getData() {
-    var playerRequest = SearchGamesRequest(
+    var playerRequest = GetListSearchModel(
       count: 30,
       offSet: 0,
-      opponentPlayerId: null,
-      playerId: widget.playerId,
-      q: null,
     );
 
-    AppServices.gameService.searchGames(playerRequest).then((value) {
+    AppServices.gameService.searchMine(playerRequest).then((value) {
       games = value.list;
       setState(() {
         gamesLoaded = true;
