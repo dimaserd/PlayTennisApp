@@ -62,7 +62,7 @@ class PlayerSetsScoreList extends StatelessWidget {
                   onTap: () => onTapped(player),
                   child: Center(
                     child: Text(
-                      "${player.surname} ${player!.name}",
+                      "${player.surname} ${player.name}",
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                         color: Colors.black,

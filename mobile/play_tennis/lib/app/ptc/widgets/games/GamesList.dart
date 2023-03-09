@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../logic/clt/models/CurrentLoginData.dart';
-import '../../../../logic/ptc/services/GameService.dart';
+import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
+import 'package:play_tennis/logic/ptc/services/GameService.dart';
 import 'GameToSelect.dart';
 
 class GamesList extends StatelessWidget {
@@ -18,21 +18,22 @@ class GamesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-        child: games.isEmpty
-            ? Column(children: const [
-                Center(
-                  child: Text("Игры не найдены"),
-                ),
-              ])
-            : ListView.builder(
-                itemBuilder: (ctx, index) {
-                  return GameToSelect(
-                    game: games[index],
-                    loginData: loginData,
-                    onChange: onChange,
-                  );
-                },
-                itemCount: games.length,
-              ));
+      child: games.isEmpty
+          ? Column(children: const [
+              Center(
+                child: Text("Игры не найдены"),
+              ),
+            ])
+          : ListView.builder(
+              itemBuilder: (ctx, index) {
+                return GameToSelect(
+                  game: games[index],
+                  loginData: loginData,
+                  onChange: onChange,
+                );
+              },
+              itemCount: games.length,
+            ),
+    );
   }
 }

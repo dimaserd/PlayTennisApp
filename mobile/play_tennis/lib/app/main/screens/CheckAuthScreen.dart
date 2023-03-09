@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import '../../../logic/clt/models/CurrentLoginData.dart';
-import '../../../main-services.dart';
+import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
+import 'package:play_tennis/main-services.dart';
 
 class CheckAuthScreen extends StatefulWidget {
   const CheckAuthScreen({super.key});
