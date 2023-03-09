@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:play_tennis/app/ptc/widgets/courts/SearchCourtsForm.dart';
 import 'package:play_tennis/app/ptc/widgets/trainers/SearchTrainersForm.dart';
 import '../CountryAndCitySelectWidget.dart';
@@ -67,58 +66,27 @@ class _PlayTabbedPageState extends State<PlayTabbedPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        bottom: false,
-        child: Center(
-          child: widgetOptions.elementAt(selectedIndex),
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
+          bottom: const TabBar(
+            tabs: [
+              Tab(icon: Icon(Icons.directions_car)),
+              Tab(icon: Icon(Icons.directions_transit)),
+              Tab(icon: Icon(Icons.directions_bike)),
+            ],
+          ),
+          title: const Text('Tabs Demo'),
+        ),
+        body: const TabBarView(
+          children: [
+            Icon(Icons.directions_car),
+            Icon(Icons.directions_transit),
+            Icon(Icons.directions_bike),
+          ],
         ),
       ),
-      bottomNavigationBar: BottomNavyBar(
-          iconSize: 20,
-          backgroundColor: Colors.transparent,
-          showElevation: false,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          containerHeight: 50,
-          selectedIndex: selectedIndex,
-          onItemSelected: (value) {
-            onItemTapped(value);
-          },
-          items: [
-            BottomNavyBarItem(
-                icon: const Icon(Icons.person),
-                title: const Text(
-                  'Игроки',
-                  style: TextStyle(fontSize: 13),
-                ),
-                activeColor: Colors.black,
-                textAlign: TextAlign.center),
-            BottomNavyBarItem(
-                icon: const Icon(Icons.people),
-                title: const Text(
-                  'Сообщества',
-                  style: TextStyle(fontSize: 13),
-                ),
-                textAlign: TextAlign.center,
-                activeColor: const Color.fromARGB(255, 212, 35, 76)),
-            BottomNavyBarItem(
-                icon: const Icon(Icons.contacts),
-                title: const Text(
-                  ' Тренеры',
-                  style: TextStyle(fontSize: 13),
-                ),
-                textAlign: TextAlign.center,
-                activeColor: Colors.blue),
-            BottomNavyBarItem(
-                icon: const Icon(Icons.sports_tennis),
-                title: const Text(
-                  ' Корты',
-                  style: TextStyle(fontSize: 13),
-                ),
-                textAlign: TextAlign.center,
-                activeColor: Colors.blue)
-          ]),
-      resizeToAvoidBottomInset: false,
     );
   }
 }

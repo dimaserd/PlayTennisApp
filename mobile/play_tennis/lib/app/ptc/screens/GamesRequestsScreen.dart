@@ -47,6 +47,10 @@ class _GamesRequestsScreenState extends State<GamesRequestsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    return getWidget(context);
+  }
+
+  Widget buildOld(BuildContext context) {
     return Scaffold(
       body: Container(
         margin: const EdgeInsets.all(20),
@@ -71,6 +75,46 @@ class _GamesRequestsScreenState extends State<GamesRequestsScreen> {
             icon: const Icon(Icons.add_circle),
           )
         ],
+      ),
+    );
+  }
+
+  Widget getWidget(BuildContext context) {
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed("/game-requests/add");
+              },
+              icon: const Icon(Icons.add_circle),
+            )
+          ],
+          bottom: const TabBar(
+            tabs: [
+              Tab(
+                icon: Icon(Icons.directions_car),
+                text: "Заявки",
+              ),
+              Tab(
+                icon: Icon(Icons.directions_transit),
+                text: "Корты",
+              ),
+              Tab(icon: Icon(Icons.directions_bike)),
+            ],
+          ),
+          title: const Text('Tabs Demo'),
+        ),
+        drawer: const SideDrawer(),
+        body: const TabBarView(
+          children: [
+            Icon(Icons.directions_car),
+            Icon(Icons.directions_transit),
+            Icon(Icons.directions_bike),
+          ],
+        ),
       ),
     );
   }

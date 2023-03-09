@@ -13,8 +13,8 @@ class PlayerScreen extends StatefulWidget {
 }
 
 class _PlayerScreenState extends State<PlayerScreen> {
-  late PlayerModel? player;
-  late bool loaded = false;
+  PlayerModel? player;
+  bool loaded = false;
 
   @override
   void initState() {
@@ -29,16 +29,47 @@ class _PlayerScreenState extends State<PlayerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: loaded && player != null
-          ? ShowPlayerData(player: player!)
-          : const Loading(text: "Игрок загружается"),
-      appBar: AppBar(
-        leading: const BackButton(),
-        title: loaded
-            ? Text("${player!.surname!} ${player!.name!}")
-            : const Text("Загрузка игрока..."),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          leading: const BackButton(),
+          bottom: const TabBar(
+            isScrollable: true,
+            tabs: [
+              Tab(
+                text: "Профиль",
+              ),
+              Tab(
+                text: "Игры",
+              ),
+            ],
+          ),
+          title: loaded && player != null
+              ? Text("${player!.surname!} ${player!.name!}")
+              : const Text("Загрузка игрока..."),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: TabBarView(
+            children: getWidgets(),
+          ),
+        ),
       ),
     );
+  }
+
+  List<Widget> getWidgets() {
+    if (player == null) {
+      return const [
+        Loading(text: "Загрузка"),
+        Loading(text: "Загрузка"),
+      ];
+    }
+
+    return [
+      ShowPlayerData(player: player!),
+      const Loading(text: "Игры пока не реализованы"),
+    ];
   }
 }
