@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/screens/ChangeAvatarScreen.dart';
 import 'package:play_tennis/app/ptc/screens/AddGameRequestScreen.dart';
 import 'package:play_tennis/app/ptc/screens/CreateGameScreen.dart';
-import 'package:play_tennis/app/ptc/screens/MyGamesScreen.dart';
 import 'package:play_tennis/app/ptc/screens/TournamentsScreen.dart';
 import 'package:play_tennis/app/ptc/screens/TrainersPage.dart';
 import 'app/main/screens/CheckAuthScreen.dart';
@@ -69,10 +68,6 @@ class MainRoutes {
 
     if (settings.name == '/profile-edit') {
       return MaterialPageRoute(builder: (context) => const EditProfileScreen());
-    }
-
-    if (settings.name == '/games') {
-      return MaterialPageRoute(builder: (context) => const MyGamesScreen());
     }
 
     if (settings.name == '/trainers') {

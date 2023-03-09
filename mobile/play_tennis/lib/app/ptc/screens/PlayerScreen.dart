@@ -35,7 +35,6 @@ class _PlayerScreenState extends State<PlayerScreen> {
         appBar: AppBar(
           leading: const BackButton(),
           bottom: const TabBar(
-            isScrollable: true,
             tabs: [
               Tab(
                 text: "Профиль",
@@ -50,7 +49,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
               : const Text("Загрузка игрока..."),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(0.0),
           child: TabBarView(
             children: getWidgets(),
           ),
