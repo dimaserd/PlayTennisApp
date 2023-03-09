@@ -25,7 +25,7 @@ class TournamentsScreen extends StatelessWidget {
             ),
             recognizer: TapGestureRecognizer()
               ..onTap = () => MainAppExtensions.trylaunchAppUrl(
-                    "ptc/trainers",
+                    "/ptc/tournaments",
                     (er) {
                       BaseApiResponseUtils.showSuccess(context, er);
                     },
