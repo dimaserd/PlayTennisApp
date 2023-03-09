@@ -1,29 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/ptc/widgets/CountryAndCitySelectWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/cities/CityChatAndChannelWidget.dart';
-import 'package:play_tennis/app/ptc/widgets/trainers/TrainerCard.dart';
+import 'package:play_tennis/app/ptc/widgets/tournaments/TournamentsList.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
 import 'package:play_tennis/logic/ptc/models/cities/PublicTelegramChatForCityModel.dart';
-import 'package:play_tennis/logic/ptc/services/TrainerCardService.dart';
+import 'package:play_tennis/logic/ptc/services/TournamentService.dart';
 import 'package:play_tennis/main-services.dart';
 import 'dart:async';
-import 'TrainerList.dart';
 
-class SearchTrainersForm extends StatefulWidget {
+class SearchTournamentsForm extends StatefulWidget {
   final PlayerLocationData locationData;
-  final void Function(TrainerCard trainer) onTapHandler;
+  final void Function(TournamentSimpleModel trainer) onTapHandler;
 
-  const SearchTrainersForm({
+  const SearchTournamentsForm({
     super.key,
     required this.locationData,
     required this.onTapHandler,
   });
 
   @override
-  State<SearchTrainersForm> createState() => _SearchTrainersForm();
+  State<SearchTournamentsForm> createState() => _SearchTournamentsForm();
 }
 
-class _SearchTrainersForm extends State<SearchTrainersForm> {
+class _SearchTournamentsForm extends State<SearchTournamentsForm> {
   final ButtonStyle style =
       ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
   final CountryAndCitySelectController countryAndCitySelectController =
@@ -32,7 +31,7 @@ class _SearchTrainersForm extends State<SearchTrainersForm> {
   final TextEditingController _searchController = TextEditingController();
   Timer? _debounce;
 
-  List<TrainerCardSimpleModel> trainers = [];
+  List<TournamentSimpleModel> tournaments = [];
   PublicTelegramChatForCityModel? cityModel;
 
   int _offSet = 0;
@@ -96,10 +95,10 @@ class _SearchTrainersForm extends State<SearchTrainersForm> {
         Expanded(
           child: Padding(
             padding: const EdgeInsets.only(top: 8, bottom: 0),
-            child: TrainerList(
+            child: TournamentsList(
               isActiveLoader: _isActiveLoader,
               offset: _offSet,
-              trainers: trainers,
+              tournaments: tournaments,
               getData: (offSet) {
                 _offSet = offSet;
                 getData();
@@ -130,10 +129,20 @@ class _SearchTrainersForm extends State<SearchTrainersForm> {
   getData() {
     var cityId = countryAndCitySelectController.city?.id;
 
-    var trainerRequest = SearchTrainerCardsRequest(
-        q: _searchController.text, cityId: cityId, count: 10, offSet: _offSet);
+    var trainerRequest = GetTournamentsRequest(
+      openForParticipantsJoining: null,
+      activityStatus: null,
+      durationType: null,
+      showMine: null,
+      useHiddenFilter: false,
+      hidden: null,
+      isExternal: null,
+      cityId: cityId,
+      count: 10,
+      offSet: _offSet,
+    );
 
-    AppServices.trainerCardService.search(trainerRequest).then((value) {
+    AppServices.tournamentService.search(trainerRequest).then((value) {
       if (!mounted) {
         return;
       }
@@ -146,11 +155,11 @@ class _SearchTrainersForm extends State<SearchTrainersForm> {
       if (_offSet == 0 || _isTapSearch == true) {
         _isTapSearch = false;
         setState(() {
-          trainers = value.list;
+          tournaments = value.list;
         });
       } else {
         setState(() {
-          trainers += value.list;
+          tournaments += value.list;
         });
       }
     });
