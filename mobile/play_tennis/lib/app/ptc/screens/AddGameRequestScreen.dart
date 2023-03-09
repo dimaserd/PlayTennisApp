@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../main/widgets/side_drawer.dart';
-import '../widgets/game-requests/AddGameRequestForm.dart';
+import 'package:play_tennis/app/main/widgets/side_drawer.dart';
+import 'package:play_tennis/app/ptc/widgets/game-requests/AddGameRequestForm.dart';
 
 class AddGameRequestScreen extends StatelessWidget {
   const AddGameRequestScreen({Key? key}) : super(key: key);

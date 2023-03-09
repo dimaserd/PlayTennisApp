@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/screens/ChangeAvatarScreen.dart';
+import 'package:play_tennis/app/ptc/screens/AboutApplicationScreen.dart';
 import 'package:play_tennis/app/ptc/screens/AddGameRequestScreen.dart';
 import 'package:play_tennis/app/ptc/screens/CreateGameScreen.dart';
 import 'package:play_tennis/app/ptc/screens/TournamentsScreen.dart';
@@ -24,6 +25,12 @@ class MainRoutes {
 
     if (settings.name == '/home') {
       return MaterialPageRoute(builder: (context) => const PlayersScreen());
+    }
+
+    if (settings.name == '/about') {
+      return MaterialPageRoute(
+        builder: (context) => const AboutApplicationScreen(),
+      );
     }
 
     if (settings.name == '/players') {

@@ -72,6 +72,14 @@ class SideDrawer extends StatelessWidget {
             },
           ),
           ListTile(
+            leading: const Icon(Icons.info),
+            title: const Text('О приложении'),
+            onTap: () {
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil("/about", (r) => false);
+            },
+          ),
+          ListTile(
             leading: const Icon(Icons.exit_to_app),
             title: const Text('Выйти'),
             onTap: () {
