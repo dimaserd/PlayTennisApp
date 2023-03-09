@@ -19,9 +19,7 @@ class PlayersScreen extends StatefulWidget {
 class _PlayersScreenState extends State<PlayersScreen> {
   PlayerLocationData? locationData;
 
-  @override
-  void initState() {
-    super.initState();
+  void loadLocationData() {
     AppServices.playerService.getLocationData().then((value) {
       if (value == null) {
         BaseApiResponseUtils.showError(context, "Кажется вы были разлогинены");
@@ -33,6 +31,12 @@ class _PlayersScreenState extends State<PlayersScreen> {
         locationData = value;
       });
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadLocationData();
   }
 
   @override

@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/palette.dart';
 import 'package:play_tennis/logic/ptc/services/TournamentService.dart';
+import 'package:play_tennis/app/ptc/widgets/html/HtmlViewWidget.dart';
 
 class TournamentCard extends StatelessWidget {
   final TournamentSimpleModel tournament;
@@ -50,7 +51,9 @@ class TournamentCard extends StatelessWidget {
                 const SizedBox(
                   height: 5,
                 ),
-                Text("${tournament.description}")
+                tournament.description != null
+                    ? HtmlViewWidget(html: tournament.description!)
+                    : const SizedBox.shrink()
               ],
               // ),
             ),
