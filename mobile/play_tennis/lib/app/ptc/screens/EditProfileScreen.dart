@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:play_tennis/app/main/widgets/Loading.dart';
+import 'package:play_tennis/app/main/widgets/side_drawer.dart';
+import 'package:play_tennis/app/ptc/widgets/profile/EditProfileWidget.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
-import '../../../logic/ptc/models/PlayerData.dart';
-import '../../../main-services.dart';
-import '../../main/widgets/Loading.dart';
-import '../../main/widgets/side_drawer.dart';
-import '../widgets/profile/EditProfileWidget.dart';
+import 'package:play_tennis/logic/ptc/models/PlayerData.dart';
+import 'package:play_tennis/main-services.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});

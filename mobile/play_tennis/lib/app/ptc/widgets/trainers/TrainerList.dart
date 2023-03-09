@@ -1,15 +1,12 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:play_tennis/app/ptc/widgets/trainers/TrainerCard.dart';
 import 'package:play_tennis/logic/ptc/services/TrainerCardService.dart';
-import 'package:play_tennis/app/main/widgets/palette.dart';
-import 'package:url_launcher/url_launcher.dart';
-
 import 'ShowAlertAddTrainer.dart';
 
 class TrainerList extends StatelessWidget {
   List<TrainerCardSimpleModel> trainers;
-  void Function(TrainerCardSimpleModel trainer) onTapHandler;
-  void Function(int offSet) getData;
+  final void Function(TrainerCardSimpleModel trainer) onTapHandler;
+  final void Function(int offSet) getData;
 
   int offset;
   bool isActiveLoader = true;
@@ -40,13 +37,6 @@ class TrainerList extends StatelessWidget {
     getData(offset);
   }
 
-  void _launchPhone(String phoneNumber) async {
-    final url = Uri.parse('tel:$phoneNumber');
-    if (await launchUrl(url)) {
-      await launchUrl(url);
-    }
-  }
-
   Widget getChild() {
     return trainers.isEmpty
         ? Column(children: const [
@@ -65,52 +55,8 @@ class TrainerList extends StatelessWidget {
                   return const Center(child: CircularProgressIndicator());
                 }
               } else {
-                return GestureDetector(
-                  onTap: () {
-                    // onTapHandler(trainers[index]);
-                  },
-                  child: Card(
-                      margin: const EdgeInsets.symmetric(
-                          vertical: 4, horizontal: 2),
-                      elevation: 4,
-                      child: ListTile(
-                        title: Text(
-                          "${trainers[index].surname!} ${trainers[index].name!}",
-                          style: Theme.of(context).textTheme.titleLarge,
-                        ),
-                        subtitle: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            RichText(
-                              text: TextSpan(
-                                text: "Номер телефона: ",
-                                style: const TextStyle(color: mainColor),
-                                children: [
-                                  TextSpan(
-                                    text: "${trainers[index].phoneNumber}",
-                                    style: const TextStyle(color: Colors.blue),
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        print("ta");
-                                        _launchPhone(
-                                            "${trainers[index].phoneNumber}");
-                                      },
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Text("${trainers[index].description}")
-                          ],
-                          // ),
-                        ),
-                      )),
+                return TrainerCard(
+                  trainer: trainers[index],
                 );
               }
             },

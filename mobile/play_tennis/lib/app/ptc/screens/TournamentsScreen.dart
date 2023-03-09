@@ -1,38 +1,44 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:play_tennis/app/main/widgets/Loading.dart';
 import 'package:play_tennis/app/main/widgets/side_drawer.dart';
-import 'package:play_tennis/baseApiResponseUtils.dart';
-import 'package:play_tennis/main-extensions.dart';
 
 class TournamentsScreen extends StatelessWidget {
   const TournamentsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Турниры"),
-      ),
-      drawer: const SideDrawer(),
-      body: Center(
-        child: RichText(
-          text: TextSpan(
-            text: 'Перейти на сайт',
-            style: const TextStyle(
-              color: Colors.blue,
-              fontSize: 18,
-              decoration: TextDecoration.underline,
-            ),
-            recognizer: TapGestureRecognizer()
-              ..onTap = () => MainAppExtensions.trylaunchAppUrl(
-                    "/ptc/tournaments",
-                    (er) {
-                      BaseApiResponseUtils.showSuccess(context, er);
-                    },
-                  ),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          bottom: const TabBar(
+            isScrollable: false,
+            tabs: [
+              Tab(
+                text: "Однодневные",
+              ),
+              Tab(
+                text: "Многодневные",
+              ),
+            ],
+          ),
+          title: const Text('Турниры'),
+        ),
+        drawer: const SideDrawer(),
+        body: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: TabBarView(
+            children: getWidgets(),
           ),
         ),
       ),
     );
+  }
+
+  List<Widget> getWidgets() {
+    return [
+      const Loading(text: "Однодневные турниры пока не реализованы"),
+      const Loading(text: "Многодневные турниры пока не реализованы"),
+    ];
   }
 }

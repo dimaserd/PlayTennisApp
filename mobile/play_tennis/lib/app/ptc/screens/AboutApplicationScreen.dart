@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/Loading.dart';
 import 'package:play_tennis/app/main/widgets/side_drawer.dart';
-import 'package:play_tennis/main-settings.dart';
+import 'package:play_tennis/baseApiResponseUtils.dart';
+import 'package:play_tennis/main-extensions.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../../../baseApiResponseUtils.dart';
-import '../../../main-extensions.dart';
 
 class AboutApplicationScreen extends StatelessWidget {
   const AboutApplicationScreen({super.key});

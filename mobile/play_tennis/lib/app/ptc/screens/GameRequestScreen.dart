@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import '../../../logic/clt/models/CurrentLoginData.dart';
-import '../../../logic/ptc/models/game-requests/GameRequestDetailedModel.dart';
-import '../../../logic/ptc/models/game-requests/GameRequestResponseSimpleModel.dart';
-import '../../../logic/ptc/models/game-requests/SearchGameRequestResponses.dart';
-import '../../../main-services.dart';
-import '../../main/widgets/Loading.dart';
-import '../widgets/game-requests/ShowGameRequestData.dart';
+import 'package:play_tennis/app/main/widgets/Loading.dart';
+import 'package:play_tennis/app/ptc/widgets/game-requests/ShowGameRequestData.dart';
+import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
+import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestDetailedModel.dart';
+import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestResponseSimpleModel.dart';
+import 'package:play_tennis/logic/ptc/models/game-requests/SearchGameRequestResponses.dart';
+import 'package:play_tennis/main-services.dart';
 
 class GameRequestScreen extends StatefulWidget {
   final String id;

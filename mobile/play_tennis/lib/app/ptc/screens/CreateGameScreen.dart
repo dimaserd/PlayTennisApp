@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/Loading.dart';
+import 'package:play_tennis/app/main/widgets/side_drawer.dart';
+import 'package:play_tennis/app/ptc/widgets/game-data/AddGameForm.dart';
 import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
 import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
 import 'package:play_tennis/logic/ptc/models/games/CreateSinglesGame.dart';
-import '../../../main-services.dart';
-import '../../main/widgets/side_drawer.dart';
-import '../widgets/game-data/AddGameForm.dart';
+import 'package:play_tennis/main-services.dart';
 
 class CreateGameScreen extends StatefulWidget {
   const CreateGameScreen({super.key});
