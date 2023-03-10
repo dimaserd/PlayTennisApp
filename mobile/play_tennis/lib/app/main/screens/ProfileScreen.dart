@@ -95,25 +95,26 @@ class ProfileScreenState extends State<ProfileScreen> {
 
     return [
       SingleChildScrollView(
-        child: Center(
-          child: ProfileData(player: playerData!),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              child: ProfileData(player: playerData!),
+            ),
+          ],
         ),
       ),
-      Column(
-        children: [
-          SearchMyGamesWidget(
-            loginData: loginData!,
+      Align(
+        alignment: Alignment.topCenter,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SearchMyGamesWidget(
+                loginData: loginData!,
+              ),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8),
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed('/games/add');
-              },
-              child: const Center(child: Text('Добавить тренера')),
-            ),
-          )
-        ],
+        ),
       ),
     ];
   }
