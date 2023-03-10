@@ -99,8 +99,12 @@ class ProfileScreenState extends State<ProfileScreen> {
           child: ProfileData(player: playerData!),
         ),
       ),
-      SearchMyGamesWidget(
-        loginData: loginData!,
+      Column(
+        children: [
+          SearchMyGamesWidget(
+            loginData: loginData!,
+          ),
+        ],
       ),
     ];
   }
