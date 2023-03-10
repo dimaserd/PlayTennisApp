@@ -104,6 +104,15 @@ class ProfileScreenState extends State<ProfileScreen> {
           SearchMyGamesWidget(
             loginData: loginData!,
           ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed('/games/add');
+              },
+              child: const Center(child: Text('Добавить тренера')),
+            ),
+          )
         ],
       ),
     ];
