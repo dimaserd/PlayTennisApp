@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
 import 'package:play_tennis/logic/ptc/services/GameService.dart';
 import 'GameToSelect.dart';
 
 class GamesList extends StatelessWidget {
   final List<SinglesGameSimpleModel> games;
-  final CurrentLoginData loginData;
+  final List<String> ignorePlayerIds;
   final Function onChange;
 
   const GamesList({
     super.key,
     required this.games,
-    required this.loginData,
     required this.onChange,
+    required this.ignorePlayerIds,
   });
 
   @override
@@ -28,7 +27,7 @@ class GamesList extends StatelessWidget {
               itemBuilder: (ctx, index) {
                 return GameToSelect(
                   game: games[index],
-                  loginData: loginData,
+                  ignorePlayerIds: ignorePlayerIds,
                   onChange: onChange,
                 );
               },

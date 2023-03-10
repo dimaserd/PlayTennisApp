@@ -62,6 +62,5 @@ class TournamentCard extends StatelessWidget {
   void _launchUrl() async {
     var url = "ptc/tournament/${tournament.id}";
     MainAppExtensions.trylaunchAppUrl(url, (p0) => null);
-    //
   }
 }

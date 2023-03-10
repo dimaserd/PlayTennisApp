@@ -32,7 +32,7 @@ class _SearchMyGamesWidgetState extends State<SearchMyGamesWidget> {
         gamesLoaded
             ? GamesList(
                 games: games,
-                loginData: widget.loginData,
+                ignorePlayerIds: [widget.loginData.userId!],
                 onChange: (p) {},
               )
             : const SizedBox.shrink(),

@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/images/CrocoAppImage.dart';
 import 'package:play_tennis/app/ptc/widgets/games/GameDataWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/PlayerSetsScoreList.dart';
-import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerSetScores.dart';
 import 'package:play_tennis/logic/ptc/services/GameService.dart';
 
 class GameToSelect extends StatelessWidget {
   final SinglesGameSimpleModel game;
-  final CurrentLoginData loginData;
+
   final Function onChange;
+  final List<String> ignorePlayerIds;
   final GameDataWidgetController gameDataWidgetController =
       GameDataWidgetController();
   GameToSelect({
     super.key,
     required this.game,
-    required this.loginData,
+    required this.ignorePlayerIds,
     required this.onChange,
   });
 
@@ -87,7 +87,7 @@ class GameToSelect extends StatelessWidget {
   }
 
   onTappedHandler(PlayerSimpleModel player, BuildContext context) {
-    if (player.id == loginData.userId) {
+    if (ignorePlayerIds.any((x) => x == player.id)) {
       return;
     }
 
