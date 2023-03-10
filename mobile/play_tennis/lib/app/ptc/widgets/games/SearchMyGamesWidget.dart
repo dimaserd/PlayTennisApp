@@ -27,17 +27,15 @@ class _SearchMyGamesWidgetState extends State<SearchMyGamesWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        gamesLoaded
-            ? GamesList(
-                games: games,
-                ignorePlayerIds: [widget.loginData.userId!],
-                onChange: (p) {},
-              )
-            : const SizedBox.shrink(),
-      ],
-    );
+    return gamesLoaded
+        ? GamesList(
+            games: games,
+            ignorePlayerIds: [
+              widget.loginData.userId!,
+            ],
+            onChange: (p) {},
+          )
+        : const SizedBox.shrink();
   }
 
   getData() {

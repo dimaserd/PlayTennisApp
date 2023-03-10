@@ -48,12 +48,23 @@ class ProfileScreenState extends State<ProfileScreen> {
     });
   }
 
+  bool showFloat = false;
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
         drawer: const SideDrawer(),
+        floatingActionButton: showFloat
+            ? FloatingActionButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/games/add');
+                },
+                backgroundColor: Colors.black,
+                child: const Icon(Icons.add),
+              )
+            : null,
         appBar: AppBar(
           actions: [
             IconButton(
@@ -63,8 +74,13 @@ class ProfileScreenState extends State<ProfileScreen> {
               icon: const Icon(Icons.edit),
             )
           ],
-          bottom: const TabBar(
-            tabs: [
+          bottom: TabBar(
+            onTap: (value) {
+              setState(() {
+                showFloat = value == 1;
+              });
+            },
+            tabs: const [
               Tab(
                 text: "Данные",
               ),
@@ -104,17 +120,12 @@ class ProfileScreenState extends State<ProfileScreen> {
           ],
         ),
       ),
-      Align(
-        alignment: Alignment.topCenter,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              SearchMyGamesWidget(
-                loginData: loginData!,
-              ),
-            ],
+      Column(
+        children: [
+          SearchMyGamesWidget(
+            loginData: loginData!,
           ),
-        ),
+        ],
       ),
     ];
   }
