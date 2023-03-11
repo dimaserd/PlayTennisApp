@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/Inputs/TextInput.dart';
 import 'package:play_tennis/app/main/widgets/Loading.dart';
+import 'package:play_tennis/app/ptc/widgets/CountryAndCitySelectWidget.dart';
+import 'package:play_tennis/app/ptc/widgets/CustomDateAndTimePickerWidget.dart';
+import 'package:play_tennis/baseApiResponseUtils.dart';
+import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
 import 'package:play_tennis/logic/ptc/models/game-requests/CreateGameRequest.dart';
-import '../../../../baseApiResponseUtils.dart';
-import '../../../../logic/ptc/models/PlayerLocationData.dart';
-import '../../../../main-services.dart';
-import '../../../../main.dart';
-import '../CountryAndCitySelectWidget.dart';
-import '../CustomDateAndTimePickerWidget.dart';
+import 'package:play_tennis/main-services.dart';
+import 'package:play_tennis/main.dart';
 
 class AddGameRequestForm extends StatefulWidget {
   const AddGameRequestForm({super.key});

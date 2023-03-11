@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../../logic/clt/models/CurrentLoginData.dart';
-import '../../../../logic/ptc/extensions/GameRequestMappingExtensions.dart';
-import '../../../../logic/ptc/models/game-requests/GameRequestDetailedModel.dart';
-import '../../../../logic/ptc/models/game-requests/GameRequestResponseSimpleModel.dart';
+import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
+import 'package:play_tennis/logic/ptc/extensions/GameRequestMappingExtensions.dart';
+import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestDetailedModel.dart';
+import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestResponseSimpleModel.dart';
 import '../players/PlayerDataWidget.dart';
 import 'GameRequestRepondingWidget.dart';
 import 'GameRequestResponsesList.dart';

@@ -9,14 +9,14 @@ import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
 import 'package:play_tennis/main-services.dart';
 
-class PlayersScreen extends StatefulWidget {
-  const PlayersScreen({super.key});
+class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
 
   @override
-  State<PlayersScreen> createState() => _PlayersScreenState();
+  State<MainScreen> createState() => _MainScreenState();
 }
 
-class _PlayersScreenState extends State<PlayersScreen> {
+class _MainScreenState extends State<MainScreen> {
   PlayerLocationData? locationData;
 
   void loadLocationData() {

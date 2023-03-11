@@ -1,23 +1,25 @@
 import 'dart:async';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import '../../../../logic/clt/models/CurrentLoginData.dart';
+import 'package:play_tennis/app/ptc/widgets/CountryAndCitySelectWidget.dart';
+import 'package:play_tennis/app/ptc/widgets/game-requests/GameRequestsList.dart';
+import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
+import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestSimpleModel.dart';
+import 'package:play_tennis/logic/ptc/models/game-requests/SearchGameRequests.dart';
+import 'package:play_tennis/main-services.dart';
+import 'package:play_tennis/main-settings.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../../../../logic/ptc/models/game-requests/GameRequestSimpleModel.dart';
-import '../../../../logic/ptc/models/game-requests/SearchGameRequests.dart';
-import '../../../../main-services.dart';
-import '../../../../main-settings.dart';
-import '../CountryAndCitySelectWidget.dart';
-import 'GameRequestsList.dart';
 
 class SearchGameRequestsForm extends StatefulWidget {
   final bool showMine;
   final CountryAndCitySelectController countryAndCitySelectController;
+  final CurrentLoginData? loginData;
 
   const SearchGameRequestsForm({
     super.key,
     required this.countryAndCitySelectController,
     required this.showMine,
+    required this.loginData,
   });
 
   @override
@@ -31,23 +33,12 @@ class _SearchGameRequestsFormState extends State<SearchGameRequestsForm> {
 
   final TextEditingController queryController = TextEditingController();
 
-  CurrentLoginData? loginData;
-  bool isLoaded = false;
-
   List<GameRequestSimpleModel> requests = [];
   Timer? timer;
 
   @override
   void initState() {
     super.initState();
-    AppServices.loginService.getLoginData().then((value) {
-      loginData = value;
-      setState(() {
-        isLoaded = true;
-      });
-      getData();
-    });
-
     timer = Timer.periodic(const Duration(seconds: 2), (Timer t) => getData());
   }
 
@@ -114,16 +105,14 @@ class _SearchGameRequestsFormState extends State<SearchGameRequestsForm> {
             ],
           ),
         ),
-        isLoaded
-            ? Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: GameRequestsList(
-                  requests: requests,
-                  loginData: loginData!,
-                  onChange: getData,
-                ),
-              )
-            : const SizedBox.shrink(),
+        Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: GameRequestsList(
+            requests: requests,
+            loginData: widget.loginData!,
+            onChange: getData,
+          ),
+        ),
       ],
     );
   }

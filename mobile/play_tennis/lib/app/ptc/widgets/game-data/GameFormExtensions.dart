@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../logic/ptc/models/PlayerModel.dart';
+import 'package:play_tennis/logic/ptc/models/PlayerModel.dart';
 
 class GameFormExtensions {
   static List<Widget> getMatchText(

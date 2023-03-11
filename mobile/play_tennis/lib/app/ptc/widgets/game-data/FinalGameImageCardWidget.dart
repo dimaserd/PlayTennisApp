@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import '../../../../baseApiResponseUtils.dart';
-import '../../../../logic/clt/models/BaseApiResponse.dart';
+import 'package:play_tennis/baseApiResponseUtils.dart';
+import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
 
 class FinalGameImageCardWidget extends StatefulWidget {
   final Future<BaseApiResponse> Function() clickHandler;

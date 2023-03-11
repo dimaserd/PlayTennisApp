@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../logic/ptc/models/PlayerModel.dart';
-import '../games/GameDataWidget.dart';
-import 'GameFormExtensions.dart';
+import 'package:play_tennis/app/ptc/widgets/game-data/GameFormExtensions.dart';
+import 'package:play_tennis/app/ptc/widgets/games/GameDataWidget.dart';
+import 'package:play_tennis/logic/ptc/models/PlayerModel.dart';
 
 class GameFormMatchInfoWidget extends StatelessWidget {
   const GameFormMatchInfoWidget({

@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/screens/ChangeAvatarScreen.dart';
+import 'package:play_tennis/app/main/screens/CheckAuthScreen.dart';
+import 'package:play_tennis/app/main/screens/LoginScreen.dart';
+import 'package:play_tennis/app/main/screens/ProfileScreen.dart';
+import 'package:play_tennis/app/main/screens/RegistrationScreen.dart';
+import 'package:play_tennis/app/main/screens/RouteNotFoundScreen.dart';
+import 'package:play_tennis/app/main/widgets/images/ImageViewWidget.dart';
 import 'package:play_tennis/app/ptc/screens/AboutApplicationScreen.dart';
 import 'package:play_tennis/app/ptc/screens/AddGameRequestScreen.dart';
 import 'package:play_tennis/app/ptc/screens/CreateGameScreen.dart';
+import 'package:play_tennis/app/ptc/screens/EditProfileScreen.dart';
+import 'package:play_tennis/app/ptc/screens/GameRequestScreen.dart';
+import 'package:play_tennis/app/ptc/screens/GamesRequestsScreen.dart';
+import 'package:play_tennis/app/ptc/screens/MainScreen.dart';
+import 'package:play_tennis/app/ptc/screens/PlayScreen.dart';
+import 'package:play_tennis/app/ptc/screens/PlayerScreen.dart';
 import 'package:play_tennis/app/ptc/screens/TournamentsScreen.dart';
 import 'package:play_tennis/app/ptc/screens/TrainersPage.dart';
-import 'app/main/screens/CheckAuthScreen.dart';
-import 'app/main/screens/LoginScreen.dart';
-import 'app/main/screens/ProfileScreen.dart';
-import 'app/main/screens/RegistrationScreen.dart';
-import 'app/main/screens/RouteNotFoundScreen.dart';
-import 'app/main/widgets/images/ImageViewWidget.dart';
-import 'app/ptc/screens/EditProfileScreen.dart';
-import 'app/ptc/screens/GameRequestScreen.dart';
-import 'app/ptc/screens/GamesRequestsScreen.dart';
-import 'app/ptc/screens/PlayerScreen.dart';
-import 'app/ptc/screens/PlayersScreen.dart';
 
 class MainRoutes {
   static MaterialPageRoute onGenerateRoute(RouteSettings settings) {
@@ -24,7 +25,7 @@ class MainRoutes {
     }
 
     if (settings.name == '/home') {
-      return MaterialPageRoute(builder: (context) => const PlayersScreen());
+      return MaterialPageRoute(builder: (context) => const MainScreen());
     }
 
     if (settings.name == '/about') {
@@ -34,7 +35,7 @@ class MainRoutes {
     }
 
     if (settings.name == '/players') {
-      return MaterialPageRoute(builder: (context) => const PlayersScreen());
+      return MaterialPageRoute(builder: (context) => const MainScreen());
     }
 
     if (settings.name == '/tournaments') {
@@ -42,10 +43,7 @@ class MainRoutes {
     }
 
     if (settings.name == '/play') {
-      return MaterialPageRoute(
-          builder: (context) => const GamesRequestsScreen(
-                showMine: false,
-              ));
+      return MaterialPageRoute(builder: (context) => const PlayScreen());
     }
 
     if (settings.name == '/game-requests/mine') {

@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import '../../../../logic/clt/models/BaseApiResponse.dart';
-import '../../../../main-services.dart';
-import '../../../main/widgets/Inputs/ImageInput.dart';
+import 'package:play_tennis/app/main/widgets/Inputs/ImageInput.dart';
+import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
+import 'package:play_tennis/main-services.dart';
 
 class AddGameImageWidget extends StatefulWidget {
   final Function(int fileId, File fileImage) imageReady;

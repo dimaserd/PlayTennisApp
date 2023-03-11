@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../../../baseApiResponseUtils.dart';
-import '../../../../logic/ptc/models/game-requests/AcceptGameRequestResponse.dart';
-import '../../../../logic/ptc/models/game-requests/GameRequestResponseSimpleModel.dart';
-import '../../../../main-services.dart';
-import '../../../../main.dart';
+import 'package:play_tennis/baseApiResponseUtils.dart';
+import 'package:play_tennis/logic/ptc/models/game-requests/AcceptGameRequestResponse.dart';
+import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestResponseSimpleModel.dart';
+import 'package:play_tennis/main-services.dart';
+import 'package:play_tennis/main.dart';
 
 class GameResponseActions extends StatelessWidget {
   const GameResponseActions({

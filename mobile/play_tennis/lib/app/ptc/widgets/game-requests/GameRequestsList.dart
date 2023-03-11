@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../logic/clt/models/CurrentLoginData.dart';
-import '../../../../logic/ptc/models/game-requests/GameRequestSimpleModel.dart';
-import 'GameRequestToSelect.dart';
+import 'package:play_tennis/app/ptc/widgets/game-requests/GameRequestToSelect.dart';
+import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
+import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestSimpleModel.dart';
 
 class GameRequestsList extends StatelessWidget {
   final List<GameRequestSimpleModel> requests;

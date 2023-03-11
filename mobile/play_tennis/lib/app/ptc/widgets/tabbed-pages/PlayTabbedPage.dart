@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/ptc/widgets/courts/SearchCourtsForm.dart';
 import 'package:play_tennis/app/ptc/widgets/trainers/SearchTrainersForm.dart';
-import '../CountryAndCitySelectWidget.dart';
 import '../communities/SearchCommunityForm.dart';
 import '../../../../logic/ptc/models/PlayerLocationData.dart';
-import '../game-requests/SearchGameRequestsForm.dart';
 
 class PlayTabbedPage extends StatefulWidget {
   final PlayerLocationData locationData;
@@ -39,10 +37,6 @@ class _PlayTabbedPageState extends State<PlayTabbedPage> {
   void initState() {
     super.initState();
     widgetOptions = <Widget>[
-      SearchGameRequestsForm(
-        countryAndCitySelectController: CountryAndCitySelectController(),
-        showMine: false,
-      ),
       SearchCommunityForm(
         locationData: locationData,
         onTapHandler: (p) {
@@ -72,18 +66,16 @@ class _PlayTabbedPageState extends State<PlayTabbedPage> {
         appBar: AppBar(
           bottom: const TabBar(
             tabs: [
-              Tab(icon: Icon(Icons.directions_car)),
-              Tab(icon: Icon(Icons.directions_transit)),
-              Tab(icon: Icon(Icons.directions_bike)),
+              Tab(text: "Заявки на игру"),
+              Tab(text: "Мои заявки"),
             ],
           ),
-          title: const Text('Tabs Demo'),
+          title: const Text('Играть'),
         ),
         body: const TabBarView(
           children: [
             Icon(Icons.directions_car),
             Icon(Icons.directions_transit),
-            Icon(Icons.directions_bike),
           ],
         ),
       ),

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:play_tennis/app/ptc/widgets/game-requests/GameResponseActions.dart';
+import 'package:play_tennis/app/ptc/widgets/players/PlayerDataWidget.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
+import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
 import 'package:play_tennis/logic/ptc/models/game-requests/AcceptGameRequestResponse.dart';
+import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestResponseSimpleModel.dart';
 import 'package:play_tennis/main-services.dart';
 import 'package:play_tennis/main.dart';
-import '../../../../logic/clt/models/CurrentLoginData.dart';
-import '../../../../logic/ptc/models/game-requests/GameRequestResponseSimpleModel.dart';
-import '../players/PlayerDataWidget.dart';
-import 'GameResponseActions.dart';
 
 class GameResponseToSelect extends StatelessWidget {
   final GameRequestResponseSimpleModel response;

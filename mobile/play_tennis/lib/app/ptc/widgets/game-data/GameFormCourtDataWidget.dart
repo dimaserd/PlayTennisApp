@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../../../logic/ptc/models/cities/CityModel.dart';
-import '../../../../logic/ptc/models/cities/CountrySimpleModel.dart';
-import '../../../main/widgets/Inputs/TextInput.dart';
-import '../CountryAndCitySelectWidget.dart';
-import '../CustomDateAndTimePickerWidget.dart';
-import '../courts/CourtTypeSelect.dart';
+import 'package:play_tennis/app/main/widgets/Inputs/TextInput.dart';
+import 'package:play_tennis/app/ptc/widgets/CountryAndCitySelectWidget.dart';
+import 'package:play_tennis/app/ptc/widgets/CustomDateAndTimePickerWidget.dart';
+import 'package:play_tennis/app/ptc/widgets/courts/CourtTypeSelect.dart';
+import 'package:play_tennis/logic/ptc/models/cities/CityModel.dart';
+import 'package:play_tennis/logic/ptc/models/cities/CountrySimpleModel.dart';
 
 class GameFormCourtData {
   String courtName;

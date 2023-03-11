@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:play_tennis/app/main/widgets/Loading.dart';
+import 'package:play_tennis/app/main/widgets/side_drawer.dart';
+import 'package:play_tennis/app/ptc/widgets/CountryAndCitySelectWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/tabbed-pages/PlayTabbedPage.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
-import '../../../logic/ptc/models/PlayerLocationData.dart';
-import '../../../main-services.dart';
-import '../../main/widgets/Loading.dart';
-import '../../main/widgets/side_drawer.dart';
-import '../widgets/CountryAndCitySelectWidget.dart';
+import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
+import 'package:play_tennis/main-services.dart';
 
 class GamesRequestsScreen extends StatefulWidget {
   final bool showMine;

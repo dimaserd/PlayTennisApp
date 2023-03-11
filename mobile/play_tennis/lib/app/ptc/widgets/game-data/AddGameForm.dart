@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/Loading.dart';
 import 'package:play_tennis/app/ptc/widgets/CountryAndCitySelectWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/CustomDateAndTimePickerWidget.dart';
+import 'package:play_tennis/app/ptc/widgets/game-data/AddGameImageWidget.dart';
+import 'package:play_tennis/app/ptc/widgets/game-data/FinalGameImageCardWidget.dart';
+import 'package:play_tennis/app/ptc/widgets/game-data/GameFormMatchInfoWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/games/GameDataWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/courts/CourtTypeSelect.dart';
 import 'package:play_tennis/app/ptc/widgets/game-data/GameFormCourtDataWidget.dart';
@@ -18,10 +21,6 @@ import 'package:play_tennis/logic/ptc/models/cities/CountrySimpleModel.dart';
 import 'package:play_tennis/logic/ptc/models/games/TennisSetData.dart';
 import 'package:play_tennis/main-services.dart';
 import 'package:play_tennis/main.dart';
-
-import 'AddGameImageWidget.dart';
-import 'FinalGameImageCardWidget.dart';
-import 'GameFormMatchInfoWidget.dart';
 
 class SingleGameData {
   String courtType;
