@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:play_tennis/app/main/extensions/TimePickerUtils.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
+import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
+import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestSimpleModel.dart';
+import 'package:play_tennis/main-services.dart';
 import 'package:play_tennis/main.dart';
-import '../../../../logic/clt/models/CurrentLoginData.dart';
-import '../../../../logic/ptc/models/game-requests/GameRequestSimpleModel.dart';
-import '../../../../main-services.dart';
 
 class GameRequestRepondingWidget extends StatelessWidget {
   final CurrentLoginData loginData;
