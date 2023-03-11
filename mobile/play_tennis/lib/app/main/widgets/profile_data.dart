@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../logic/ptc/models/PlayerData.dart';
-import '../../ptc/widgets/profile/PlayerConfirmationWidget.dart';
-import 'images/PlayerAvatar.dart';
+import 'package:play_tennis/app/main/widgets/images/PlayerAvatar.dart';
+import 'package:play_tennis/app/ptc/widgets/profile/PlayerConfirmationWidget.dart';
+import 'package:play_tennis/logic/ptc/models/PlayerData.dart';
 
 class ProfileData extends StatelessWidget {
   final PlayerData player;
