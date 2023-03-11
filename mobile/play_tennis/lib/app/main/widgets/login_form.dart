@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:play_tennis/app/main/widgets/Inputs/PasswordInput.dart';
+import 'package:play_tennis/app/main/widgets/Inputs/TextInput.dart';
+import 'package:play_tennis/app/main/widgets/Loading.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/clt/models/models.dart';
-import '../../../main-services.dart';
-import '../../../main-settings.dart';
-import 'Inputs/PasswordInput.dart';
-import 'Inputs/TextInput.dart';
-import 'Loading.dart';
+import 'package:play_tennis/main-services.dart';
+import 'package:play_tennis/main-settings.dart';
 
 class LoginForm extends StatefulWidget {
   final Function onLogin;

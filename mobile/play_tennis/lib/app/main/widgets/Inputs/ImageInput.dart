@@ -2,10 +2,10 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/Loading.dart';
+import 'package:play_tennis/baseApiResponseUtils.dart';
+import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
 import 'package:play_tennis/main.dart';
-import '../../../../baseApiResponseUtils.dart';
-import '../../../../logic/clt/models/BaseApiResponse.dart';
-import '../../../../utils.dart';
+import 'package:play_tennis/utils.dart';
 
 class ImageInput extends StatefulWidget {
   final String labelText;

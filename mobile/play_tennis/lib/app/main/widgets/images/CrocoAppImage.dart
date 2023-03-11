@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'ImageViewWidget.dart';
+import 'package:play_tennis/app/main/widgets/images/ImageViewWidget.dart';
 
 class CrocoAppImage extends StatelessWidget {
   final int imageFileId;

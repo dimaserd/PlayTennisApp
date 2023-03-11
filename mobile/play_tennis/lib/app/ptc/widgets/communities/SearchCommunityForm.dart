@@ -1,12 +1,12 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:play_tennis/app/ptc/widgets/CountryAndCitySelectWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/cities/CityChatAndChannelWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/communities/CommunityList.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
 import 'package:play_tennis/logic/ptc/models/cities/PublicTelegramChatForCityModel.dart';
 import 'package:play_tennis/logic/ptc/services/CommunityCardService.dart';
 import 'package:play_tennis/main-services.dart';
-import '../CountryAndCitySelectWidget.dart';
-import 'dart:async';
 
 class SearchCommunityForm extends StatefulWidget {
   final PlayerLocationData locationData;

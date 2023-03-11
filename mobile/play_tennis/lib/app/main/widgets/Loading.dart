@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../main-settings.dart';
+import 'package:play_tennis/main-settings.dart';
 
 class Loading extends StatelessWidget {
   final String text;

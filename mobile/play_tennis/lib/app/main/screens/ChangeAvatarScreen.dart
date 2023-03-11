@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:play_tennis/app/main/widgets/Loading.dart';
 import 'package:play_tennis/app/ptc/widgets/profile/EditPlayerAvatarWidget.dart';
-import '../../../baseApiResponseUtils.dart';
-import '../../../logic/ptc/models/PlayerData.dart';
-import '../../../main-services.dart';
-import '../widgets/Loading.dart';
+import 'package:play_tennis/baseApiResponseUtils.dart';
+import 'package:play_tennis/logic/ptc/models/PlayerData.dart';
+import 'package:play_tennis/main-services.dart';
 
 class ChangeAvatarScreen extends StatefulWidget {
   const ChangeAvatarScreen({Key? key}) : super(key: key);

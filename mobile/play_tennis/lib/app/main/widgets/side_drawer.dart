@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../main-services.dart';
-import '../../../main-settings.dart';
-import 'palette.dart';
+import 'package:play_tennis/app/main/widgets/palette.dart';
+import 'package:play_tennis/main-services.dart';
+import 'package:play_tennis/main-settings.dart';
 
 class SideDrawer extends StatelessWidget {
   const SideDrawer({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
-import '../../../../main-settings.dart';
-import '../Loading.dart';
+import 'package:play_tennis/app/main/widgets/Loading.dart';
+import 'package:play_tennis/main-settings.dart';
 
 class ImageViewWidgetExtensions {
   static String buildOriginalUrl(int fileId) {

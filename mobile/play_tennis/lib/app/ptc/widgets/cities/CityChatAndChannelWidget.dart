@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import '../../../../logic/ptc/models/cities/PublicTelegramChatForCityModel.dart';
-import '../../../../main-extensions.dart';
+import 'package:play_tennis/logic/ptc/models/cities/PublicTelegramChatForCityModel.dart';
+import 'package:play_tennis/main-extensions.dart';
 
 class CityChatAndChannelWidget extends StatelessWidget {
   final PublicTelegramChatForCityModel model;

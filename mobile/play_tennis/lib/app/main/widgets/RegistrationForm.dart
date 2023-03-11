@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:play_tennis/app/main/widgets/Inputs/DatePickerInput.dart';
+import 'package:play_tennis/app/main/widgets/Inputs/DropdownWidget.dart';
+import 'package:play_tennis/app/main/widgets/Inputs/PasswordInput.dart';
+import 'package:play_tennis/app/main/widgets/Inputs/PhoneNumberInput.dart';
+import 'package:play_tennis/app/main/widgets/Inputs/TextInput.dart';
+import 'package:play_tennis/app/main/widgets/Loading.dart';
+import 'package:play_tennis/app/ptc/widgets/CountryAndCitySelectWidget.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
-import '../../../logic/ptc/models/PlayerRegistrationRequest.dart';
-import '../../../main-services.dart';
-import '../../../main-settings.dart';
-import '../../ptc/widgets/CountryAndCitySelectWidget.dart';
-import 'Inputs/DatePickerInput.dart';
-import 'Inputs/DropdownWidget.dart';
-import 'Inputs/PasswordInput.dart';
-import 'Inputs/PhoneNumberInput.dart';
-import 'Inputs/TextInput.dart';
-import 'Loading.dart';
+import 'package:play_tennis/logic/ptc/models/PlayerRegistrationRequest.dart';
+import 'package:play_tennis/main-services.dart';
+import 'package:play_tennis/main-settings.dart';
 
 class RegistrationForm extends StatefulWidget {
   final Function onLogin;
