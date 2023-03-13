@@ -56,14 +56,6 @@ class SideDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.list),
-            title: const Text('Мои заявки на игру'),
-            onTap: () {
-              Navigator.of(context)
-                  .pushNamedAndRemoveUntil("/game-requests/mine", (r) => false);
-            },
-          ),
-          ListTile(
             leading: const Icon(Icons.star),
             title: const Text('Турниры'),
             onTap: () {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widgets/side_drawer.dart';
+import 'package:play_tennis/app/main/widgets/side_drawer.dart';
 
 class RouteNotFoundScreen extends StatelessWidget {
   final String? url;
