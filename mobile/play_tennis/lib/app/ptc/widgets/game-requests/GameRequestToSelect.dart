@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:play_tennis/app/ptc/widgets/game-requests/GameRequestRepondingWidget.dart';
+import 'package:play_tennis/app/ptc/widgets/players/PlayerDataWidget.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
 import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestSimpleModel.dart';
 import 'package:play_tennis/main-services.dart';
-import '../players/PlayerDataWidget.dart';
-import 'GameRequestRepondingWidget.dart';
+import 'package:play_tennis/main.dart';
 
 class GameRequestToSelect extends StatelessWidget {
   final GameRequestSimpleModel request;
   final CurrentLoginData loginData;
   final Function onChange;
-  GameRequestToSelect({
+  const GameRequestToSelect({
     super.key,
     required this.request,
     required this.loginData,
     required this.onChange,
   });
-  bool inProccess = false;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,9 @@ class GameRequestToSelect extends StatelessWidget {
         elevation: 5,
         child: Column(
           children: [
-            PlayerDataWidget(player: player),
+            PlayerDataWidget(
+              player: player,
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: GameRequestRepondingWidget(
@@ -49,16 +51,16 @@ class GameRequestToSelect extends StatelessWidget {
   }
 
   respond(BuildContext context) {
-    if (inProccess) {
+    if (MyApp.inProccess) {
       return;
     }
 
-    inProccess = true;
+    MyApp.inProccess = true;
 
     AppServices.gameRequestsService.respond(request.id!).then((value) {
       BaseApiResponseUtils.handleResponse(context, value);
 
-      inProccess = false;
+      MyApp.inProccess = false;
     });
   }
 }

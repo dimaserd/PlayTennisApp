@@ -33,34 +33,34 @@ class GameResponseToSelect extends StatelessWidget {
         elevation: 5,
         child: Column(
           children: [
-            PlayerDataWidget(player: player),
+            PlayerDataWidget(
+              player: player,
+            ),
             const SizedBox(
               height: 5,
             ),
-            loginData.userId == player.id
-                ? Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.redAccent,
-                        minimumSize: const Size.fromHeight(30),
-                      ),
-                      onPressed: () {
-                        BaseApiResponseUtils.showError(
-                            context, "Не реализовано");
-                      },
-                      child: const Text("Удалить отклик"),
-                    ),
-                  )
-                : const SizedBox.shrink(),
+            const SizedBox.shrink(),
             loginData.userId != player.id
                 ? GameResponseActions(requestId: requestId, response: response)
                 : const SizedBox.shrink(),
-            const SizedBox(
-              height: 10,
-            )
           ],
         ),
+      ),
+    );
+  }
+
+  Widget deleteButton(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.redAccent,
+          minimumSize: const Size.fromHeight(30),
+        ),
+        onPressed: () {
+          BaseApiResponseUtils.showError(context, "Не реализовано");
+        },
+        child: const Text("Удалить отклик"),
       ),
     );
   }

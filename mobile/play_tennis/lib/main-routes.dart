@@ -94,7 +94,7 @@ class MainRoutes {
       );
     }
 
-    // Обработка '/subject/:id'
+    // Обработка '/player/:id'
     if (uri.pathSegments.length == 2 && uri.pathSegments.first == 'player') {
       var id = uri.pathSegments[1];
       return MaterialPageRoute(
