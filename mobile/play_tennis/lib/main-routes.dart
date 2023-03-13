@@ -75,10 +75,6 @@ class MainRoutes {
       return MaterialPageRoute(builder: (context) => const EditProfileScreen());
     }
 
-    if (settings.name == '/trainers') {
-      return MaterialPageRoute(builder: (context) => const TrainersPage());
-    }
-
     //Многоуровневые маршруты
     var uri = Uri.parse(settings.name!);
 
