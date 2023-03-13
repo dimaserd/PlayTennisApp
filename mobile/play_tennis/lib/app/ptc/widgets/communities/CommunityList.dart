@@ -3,9 +3,9 @@ import 'package:play_tennis/logic/ptc/services/CommunityCardService.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CommunityList extends StatelessWidget {
-  List<CommunityCardSimpleModel> community;
-  void Function(SearchCommunityCards community) onTapHandler;
-  void Function(int offSet) getData;
+  final List<CommunityCardSimpleModel> community;
+  final void Function(SearchCommunityCards community) onTapHandler;
+  final void Function(int offSet) getData;
 
   int offset;
   bool isActiveLoader = true;

@@ -7,12 +7,15 @@ class AddGameRequestScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: const AddGameRequestForm(),
-      drawer: const SideDrawer(),
-      appBar: AppBar(
-        leading: const BackButton(),
-        title: const Text("Создать заявку"),
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        body: const AddGameRequestForm(),
+        drawer: const SideDrawer(),
+        appBar: AppBar(
+          leading: const BackButton(),
+          title: const Text("Создать заявку"),
+        ),
       ),
     );
   }

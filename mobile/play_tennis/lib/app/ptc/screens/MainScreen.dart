@@ -43,32 +43,35 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 4,
-      child: Scaffold(
-        appBar: AppBar(
-          bottom: const TabBar(
-            isScrollable: true,
-            tabs: [
-              Tab(
-                text: "Игроки",
-              ),
-              Tab(
-                text: "Сообщества",
-              ),
-              Tab(
-                text: "Тренеры",
-              ),
-              Tab(
-                text: "Корты",
-              ),
-            ],
+      child: GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: Scaffold(
+          appBar: AppBar(
+            bottom: const TabBar(
+              isScrollable: true,
+              tabs: [
+                Tab(
+                  text: "Игроки",
+                ),
+                Tab(
+                  text: "Сообщества",
+                ),
+                Tab(
+                  text: "Тренеры",
+                ),
+                Tab(
+                  text: "Корты",
+                ),
+              ],
+            ),
+            title: const Text('Главная'),
           ),
-          title: const Text('Главная'),
-        ),
-        drawer: const SideDrawer(),
-        body: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: TabBarView(
-            children: getWidgets(),
+          drawer: const SideDrawer(),
+          body: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: TabBarView(
+              children: getWidgets(),
+            ),
           ),
         ),
       ),

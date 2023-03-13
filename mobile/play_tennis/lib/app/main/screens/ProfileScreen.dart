@@ -54,47 +54,50 @@ class ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
-      child: Scaffold(
-        drawer: const SideDrawer(),
-        floatingActionButton: showFloat
-            ? FloatingActionButton(
+      child: GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: Scaffold(
+          drawer: const SideDrawer(),
+          floatingActionButton: showFloat
+              ? FloatingActionButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/games/add');
+                  },
+                  backgroundColor: Colors.black,
+                  child: const Icon(Icons.add),
+                )
+              : null,
+          appBar: AppBar(
+            actions: [
+              IconButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed('/games/add');
+                  Navigator.of(context).pushNamed("/profile-edit");
                 },
-                backgroundColor: Colors.black,
-                child: const Icon(Icons.add),
+                icon: const Icon(Icons.edit),
               )
-            : null,
-        appBar: AppBar(
-          actions: [
-            IconButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed("/profile-edit");
-              },
-              icon: const Icon(Icons.edit),
-            )
-          ],
-          bottom: TabBar(
-            onTap: (value) {
-              setState(() {
-                showFloat = value == 1;
-              });
-            },
-            tabs: const [
-              Tab(
-                text: "Данные",
-              ),
-              Tab(
-                text: "Мои игры",
-              ),
             ],
+            bottom: TabBar(
+              onTap: (value) {
+                setState(() {
+                  showFloat = value == 1;
+                });
+              },
+              tabs: const [
+                Tab(
+                  text: "Данные",
+                ),
+                Tab(
+                  text: "Мои игры",
+                ),
+              ],
+            ),
+            title: const Text("Профиль"),
           ),
-          title: const Text("Профиль"),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(0.0),
-          child: TabBarView(
-            children: getWidgets(),
+          body: Padding(
+            padding: const EdgeInsets.all(0.0),
+            child: TabBarView(
+              children: getWidgets(),
+            ),
           ),
         ),
       ),

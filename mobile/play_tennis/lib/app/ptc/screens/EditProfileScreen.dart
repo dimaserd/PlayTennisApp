@@ -34,14 +34,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: loginData != null
-          ? EditProfileWidget(playerData: loginData!)
-          : const Loading(text: "Получение профиля"),
-      drawer: const SideDrawer(),
-      appBar: AppBar(
-        leading: const BackButton(),
-        title: const Text("Редактирование профиля"),
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        body: loginData != null
+            ? EditProfileWidget(playerData: loginData!)
+            : const Loading(text: "Получение профиля"),
+        drawer: const SideDrawer(),
+        appBar: AppBar(
+          leading: const BackButton(),
+          title: const Text("Редактирование профиля"),
+        ),
       ),
     );
   }

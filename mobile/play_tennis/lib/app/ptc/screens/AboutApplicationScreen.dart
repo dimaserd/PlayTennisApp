@@ -12,26 +12,29 @@ class AboutApplicationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          bottom: const TabBar(
-            isScrollable: false,
-            tabs: [
-              Tab(
-                text: "Информация",
-              ),
-              Tab(
-                text: "Бэклог",
-              ),
-            ],
+      child: GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: Scaffold(
+          appBar: AppBar(
+            bottom: const TabBar(
+              isScrollable: false,
+              tabs: [
+                Tab(
+                  text: "Информация",
+                ),
+                Tab(
+                  text: "Бэклог",
+                ),
+              ],
+            ),
+            title: const Text('О приложении'),
           ),
-          title: const Text('О приложении'),
-        ),
-        drawer: const SideDrawer(),
-        body: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: TabBarView(
-            children: getWidgets(),
+          drawer: const SideDrawer(),
+          body: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: TabBarView(
+              children: getWidgets(),
+            ),
           ),
         ),
       ),

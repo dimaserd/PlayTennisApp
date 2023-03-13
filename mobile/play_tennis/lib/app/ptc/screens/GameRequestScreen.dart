@@ -76,20 +76,23 @@ class _GameRequestScreenState extends State<GameRequestScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: loaded && request != null
-          ? ShowGameRequestData(
-              request: request!,
-              responses: responses,
-              loginData: loginData,
-              onChange: () {
-                Navigator.of(context).pop();
-              },
-            )
-          : const Loading(text: "Заявка на игру загружается"),
-      appBar: AppBar(
-        leading: const BackButton(),
-        title: Text(getTitleText()),
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        body: loaded && request != null
+            ? ShowGameRequestData(
+                request: request!,
+                responses: responses,
+                loginData: loginData,
+                onChange: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            : const Loading(text: "Заявка на игру загружается"),
+        appBar: AppBar(
+          leading: const BackButton(),
+          title: Text(getTitleText()),
+        ),
       ),
     );
   }

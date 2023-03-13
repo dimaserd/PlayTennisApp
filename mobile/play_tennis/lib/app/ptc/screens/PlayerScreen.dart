@@ -47,27 +47,30 @@ class _PlayerScreenState extends State<PlayerScreen> {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          leading: const BackButton(),
-          bottom: const TabBar(
-            tabs: [
-              Tab(
-                text: "Профиль",
-              ),
-              Tab(
-                text: "Игры",
-              ),
-            ],
+      child: GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: Scaffold(
+          appBar: AppBar(
+            leading: const BackButton(),
+            bottom: const TabBar(
+              tabs: [
+                Tab(
+                  text: "Профиль",
+                ),
+                Tab(
+                  text: "Игры",
+                ),
+              ],
+            ),
+            title: loaded && player != null
+                ? Text("${player!.surname!} ${player!.name!}")
+                : const Text("Загрузка игрока..."),
           ),
-          title: loaded && player != null
-              ? Text("${player!.surname!} ${player!.name!}")
-              : const Text("Загрузка игрока..."),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(0.0),
-          child: TabBarView(
-            children: getWidgets(),
+          body: Padding(
+            padding: const EdgeInsets.all(0.0),
+            child: TabBarView(
+              children: getWidgets(),
+            ),
           ),
         ),
       ),

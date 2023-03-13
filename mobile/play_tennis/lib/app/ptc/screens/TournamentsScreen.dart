@@ -40,26 +40,29 @@ class _TournamentsScreenState extends State<TournamentsScreen> {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          bottom: const TabBar(
-            isScrollable: false,
-            tabs: [
-              Tab(
-                text: "Однодневные",
-              ),
-              Tab(
-                text: "Многодневные",
-              ),
-            ],
+      child: GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: Scaffold(
+          appBar: AppBar(
+            bottom: const TabBar(
+              isScrollable: false,
+              tabs: [
+                Tab(
+                  text: "Однодневные",
+                ),
+                Tab(
+                  text: "Многодневные",
+                ),
+              ],
+            ),
+            title: const Text('Турниры'),
           ),
-          title: const Text('Турниры'),
-        ),
-        drawer: const SideDrawer(),
-        body: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: TabBarView(
-            children: getWidgets(),
+          drawer: const SideDrawer(),
+          body: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: TabBarView(
+              children: getWidgets(),
+            ),
           ),
         ),
       ),

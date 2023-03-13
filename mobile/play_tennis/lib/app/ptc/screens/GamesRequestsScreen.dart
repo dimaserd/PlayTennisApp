@@ -51,30 +51,33 @@ class _GamesRequestsScreenState extends State<GamesRequestsScreen> {
   }
 
   Widget buildOld(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        margin: const EdgeInsets.all(20),
-        child: locationData != null
-            ? PlayTabbedPage(
-                locationData: locationData!,
-                onItemTapped: _onItemTapped,
-                selectedIndex: selectedIndex,
-              )
-            : const Loading(text: "Получение профиля"),
-      ),
-      drawer: const SideDrawer(),
-      appBar: AppBar(
-        title: widget.showMine
-            ? const Text("Мои заявки")
-            : const Text("Заявки на игру"),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).pushNamed("/game-requests/add");
-            },
-            icon: const Icon(Icons.add_circle),
-          )
-        ],
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        body: Container(
+          margin: const EdgeInsets.all(20),
+          child: locationData != null
+              ? PlayTabbedPage(
+                  locationData: locationData!,
+                  onItemTapped: _onItemTapped,
+                  selectedIndex: selectedIndex,
+                )
+              : const Loading(text: "Получение профиля"),
+        ),
+        drawer: const SideDrawer(),
+        appBar: AppBar(
+          title: widget.showMine
+              ? const Text("Мои заявки")
+              : const Text("Заявки на игру"),
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed("/game-requests/add");
+              },
+              icon: const Icon(Icons.add_circle),
+            )
+          ],
+        ),
       ),
     );
   }

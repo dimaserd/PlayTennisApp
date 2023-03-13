@@ -63,33 +63,36 @@ class _PlayScreenState extends State<PlayScreen> {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          actions: [
-            IconButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed("/game-requests/add");
-              },
-              icon: const Icon(Icons.add_circle),
-            )
-          ],
-          bottom: const TabBar(
-            tabs: [
-              Tab(
-                text: "Заявки на игру",
-              ),
-              Tab(
-                text: "Мои заявки",
-              ),
+      child: GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: Scaffold(
+          appBar: AppBar(
+            actions: [
+              IconButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed("/game-requests/add");
+                },
+                icon: const Icon(Icons.add_circle),
+              )
             ],
+            bottom: const TabBar(
+              tabs: [
+                Tab(
+                  text: "Заявки на игру",
+                ),
+                Tab(
+                  text: "Мои заявки",
+                ),
+              ],
+            ),
+            title: const Text('Играть'),
           ),
-          title: const Text('Играть'),
-        ),
-        drawer: const SideDrawer(),
-        body: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: TabBarView(
-            children: getWidgets(),
+          drawer: const SideDrawer(),
+          body: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: TabBarView(
+              children: getWidgets(),
+            ),
           ),
         ),
       ),
