@@ -3,9 +3,9 @@ import 'package:play_tennis/app/main/widgets/images/PlayerAvatar.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerModel.dart';
 
 class PlayerDataWidget extends StatelessWidget {
-  PlayerModel player;
+  final PlayerModel player;
 
-  PlayerDataWidget({
+  const PlayerDataWidget({
     super.key,
     required this.player,
   });

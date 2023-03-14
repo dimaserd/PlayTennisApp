@@ -17,8 +17,7 @@ class GameRequestsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-        height: 300,
+    return Flexible(
         child: requests.isEmpty
             ? Column(children: const [
                 Center(
@@ -26,11 +25,11 @@ class GameRequestsList extends StatelessWidget {
                 ),
               ])
             : ListView.builder(
+                shrinkWrap: true,
                 itemBuilder: (ctx, index) {
                   return GameRequestToSelect(
                     request: requests[index],
                     loginData: loginData,
-                    onChange: onChange,
                   );
                 },
                 itemCount: requests.length,
