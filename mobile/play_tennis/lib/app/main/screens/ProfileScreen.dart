@@ -15,15 +15,38 @@ class ProfileScreen extends StatefulWidget {
   ProfileScreenState createState() => ProfileScreenState();
 }
 
-class ProfileScreenState extends State<ProfileScreen> {
+class ProfileScreenState extends State<ProfileScreen>
+    with SingleTickerProviderStateMixin {
   PlayerData? playerData;
   CurrentLoginData? loginData;
+
+  late TabController _tabController;
+  var showButton = false;
+  var _index = 0;
 
   @override
   void initState() {
     super.initState();
     getPlayerData();
     getLoginData();
+    _tabController = TabController(length: 2, vsync: this);
+    _tabController.addListener(_handleTabChange);
+  }
+
+  @override
+  void dispose() {
+    _tabController.removeListener(_handleTabChange);
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  void _handleTabChange() {
+    if (mounted) {
+      setState(() {
+        showButton = _tabController.index == 0 ? false : true;
+        _index = _tabController.index;
+      });
+    }
   }
 
   void getPlayerData() {
@@ -34,39 +57,42 @@ class ProfileScreenState extends State<ProfileScreen> {
             .pushNamedAndRemoveUntil('/login', (route) => true);
         return;
       }
+      if (mounted) {
       setState(() {
         playerData = value;
       });
+      }
     });
   }
 
   void getLoginData() {
     AppServices.loginService.getLoginData().then((value) {
+      if (mounted) {
       setState(() {
         loginData = value;
       });
+      }
     });
   }
-
-  bool showFloat = false;
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
+      initialIndex: _index,
       child: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Scaffold(
           drawer: const SideDrawer(),
-          floatingActionButton: showFloat
-              ? FloatingActionButton(
-                  onPressed: () {
-                    Navigator.of(context).pushNamed('/games/add');
-                  },
-                  backgroundColor: Colors.black,
-                  child: const Icon(Icons.add),
-                )
-              : null,
+          floatingActionButton: Visibility(
+              visible: showButton,
+              child: FloatingActionButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/games/add');
+                },
+                backgroundColor: Colors.black,
+                child: const Icon(Icons.add),
+              )),
           appBar: AppBar(
             actions: [
               IconButton(
@@ -77,11 +103,7 @@ class ProfileScreenState extends State<ProfileScreen> {
               )
             ],
             bottom: TabBar(
-              onTap: (value) {
-                setState(() {
-                  showFloat = value == 1;
-                });
-              },
+              controller: _tabController,
               tabs: const [
                 Tab(
                   text: "Данные",
@@ -96,6 +118,7 @@ class ProfileScreenState extends State<ProfileScreen> {
           body: Padding(
             padding: const EdgeInsets.all(0.0),
             child: TabBarView(
+              controller: _tabController,
               children: getWidgets(),
             ),
           ),

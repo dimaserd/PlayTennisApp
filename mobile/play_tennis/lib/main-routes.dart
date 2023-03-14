@@ -16,7 +16,6 @@ import 'package:play_tennis/app/ptc/screens/MainScreen.dart';
 import 'package:play_tennis/app/ptc/screens/PlayScreen.dart';
 import 'package:play_tennis/app/ptc/screens/PlayerScreen.dart';
 import 'package:play_tennis/app/ptc/screens/TournamentsScreen.dart';
-import 'package:play_tennis/app/ptc/screens/TrainersPage.dart';
 
 class MainRoutes {
   static MaterialPageRoute onGenerateRoute(RouteSettings settings) {
