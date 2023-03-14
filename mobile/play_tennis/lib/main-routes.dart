@@ -18,6 +18,10 @@ import 'package:play_tennis/app/ptc/screens/PlayerScreen.dart';
 import 'package:play_tennis/app/ptc/screens/TournamentsScreen.dart';
 
 class MainRoutes {
+  static void toPlayerCard(BuildContext context, String playerId) {
+    Navigator.of(context).pushNamed('/player/$playerId');
+  }
+
   static MaterialPageRoute onGenerateRoute(RouteSettings settings) {
     if (settings.name == '/') {
       return MaterialPageRoute(builder: (context) => const CheckAuthScreen());

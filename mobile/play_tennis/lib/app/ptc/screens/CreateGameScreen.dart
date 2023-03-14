@@ -40,7 +40,6 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
               },
             )
           : const Loading(text: "Загрузка"),
-      drawer: const SideDrawer(),
       appBar: AppBar(
         title: const Text("Создать игру"),
       ),

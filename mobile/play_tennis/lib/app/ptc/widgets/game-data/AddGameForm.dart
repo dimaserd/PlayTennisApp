@@ -127,9 +127,18 @@ class _AddGameFormState extends State<AddGameForm> {
         alignment: Alignment.center,
         padding: const EdgeInsets.all(15.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: getStepWidgets(),
         ));
+  }
+
+  void setOpponent(PlayerModel player) {
+    opponent = player;
+    setState(() {
+      step = 1;
+    });
   }
 
   List<Widget> getStepWidgets() {
@@ -149,10 +158,7 @@ class _AddGameFormState extends State<AddGameForm> {
             child: SearchPlayersForm(
           locationData: locationData!,
           onTapHandler: (p) {
-            opponent = p;
-            setState(() {
-              step = 1;
-            });
+            setOpponent(p);
           },
         ))
       ];
@@ -160,11 +166,9 @@ class _AddGameFormState extends State<AddGameForm> {
 
     if (step == 1) {
       return [
-        Expanded(
-          child: PlayerCard(
-            player: opponent!,
-            margin: const EdgeInsets.only(top: 0, left: 0, right: 0),
-          ),
+        PlayerCard(
+          player: opponent!,
+          margin: const EdgeInsets.only(top: 0, left: 0, right: 0),
         ),
         const SizedBox(
           height: 5,
@@ -172,7 +176,7 @@ class _AddGameFormState extends State<AddGameForm> {
         ElevatedButton(
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.redAccent,
-            minimumSize: const Size.fromHeight(36), // NEW
+            minimumSize: const Size.fromHeight(36),
           ),
           onPressed: () {
             setState(() {
@@ -185,34 +189,32 @@ class _AddGameFormState extends State<AddGameForm> {
           height: 5,
         ),
         !hasScore
-            ? Expanded(
-                child: Card(
-                  margin: const EdgeInsets.only(top: 0, left: 0, right: 0),
-                  elevation: 5,
-                  child: Padding(
-                    padding: const EdgeInsets.all(12),
-                    child: Column(children: [
-                      const Text(
-                        "Счёт матча",
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w600,
-                        ),
+            ? Card(
+                margin: const EdgeInsets.only(top: 0, left: 0, right: 0),
+                elevation: 5,
+                child: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Column(children: [
+                    const Text(
+                      "Счёт матча",
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w600,
                       ),
-                      GameDataWidget(controller: gameDataWidgetController),
-                      const SizedBox(
-                        height: 20,
+                    ),
+                    GameDataWidget(controller: gameDataWidgetController),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                        minimumSize: const Size.fromHeight(48),
                       ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.black,
-                          minimumSize: const Size.fromHeight(48), // NEW
-                        ),
-                        onPressed: _saveScore,
-                        child: const Text("Далее"),
-                      )
-                    ]),
-                  ),
+                      onPressed: _saveScore,
+                      child: const Text("Далее"),
+                    )
+                  ]),
                 ),
               )
             : const SizedBox.shrink(),
@@ -220,42 +222,40 @@ class _AddGameFormState extends State<AddGameForm> {
           height: 10,
         ),
         hasScore
-            ? Expanded(
-                child: Card(
-                  margin: const EdgeInsets.only(top: 0, left: 0, right: 0),
-                  elevation: 5,
-                  child: Padding(
-                    padding: const EdgeInsets.all(12),
-                    child: Column(children: [
-                      ...GameFormExtensions.getMatchText(
-                        context,
-                        opponent!,
-                        gameDataWidgetController.isWinning(),
-                        gameDataWidgetController.getStringValue(),
-                        [],
+            ? Card(
+                margin: const EdgeInsets.only(top: 0, left: 0, right: 0),
+                elevation: 5,
+                child: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Column(children: [
+                    ...GameFormExtensions.getMatchText(
+                      context,
+                      opponent!,
+                      gameDataWidgetController.isWinning(),
+                      gameDataWidgetController.getStringValue(),
+                      [],
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                        minimumSize: const Size.fromHeight(40),
                       ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.black,
-                          minimumSize: const Size.fromHeight(40),
-                        ),
-                        onPressed: () => _setStepHandler(2),
-                        child: const Text("Подтвердить"),
+                      onPressed: () => _setStepHandler(2),
+                      child: const Text("Подтвердить"),
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white10,
+                        minimumSize: const Size.fromHeight(40),
                       ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white10,
-                          minimumSize: const Size.fromHeight(40),
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            hasScore = false;
-                          });
-                        },
-                        child: const Text("Назад"),
-                      ),
-                    ]),
-                  ),
+                      onPressed: () {
+                        setState(() {
+                          hasScore = false;
+                        });
+                      },
+                      child: const Text("Назад"),
+                    ),
+                  ]),
                 ),
               )
             : const SizedBox.shrink(),

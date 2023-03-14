@@ -30,7 +30,7 @@ class _PlayerActionsState extends State<PlayerActions> {
                 onPressed: () {
                   showError("Пока не реализовано");
                 },
-                child: const Text("Предложить игру"),
+                child: const Text("Внести игру"),
               ),
             ),
           ],

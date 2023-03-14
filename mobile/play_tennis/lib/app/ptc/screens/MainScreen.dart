@@ -7,6 +7,7 @@ import 'package:play_tennis/app/ptc/widgets/players/SearchPlayersForm.dart';
 import 'package:play_tennis/app/ptc/widgets/trainers/SearchTrainersForm.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
+import 'package:play_tennis/main-routes.dart';
 import 'package:play_tennis/main-services.dart';
 
 class MainScreen extends StatefulWidget {
@@ -92,7 +93,7 @@ class _MainScreenState extends State<MainScreen> {
       SearchPlayersForm(
         locationData: locationData!,
         onTapHandler: (p) {
-          Navigator.of(context).pushNamed("/player/${p.id!}");
+          MainRoutes.toPlayerCard(context, p.id!);
         },
       ),
       SearchCommunityForm(

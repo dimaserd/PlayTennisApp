@@ -16,7 +16,6 @@ class ShowPlayerData extends StatelessWidget {
           margin: const EdgeInsets.only(top: 5, left: 5, right: 5),
         ),
         SizedBox(
-          //height: 50,
           width: double.infinity,
           child: Card(
             margin: const EdgeInsets.only(top: 5, left: 5, right: 5),
