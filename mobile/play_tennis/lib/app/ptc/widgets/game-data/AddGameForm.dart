@@ -51,7 +51,7 @@ class AddGameForm extends StatefulWidget {
   final Function() onSuccess;
 
   const AddGameForm({
-    Key? key, // Добавили указание ключа
+    Key? key,
     required this.createGameClick,
     required this.onSuccess,
   }) : super(key: key);
@@ -123,20 +123,13 @@ class _AddGameFormState extends State<AddGameForm> {
           ));
     }
 
-    return 
-    // SingleChildScrollView(
-    //     child: SizedBox(
-    //   width: double.infinity,
-    //   height: MediaQuery.of(context).size.height,
-    //   child: 
-      Container(
-          alignment: Alignment.center,
-          padding: const EdgeInsets.all(15.0),
-          child: Column(
-              mainAxisSize: MainAxisSize.min, children: getStepWidgets())
-              // ),
-    // )
-    );
+    return Container(
+        alignment: Alignment.center,
+        padding: const EdgeInsets.all(15.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: getStepWidgets(),
+        ));
   }
 
   List<Widget> getStepWidgets() {

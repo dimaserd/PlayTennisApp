@@ -29,31 +29,21 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return 
-    // GestureDetector(
-      // onTap: () {
-      //   print("tap");
-      //   // FocusManager.instance.primaryFocus?.unfocus();
-      // },
-      // child: 
-      Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: 
-        loginData != null
-            ? AddGameForm(
-                  createGameClick: _createGameClickHandler,
-                  onSuccess: () {
-                    Navigator.of(context)
-                        .pushNamedAndRemoveUntil('/games', (route) => true);
-                  },
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: loginData != null
+          ? AddGameForm(
+              createGameClick: _createGameClickHandler,
+              onSuccess: () {
+                Navigator.of(context)
+                    .pushNamedAndRemoveUntil('/games', (route) => true);
+              },
             )
-            :
-             const Loading(text: "Загрузка"),
-        drawer: const SideDrawer(),
-        appBar: AppBar(
-          title: const Text("Создать игру"),
-        ),
-      // ),
+          : const Loading(text: "Загрузка"),
+      drawer: const SideDrawer(),
+      appBar: AppBar(
+        title: const Text("Создать игру"),
+      ),
     );
   }
 
