@@ -43,7 +43,7 @@ class ProfileScreenState extends State<ProfileScreen>
   void _handleTabChange() {
     if (mounted) {
       setState(() {
-        showButton = _tabController.index == 0 ? false : true;
+        showButton = _tabController.index != 0;
         _index = _tabController.index;
       });
     }
@@ -58,9 +58,9 @@ class ProfileScreenState extends State<ProfileScreen>
         return;
       }
       if (mounted) {
-      setState(() {
-        playerData = value;
-      });
+        setState(() {
+          playerData = value;
+        });
       }
     });
   }
@@ -68,9 +68,9 @@ class ProfileScreenState extends State<ProfileScreen>
   void getLoginData() {
     AppServices.loginService.getLoginData().then((value) {
       if (mounted) {
-      setState(() {
-        loginData = value;
-      });
+        setState(() {
+          loginData = value;
+        });
       }
     });
   }
