@@ -22,6 +22,7 @@ class GameRequestResponsesList extends StatelessWidget {
         : "Отклики:";
 
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         const SizedBox(
           height: 5,
@@ -52,11 +53,11 @@ class GameRequestResponsesList extends StatelessWidget {
                   ),
                 ),
               ),
-        SizedBox(
-            height: 300,
+        Flexible(
             child: responses.isEmpty
                 ? const SizedBox.shrink()
                 : ListView.builder(
+                  shrinkWrap: true,
                     itemBuilder: (ctx, index) {
                       return GameResponseToSelect(
                         requestId: requestId,

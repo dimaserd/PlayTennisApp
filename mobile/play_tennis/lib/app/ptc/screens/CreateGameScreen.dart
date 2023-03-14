@@ -8,7 +8,7 @@ import 'package:play_tennis/logic/ptc/models/games/CreateSinglesGame.dart';
 import 'package:play_tennis/main-services.dart';
 
 class CreateGameScreen extends StatefulWidget {
-  const CreateGameScreen({super.key});
+  const CreateGameScreen({Key? key}) : super(key: key);
 
   @override
   State<CreateGameScreen> createState() => _CreateGameScreenState();
@@ -29,23 +29,31 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: Scaffold(
-        body: loginData != null
+    return 
+    // GestureDetector(
+      // onTap: () {
+      //   print("tap");
+      //   // FocusManager.instance.primaryFocus?.unfocus();
+      // },
+      // child: 
+      Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: 
+        loginData != null
             ? AddGameForm(
-                createGameClick: _createGameClickHandler,
-                onSuccess: () {
-                  Navigator.of(context)
-                      .pushNamedAndRemoveUntil('/games', (route) => true);
-                },
-              )
-            : const Loading(text: "Загрузка"),
+                  createGameClick: _createGameClickHandler,
+                  onSuccess: () {
+                    Navigator.of(context)
+                        .pushNamedAndRemoveUntil('/games', (route) => true);
+                  },
+            )
+            :
+             const Loading(text: "Загрузка"),
         drawer: const SideDrawer(),
         appBar: AppBar(
           title: const Text("Создать игру"),
         ),
-      ),
+      // ),
     );
   }
 

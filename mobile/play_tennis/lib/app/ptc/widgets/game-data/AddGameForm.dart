@@ -5,11 +5,11 @@ import 'package:play_tennis/app/ptc/widgets/CountryAndCitySelectWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/CustomDateAndTimePickerWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/game-data/AddGameImageWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/game-data/FinalGameImageCardWidget.dart';
+import 'package:play_tennis/app/ptc/widgets/game-data/GameFormExtensions.dart';
 import 'package:play_tennis/app/ptc/widgets/game-data/GameFormMatchInfoWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/games/GameDataWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/courts/CourtTypeSelect.dart';
 import 'package:play_tennis/app/ptc/widgets/game-data/GameFormCourtDataWidget.dart';
-import 'package:play_tennis/app/ptc/widgets/game-data/GameFormExtensions.dart';
 import 'package:play_tennis/app/ptc/widgets/players/SearchPlayersForm.dart';
 import 'package:play_tennis/app/ptc/widgets/players/ShowPlayerData.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
@@ -51,10 +51,10 @@ class AddGameForm extends StatefulWidget {
   final Function() onSuccess;
 
   const AddGameForm({
-    super.key,
+    Key? key, // Добавили указание ключа
     required this.createGameClick,
     required this.onSuccess,
-  });
+  }) : super(key: key);
 
   @override
   State<AddGameForm> createState() => _AddGameFormState();
@@ -97,33 +97,45 @@ class _AddGameFormState extends State<AddGameForm> {
         countryAndCitySelectController.city = value.city;
         countryAndCitySelectController.setCountry(value.country!);
       }
-
-      setState(() {
-        locationData = value;
-      });
+      if (mounted) {
+        setState(() {
+          locationData = value;
+        });
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
     if (locationData == null) {
-      return SizedBox(
-        child: Column(
-          children: const [
-            Loading(text: "Загрузка"),
-          ],
-        ),
-      );
+      return ConstrainedBox(
+          key: UniqueKey(), // добавлен ключ
+          constraints: const BoxConstraints(
+            minWidth: double.infinity,
+            minHeight: double.infinity,
+          ),
+          child: SizedBox(
+            child: Column(
+              children: const [
+                Loading(text: "Загрузка"),
+              ],
+            ),
+          ));
     }
 
-    return SingleChildScrollView(
-      child: Container(
-        alignment: Alignment.center,
-        padding: const EdgeInsets.all(15.0),
-        child: Column(
-          children: getStepWidgets(),
-        ),
-      ),
+    return 
+    // SingleChildScrollView(
+    //     child: SizedBox(
+    //   width: double.infinity,
+    //   height: MediaQuery.of(context).size.height,
+    //   child: 
+      Container(
+          alignment: Alignment.center,
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+              mainAxisSize: MainAxisSize.min, children: getStepWidgets())
+              // ),
+    // )
     );
   }
 
@@ -140,7 +152,8 @@ class _AddGameFormState extends State<AddGameForm> {
         const SizedBox(
           height: 10,
         ),
-        SearchPlayersForm(
+        Expanded(
+            child: SearchPlayersForm(
           locationData: locationData!,
           onTapHandler: (p) {
             opponent = p;
@@ -148,15 +161,17 @@ class _AddGameFormState extends State<AddGameForm> {
               step = 1;
             });
           },
-        )
+        ))
       ];
     }
 
     if (step == 1) {
       return [
-        PlayerCard(
-          player: opponent!,
-          margin: const EdgeInsets.only(top: 0, left: 0, right: 0),
+        Expanded(
+          child: PlayerCard(
+            player: opponent!,
+            margin: const EdgeInsets.only(top: 0, left: 0, right: 0),
+          ),
         ),
         const SizedBox(
           height: 5,
@@ -177,32 +192,34 @@ class _AddGameFormState extends State<AddGameForm> {
           height: 5,
         ),
         !hasScore
-            ? Card(
-                margin: const EdgeInsets.only(top: 0, left: 0, right: 0),
-                elevation: 5,
-                child: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: Column(children: [
-                    const Text(
-                      "Счёт матча",
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w600,
+            ? Expanded(
+                child: Card(
+                  margin: const EdgeInsets.only(top: 0, left: 0, right: 0),
+                  elevation: 5,
+                  child: Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: Column(children: [
+                      const Text(
+                        "Счёт матча",
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                    ),
-                    GameDataWidget(controller: gameDataWidgetController),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.black,
-                        minimumSize: const Size.fromHeight(48), // NEW
+                      GameDataWidget(controller: gameDataWidgetController),
+                      const SizedBox(
+                        height: 20,
                       ),
-                      onPressed: _saveScore,
-                      child: const Text("Далее"),
-                    )
-                  ]),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.black,
+                          minimumSize: const Size.fromHeight(48), // NEW
+                        ),
+                        onPressed: _saveScore,
+                        child: const Text("Далее"),
+                      )
+                    ]),
+                  ),
                 ),
               )
             : const SizedBox.shrink(),
@@ -210,40 +227,42 @@ class _AddGameFormState extends State<AddGameForm> {
           height: 10,
         ),
         hasScore
-            ? Card(
-                margin: const EdgeInsets.only(top: 0, left: 0, right: 0),
-                elevation: 5,
-                child: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: Column(children: [
-                    ...GameFormExtensions.getMatchText(
-                      context,
-                      opponent!,
-                      gameDataWidgetController.isWinning(),
-                      gameDataWidgetController.getStringValue(),
-                      [],
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.black,
-                        minimumSize: const Size.fromHeight(40),
+            ? Expanded(
+                child: Card(
+                  margin: const EdgeInsets.only(top: 0, left: 0, right: 0),
+                  elevation: 5,
+                  child: Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: Column(children: [
+                      ...GameFormExtensions.getMatchText(
+                        context,
+                        opponent!,
+                        gameDataWidgetController.isWinning(),
+                        gameDataWidgetController.getStringValue(),
+                        [],
                       ),
-                      onPressed: () => _setStepHandler(2),
-                      child: const Text("Подтвердить"),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white10,
-                        minimumSize: const Size.fromHeight(40),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.black,
+                          minimumSize: const Size.fromHeight(40),
+                        ),
+                        onPressed: () => _setStepHandler(2),
+                        child: const Text("Подтвердить"),
                       ),
-                      onPressed: () {
-                        setState(() {
-                          hasScore = false;
-                        });
-                      },
-                      child: const Text("Назад"),
-                    ),
-                  ]),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white10,
+                          minimumSize: const Size.fromHeight(40),
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            hasScore = false;
+                          });
+                        },
+                        child: const Text("Назад"),
+                      ),
+                    ]),
+                  ),
                 ),
               )
             : const SizedBox.shrink(),
@@ -252,25 +271,29 @@ class _AddGameFormState extends State<AddGameForm> {
 
     if (step == 2) {
       return [
-        GameFormMatchInfoWidget(
-          context: context,
-          opponent: opponent!,
-          gameDataWidgetController: gameDataWidgetController,
-          backBtnHandler: () => _setStepHandler(1),
-          courtType: courtTypeSelectController.value,
-          showCourtType: false,
-          customWidgets: const [],
+        Expanded(
+          child: GameFormMatchInfoWidget(
+            context: context,
+            opponent: opponent!,
+            gameDataWidgetController: gameDataWidgetController,
+            backBtnHandler: () => _setStepHandler(1),
+            courtType: courtTypeSelectController.value,
+            showCourtType: false,
+            customWidgets: const [],
+          ),
         ),
         const SizedBox(
           height: 10,
         ),
-        GameFormCourtDataWidget(
-          countryAndCitySelectController: countryAndCitySelectController,
-          errorHandler: _errorHandler,
-          successHandler: _gameFormCourtDataWidgetHandler,
-          dateAndTimePickerController: dateAndTimePickerController,
-          courtNameController: courtNameController,
-          courtTypeSelectController: courtTypeSelectController,
+        Expanded(
+          child: GameFormCourtDataWidget(
+            countryAndCitySelectController: countryAndCitySelectController,
+            errorHandler: _errorHandler,
+            successHandler: _gameFormCourtDataWidgetHandler,
+            dateAndTimePickerController: dateAndTimePickerController,
+            courtNameController: courtNameController,
+            courtTypeSelectController: courtTypeSelectController,
+          ),
         ),
         const SizedBox(
           height: 10,
@@ -280,58 +303,60 @@ class _AddGameFormState extends State<AddGameForm> {
 
     if (step == 3) {
       return [
-        GameFormMatchInfoWidget(
-          context: context,
-          opponent: opponent!,
-          gameDataWidgetController: gameDataWidgetController,
-          backBtnHandler: () => _setStepHandler(2),
-          courtType: courtTypeSelectController.value,
-          showCourtType: true,
-          customWidgets: [
-            const SizedBox(
-              height: 10,
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "Страна: ${courtData!.selectedCountry.name}",
-                style: const TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
+        Expanded(
+          child: GameFormMatchInfoWidget(
+            context: context,
+            opponent: opponent!,
+            gameDataWidgetController: gameDataWidgetController,
+            backBtnHandler: () => _setStepHandler(2),
+            courtType: courtTypeSelectController.value,
+            showCourtType: true,
+            customWidgets: [
+              const SizedBox(
+                height: 10,
+              ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Страна: ${courtData!.selectedCountry.name}",
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "Город: ${courtData!.selectedCity.name}",
-                style: const TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Город: ${courtData!.selectedCity.name}",
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "Корт: ${courtNameController.text}",
-                style: const TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Корт: ${courtNameController.text}",
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "Покрытие: ${CourtTypeConsts.texts[courtTypeSelectController.value]}",
-                style: const TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Покрытие: ${CourtTypeConsts.texts[courtTypeSelectController.value]}",
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         const SizedBox(
           height: 10,

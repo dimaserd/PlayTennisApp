@@ -46,9 +46,11 @@ class _SearchMyGamesWidgetState extends State<SearchMyGamesWidget> {
 
     AppServices.gameService.searchMine(playerRequest).then((value) {
       games = value.list;
+      if (mounted) {
       setState(() {
         gamesLoaded = true;
       });
+      }
     });
   }
 }
