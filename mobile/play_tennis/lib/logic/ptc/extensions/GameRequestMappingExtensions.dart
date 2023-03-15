@@ -1,5 +1,5 @@
-import '../models/game-requests/GameRequestDetailedModel.dart';
-import '../models/game-requests/GameRequestSimpleModel.dart';
+import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestDetailedModel.dart';
+import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestSimpleModel.dart';
 
 class GameRequestMappingExtensions {
   static GameRequestSimpleModel map(GameRequestDetailedModel model) {
@@ -10,6 +10,10 @@ class GameRequestMappingExtensions {
       description: model.description,
       hasMyRespond: model.hasMyRespond,
       respondsCount: model.respondsCount,
+      hasMyDeclinedRespond: false,
+      hasMyAcceptedRespond: false,
+      matchDateString: model.matchDateString,
+      toNowDateDescription: model.toNowDateDescription,
     );
   }
 }
