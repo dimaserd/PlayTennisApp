@@ -32,8 +32,10 @@ class GameRequestResponsesList extends StatelessWidget {
             : SizedBox(
                 width: double.infinity,
                 child: Card(
-                  margin:
-                      const EdgeInsets.symmetric(vertical: 4, horizontal: 5),
+                  margin: const EdgeInsets.symmetric(
+                    vertical: 4,
+                    horizontal: 5,
+                  ),
                   elevation: 5,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
@@ -57,7 +59,7 @@ class GameRequestResponsesList extends StatelessWidget {
             child: responses.isEmpty
                 ? const SizedBox.shrink()
                 : ListView.builder(
-                  shrinkWrap: true,
+                    shrinkWrap: true,
                     itemBuilder: (ctx, index) {
                       return GameResponseToSelect(
                         requestId: requestId,
