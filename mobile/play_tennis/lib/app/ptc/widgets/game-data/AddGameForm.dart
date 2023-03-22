@@ -272,7 +272,9 @@ class _AddGameFormState extends State<AddGameForm> {
 
     if (step == 2) {
       return [
-        Expanded(
+        SizedBox(
+          width: double.infinity,
+          height: 120,
           child: GameFormMatchInfoWidget(
             context: context,
             opponent: opponent!,
@@ -287,13 +289,15 @@ class _AddGameFormState extends State<AddGameForm> {
           height: 10,
         ),
         Expanded(
-          child: GameFormCourtDataWidget(
-            countryAndCitySelectController: countryAndCitySelectController,
-            errorHandler: _errorHandler,
-            successHandler: _gameFormCourtDataWidgetHandler,
-            dateAndTimePickerController: dateAndTimePickerController,
-            courtNameController: courtNameController,
-            courtTypeSelectController: courtTypeSelectController,
+          child: SingleChildScrollView(
+            child: GameFormCourtDataWidget(
+              countryAndCitySelectController: countryAndCitySelectController,
+              errorHandler: _errorHandler,
+              successHandler: _gameFormCourtDataWidgetHandler,
+              dateAndTimePickerController: dateAndTimePickerController,
+              courtNameController: courtNameController,
+              courtTypeSelectController: courtTypeSelectController,
+            ),
           ),
         ),
         const SizedBox(

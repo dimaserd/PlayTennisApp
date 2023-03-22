@@ -21,42 +21,45 @@ class GameRequestToSelect extends StatelessWidget {
         Navigator.of(context).pushNamed("/game-request/${request.id}");
       },
       child: Card(
+        color: Colors.white,
         margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 5),
         elevation: 5,
         child: Expanded(
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    GameRequestExtensions.getDateString(request.matchDateUtc),
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
+          child: Container(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      GameRequestExtensions.getDateString(request.matchDateUtc),
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              PlayerDataWidget(
-                player: player,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    request.description!,
-                    style: const TextStyle(fontSize: 16),
+                PlayerDataWidget(
+                  player: player,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      request.description!,
+                      style: const TextStyle(fontSize: 16),
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
