@@ -66,6 +66,7 @@ class _PlayScreenState extends State<PlayScreen> {
       child: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Scaffold(
+          backgroundColor: Colors.white,
           appBar: AppBar(
             actions: [
               IconButton(
@@ -90,8 +91,11 @@ class _PlayScreenState extends State<PlayScreen> {
           drawer: const SideDrawer(),
           body: Padding(
             padding: const EdgeInsets.all(20.0),
-            child: TabBarView(
-              children: getWidgets(),
+            child: Container(
+              color: Colors.white,
+              child: TabBarView(
+                children: getWidgets(),
+              ),
             ),
           ),
         ),

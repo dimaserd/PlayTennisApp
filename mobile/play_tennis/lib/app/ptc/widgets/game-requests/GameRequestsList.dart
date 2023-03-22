@@ -17,15 +17,17 @@ class GameRequestsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-        child: requests.isEmpty
+    return 
+    Flexible(
+        child: 
+        requests.isEmpty
             ? Column(children: const [
                 Center(
                   child: Text("Заявки на игру не найдены"),
                 ),
               ])
             : Container(
-              color: Colors.transparent,
+              color: Colors.white,
               child: ListView.builder(
                   shrinkWrap: true,
                   itemBuilder: (ctx, index) {
