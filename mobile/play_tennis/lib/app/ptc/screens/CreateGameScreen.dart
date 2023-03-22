@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/Loading.dart';
-import 'package:play_tennis/app/main/widgets/side_drawer.dart';
 import 'package:play_tennis/app/ptc/widgets/game-data/AddGameForm.dart';
 import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
 import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
 import 'package:play_tennis/logic/ptc/models/games/CreateSinglesGame.dart';
 import 'package:play_tennis/main-services.dart';
+import 'package:play_tennis/logic/ptc/models/PlayerModel.dart';
 
 class CreateGameScreen extends StatefulWidget {
-  const CreateGameScreen({Key? key}) : super(key: key);
+  final PlayerModel? player;
+  const CreateGameScreen({Key? key, required this.player}) : super(key: key);
 
   @override
   State<CreateGameScreen> createState() => _CreateGameScreenState();
@@ -33,6 +34,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
       resizeToAvoidBottomInset: false,
       body: loginData != null
           ? AddGameForm(
+            player: widget.player,
               createGameClick: _createGameClickHandler,
               onSuccess: () {
                 Navigator.of(context)

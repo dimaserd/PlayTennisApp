@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
+import 'package:play_tennis/logic/ptc/models/PlayerModel.dart';
 
 class PlayerActions extends StatefulWidget {
-  const PlayerActions({Key? key}) : super(key: key);
+  const PlayerActions({Key? key, required this.player}) : super(key: key,);
+  final PlayerModel player;
 
   @override
   State<PlayerActions> createState() => _PlayerActionsState();
 }
 
 class _PlayerActionsState extends State<PlayerActions> {
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -28,7 +31,7 @@ class _PlayerActionsState extends State<PlayerActions> {
                   minimumSize: const Size.fromHeight(40), // NEW
                 ),
                 onPressed: () {
-                  showError("Пока не реализовано");
+                  Navigator.of(context).pushNamed('/create/game', arguments: widget.player);
                 },
                 child: const Text("Внести игру"),
               ),

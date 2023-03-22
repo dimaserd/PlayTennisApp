@@ -49,11 +49,13 @@ class SingleGameData {
 class AddGameForm extends StatefulWidget {
   final Future<BaseApiResponse> Function(SingleGameData) createGameClick;
   final Function() onSuccess;
+  final PlayerModel? player;
 
   const AddGameForm({
     Key? key,
     required this.createGameClick,
     required this.onSuccess,
+    required this.player,
   }) : super(key: key);
 
   @override
@@ -103,6 +105,9 @@ class _AddGameFormState extends State<AddGameForm> {
         });
       }
     });
+    if (widget.player != null) {
+      setOpponent(widget.player!);
+    }
   }
 
   @override
@@ -123,15 +128,18 @@ class _AddGameFormState extends State<AddGameForm> {
           ));
     }
 
-    return Container(
-        alignment: Alignment.center,
-        padding: const EdgeInsets.all(15.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: getStepWidgets(),
-        ));
+    return GestureDetector(
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        child: Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.all(15.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: getStepWidgets(),
+            )));
   }
 
   void setOpponent(PlayerModel player) {
