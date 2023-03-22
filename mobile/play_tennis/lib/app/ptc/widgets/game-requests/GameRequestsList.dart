@@ -24,15 +24,18 @@ class GameRequestsList extends StatelessWidget {
                   child: Text("Заявки на игру не найдены"),
                 ),
               ])
-            : ListView.builder(
-                shrinkWrap: true,
-                itemBuilder: (ctx, index) {
-                  return GameRequestToSelect(
-                    request: requests[index],
-                    loginData: loginData,
-                  );
-                },
-                itemCount: requests.length,
-              ));
+            : Container(
+              color: Colors.transparent,
+              child: ListView.builder(
+                  shrinkWrap: true,
+                  itemBuilder: (ctx, index) {
+                    return GameRequestToSelect(
+                      request: requests[index],
+                      loginData: loginData,
+                    );
+                  },
+                  itemCount: requests.length,
+                ),
+            ));
   }
 }

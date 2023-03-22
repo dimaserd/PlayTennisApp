@@ -16,8 +16,11 @@ import 'package:play_tennis/app/ptc/screens/MainScreen.dart';
 import 'package:play_tennis/app/ptc/screens/PlayScreen.dart';
 import 'package:play_tennis/app/ptc/screens/PlayerScreen.dart';
 import 'package:play_tennis/app/ptc/screens/TournamentsScreen.dart';
+import 'package:play_tennis/app/ptc/widgets/game-data/AddGameForm.dart';
+import 'package:play_tennis/logic/ptc/models/PlayerModel.dart';
 
 class MainRoutes {
+
   static void toPlayerCard(BuildContext context, String playerId) {
     Navigator.of(context).pushNamed('/player/$playerId');
   }
@@ -115,7 +118,13 @@ class MainRoutes {
     }
 
     if (settings.name == '/games/add') {
-      return MaterialPageRoute(builder: (context) => const CreateGameScreen());
+      return MaterialPageRoute(builder: (context) => const CreateGameScreen(player: null));
+    }
+
+    if (settings.name == '/create/game') {
+      var playerArguments = settings.arguments as PlayerModel;
+      // print("arguments $arguments");
+      return MaterialPageRoute(builder: (context) => CreateGameScreen(player: playerArguments));
     }
 
     return MaterialPageRoute(

@@ -36,7 +36,7 @@ class ShowPlayerData extends StatelessWidget {
             ),
           ),
         ),
-        const PlayerActions()
+        PlayerActions(player: player)
       ],
     );
   }
