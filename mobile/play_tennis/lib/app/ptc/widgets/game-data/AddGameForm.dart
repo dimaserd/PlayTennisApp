@@ -308,7 +308,9 @@ class _AddGameFormState extends State<AddGameForm> {
 
     if (step == 3) {
       return [
-        Expanded(
+        SizedBox(
+          width: double.infinity,
+          height: 170,
           child: GameFormMatchInfoWidget(
             context: context,
             opponent: opponent!,
