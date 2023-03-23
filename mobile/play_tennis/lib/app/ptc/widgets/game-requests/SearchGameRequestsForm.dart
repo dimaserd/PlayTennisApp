@@ -81,6 +81,7 @@ class _SearchGameRequestsFormState extends State<SearchGameRequestsForm> {
               )
             : const SizedBox.shrink(),
         Container(
+          color: Colors.white,
           margin: const EdgeInsets.only(top: 5),
           width: double.infinity,
           child: Column(
@@ -105,14 +106,18 @@ class _SearchGameRequestsFormState extends State<SearchGameRequestsForm> {
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 8.0),
-          child: GameRequestsList(
-            requests: requests,
-            loginData: widget.loginData!,
-            onChange: getData,
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: SingleChildScrollView(
+              child: GameRequestsList(
+                requests: requests,
+                loginData: widget.loginData!,
+                onChange: getData,
+              ),
+            ),
           ),
-        ),
+        )
       ],
     );
   }

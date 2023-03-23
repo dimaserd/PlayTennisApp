@@ -17,27 +17,24 @@ class GameRequestsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return 
-    Flexible(
-        child: 
-        requests.isEmpty
-            ? Column(children: const [
-                Center(
-                  child: Text("Заявки на игру не найдены"),
-                ),
-              ])
-            : Container(
-              color: Colors.white,
-              child: ListView.builder(
-                  shrinkWrap: true,
-                  itemBuilder: (ctx, index) {
-                    return GameRequestToSelect(
-                      request: requests[index],
-                      loginData: loginData,
-                    );
-                  },
-                  itemCount: requests.length,
-                ),
-            ));
+    return requests.isEmpty
+        ? Column(children: const [
+            Center(
+              child: Text("Заявки на игру не найдены"),
+            ),
+          ])
+        : SizedBox(
+            height: MediaQuery.of(context).size.height * 0.5, // установите нужную высоту
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemBuilder: (ctx, index) {
+                return GameRequestToSelect(
+                  request: requests[index],
+                  loginData: loginData,
+                );
+              },
+              itemCount: requests.length,
+            ),
+          );
   }
 }
