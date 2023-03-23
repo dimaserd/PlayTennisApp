@@ -28,6 +28,7 @@ class _AddGameImageWidgetState extends State<AddGameImageWidget> {
         children: [
           ImageInput(
             saveImage: saveFile,
+            useCropper: false,
           ),
         ],
       ),

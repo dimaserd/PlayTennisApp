@@ -86,7 +86,10 @@ class _PlayerScreenState extends State<PlayerScreen> {
     }
 
     return [
-      ShowPlayerData(player: player!),
+      ShowPlayerData(
+        player: player!,
+        loginData: loginData!,
+      ),
       SearchGamesWidget(
         loginData: loginData!,
         playerId: player!.id!,

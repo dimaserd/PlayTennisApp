@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/images/PlayerAvatar.dart';
 import 'package:play_tennis/app/ptc/widgets/profile/PlayerActions.dart';
+import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerModel.dart';
 
 class ShowPlayerData extends StatelessWidget {
   final PlayerModel player;
-  const ShowPlayerData({super.key, required this.player});
+  final CurrentLoginData loginData;
+  const ShowPlayerData({
+    super.key,
+    required this.player,
+    required this.loginData,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +42,12 @@ class ShowPlayerData extends StatelessWidget {
             ),
           ),
         ),
-        PlayerActions(player: player)
+        player.id != loginData.userId
+            ? PlayerActions(
+                player: player,
+                loginData: loginData,
+              )
+            : const SizedBox.shrink()
       ],
     );
   }

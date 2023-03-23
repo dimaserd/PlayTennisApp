@@ -10,10 +10,12 @@ import 'package:play_tennis/utils.dart';
 class ImageInput extends StatefulWidget {
   final String labelText;
   final Future<BaseApiResponse> Function(File file) saveImage;
+  final bool useCropper;
 
   const ImageInput({
     super.key,
     required this.saveImage,
+    required this.useCropper,
     this.labelText = "Выберите изображение",
   });
 
@@ -36,7 +38,7 @@ class _ImageInputState extends State<ImageInput> {
     try {
       final image = await Utils.pickMedia(
         isGallery: isGallery,
-        cropImage: Utils.cropSquareImage,
+        cropImage: widget.useCropper ? Utils.cropSquareImage : null,
       );
 
       if (image == null) {

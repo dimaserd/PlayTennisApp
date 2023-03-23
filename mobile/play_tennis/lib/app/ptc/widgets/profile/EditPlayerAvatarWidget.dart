@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:play_tennis/app/main/widgets/Inputs/ImageInput.dart';
+import 'package:play_tennis/app/main/widgets/images/PlayerAvatar.dart';
 import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
-import '../../../../main-services.dart';
-import '../../../main/widgets/Inputs/ImageInput.dart';
-import '../../../main/widgets/images/PlayerAvatar.dart';
+import 'package:play_tennis/main-services.dart';
 
 class EditPlayerAvatarWidget extends StatefulWidget {
   int? avatarFileId;
@@ -69,6 +69,7 @@ class _EditPlayerAvatarWidgetState extends State<EditPlayerAvatarWidget> {
       isEdit
           ? ImageInput(
               saveImage: saveFile,
+              useCropper: true,
               labelText: "Выбрать новое изображение для аватара",
             )
           : const SizedBox.shrink(),
