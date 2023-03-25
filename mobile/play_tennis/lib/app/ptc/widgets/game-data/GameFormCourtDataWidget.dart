@@ -30,9 +30,13 @@ class GameFormCourtDataWidget extends StatelessWidget {
 
   final Function(String error) errorHandler;
   final Function(GameFormCourtData data) successHandler;
+  final ScrollController scrollController;
+  final Function() scroll;
 
   const GameFormCourtDataWidget({
     super.key,
+    required this.scroll,
+    required this.scrollController,
     required this.errorHandler,
     required this.successHandler,
     required this.dateAndTimePickerController,
@@ -86,9 +90,15 @@ class GameFormCourtDataWidget extends StatelessWidget {
       const SizedBox(
         height: 10,
       ),
-      TextInput(
-        labelText: "Корт",
-        textController: courtNameController,
+      TextField(
+        decoration: const InputDecoration(
+          labelText: "Корт",
+        ),
+        controller: courtNameController,
+        autofocus: false,
+        onTap: () {
+          scroll();
+        }
       ),
       const SizedBox(
         height: 10,
