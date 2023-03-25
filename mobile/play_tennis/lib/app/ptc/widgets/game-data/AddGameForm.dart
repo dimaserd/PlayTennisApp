@@ -274,7 +274,7 @@ class _AddGameFormState extends State<AddGameForm> {
       return [
         SizedBox(
           width: double.infinity,
-          height: 120,
+          height: 130,
           child: GameFormMatchInfoWidget(
             context: context,
             opponent: opponent!,
@@ -310,7 +310,7 @@ class _AddGameFormState extends State<AddGameForm> {
       return [
         SizedBox(
           width: double.infinity,
-          height: 170,
+          height: 190,
           child: GameFormMatchInfoWidget(
             context: context,
             opponent: opponent!,
@@ -369,15 +369,19 @@ class _AddGameFormState extends State<AddGameForm> {
           height: 10,
         ),
         fileImage == null
-            ? AddGameImageWidget(
+            ? Expanded(
+                child: SingleChildScrollView(
+                    child: AddGameImageWidget(
                 imageReady: _imageReadyHandler,
                 noImage: _noImageHandler,
-              )
-            : FinalGameImageCardWidget(
+              )))
+            : Expanded(
+                child: SingleChildScrollView(
+                    child: FinalGameImageCardWidget(
                 fileImage: fileImage,
                 onSuccess: widget.onSuccess,
                 clickHandler: createGameHandler,
-              ),
+              ))),
       ];
     }
 
