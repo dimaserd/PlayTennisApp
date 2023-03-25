@@ -46,6 +46,8 @@ class SingleGameData {
   });
 }
 
+enum ScrollDirection { top, bottom }
+
 class AddGameForm extends StatefulWidget {
   final Future<BaseApiResponse> Function(SingleGameData) createGameClick;
   final Function() onSuccess;
@@ -79,6 +81,7 @@ class _AddGameFormState extends State<AddGameForm> {
   TextEditingController courtNameController = TextEditingController();
   CourtTypeSelectController courtTypeSelectController =
       CourtTypeSelectController();
+  final ScrollController _scrollController = ScrollController();
 
   PlayerModel? opponent;
   int step = 0;
@@ -132,14 +135,19 @@ class _AddGameFormState extends State<AddGameForm> {
         onTap: () {
           FocusScope.of(context).unfocus();
         },
-        child: Container(
-            alignment: Alignment.center,
-            padding: const EdgeInsets.all(15.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: getStepWidgets(),
-            )));
+        child: SingleChildScrollView(
+            controller: _scrollController,
+            child: Container(
+                height: MediaQuery.of(context).size.height,
+                child: Container(
+                    alignment: Alignment.center,
+                    height: MediaQuery.of(context).size.height,
+                    padding: const EdgeInsets.all(15.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: getStepWidgets(),
+                    )))));
   }
 
   void setOpponent(PlayerModel player) {
@@ -289,15 +297,17 @@ class _AddGameFormState extends State<AddGameForm> {
           height: 10,
         ),
         Expanded(
-          child: SingleChildScrollView(
-            child: GameFormCourtDataWidget(
-              countryAndCitySelectController: countryAndCitySelectController,
-              errorHandler: _errorHandler,
-              successHandler: _gameFormCourtDataWidgetHandler,
-              dateAndTimePickerController: dateAndTimePickerController,
-              courtNameController: courtNameController,
-              courtTypeSelectController: courtTypeSelectController,
-            ),
+          child: GameFormCourtDataWidget(
+            scroll: () {
+              scrollMove(ScrollDirection.bottom);
+            },
+            scrollController: _scrollController,
+            countryAndCitySelectController: countryAndCitySelectController,
+            errorHandler: _errorHandler,
+            successHandler: _gameFormCourtDataWidgetHandler,
+            dateAndTimePickerController: dateAndTimePickerController,
+            courtNameController: courtNameController,
+            courtTypeSelectController: courtTypeSelectController,
           ),
         ),
         const SizedBox(
@@ -307,10 +317,11 @@ class _AddGameFormState extends State<AddGameForm> {
     }
 
     if (step == 3) {
+      scrollMove(ScrollDirection.top);
       return [
         SizedBox(
           width: double.infinity,
-          height: 170,
+          height: 193,
           child: GameFormMatchInfoWidget(
             context: context,
             opponent: opponent!,
@@ -400,6 +411,25 @@ class _AddGameFormState extends State<AddGameForm> {
     );
 
     return widget.createGameClick(gameData);
+  }
+
+  void scrollMove(ScrollDirection scroll) {
+    switch (scroll) {
+      case ScrollDirection.top:
+        _scrollController.animateTo(
+          _scrollController.position.minScrollExtent,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeOut,
+        );
+        break;
+      case ScrollDirection.bottom:
+        _scrollController.animateTo(
+          _scrollController.position.maxScrollExtent,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeOut,
+        );
+        break;
+    }
   }
 
   void _imageReadyHandler(int fileId, File file) {
