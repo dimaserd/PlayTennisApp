@@ -30,17 +30,19 @@ class _TimePickerInputState extends State<TimePickerInput> {
   }
 
   Future<bool> showPicker(BuildContext context) async {
-    widget.pickedTime = await showTimePicker(
+    final pickedTime = await showTimePicker(
       context: context,
-      initialTime: const TimeOfDay(hour: 10, minute: 0),
+      initialTime: widget.pickedTime ?? TimeOfDay(hour: 10, minute: 0),
     );
 
-    if (widget.timeChanged != null) {
-      widget.timeChanged!(widget.pickedTime);
-    }
-
-    if (widget.pickedTime != null) {
-      dateInput.text = TimePickerUtils.formatTime(widget.pickedTime!);
+    if (pickedTime != null) {
+      setState(() {
+        widget.pickedTime = pickedTime;
+        dateInput.text = TimePickerUtils.formatTime(pickedTime);
+        if (widget.timeChanged != null) {
+          widget.timeChanged!(pickedTime);
+        }
+      });
     }
 
     return true;
@@ -50,17 +52,20 @@ class _TimePickerInputState extends State<TimePickerInput> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: 0, left: 0, right: 0),
-      child: TextField(
-        controller: dateInput,
-        //editing controller of this TextField
-        decoration: InputDecoration(
-          labelText: widget.label, //label text of field
-        ),
-        readOnly: true,
-        //set it true, so that user will not able to edit text
+      child: GestureDetector(
         onTap: () async {
           await showPicker(context);
         },
+        child: InputDecorator(
+          decoration: InputDecoration(
+            labelText: widget.label,
+          ),
+          child: Text(
+            widget.pickedTime != null
+                ? TimePickerUtils.formatTime(widget.pickedTime!)
+                : '',
+          ),
+        ),
       ),
     );
   }

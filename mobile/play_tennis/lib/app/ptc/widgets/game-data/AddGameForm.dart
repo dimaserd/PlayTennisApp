@@ -296,20 +296,17 @@ class _AddGameFormState extends State<AddGameForm> {
         const SizedBox(
           height: 10,
         ),
-        Expanded(
-          child: GameFormCourtDataWidget(
-            scroll: () {
-              scrollMove(ScrollDirection.bottom);
-            },
-            scrollController: _scrollController,
+        GameFormCourtDataWidget(
             countryAndCitySelectController: countryAndCitySelectController,
             errorHandler: _errorHandler,
             successHandler: _gameFormCourtDataWidgetHandler,
             dateAndTimePickerController: dateAndTimePickerController,
             courtNameController: courtNameController,
             courtTypeSelectController: courtTypeSelectController,
+            scroll: () {
+                scrollMove(ScrollDirection.bottom);
+            },
           ),
-        ),
         const SizedBox(
           height: 10,
         ),
