@@ -30,13 +30,11 @@ class GameFormCourtDataWidget extends StatelessWidget {
 
   final Function(String error) errorHandler;
   final Function(GameFormCourtData data) successHandler;
-  final ScrollController scrollController;
   final Function() scroll;
 
   const GameFormCourtDataWidget({
     super.key,
     required this.scroll,
-    required this.scrollController,
     required this.errorHandler,
     required this.successHandler,
     required this.dateAndTimePickerController,
