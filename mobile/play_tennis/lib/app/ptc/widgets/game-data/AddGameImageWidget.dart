@@ -6,11 +6,11 @@ import 'package:play_tennis/main-services.dart';
 
 class AddGameImageWidget extends StatefulWidget {
   final Function(int fileId, File fileImage) imageReady;
-  final Function() noImage;
+  final Function() withoutImageClickHandler;
 
   const AddGameImageWidget({
     required this.imageReady,
-    required this.noImage,
+    required this.withoutImageClickHandler,
     super.key,
   });
 
@@ -21,17 +21,44 @@ class AddGameImageWidget extends StatefulWidget {
 class _AddGameImageWidgetState extends State<AddGameImageWidget> {
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.only(top: 0, left: 0, right: 0),
-      elevation: 5,
-      child: Column(
-        children: [
-          ImageInput(
-            saveImage: saveFile,
-            useCropper: false,
+    return Column(
+      children: [
+        Card(
+          margin: const EdgeInsets.only(top: 0, left: 0, right: 0),
+          elevation: 5,
+          child: Column(
+            children: [
+              ImageInput(
+                saveImage: saveFile,
+                useCropper: false,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Card(
+          margin: const EdgeInsets.only(top: 0, left: 0, right: 0),
+          elevation: 5,
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.redAccent,
+                minimumSize: const Size.fromHeight(38),
+              ),
+              onPressed: () {
+                widget.withoutImageClickHandler();
+              },
+              child: const Text("Продолжить без фотографии"),
+            ),
+          ),
+        )
+      ],
     );
   }
 

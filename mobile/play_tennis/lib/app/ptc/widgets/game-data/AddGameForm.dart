@@ -330,46 +330,7 @@ class _AddGameFormState extends State<AddGameForm> {
               const SizedBox(
                 height: 10,
               ),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Страна: ${courtData!.selectedCountry.name}",
-                  style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Город: ${courtData!.selectedCity.name}",
-                  style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Корт: ${courtNameController.text}",
-                  style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Покрытие: ${CourtTypeConsts.texts[courtTypeSelectController.value]}",
-                  style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
+              ...getGameDataExtraWidgets()
             ],
           ),
         ),
@@ -379,21 +340,147 @@ class _AddGameFormState extends State<AddGameForm> {
         fileImage == null
             ? Expanded(
                 child: SingleChildScrollView(
-                    child: AddGameImageWidget(
-                imageReady: _imageReadyHandler,
-                noImage: _noImageHandler,
-              )))
-            : Expanded(
-                child: SingleChildScrollView(
-                    child: FinalGameImageCardWidget(
-                fileImage: fileImage,
-                onSuccess: widget.onSuccess,
-                clickHandler: createGameHandler,
-              ))),
+                  child: AddGameImageWidget(
+                    imageReady: _imageReadyHandler,
+                    withoutImageClickHandler: _noImageHandler,
+                  ),
+                ),
+              )
+            : Card(
+                margin: const EdgeInsets.all(0.0),
+                elevation: 5,
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Column(
+                    children: [
+                      Image.file(fileImage!),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          top: 10.0,
+                        ),
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blue,
+                            minimumSize: const Size.fromHeight(40),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              step = 4;
+                            });
+                          },
+                          child: const Text("Далее"),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          top: 10.0,
+                        ),
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.redAccent,
+                            minimumSize: const Size.fromHeight(40),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              fileImage = null;
+                            });
+                          },
+                          child: const Text("Изменить фото"),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              )
+      ];
+    }
+
+    if (step == 4) {
+      return [
+        SizedBox(
+          width: double.infinity,
+          height: 193,
+          child: GameFormMatchInfoWidget(
+            context: context,
+            opponent: opponent!,
+            gameDataWidgetController: gameDataWidgetController,
+            backBtnHandler: () => _setStepHandler(3),
+            courtType: courtTypeSelectController.value,
+            showCourtType: true,
+            customWidgets: [
+              const SizedBox(
+                height: 10,
+              ),
+              ...getGameDataExtraWidgets()
+            ],
+          ),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Expanded(
+          child: SingleChildScrollView(
+            child: FinalGameImageCardWidget(
+              fileImage: fileImage,
+              onSuccess: widget.onSuccess,
+              createClickHandler: createGameHandler,
+              goBackClickHandler: () {
+                setState(() {
+                  step = 3;
+                });
+              },
+            ),
+          ),
+        ),
       ];
     }
 
     return [];
+  }
+
+  List<Widget> getGameDataExtraWidgets() {
+    return [
+      Align(
+        alignment: Alignment.centerLeft,
+        child: Text(
+          "Страна: ${courtData!.selectedCountry.name}",
+          style: const TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      Align(
+        alignment: Alignment.centerLeft,
+        child: Text(
+          "Город: ${courtData!.selectedCity.name}",
+          style: const TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      Align(
+        alignment: Alignment.centerLeft,
+        child: Text(
+          "Корт: ${courtNameController.text}",
+          style: const TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      Align(
+        alignment: Alignment.centerLeft,
+        child: Text(
+          "Покрытие: ${CourtTypeConsts.texts[courtTypeSelectController.value]}",
+          style: const TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+    ];
   }
 
   Future<BaseApiResponse> createGameHandler() async {
@@ -435,13 +522,17 @@ class _AddGameFormState extends State<AddGameForm> {
 
   void _imageReadyHandler(int fileId, File file) {
     imageFileId = fileId;
+
     setState(() {
       fileImage = file;
+      step = 4;
     });
   }
 
   void _noImageHandler() {
-    _errorHandler("Пока не реализовано");
+    setState(() {
+      step = 4;
+    });
   }
 
   void _gameFormCourtDataWidgetHandler(GameFormCourtData data) {

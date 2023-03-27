@@ -146,7 +146,7 @@ class _ImageInputState extends State<ImageInput> {
 
     return [
       Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: inProcess
             ? const Loading(text: "Изображение загружается на сервер")
             : ElevatedButton(
@@ -172,7 +172,7 @@ class _ImageInputState extends State<ImageInput> {
               ),
       ),
       Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.redAccent,
@@ -209,7 +209,10 @@ class _ImageInputState extends State<ImageInput> {
           ),
           image != null
               ? Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 10.0,
+                    horizontal: 20,
+                  ),
                   child: Image.file(image!),
                 )
               : const Text("Изображение не выбрано"),
