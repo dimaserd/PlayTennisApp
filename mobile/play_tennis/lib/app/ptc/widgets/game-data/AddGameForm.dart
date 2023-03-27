@@ -137,7 +137,7 @@ class _AddGameFormState extends State<AddGameForm> {
         },
         child: SingleChildScrollView(
             controller: _scrollController,
-            child: Container(
+            child: SizedBox(
                 height: MediaQuery.of(context).size.height,
                 child: Container(
                     alignment: Alignment.center,
@@ -282,7 +282,7 @@ class _AddGameFormState extends State<AddGameForm> {
       return [
         SizedBox(
           width: double.infinity,
-          height: 130,
+          height: 115,
           child: GameFormMatchInfoWidget(
             context: context,
             opponent: opponent!,
@@ -297,16 +297,16 @@ class _AddGameFormState extends State<AddGameForm> {
           height: 10,
         ),
         GameFormCourtDataWidget(
-            countryAndCitySelectController: countryAndCitySelectController,
-            errorHandler: _errorHandler,
-            successHandler: _gameFormCourtDataWidgetHandler,
-            dateAndTimePickerController: dateAndTimePickerController,
-            courtNameController: courtNameController,
-            courtTypeSelectController: courtTypeSelectController,
-            scroll: () {
-                scrollMove(ScrollDirection.bottom);
-            },
-          ),
+          countryAndCitySelectController: countryAndCitySelectController,
+          errorHandler: _errorHandler,
+          successHandler: _gameFormCourtDataWidgetHandler,
+          dateAndTimePickerController: dateAndTimePickerController,
+          courtNameController: courtNameController,
+          courtTypeSelectController: courtTypeSelectController,
+          scroll: () {
+            scrollMove(ScrollDirection.bottom);
+          },
+        ),
         const SizedBox(
           height: 10,
         ),

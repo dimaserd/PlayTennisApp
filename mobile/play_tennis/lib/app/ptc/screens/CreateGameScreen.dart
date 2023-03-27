@@ -34,11 +34,11 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
       resizeToAvoidBottomInset: false,
       body: loginData != null
           ? AddGameForm(
-            player: widget.player,
+              player: widget.player,
               createGameClick: _createGameClickHandler,
               onSuccess: () {
                 Navigator.of(context)
-                    .pushNamedAndRemoveUntil('/games', (route) => true);
+                    .pushNamedAndRemoveUntil('/profile', (route) => true);
               },
             )
           : const Loading(text: "Загрузка"),
