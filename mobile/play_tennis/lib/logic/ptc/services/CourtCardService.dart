@@ -1,6 +1,7 @@
 import 'dart:convert';
-import '../../clt/models/BaseApiResponse.dart';
-import '../../core/NetworkService.dart';
+
+import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
+import 'package:play_tennis/logic/core/NetworkService.dart';
 
 class SearchCourtCards {
   late String? q;
@@ -36,12 +37,24 @@ class CourtCardSimpleModel {
   late String? name;
   late String? description;
   late String? address;
+  late String? phoneNumber;
+  late String? webSite;
+  late double yandexMapsLatitude;
+  late double yandexMapsLongitude;
+  late String? yandexMapsOrganizationId;
+  late String? yandexMapsAppLink;
 
   CourtCardSimpleModel({
     required this.id,
     required this.name,
     required this.description,
     required this.address,
+    required this.phoneNumber,
+    required this.webSite,
+    required this.yandexMapsLatitude,
+    required this.yandexMapsLongitude,
+    required this.yandexMapsOrganizationId,
+    required this.yandexMapsAppLink,
   });
 
   factory CourtCardSimpleModel.fromJson(Map<String, dynamic> json) =>
@@ -50,6 +63,12 @@ class CourtCardSimpleModel {
         name: json["name"],
         description: json["description"],
         address: json["address"],
+        phoneNumber: json["phoneNumber"],
+        webSite: json["webSite"],
+        yandexMapsLatitude: json["yandexMapsLatitude"],
+        yandexMapsLongitude: json["yandexMapsLongitude"],
+        yandexMapsOrganizationId: json["yandexMapsOrganizationId"],
+        yandexMapsAppLink: json["yandexMapsAppLink"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -57,6 +76,12 @@ class CourtCardSimpleModel {
         'name': name,
         'description': description,
         'address': address,
+        'phoneNumber': phoneNumber,
+        'webSite': webSite,
+        'yandexMapsLatitude': yandexMapsLatitude,
+        'yandexMapsLongitude': yandexMapsLongitude,
+        'yandexMapsOrganizationId': yandexMapsOrganizationId,
+        'yandexMapsAppLink': yandexMapsAppLink,
       };
 }
 

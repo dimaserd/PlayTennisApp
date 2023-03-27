@@ -1,13 +1,11 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:play_tennis/app/main/widgets/palette.dart';
+import 'package:play_tennis/app/ptc/widgets/courts/CourtCard.dart';
 import 'package:play_tennis/logic/ptc/services/CourtCardService.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class CourtsList extends StatelessWidget {
-  List<CourtCardSimpleModel> courts;
-  void Function(CourtCardSimpleModel trainer) onTapHandler;
-  void Function(int offSet) getData;
+  final List<CourtCardSimpleModel> courts;
+  final void Function(CourtCardSimpleModel trainer) onTapHandler;
+  final void Function(int offSet) getData;
 
   int offset;
   bool isActiveLoader = true;
@@ -39,13 +37,6 @@ class CourtsList extends StatelessWidget {
     getData(offset);
   }
 
-  void _launchPhone(String phoneNumber) async {
-    final url = Uri.parse('tel:$phoneNumber');
-    if (await launchUrl(url)) {
-      await launchUrl(url);
-    }
-  }
-
   Widget getChild() {
     return courts.isEmpty
         ? Column(children: const [
@@ -64,45 +55,8 @@ class CourtsList extends StatelessWidget {
                   return const Center(child: CircularProgressIndicator());
                 }
               } else {
-                return GestureDetector(
-                  onTap: () {
-                    // onTapHandler(trainers[index]);
-                  },
-                  child: Card(
-                      margin: const EdgeInsets.symmetric(
-                          vertical: 4, horizontal: 2),
-                      elevation: 4,
-                      child: ListTile(
-                        title: Text(
-                          courts[index].name!,
-                          style: Theme.of(context).textTheme.titleLarge,
-                        ),
-                        subtitle: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            RichText(
-                              text: TextSpan(
-                                text: "Номер телефона: ",
-                                style: const TextStyle(color: mainColor),
-                                children: [
-                                  TextSpan(
-                                    text: "+79166044960 фейк",
-                                    style: const TextStyle(color: Colors.blue),
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        print("ta");
-                                        _launchPhone("+79166044960");
-                                      },
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Text("${courts[index].description}")
-                          ],
-                          // ),
-                        ),
-                      )),
+                return CourtCard(
+                  courtCard: courts[index],
                 );
               }
             },
