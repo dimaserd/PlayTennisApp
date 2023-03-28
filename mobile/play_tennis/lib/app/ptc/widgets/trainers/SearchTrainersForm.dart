@@ -131,7 +131,11 @@ class _SearchTrainersForm extends State<SearchTrainersForm> {
     var cityId = countryAndCitySelectController.city?.id;
 
     var trainerRequest = SearchTrainerCardsRequest(
-        q: _searchController.text, cityId: cityId, count: 10, offSet: _offSet);
+      q: _searchController.text,
+      cityId: cityId,
+      count: 10,
+      offSet: _offSet,
+    );
 
     AppServices.trainerCardService.search(trainerRequest).then((value) {
       if (!mounted) {

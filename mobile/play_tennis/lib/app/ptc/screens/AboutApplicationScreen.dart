@@ -3,6 +3,7 @@ import 'package:play_tennis/app/main/widgets/Loading.dart';
 import 'package:play_tennis/app/main/widgets/side_drawer.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/main-extensions.dart';
+import 'package:play_tennis/main-settings.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutApplicationScreen extends StatelessWidget {
@@ -83,6 +84,17 @@ class MainApplicationInfo extends StatelessWidget {
             fontWeight: FontWeight.w600,
             fontSize: 16,
           ),
+        ),
+        const SizedBox(height: 5),
+        InkWell(
+          child: const Text(
+            'Ссылка на меня на платформе',
+            style: TextStyle(color: Colors.blue),
+          ),
+          onTap: () {
+            Navigator.of(context)
+                .pushNamed('/player/${MainSettings.dimaserdPlayerId}');
+          },
         ),
         const SizedBox(height: 5),
         InkWell(
