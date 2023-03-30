@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class ShowAlertAddTrainer extends StatelessWidget {
-  const ShowAlertAddTrainer({super.key});
+class ShowAlertContact extends StatelessWidget {
+  final String title;
+  final String subTitle;
+  const ShowAlertContact({super.key, required this.title, required this.subTitle});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +14,7 @@ class ShowAlertAddTrainer extends StatelessWidget {
         onPressed: () {
           showAlert(context);
         },
-        child: const Center(child: Text('Добавить тренера')),
+        child: Center(child: Text(title)),
       ),
     );
   }
@@ -22,14 +24,14 @@ class ShowAlertAddTrainer extends StatelessWidget {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text('Добавить тренера'),
+            title: Text(title),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const Text(
-                  'Для добавления тренера пожалуйста напишите мне.',
+                Text(
+                  subTitle,
                 ),
                 const SizedBox(height: 16),
                 const Text(

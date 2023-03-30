@@ -132,22 +132,22 @@ class _AddGameFormState extends State<AddGameForm> {
     }
 
     return GestureDetector(
-        onTap: () {
-          FocusScope.of(context).unfocus();
-        },
-        child: SingleChildScrollView(
-            controller: _scrollController,
-            child: SizedBox(
-                height: MediaQuery.of(context).size.height,
-                child: Container(
-                    alignment: Alignment.center,
-                    height: MediaQuery.of(context).size.height,
-                    padding: const EdgeInsets.all(15.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: getStepWidgets(),
-                    )))));
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: SingleChildScrollView(
+        controller: _scrollController,
+        child: Container(
+          alignment: Alignment.center,
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: getStepWidgets(),
+          ),
+        ),
+      ),
+    );
   }
 
   void setOpponent(PlayerModel player) {
@@ -274,7 +274,7 @@ class _AddGameFormState extends State<AddGameForm> {
                   ]),
                 ),
               )
-            : const SizedBox.shrink(),
+            : const SizedBox.shrink()
       ];
     }
 
@@ -308,7 +308,7 @@ class _AddGameFormState extends State<AddGameForm> {
           },
         ),
         const SizedBox(
-          height: 10,
+          height: 190,
         ),
       ];
     }
@@ -316,35 +316,31 @@ class _AddGameFormState extends State<AddGameForm> {
     if (step == 3) {
       scrollMove(ScrollDirection.top);
       return [
-        SizedBox(
-          width: double.infinity,
-          height: 193,
-          child: GameFormMatchInfoWidget(
-            context: context,
-            opponent: opponent!,
-            gameDataWidgetController: gameDataWidgetController,
-            backBtnHandler: () => _setStepHandler(2),
-            courtType: courtTypeSelectController.value,
-            showCourtType: true,
-            customWidgets: [
-              const SizedBox(
-                height: 10,
+        FractionallySizedBox(
+            widthFactor: 1.0,
+            child: SizedBox(
+              child: GameFormMatchInfoWidget(
+                context: context,
+                opponent: opponent!,
+                gameDataWidgetController: gameDataWidgetController,
+                backBtnHandler: () => _setStepHandler(2),
+                courtType: courtTypeSelectController.value,
+                showCourtType: true,
+                customWidgets: [
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  ...getGameDataExtraWidgets()
+                ],
               ),
-              ...getGameDataExtraWidgets()
-            ],
-          ),
-        ),
+            )),
         const SizedBox(
           height: 10,
         ),
         fileImage == null
-            ? Expanded(
-                child: SingleChildScrollView(
-                  child: AddGameImageWidget(
-                    imageReady: _imageReadyHandler,
-                    withoutImageClickHandler: _noImageHandler,
-                  ),
-                ),
+            ? AddGameImageWidget(
+                imageReady: _imageReadyHandler,
+                withoutImageClickHandler: _noImageHandler,
               )
             : Card(
                 margin: const EdgeInsets.all(0.0),
@@ -397,40 +393,36 @@ class _AddGameFormState extends State<AddGameForm> {
 
     if (step == 4) {
       return [
-        SizedBox(
-          width: double.infinity,
-          height: 193,
-          child: GameFormMatchInfoWidget(
-            context: context,
-            opponent: opponent!,
-            gameDataWidgetController: gameDataWidgetController,
-            backBtnHandler: () => _setStepHandler(3),
-            courtType: courtTypeSelectController.value,
-            showCourtType: true,
-            customWidgets: [
-              const SizedBox(
-                height: 10,
+        FractionallySizedBox(
+            widthFactor: 1.0,
+            child: SizedBox(
+              child: GameFormMatchInfoWidget(
+                context: context,
+                opponent: opponent!,
+                gameDataWidgetController: gameDataWidgetController,
+                backBtnHandler: () => _setStepHandler(3),
+                courtType: courtTypeSelectController.value,
+                showCourtType: true,
+                customWidgets: [
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  ...getGameDataExtraWidgets()
+                ],
               ),
-              ...getGameDataExtraWidgets()
-            ],
-          ),
-        ),
+            )),
         const SizedBox(
           height: 10,
         ),
-        Expanded(
-          child: SingleChildScrollView(
-            child: FinalGameImageCardWidget(
-              fileImage: fileImage,
-              onSuccess: widget.onSuccess,
-              createClickHandler: createGameHandler,
-              goBackClickHandler: () {
-                setState(() {
-                  step = 3;
-                });
-              },
-            ),
-          ),
+        FinalGameImageCardWidget(
+          fileImage: fileImage,
+          onSuccess: widget.onSuccess,
+          createClickHandler: createGameHandler,
+          goBackClickHandler: () {
+            setState(() {
+              step = 3;
+            });
+          },
         ),
       ];
     }

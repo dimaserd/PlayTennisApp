@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/ptc/widgets/trainers/TrainerCard.dart';
 import 'package:play_tennis/logic/ptc/services/TrainerCardService.dart';
-import 'ShowAlertAddTrainer.dart';
+import 'ShowAlertContact.dart';
 
 class TrainerList extends StatelessWidget {
   List<TrainerCardSimpleModel> trainers;
@@ -49,7 +49,7 @@ class TrainerList extends StatelessWidget {
             itemBuilder: (context, index) {
               if (index == trainers.length) {
                 if (isActiveLoader == false || trainers.length < 5) {
-                  return const ShowAlertAddTrainer();
+                  return const ShowAlertContact(title: "Добавить тренера", subTitle: "Для добавления тренера пожалуйста напишите мне.");
                 } else {
                   // Вернуть заглушку для отображения индикатора загрузки
                   return const Center(child: CircularProgressIndicator());
