@@ -114,7 +114,7 @@ class GameFormCourtDataWidget extends StatelessWidget {
         ),
         onPressed: _clickHandler,
         child: const Text("Далее"),
-      )
+      ),
     ];
   }
 

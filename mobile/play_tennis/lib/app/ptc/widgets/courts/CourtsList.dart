@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/ptc/widgets/courts/CourtCard.dart';
+import 'package:play_tennis/app/ptc/widgets/trainers/ShowAlertContact.dart';
 import 'package:play_tennis/logic/ptc/services/CourtCardService.dart';
 
 class CourtsList extends StatelessWidget {
@@ -49,7 +50,7 @@ class CourtsList extends StatelessWidget {
             itemBuilder: (context, index) {
               if (index == courts.length) {
                 if (isActiveLoader == false || courts.length < 5) {
-                  return Container();
+                  return const ShowAlertContact(title: "Добавить корт", subTitle: "Для добавления корта пожалуйста напишите мне.");
                 } else {
                   // Вернуть заглушку для отображения индикатора загрузки
                   return const Center(child: CircularProgressIndicator());
