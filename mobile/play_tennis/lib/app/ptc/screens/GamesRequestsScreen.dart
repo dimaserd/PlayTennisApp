@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:play_tennis/app/main/widgets/Loading.dart';
 import 'package:play_tennis/app/main/widgets/side_drawer.dart';
 import 'package:play_tennis/app/ptc/widgets/CountryAndCitySelectWidget.dart';
-import 'package:play_tennis/app/ptc/widgets/tabbed-pages/PlayTabbedPage.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
 import 'package:play_tennis/main-services.dart';
@@ -50,38 +48,6 @@ class _GamesRequestsScreenState extends State<GamesRequestsScreen> {
     return getWidget(context);
   }
 
-  Widget buildOld(BuildContext context) {
-    return GestureDetector(
-      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: Scaffold(
-        body: Container(
-          margin: const EdgeInsets.all(20),
-          child: locationData != null
-              ? PlayTabbedPage(
-                  locationData: locationData!,
-                  onItemTapped: _onItemTapped,
-                  selectedIndex: selectedIndex,
-                )
-              : const Loading(text: "Получение профиля"),
-        ),
-        drawer: const SideDrawer(),
-        appBar: AppBar(
-          title: widget.showMine
-              ? const Text("Мои заявки")
-              : const Text("Заявки на игру"),
-          actions: [
-            IconButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed("/game-requests/add");
-              },
-              icon: const Icon(Icons.add_circle),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
   Widget getWidget(BuildContext context) {
     return DefaultTabController(
       length: 3,
@@ -125,20 +91,5 @@ class _GamesRequestsScreenState extends State<GamesRequestsScreen> {
   @override
   void dispose() {
     super.dispose();
-  }
-
-  void _onItemTapped(int index) {
-    setState(() {
-      selectedIndex = index;
-      if (index == 0) {
-        title = "Игроки";
-      } else if (index == 1) {
-        title = "Сообщества";
-      } else if (index == 2) {
-        title = "Тренеры";
-      } else if (index == 3) {
-        title = "Корты";
-      }
-    });
   }
 }

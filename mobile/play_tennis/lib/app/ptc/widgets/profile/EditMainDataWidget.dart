@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:play_tennis/app/main/widgets/Inputs/DatePickerInput.dart';
+import 'package:play_tennis/app/main/widgets/Inputs/DropdownWidget.dart';
+import 'package:play_tennis/app/main/widgets/Inputs/TextInput.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
-import '../../../../logic/ptc/models/PlayerData.dart';
-import '../../../../logic/ptc/models/players/UpdateDataByPlayerRequest.dart';
-import '../../../../main-services.dart';
-import '../../../main/widgets/Inputs/DatePickerInput.dart';
-import '../../../main/widgets/Inputs/DropdownWidget.dart';
-import '../../../main/widgets/Inputs/TextInput.dart';
+import 'package:play_tennis/logic/ptc/models/PlayerData.dart';
+import 'package:play_tennis/logic/ptc/models/players/UpdateDataByPlayerRequest.dart';
+import 'package:play_tennis/main-services.dart';
 
 class EditMainDataWidget extends StatefulWidget {
   PlayerData playerData;

@@ -2,7 +2,6 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:play_tennis/logic/ptc/services/CityService.dart';
 import 'package:play_tennis/main-services.dart';
-import 'package:play_tennis/main.dart';
 
 class SelectCityDistrictsWidget extends StatefulWidget {
   final String cityId;
