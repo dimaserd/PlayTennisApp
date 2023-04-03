@@ -21,9 +21,11 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
   @override
   void initState() {
     AppServices.loginService.getLoginData().then((value) {
-      setState(() {
-        loginData = value;
-      });
+      if (mounted) {
+        setState(() {
+          loginData = value;
+        });
+      }
     });
     super.initState();
   }

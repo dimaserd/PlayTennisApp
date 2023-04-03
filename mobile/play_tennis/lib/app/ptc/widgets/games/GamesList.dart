@@ -17,13 +17,15 @@ class GamesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: games.isEmpty
+      child: 
+      games.isEmpty
           ? Column(children: const [
               Center(
                 child: Text("Игры не найдены"),
               ),
             ])
-          : ListView.builder(
+          : 
+          ListView.builder(
               itemBuilder: (ctx, index) {
                 return GameToSelect(
                   game: games[index],

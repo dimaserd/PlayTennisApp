@@ -72,7 +72,7 @@ class MainRoutes {
     }
 
     if (settings.name == '/profile') {
-      return MaterialPageRoute(builder: (context) => const ProfileScreen());
+      return MaterialPageRoute(builder: (context) => ProfileScreen(key: UniqueKey()));
     }
 
     if (settings.name == '/profile-edit') {
@@ -116,14 +116,14 @@ class MainRoutes {
 
     if (settings.name == '/games/add') {
       return MaterialPageRoute(
-          builder: (context) => const CreateGameScreen(player: null));
+          builder: (context) =>  CreateGameScreen(player: null, key: UniqueKey()));
     }
 
     if (settings.name == '/create/game') {
       var playerArguments = settings.arguments as PlayerModel;
       // print("arguments $arguments");
       return MaterialPageRoute(
-          builder: (context) => CreateGameScreen(player: playerArguments));
+          builder: (context) => CreateGameScreen(player: playerArguments, key: UniqueKey()));
     }
 
     return MaterialPageRoute(

@@ -170,13 +170,16 @@ class _AddGameFormState extends State<AddGameForm> {
         const SizedBox(
           height: 10,
         ),
-        Expanded(
-            child: SearchPlayersForm(
-          locationData: locationData!,
-          onTapHandler: (p) {
-            setOpponent(p);
-          },
-        ))
+        SizedBox(
+          height: MediaQuery.of(context).size.height - 120,
+          width: double.infinity,
+          child: SearchPlayersForm(
+            locationData: locationData!,
+            onTapHandler: (p) {
+              setOpponent(p);
+            },
+          ),
+        )
       ];
     }
 
