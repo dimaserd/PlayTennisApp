@@ -23,10 +23,7 @@ class GameDataWidgetExtensions {
   static PlayerSetScores getStringValueGames(
       List<TennisSetData> value, int numberPlayer) {
     var game = PlayerSetScores(
-      first: "-",
-      second: "-",
-      third: "-",
-    );
+        first: "-", second: "-", third: "-", four: "-", five: "-");
 
     for (var i = 0; i < value.length; i++) {
       var setData = value[i];
@@ -43,6 +40,10 @@ class GameDataWidgetExtensions {
           game.third = correctScore;
           break;
         case 3:
+          game.four = correctScore;
+          break;
+        case 4:
+          game.five = correctScore;
           break;
         default:
           break;
@@ -181,7 +182,6 @@ class GameDataWidgetController {
 
   List<TennisSetData> getValue() {
     List<TennisSetData> list = [];
-
     for (var i = 0; i < _setCount; i++) {
       list.add(getSetValue(i));
     }

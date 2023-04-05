@@ -66,15 +66,19 @@ class GameToSelect extends StatelessWidget {
                 height: 5,
               ),
               PlayerSetsScoreList(
+                sets: game.scoreData!.sets,
                 player: player1,
                 gameScores: gamePlayer1,
+                playerId: 0,
                 onTapped: (p) {
                   onTappedHandler(p, context);
                 },
               ),
               PlayerSetsScoreList(
+                sets: game.scoreData!.sets,
                 player: player2,
                 gameScores: gamePlayer2,
+                playerId: 1,
                 onTapped: (p) {
                   onTappedHandler(p, context);
                 },

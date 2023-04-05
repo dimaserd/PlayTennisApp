@@ -58,7 +58,9 @@ class _SearchGamesWidgetState extends State<SearchGamesWidget> {
     AppServices.gameService.searchGames(playerRequest).then((value) {
       games = value.list;
       setState(() {
+        if (mounted) {
         gamesLoaded = true;
+        }
       });
     });
   }

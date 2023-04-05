@@ -31,13 +31,15 @@ class TennisSetData {
     required this.tieBreak,
   });
 
-  factory TennisSetData.fromJson(Map<String, dynamic> json) => TennisSetData(
+  factory TennisSetData.fromJson(Map<String, dynamic> json) { 
+    return TennisSetData(
         score1: json["score1"],
         score2: json["score2"],
         tieBreak: json["tieBreak"] != null
             ? TennisTieBreakScoreData?.fromJson(json["tieBreak"])
             : null,
       );
+  }
 
   Map<String, dynamic> toJson() => {
         'score1': score1,
