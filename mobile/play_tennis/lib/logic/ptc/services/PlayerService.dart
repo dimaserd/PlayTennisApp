@@ -1,11 +1,11 @@
 import 'dart:convert';
-import '../../clt/models/BaseApiResponse.dart';
-import '../../core/NetworkService.dart';
-import '../models/PlayerData.dart';
-import '../models/PlayerLocationData.dart';
-import '../models/PlayerModel.dart';
-import '../models/SearchPlayersRequest.dart';
-import '../models/players/UpdateDataByPlayerRequest.dart';
+import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
+import 'package:play_tennis/logic/core/NetworkService.dart';
+import 'package:play_tennis/logic/ptc/models/PlayerData.dart';
+import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
+import 'package:play_tennis/logic/ptc/models/PlayerModel.dart';
+import 'package:play_tennis/logic/ptc/models/SearchPlayersRequest.dart';
+import 'package:play_tennis/logic/ptc/models/players/UpdateDataByPlayerRequest.dart';
 
 class UpdateCountryAndCityDataRequest {
   late String? countryId;
