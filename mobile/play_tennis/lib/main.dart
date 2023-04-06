@@ -11,7 +11,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
-
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
   // make sure you call `initializeApp` before using other Firebase services.
@@ -71,14 +70,12 @@ void main() async {
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then(
     (_) => runApp(const MyApp()),
   );
-
 }
 
 class MyApp extends StatelessWidget {
   static bool inProccess = false;
 
   const MyApp({super.key});
-  
 
   @override
   Widget build(BuildContext context) {
@@ -106,10 +103,10 @@ class MyApp extends StatelessWidget {
     );
   }
 
-   // Define an async function to initialize FlutterFire
+  // Define an async function to initialize FlutterFire
   Future<void> _initializeFlutterFire() async {
-      // Force enable crashlytics collection enabled if we're testing it.
-      await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
-      FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+    // Force enable crashlytics collection enabled if we're testing it.
+    await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
   }
 }
