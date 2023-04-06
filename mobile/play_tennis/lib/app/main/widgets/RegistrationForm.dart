@@ -391,12 +391,12 @@ class _RegistrationFormState extends State<RegistrationForm> {
       var regResponse =
           await AppServices.playerRegistrationService.register(model);
 
-      if (!regResponse.isSucceeded) {
+      if (!regResponse.succeeded) {
         setState(() {
           isRegistrationInProgress = false;
         });
 
-        _errorHandler(regResponse.message);
+        _errorHandler(regResponse.message!);
         return;
       }
 
