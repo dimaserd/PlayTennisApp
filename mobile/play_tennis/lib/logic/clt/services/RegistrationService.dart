@@ -1,10 +1,10 @@
 import 'dart:convert';
+import 'package:play_tennis/logic/clt/consts/SharedKeys.dart';
+import 'package:play_tennis/logic/clt/models/RegisterAndSignInResult.dart';
+import 'package:play_tennis/logic/clt/models/RegisterModel.dart';
+import 'package:play_tennis/logic/clt/models/RegistrationResult.dart';
+import 'package:play_tennis/logic/core/NetworkService.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../core/NetworkService.dart';
-import '../consts/SharedKeys.dart';
-import '../models/RegisterAndSignInResult.dart';
-import '../models/RegisterModel.dart';
-import '../models/RegistrationResult.dart';
 
 class RegistrationService {
   final NetworkService networkService;

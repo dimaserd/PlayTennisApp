@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:play_tennis/app/main/screens/AdvancedRegistrationScreen.dart';
 import 'package:play_tennis/app/main/screens/ChangeAvatarScreen.dart';
 import 'package:play_tennis/app/main/screens/CheckAuthScreen.dart';
 import 'package:play_tennis/app/main/screens/LoginScreen.dart';
@@ -66,13 +67,19 @@ class MainRoutes {
           builder: (context) => const RegistrationScreen());
     }
 
+    if (settings.name == '/advanced-registration') {
+      return MaterialPageRoute(
+          builder: (context) => const AdvancedRegistrationScreen());
+    }
+
     if (settings.name == '/change-avatar') {
       return MaterialPageRoute(
           builder: (context) => const ChangeAvatarScreen());
     }
 
     if (settings.name == '/profile') {
-      return MaterialPageRoute(builder: (context) => ProfileScreen(key: UniqueKey()));
+      return MaterialPageRoute(
+          builder: (context) => ProfileScreen(key: UniqueKey()));
     }
 
     if (settings.name == '/profile-edit') {
@@ -116,14 +123,16 @@ class MainRoutes {
 
     if (settings.name == '/games/add') {
       return MaterialPageRoute(
-          builder: (context) =>  CreateGameScreen(player: null, key: UniqueKey()));
+          builder: (context) =>
+              CreateGameScreen(player: null, key: UniqueKey()));
     }
 
     if (settings.name == '/create/game') {
       var playerArguments = settings.arguments as PlayerModel;
       // print("arguments $arguments");
       return MaterialPageRoute(
-          builder: (context) => CreateGameScreen(player: playerArguments, key: UniqueKey()));
+          builder: (context) =>
+              CreateGameScreen(player: playerArguments, key: UniqueKey()));
     }
 
     return MaterialPageRoute(

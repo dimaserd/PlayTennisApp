@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/RegistrationForm.dart';
 
-class RegistrationScreen extends StatelessWidget {
-  const RegistrationScreen({Key? key}) : super(key: key);
+class AdvancedRegistrationScreen extends StatelessWidget {
+  const AdvancedRegistrationScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,6 @@ class RegistrationScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             RegistrationForm(
-              isV2: false,
               onLogin: () {
                 Navigator.of(context)
                     .pushNamedAndRemoveUntil("/profile", (r) => false);
