@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/images/PlayerAvatar.dart';
 import 'package:play_tennis/app/ptc/widgets/profile/PlayerConfirmationWidget.dart';
+import 'package:play_tennis/app/ptc/widgets/profile/TelegramLinkTipWidget.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerData.dart';
 
 class ProfileData extends StatelessWidget {
@@ -12,6 +13,11 @@ class ProfileData extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        player.telegramUserId == null
+            ? TelegramLinkTipWidget(
+                player: player,
+              )
+            : const SizedBox.shrink(),
         !player.accountConfirmed
             ? PlayerConfirmationWidget(
                 player: player,

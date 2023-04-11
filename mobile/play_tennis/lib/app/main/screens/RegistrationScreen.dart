@@ -14,7 +14,7 @@ class RegistrationScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             RegistrationForm(
-              isV2: false,
+              isV2: true,
               onLogin: () {
                 Navigator.of(context)
                     .pushNamedAndRemoveUntil("/profile", (r) => false);
