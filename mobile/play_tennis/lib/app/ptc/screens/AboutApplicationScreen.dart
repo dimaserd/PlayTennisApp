@@ -74,7 +74,7 @@ class MainApplicationInfo extends StatelessWidget {
           'По любым вопросам касающихся работы приложения или сотрудничества, обращайтесь ко мне:',
           style: TextStyle(
             fontWeight: FontWeight.w400,
-            fontSize: 14,
+            fontSize: 16,
           ),
         ),
         const SizedBox(height: 10),
@@ -89,7 +89,10 @@ class MainApplicationInfo extends StatelessWidget {
         InkWell(
           child: const Text(
             'Ссылка на меня на платформе',
-            style: TextStyle(color: Colors.blue),
+            style: TextStyle(
+              color: Colors.blue,
+              fontSize: 16,
+            ),
           ),
           onTap: () {
             Navigator.of(context)
@@ -100,7 +103,10 @@ class MainApplicationInfo extends StatelessWidget {
         InkWell(
           child: const Text(
             'Телеграмм: @dimaserd',
-            style: TextStyle(color: Colors.blue),
+            style: TextStyle(
+              color: Colors.blue,
+              fontSize: 16,
+            ),
           ),
           onTap: () {
             var telegramUser = Uri.parse("tg://resolve?domain=@dimaserd");
@@ -111,14 +117,17 @@ class MainApplicationInfo extends StatelessWidget {
         InkWell(
           child: const Text(
             'Телефон: +7 916 604-49-60',
-            style: TextStyle(color: Colors.blue),
+            style: TextStyle(
+              color: Colors.blue,
+              fontSize: 16,
+            ),
           ),
           onTap: () {
             var phoneNumber = Uri.parse("tel://+79166044960");
             launchUrl(phoneNumber);
           },
         ),
-        const SizedBox(height: 5),
+        const SizedBox(height: 15),
         const Text(
           'Если вам нужна своя платформа или приложение для вашего бизнеса, буду рад вам помочь)',
           style: TextStyle(
@@ -131,26 +140,31 @@ class MainApplicationInfo extends StatelessWidget {
           'Другие способы работы с платформой:',
           style: TextStyle(
             fontWeight: FontWeight.w600,
-            fontSize: 16,
+            fontSize: 18,
           ),
         ),
         const SizedBox(height: 5),
         InkWell(
           child: const Text(
-            'Телеграм-бот PlayTennis',
-            style: TextStyle(color: Colors.blue),
+            'Телеграм-бот ${MainSettings.appName}',
+            style: TextStyle(
+              color: Colors.blue,
+              fontSize: 18,
+            ),
           ),
           onTap: () {
-            var telegramUser =
-                Uri.parse("tg://resolve?domain=@tennis_play_bot");
-            launchUrl(telegramUser);
+            var uri = Uri.parse(TelegramBotSettings.link);
+            launchUrl(uri);
           },
         ),
         const SizedBox(height: 5),
         InkWell(
           child: const Text(
-            'Web-приложение PlayTennis',
-            style: TextStyle(color: Colors.blue),
+            'Web-приложение ${MainSettings.appName}',
+            style: TextStyle(
+              color: Colors.blue,
+              fontSize: 18,
+            ),
           ),
           onTap: () {
             MainAppExtensions.trylaunchAppUrl(

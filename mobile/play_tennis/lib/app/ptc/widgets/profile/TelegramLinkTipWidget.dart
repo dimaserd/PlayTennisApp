@@ -18,7 +18,9 @@ class TelegramLinkTipWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pushNamed('/profile-telegram-link');
+              },
               child: const Padding(
                 padding: EdgeInsets.all(10.0),
                 child: Center(
