@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:play_tennis/logic/clt/consts/SharedKeys.dart';
+import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
 import 'package:play_tennis/logic/core/NetworkService.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerRegistrationRequest.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -42,6 +43,7 @@ class AdvancedPlayerRegistration {
   late String? cityOrCountry;
   late bool noCityOrCountryFilled;
   late String? registrationSource;
+  late String? aboutMe;
 
   AdvancedPlayerRegistration({
     required this.name,
@@ -56,6 +58,7 @@ class AdvancedPlayerRegistration {
     required this.cityOrCountry,
     required this.noCityOrCountryFilled,
     required this.registrationSource,
+    required this.aboutMe,
   });
 
   factory AdvancedPlayerRegistration.fromJson(Map<String, dynamic> json) =>
@@ -72,6 +75,7 @@ class AdvancedPlayerRegistration {
         cityOrCountry: json["cityOrCountry"],
         noCityOrCountryFilled: json["noCityOrCountryFilled"],
         registrationSource: json["registrationSource"],
+        aboutMe: json["aboutMe"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -87,6 +91,7 @@ class AdvancedPlayerRegistration {
         'cityOrCountry': cityOrCountry,
         'noCityOrCountryFilled': noCityOrCountryFilled,
         'registrationSource': registrationSource,
+        'aboutMe': aboutMe,
       };
 }
 
@@ -117,6 +122,14 @@ class PlayerRegistrationService {
       "advanced",
       bodyJson,
     );
+  }
+
+  Future<BaseApiResponse> confirm() async {
+    var responseBody = await networkService.postData(
+        "/api/ptc/player/registration/advanced/confirm", "{}");
+    var decoded = jsonDecode(responseBody);
+
+    return BaseApiResponse.fromJson(decoded);
   }
 
   Future<PlayerRegistrationResult> registerInner(

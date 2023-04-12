@@ -7,7 +7,10 @@ import 'package:play_tennis/logic/ptc/models/PlayerData.dart';
 class ProfileData extends StatelessWidget {
   final PlayerData player;
 
-  const ProfileData({super.key, required this.player});
+  const ProfileData({
+    super.key,
+    required this.player,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +46,9 @@ class ProfileData extends StatelessWidget {
                 Text(
                   "Имя: ${player.surname!} ${player.name!}",
                 ),
-                Text("Email: ${player.email}"),
+                player.noEmail
+                    ? const SizedBox.shrink()
+                    : Text("Email: ${player.email}"),
                 Text("Номер телефона: ${player.phoneNumber}"),
                 Text("Ntrp: ${player.ntrpRating}"),
                 Text("Рейтинг силы: ${player.rating}"),

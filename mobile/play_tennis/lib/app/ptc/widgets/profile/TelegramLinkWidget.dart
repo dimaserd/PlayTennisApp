@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:play_tennis/baseApiResponseUtils.dart';
+import 'package:play_tennis/main-services.dart';
 import 'package:play_tennis/main-settings.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -40,10 +42,18 @@ class TelegramLinkWidget extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
-          onTap: () {
-            Clipboard.setData(const ClipboardData(
-                    text: TelegramBotSettings.profileLinkCommandFormat))
-                .then((_) {
+          onTap: () async {
+            var result = await AppServices.playerService.createTelegramLink();
+
+            if (!result.isSucceeded) {
+              _showError(context, result.message);
+              return;
+            }
+
+            var text = result.responseObject.command!;
+
+            print(text);
+            Clipboard.setData(ClipboardData(text: text)).then((_) {
               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                 content: Text(
                   "Команда скопирована в буфер обмена. Перейдите в телеграм-бот и вставьте ему это сообщение и нажмите отправить",
@@ -73,5 +83,9 @@ class TelegramLinkWidget extends StatelessWidget {
         const SizedBox(height: 5),
       ],
     );
+  }
+
+  _showError(BuildContext context, String error) {
+    BaseApiResponseUtils.showError(context, error);
   }
 }

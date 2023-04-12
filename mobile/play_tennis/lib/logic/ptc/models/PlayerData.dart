@@ -7,6 +7,7 @@ class PlayerData {
   late String? patronymic;
   late String? phoneNumber;
   late String? email;
+  late bool noEmail;
   late int? avatarFileId;
   late String? ntrpRating;
   late double rating;
@@ -28,6 +29,7 @@ class PlayerData {
     required this.patronymic,
     required this.phoneNumber,
     required this.email,
+    required this.noEmail,
     required this.avatarFileId,
     required this.ntrpRating,
     required this.rating,
@@ -50,6 +52,7 @@ class PlayerData {
         patronymic: json["patronymic"],
         phoneNumber: json["phoneNumber"],
         email: json["email"],
+        noEmail: json["noEmail"],
         avatarFileId: json["avatarFileId"],
         ntrpRating: json["ntrpRating"],
         rating: json["rating"],
@@ -72,6 +75,7 @@ class PlayerData {
         'patronymic': patronymic,
         'phoneNumber': phoneNumber,
         'email': email,
+        'noEmail': noEmail,
         'avatarFileId': avatarFileId,
         'ntrpRating': ntrpRating,
         'rating': rating,
@@ -81,7 +85,7 @@ class PlayerData {
         'telegramUserName': telegramUserName,
         'cityId': cityId,
         'countryId': countryId,
-        'birthDate': birthDate,
-        'createdOn': createdOn,
+        'birthDate': birthDate.toIso8601String(),
+        'createdOn': createdOn.toIso8601String(),
       };
 }

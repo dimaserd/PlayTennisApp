@@ -417,7 +417,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
         return;
       }
 
-      _errorHandler("Регистрация и авторизация прошла успешно");
+      _successHandler("Регистрация и авторизация прошла успешно");
 
       widget.onLogin();
 
@@ -453,6 +453,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
       cityOrCountry: model.cityOrCountry,
       noCityOrCountryFilled: model.noCityOrCountryFilled,
       registrationSource: model.registrationSource,
+      aboutMe: model.aboutMe,
     );
 
     return AppServices.playerRegistrationService
@@ -461,5 +462,9 @@ class _RegistrationFormState extends State<RegistrationForm> {
 
   void _errorHandler(String error) {
     BaseApiResponseUtils.showError(context, error);
+  }
+
+  void _successHandler(String message) {
+    BaseApiResponseUtils.showSuccess(context, message);
   }
 }

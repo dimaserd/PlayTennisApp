@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/Loading.dart';
 import 'package:play_tennis/app/ptc/widgets/profile/EditPlayerAvatarWidget.dart';
@@ -42,18 +44,33 @@ class _ChangeAvatarScreenState extends State<ChangeAvatarScreen> {
                   children: [
                     EditPlayerAvatarWidget(
                       avatarFileId: loginData!.avatarFileId,
+                      onSucceess: () {
+                        sleep(const Duration(seconds: 2));
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                          "/profile",
+                          (route) => false,
+                        );
+                      },
                     ),
                     Padding(
-                      padding:
-                          const EdgeInsets.only(top: 0, left: 20, right: 20),
+                      padding: const EdgeInsets.only(
+                        top: 0,
+                        left: 20,
+                        right: 20,
+                      ),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.redAccent,
-                          minimumSize: const Size.fromHeight(30), // NEW
+                          backgroundColor: Colors.black,
+                          minimumSize: const Size.fromHeight(32),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                            "/profile",
+                            (route) => false,
+                          );
+                        },
                         child: const Text(
-                          "Поменяю потом",
+                          "Пропустить",
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,

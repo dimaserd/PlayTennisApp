@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
-import '../../clt/models/models.dart';
-import '../../core/NetworkService.dart';
 import 'package:http/http.dart' as http;
+import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
+import 'package:play_tennis/logic/core/NetworkService.dart';
 
 class FilesService {
   final NetworkService networkService;
