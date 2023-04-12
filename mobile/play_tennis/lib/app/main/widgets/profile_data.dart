@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/images/PlayerAvatar.dart';
 import 'package:play_tennis/app/ptc/widgets/profile/PlayerConfirmationWidget.dart';
+import 'package:play_tennis/logic/clt/models/models.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerData.dart';
+import 'package:play_tennis/main-routes.dart';
+import 'package:play_tennis/main-services.dart';
 
 class ProfileData extends StatelessWidget {
   final PlayerData player;
+  final CurrentLoginData? loginData;
 
-  const ProfileData({super.key, required this.player});
+  const ProfileData({super.key, required this.player, required this.loginData});
 
   @override
   Widget build(BuildContext context) {
@@ -80,10 +84,55 @@ class ProfileData extends StatelessWidget {
             ),
           ),
         ),
+        GestureDetector(
+          onTap: () {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    actionsAlignment: MainAxisAlignment.center,
+                    title:
+                        const Text('Вы действительно хотите удалить аккаунт?'),
+                    actions: [
+                      ElevatedButton(
+                        child: const Text('Отменить'),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      ElevatedButton(
+                        child: const Text('Да'),
+                        onPressed: () {
+                          if (loginData?.userId != null) {
+                            final userId = loginData!.userId!;
+                            deleteAccount(context, userId);
+                          }
+                        },
+                      ),
+                    ],
+                  );
+                });
+          },
+          child: const SizedBox(
+              height: 50,
+              width: double.infinity,
+              child: Card(
+                  margin: const EdgeInsets.only(top: 5, left: 5, right: 5),
+                  elevation: 5,
+                  child: Center(
+                      child: Text("Удалить аккаунт",
+                          style: TextStyle(color: Colors.red))))),
+        ),
         const SizedBox(
           height: 10,
         ),
       ],
     );
+  }
+
+  Future<void> deleteAccount(context, String userId) async {
+    await AppServices.deletePlayerService.delete(userId);
+    Navigator.pushNamedAndRemoveUntil(
+                                context, '/login', (route) => false);
   }
 }

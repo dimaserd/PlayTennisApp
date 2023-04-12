@@ -141,7 +141,7 @@ class ProfileScreenState extends State<ProfileScreen>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
-              child: ProfileData(player: playerData!),
+              child: ProfileData(player: playerData!, loginData: loginData),
             ),
           ],
         ),

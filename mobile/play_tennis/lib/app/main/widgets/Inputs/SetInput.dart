@@ -17,6 +17,7 @@ class SetInput extends StatelessWidget {
       mask: "#:#",
       keyboardType: TextInputType.number,
       textAlign: TextAlign.center,
+      textInputAction: TextInputAction.done,
       style: const TextStyle(
         fontSize: 24,
       ),
