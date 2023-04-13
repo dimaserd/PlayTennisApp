@@ -65,7 +65,15 @@ class NetworkService {
   }
 
   Future<String> postData(String uriPath, String bodyJson) async {
-    var response = await postDataInner(uriPath, bodyJson, (e) {});
+    return postDataV2(uriPath, bodyJson, (p0) {});
+  }
+
+  Future<String> postDataV2(
+    String uriPath,
+    String bodyJson,
+    Function(String) errorHandler,
+  ) async {
+    var response = await postDataInner(uriPath, bodyJson, errorHandler);
 
     if (response == null) {
       return "";

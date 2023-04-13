@@ -1,6 +1,7 @@
 import 'dart:convert';
-import '../../clt/models/BaseApiResponse.dart';
-import '../../core/NetworkService.dart';
+
+import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
+import 'package:play_tennis/logic/core/NetworkService.dart';
 
 class SearchTrainerCardsRequest {
   late String? q;
@@ -86,24 +87,29 @@ class TrainerCardService {
   TrainerCardService(this.networkService);
 
   Future<GetListResult<TrainerCardSimpleModel>> search(
-      SearchTrainerCardsRequest model) async {
+      SearchTrainerCardsRequest model, Function(String) errorHandler) async {
     var map = model.toJson();
     var bodyJson = jsonEncode(map);
 
-    var responseBody =
-        await networkService.postData('${baseUrl}search', bodyJson);
+    var responseBody = await networkService.postDataV2(
+        '${baseUrl}search', bodyJson, errorHandler);
 
-    var json = jsonDecode(responseBody);
+    try {
+      var json = jsonDecode(responseBody);
 
-    var result = GetListResult(
-      totalCount: json["totalCount"],
-      list: List<TrainerCardSimpleModel>.from(
-        json["list"].map((x) => TrainerCardSimpleModel.fromJson(x)),
-      ),
-      count: json["count"],
-      offSet: json["offSet"],
-    );
+      var result = GetListResult(
+        totalCount: json["totalCount"],
+        list: List<TrainerCardSimpleModel>.from(
+          json["list"].map((x) => TrainerCardSimpleModel.fromJson(x)),
+        ),
+        count: json["count"],
+        offSet: json["offSet"],
+      );
 
-    return result;
+      return result;
+    } catch (e) {
+      errorHandler(e.toString());
+      return GetListResult(totalCount: 0, list: [], count: 0, offSet: 0);
+    }
   }
 }

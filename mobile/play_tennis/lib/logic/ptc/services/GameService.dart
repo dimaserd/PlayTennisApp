@@ -1,7 +1,7 @@
 import 'dart:convert';
+import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
+import 'package:play_tennis/logic/core/NetworkService.dart';
 import 'package:play_tennis/logic/ptc/models/games/CreateSinglesGame.dart';
-import '../../clt/models/BaseApiResponse.dart';
-import '../../core/NetworkService.dart';
 
 class SearchGamesRequest {
   late String? playerId;
@@ -193,25 +193,30 @@ class GameService {
   }
 
   Future<GetListResult<SinglesGameSimpleModel>> searchMine(
-      GetListSearchModel model) async {
+      GetListSearchModel model, Function(String) errorHandler) async {
     var map = model.toJson();
 
     var bodyJson = jsonEncode(map);
-    var responseBody =
-        await networkService.postData('${baseUrl}search/mine', bodyJson);
+    var responseBody = await networkService.postDataV2(
+        '${baseUrl}search/mine', bodyJson, errorHandler);
 
-    var json = jsonDecode(responseBody);
+    try {
+      var json = jsonDecode(responseBody);
 
-    var result = GetListResult(
-      totalCount: json["totalCount"],
-      list: List<SinglesGameSimpleModel>.from(
-        json["list"].map((x) => SinglesGameSimpleModel.fromJson(x)),
-      ),
-      count: json["count"],
-      offSet: json["offSet"],
-    );
+      var result = GetListResult(
+        totalCount: json["totalCount"],
+        list: List<SinglesGameSimpleModel>.from(
+          json["list"].map((x) => SinglesGameSimpleModel.fromJson(x)),
+        ),
+        count: json["count"],
+        offSet: json["offSet"],
+      );
 
-    return result;
+      return result;
+    } catch (e) {
+      errorHandler(e.toString());
+      return GetListResult(totalCount: 0, list: [], count: 0, offSet: 0);
+    }
   }
 
   Future<GetListResult<SinglesGameSimpleModel>> searchGames(

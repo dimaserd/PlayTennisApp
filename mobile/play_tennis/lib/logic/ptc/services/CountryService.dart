@@ -32,24 +32,32 @@ class CountryService {
     return result;
   }
 
-  Future<GetListResult<CityModel>> searchCities(SearchCities model) async {
+  Future<GetListResult<CityModel>> searchCities(
+    SearchCities model,
+    Function(String) errorHandler,
+  ) async {
     var map = model.toJson();
     var bodyJson = jsonEncode(map);
 
-    var responseBody =
-        await networkService.postData('/api/ptc/dlv/cities/search', bodyJson);
+    var responseBody = await networkService.postData(
+        '/api/ptc/dlv/cities/search/cached', bodyJson);
 
-    var json = jsonDecode(responseBody);
+    try {
+      var json = jsonDecode(responseBody);
 
-    var result = GetListResult(
-      totalCount: json["totalCount"],
-      list: List<CityModel>.from(
-        json["list"].map((x) => CityModel.fromJson(x)),
-      ),
-      count: json["count"],
-      offSet: json["offSet"],
-    );
+      var result = GetListResult(
+        totalCount: json["totalCount"],
+        list: List<CityModel>.from(
+          json["list"].map((x) => CityModel.fromJson(x)),
+        ),
+        count: json["count"],
+        offSet: json["offSet"],
+      );
 
-    return result;
+      return result;
+    } catch (e) {
+      errorHandler(e.toString());
+      return GetListResult(count: 0, list: [], offSet: 0, totalCount: 0);
+    }
   }
 }

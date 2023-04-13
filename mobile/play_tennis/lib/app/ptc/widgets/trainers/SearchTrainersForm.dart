@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:play_tennis/app/ptc/widgets/CountryAndCitySelectWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/cities/CityChatAndChannelWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/trainers/TrainerCard.dart';
+import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
 import 'package:play_tennis/logic/ptc/models/cities/PublicTelegramChatForCityModel.dart';
 import 'package:play_tennis/logic/ptc/services/TrainerCardService.dart';
@@ -137,7 +138,9 @@ class _SearchTrainersForm extends State<SearchTrainersForm> {
       offSet: _offSet,
     );
 
-    AppServices.trainerCardService.search(trainerRequest).then((value) {
+    AppServices.trainerCardService
+        .search(trainerRequest, _errorHandler)
+        .then((value) {
       if (!mounted) {
         return;
       }
@@ -175,5 +178,9 @@ class _SearchTrainersForm extends State<SearchTrainersForm> {
         cityModel = null;
       });
     }
+  }
+
+  _errorHandler(String error) {
+    BaseApiResponseUtils.showError(context, error);
   }
 }

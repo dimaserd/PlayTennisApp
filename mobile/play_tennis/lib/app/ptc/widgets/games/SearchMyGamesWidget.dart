@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/ptc/widgets/games/GamesList.dart';
+import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
 import 'package:play_tennis/logic/ptc/services/GameService.dart';
 import 'package:play_tennis/main-services.dart';
@@ -44,13 +45,19 @@ class _SearchMyGamesWidgetState extends State<SearchMyGamesWidget> {
       offSet: 0,
     );
 
-    AppServices.gameService.searchMine(playerRequest).then((value) {
+    AppServices.gameService
+        .searchMine(playerRequest, _errorHandler)
+        .then((value) {
       games = value.list;
       if (mounted) {
-      setState(() {
-        gamesLoaded = true;
-      });
+        setState(() {
+          gamesLoaded = true;
+        });
       }
     });
+  }
+
+  _errorHandler(String error) {
+    BaseApiResponseUtils.showError(context, error);
   }
 }
