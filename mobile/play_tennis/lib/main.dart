@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:play_tennis/app/main/widgets/palette.dart';
+import 'package:play_tennis/main-services.dart';
 import 'main-routes.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'main-services.dart';
 import 'main-settings.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -46,13 +46,13 @@ void main() async {
   } else {
     print('User did not grant permission to receive notifications');
   }
-  //await messaging.getToken().then((token) {
-  //  print('Token: $token');
+  await messaging.getToken().then((token) {
+    print('Token: $token');
 
-  //  if (token != null) {
-  //    AppServices.appNotificationTokenService.addToken(token);
-  //  }
-  //});
+    if (token != null) {
+      AppServices.appNotificationTokenService.addToken(token);
+    }
+  });
 
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     print('Got a message whilst in the foreground!');
