@@ -52,7 +52,6 @@ class TelegramLinkWidget extends StatelessWidget {
 
             var text = result.responseObject.command!;
 
-            print(text);
             Clipboard.setData(ClipboardData(text: text)).then((_) {
               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                 content: Text(
