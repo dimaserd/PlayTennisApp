@@ -135,7 +135,6 @@ class MainRoutes {
 
     if (settings.name == '/create/game') {
       var playerArguments = settings.arguments as PlayerModel;
-      // print("arguments $arguments");
       return MaterialPageRoute(
           builder: (context) =>
               CreateGameScreen(player: playerArguments, key: UniqueKey()));
