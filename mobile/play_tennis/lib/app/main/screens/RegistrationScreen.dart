@@ -17,7 +17,7 @@ class RegistrationScreen extends StatelessWidget {
               isV2: true,
               onLogin: () {
                 Navigator.of(context)
-                    .pushNamedAndRemoveUntil("/profile", (r) => false);
+                    .pushNamedAndRemoveUntil("/change-avatar", (r) => false);
               },
             ),
           ],
