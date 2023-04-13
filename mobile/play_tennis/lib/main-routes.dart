@@ -9,6 +9,7 @@ import 'package:play_tennis/app/main/screens/RouteNotFoundScreen.dart';
 import 'package:play_tennis/app/main/widgets/images/ImageViewWidget.dart';
 import 'package:play_tennis/app/ptc/screens/AboutApplicationScreen.dart';
 import 'package:play_tennis/app/ptc/screens/AddGameRequestScreen.dart';
+import 'package:play_tennis/app/ptc/screens/ChangePassScreen.dart';
 import 'package:play_tennis/app/ptc/screens/CreateGameScreen.dart';
 import 'package:play_tennis/app/ptc/screens/EditProfileScreen.dart';
 import 'package:play_tennis/app/ptc/screens/GameRequestScreen.dart';
@@ -66,6 +67,10 @@ class MainRoutes {
     if (settings.name == '/registration') {
       return MaterialPageRoute(
           builder: (context) => const RegistrationScreen());
+    }
+
+    if (settings.name == '/forgotpass') {
+      return MaterialPageRoute(builder: (context) => const ChangePassScreen());
     }
 
     if (settings.name == '/advanced-registration') {
