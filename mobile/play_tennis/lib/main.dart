@@ -47,10 +47,16 @@ void main() async {
     print('User did not grant permission to receive notifications');
   }
 
-  String? token = await FirebaseMessaging.instance.getToken();
+  //Почему-то падает
+  try {
+    String? token = await FirebaseMessaging.instance.getToken();
 
-  if (token != null) {
-    AppServices.appNotificationTokenService.addToken(token);
+    if (token != null) {
+      AppServices.appNotificationTokenService.addToken(token);
+    }
+  } catch (e) {
+    //TODO надо починить
+    print(e);
   }
 
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
