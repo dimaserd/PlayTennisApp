@@ -4,7 +4,6 @@ import 'package:play_tennis/app/ptc/widgets/profile/PlayerConfirmationWidget.dar
 import 'package:play_tennis/logic/clt/models/models.dart';
 import 'package:play_tennis/app/ptc/widgets/profile/TelegramLinkTipWidget.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerData.dart';
-import 'package:play_tennis/main-routes.dart';
 import 'package:play_tennis/main-services.dart';
 
 class ProfileData extends StatelessWidget {
