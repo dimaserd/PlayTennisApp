@@ -117,7 +117,6 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
   }
 
   void _onSearchChanged(String query) {
-    print("tap");
     if (_debounce?.isActive ?? false) _debounce?.cancel();
     _debounce = Timer(const Duration(milliseconds: 500), () {
       // Здесь вы можете добавить логику поиска
@@ -186,6 +185,5 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
         cityModel = null;
       });
     }
-    print("players: $players");
   }
 }

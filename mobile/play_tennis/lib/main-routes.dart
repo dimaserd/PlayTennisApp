@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:play_tennis/app/main/screens/AdvancedRegistrationScreen.dart';
 import 'package:play_tennis/app/main/screens/ChangeAvatarScreen.dart';
 import 'package:play_tennis/app/main/screens/CheckAuthScreen.dart';
 import 'package:play_tennis/app/main/screens/LoginScreen.dart';
@@ -8,6 +9,7 @@ import 'package:play_tennis/app/main/screens/RouteNotFoundScreen.dart';
 import 'package:play_tennis/app/main/widgets/images/ImageViewWidget.dart';
 import 'package:play_tennis/app/ptc/screens/AboutApplicationScreen.dart';
 import 'package:play_tennis/app/ptc/screens/AddGameRequestScreen.dart';
+import 'package:play_tennis/app/ptc/screens/ChangePassScreen.dart';
 import 'package:play_tennis/app/ptc/screens/CreateGameScreen.dart';
 import 'package:play_tennis/app/ptc/screens/EditProfileScreen.dart';
 import 'package:play_tennis/app/ptc/screens/GameRequestScreen.dart';
@@ -15,6 +17,7 @@ import 'package:play_tennis/app/ptc/screens/GamesRequestsScreen.dart';
 import 'package:play_tennis/app/ptc/screens/MainScreen.dart';
 import 'package:play_tennis/app/ptc/screens/PlayScreen.dart';
 import 'package:play_tennis/app/ptc/screens/PlayerScreen.dart';
+import 'package:play_tennis/app/ptc/screens/TelegramLinkScreen.dart';
 import 'package:play_tennis/app/ptc/screens/TournamentsScreen.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerModel.dart';
 
@@ -67,13 +70,28 @@ class MainRoutes {
           builder: (context) => const RegistrationScreen());
     }
 
+    if (settings.name == '/forgotpass') {
+      return MaterialPageRoute(builder: (context) => const ChangePassScreen());
+    }
+
+    if (settings.name == '/advanced-registration') {
+      return MaterialPageRoute(
+          builder: (context) => const AdvancedRegistrationScreen());
+    }
+
     if (settings.name == '/change-avatar') {
       return MaterialPageRoute(
           builder: (context) => const ChangeAvatarScreen());
     }
 
     if (settings.name == '/profile') {
-      return MaterialPageRoute(builder: (context) => ProfileScreen(key: UniqueKey()));
+      return MaterialPageRoute(
+          builder: (context) => ProfileScreen(key: UniqueKey()));
+    }
+
+    if (settings.name == '/profile-telegram-link') {
+      return MaterialPageRoute(
+          builder: (context) => TelegramLinkScreen(key: UniqueKey()));
     }
 
     if (settings.name == '/profile-edit') {
@@ -117,14 +135,15 @@ class MainRoutes {
 
     if (settings.name == '/games/add') {
       return MaterialPageRoute(
-          builder: (context) =>  CreateGameScreen(player: null, key: UniqueKey()));
+          builder: (context) =>
+              CreateGameScreen(player: null, key: UniqueKey()));
     }
 
     if (settings.name == '/create/game') {
       var playerArguments = settings.arguments as PlayerModel;
-      // print("arguments $arguments");
       return MaterialPageRoute(
-          builder: (context) => CreateGameScreen(player: playerArguments, key: UniqueKey()));
+          builder: (context) =>
+              CreateGameScreen(player: playerArguments, key: UniqueKey()));
     }
 
     return MaterialPageRoute(

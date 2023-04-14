@@ -8,12 +8,15 @@ import 'package:play_tennis/app/main/widgets/Loading.dart';
 import 'package:play_tennis/app/ptc/widgets/CountryAndCitySelectWidget.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerRegistrationRequest.dart';
+import 'package:play_tennis/logic/ptc/services/PlayerRegistrationService.dart';
 import 'package:play_tennis/main-services.dart';
 import 'package:play_tennis/main-settings.dart';
 
 class RegistrationForm extends StatefulWidget {
   final Function onLogin;
-  const RegistrationForm({super.key, required this.onLogin});
+  final bool isV2;
+  const RegistrationForm(
+      {super.key, required this.isV2, required this.onLogin});
 
   @override
   State<RegistrationForm> createState() => _RegistrationFormState();
@@ -132,13 +135,15 @@ class _RegistrationFormState extends State<RegistrationForm> {
 
   List<Widget> getThirdStepWidgets() {
     return [
-      Padding(
-        padding: padding,
-        child: TextInput(
-          labelText: "Адрес электронной почты",
-          textController: emailTextController,
-        ),
-      ),
+      widget.isV2
+          ? const SizedBox.shrink()
+          : Padding(
+              padding: padding,
+              child: TextInput(
+                labelText: "Адрес электронной почты",
+                textController: emailTextController,
+              ),
+            ),
       Padding(
         padding: padding,
         child: PhoneNumberInput(
@@ -270,7 +275,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.black,
-            minimumSize: const Size.fromHeight(40), // NEW
+            minimumSize: const Size.fromHeight(40),
           ),
           onPressed: () => submitFirstStep(),
           child: const Text("Далее"),
@@ -388,15 +393,16 @@ class _RegistrationFormState extends State<RegistrationForm> {
         registrationSource: "PlayTennisApp",
       );
 
-      var regResponse =
-          await AppServices.playerRegistrationService.register(model);
+      var regResponse = widget.isV2
+          ? await registerHandlerV2(model)
+          : await registerHandler(model);
 
-      if (!regResponse.isSucceeded) {
+      if (!regResponse.succeeded) {
         setState(() {
           isRegistrationInProgress = false;
         });
 
-        _errorHandler(regResponse.message);
+        _errorHandler(regResponse.message!);
         return;
       }
 
@@ -411,7 +417,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
         return;
       }
 
-      _errorHandler("Регистрация и авторизация прошла успешно");
+      _successHandler("Регистрация и авторизация прошла успешно");
 
       widget.onLogin();
 
@@ -427,7 +433,38 @@ class _RegistrationFormState extends State<RegistrationForm> {
     } finally {}
   }
 
+  Future<PlayerRegistrationResult> registerHandler(
+      PlayerRegistrationRequest model) {
+    return AppServices.playerRegistrationService.register(model);
+  }
+
+  Future<PlayerRegistrationResult> registerHandlerV2(
+      PlayerRegistrationRequest model) {
+    var advancedModel = AdvancedPlayerRegistration(
+      name: model.name,
+      surname: model.surname,
+      phoneNumber: model.phoneNumber,
+      ntrpRating: model.ntrpRating,
+      password: model.password,
+      sex: model.sex,
+      birthDate: model.birthDate,
+      cityId: model.cityId,
+      countryId: model.countryId,
+      cityOrCountry: model.cityOrCountry,
+      noCityOrCountryFilled: model.noCityOrCountryFilled,
+      registrationSource: model.registrationSource,
+      aboutMe: model.aboutMe,
+    );
+
+    return AppServices.playerRegistrationService
+        .registerAdvanced(advancedModel);
+  }
+
   void _errorHandler(String error) {
     BaseApiResponseUtils.showError(context, error);
+  }
+
+  void _successHandler(String message) {
+    BaseApiResponseUtils.showSuccess(context, message);
   }
 }

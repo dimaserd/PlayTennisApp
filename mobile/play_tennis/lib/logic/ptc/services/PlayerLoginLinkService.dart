@@ -1,7 +1,7 @@
 import 'dart:convert';
+import 'package:play_tennis/logic/clt/consts/SharedKeys.dart';
+import 'package:play_tennis/logic/core/NetworkService.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../clt/consts/SharedKeys.dart';
-import '../../core/NetworkService.dart';
 
 class LoginByEmailOrPhoneNumber {
   late String? emailOrPhoneNumber;

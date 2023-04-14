@@ -61,31 +61,34 @@ class SearchCommunityCards {
 }
 
 class CommunityCardService {
-  
   final NetworkService networkService;
   final String baseUrl = "/api/ptc/community-card/";
   CommunityCardService(this.networkService);
 
   Future<GetListResult<CommunityCardSimpleModel>> search(
-      SearchCommunityCards model) async {
+      SearchCommunityCards model, Function(String) errorHandler) async {
     var map = model.toJson();
     var bodyJson = jsonEncode(map);
 
-    var responseBody =
-        await networkService.postData('${baseUrl}search', bodyJson);
+    var responseBody = await networkService.postDataV2(
+        '${baseUrl}search', bodyJson, errorHandler);
 
-    var json = jsonDecode(responseBody);
+    try {
+      var json = jsonDecode(responseBody);
 
-    var result = GetListResult(
-      totalCount: json["totalCount"],
-      list: List<CommunityCardSimpleModel>.from(
-        json["list"].map((x) => CommunityCardSimpleModel.fromJson(x)),
-      ),
-      count: json["count"],
-      offSet: json["offSet"],
-    );
+      var result = GetListResult(
+        totalCount: json["totalCount"],
+        list: List<CommunityCardSimpleModel>.from(
+          json["list"].map((x) => CommunityCardSimpleModel.fromJson(x)),
+        ),
+        count: json["count"],
+        offSet: json["offSet"],
+      );
 
-    return result;
+      return result;
+    } catch (e) {
+      errorHandler(e.toString());
+      return GetListResult(totalCount: 0, list: [], count: 0, offSet: 0);
+    }
   }
-
 }

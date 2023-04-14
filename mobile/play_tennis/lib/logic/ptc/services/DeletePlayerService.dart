@@ -7,12 +7,18 @@ class DeletePlayerService {
 
   DeletePlayerService(this.networkService);
 
-  Future<BaseApiResponse> delete(String id) async {
-    var response =
-        await networkService.postData('/api/ptc/player/RemoveMe/$id', "{}");
+  Future<BaseApiResponse> delete(
+      String id, Function(String) errorHandler) async {
+    var response = await networkService.postDataV2(
+        '/api/ptc/player/RemoveMe/$id', "{}", errorHandler);
 
-    var json = jsonDecode(response);
+    try {
+      var json = jsonDecode(response);
 
-    return BaseApiResponse.fromJson(json);
+      return BaseApiResponse.fromJson(json);
+    } catch (e) {
+      errorHandler(e.toString());
+      return BaseApiResponse(isSucceeded: false, message: "Error");
+    }
   }
 }

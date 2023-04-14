@@ -157,6 +157,7 @@ class _MyStatefulWidgetState extends State<EditProfileWidget> {
             children: [
               EditPlayerAvatarWidget(
                 avatarFileId: widget.playerData.avatarFileId,
+                onSucceess: () => {},
               ),
             ],
           ),

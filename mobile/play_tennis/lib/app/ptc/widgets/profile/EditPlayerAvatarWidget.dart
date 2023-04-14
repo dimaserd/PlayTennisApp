@@ -6,8 +6,13 @@ import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
 import 'package:play_tennis/main-services.dart';
 
 class EditPlayerAvatarWidget extends StatefulWidget {
-  int? avatarFileId;
-  EditPlayerAvatarWidget({super.key, required this.avatarFileId});
+  final int? avatarFileId;
+  final Function onSucceess;
+  const EditPlayerAvatarWidget({
+    super.key,
+    required this.avatarFileId,
+    required this.onSucceess,
+  });
 
   @override
   State<EditPlayerAvatarWidget> createState() => _EditPlayerAvatarWidgetState();
@@ -16,6 +21,15 @@ class EditPlayerAvatarWidget extends StatefulWidget {
 class _EditPlayerAvatarWidgetState extends State<EditPlayerAvatarWidget> {
   bool isEdit = false;
   bool completed = false;
+  int? avatarFileId;
+
+  @override
+  initState() {
+    setState(() {
+      avatarFileId = widget.avatarFileId;
+    });
+    super.initState();
+  }
 
   List<Widget> getCompletedWidgets() {
     return [
@@ -37,7 +51,7 @@ class _EditPlayerAvatarWidgetState extends State<EditPlayerAvatarWidget> {
           ? Padding(
               padding: const EdgeInsets.all(20.0),
               child: PlayerAvatar(
-                avatarFileId: widget.avatarFileId,
+                avatarFileId: avatarFileId,
               ),
             )
           : const SizedBox.shrink(),
@@ -96,9 +110,11 @@ class _EditPlayerAvatarWidgetState extends State<EditPlayerAvatarWidget> {
 
     if (avatarResponse.isSucceeded) {
       setState(() {
-        widget.avatarFileId = newAvatarFileId;
+        avatarFileId = newAvatarFileId;
         isEdit = false;
       });
+
+      widget.onSucceess();
       return BaseApiResponse(isSucceeded: true, message: "Ваш аватар обновлен");
     }
 

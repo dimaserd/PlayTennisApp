@@ -65,6 +65,15 @@ class _LoginFormState extends State<LoginForm> {
           },
         ),
       ),
+      Padding(
+        padding: const EdgeInsets.only(top: 10.0),
+        child: TextButton(
+          child: const Text("Забыли пароль?"),
+          onPressed: () {
+            Navigator.of(context).pushNamed("/forgotpass");
+          },
+        ),
+      ),
     ];
   }
 

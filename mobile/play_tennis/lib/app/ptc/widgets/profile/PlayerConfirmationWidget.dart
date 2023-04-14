@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import '../../../../logic/ptc/models/PlayerData.dart';
-import '../../../../main-services.dart';
-import '../../../main/widgets/Inputs/TextInput.dart';
+import 'package:play_tennis/app/main/widgets/Inputs/TextInput.dart';
+import 'package:play_tennis/logic/ptc/models/PlayerData.dart';
+import 'package:play_tennis/main-services.dart';
 
 class PlayerConfirmationWidget extends StatefulWidget {
-  PlayerData player;
-  PlayerConfirmationWidget({super.key, required this.player});
+  final PlayerData player;
+  const PlayerConfirmationWidget({super.key, required this.player});
 
   @override
   State<PlayerConfirmationWidget> createState() =>

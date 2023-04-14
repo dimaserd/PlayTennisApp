@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:play_tennis/app/ptc/widgets/CountryAndCitySelectWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/cities/CityChatAndChannelWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/communities/CommunityList.dart';
+import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
 import 'package:play_tennis/logic/ptc/models/cities/PublicTelegramChatForCityModel.dart';
 import 'package:play_tennis/logic/ptc/services/CommunityCardService.dart';
@@ -132,7 +133,9 @@ class _SearchCommunityForm extends State<SearchCommunityForm> {
     var communityRequest = SearchCommunityCards(
         q: _searchController.text, cityId: cityId, count: 10, offSet: _offSet);
 
-    AppServices.communityService.search(communityRequest).then((value) {
+    AppServices.communityService
+        .search(communityRequest, _errorHandler)
+        .then((value) {
       if (!mounted) {
         return;
       }
@@ -170,5 +173,9 @@ class _SearchCommunityForm extends State<SearchCommunityForm> {
         cityModel = null;
       });
     }
+  }
+
+  _errorHandler(String error) {
+    BaseApiResponseUtils.showError(context, error);
   }
 }

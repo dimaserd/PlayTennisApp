@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
 import 'package:play_tennis/logic/ptc/models/cities/CityModel.dart';
 import 'package:play_tennis/logic/ptc/models/cities/CountrySimpleModel.dart';
@@ -129,8 +130,14 @@ class _CountryAndCitySelectState extends State<CountryAndCitySelect> {
       offSet: 0,
     );
 
-    return AppServices.countryService.searchCities(model).then((value) {
+    return AppServices.countryService
+        .searchCities(model, _errorHandler)
+        .then((value) {
       return value.list;
     });
+  }
+
+  _errorHandler(String error) {
+    BaseApiResponseUtils.showError(context, error);
   }
 }

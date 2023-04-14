@@ -40,7 +40,6 @@ class FlutterNotificationAppTokenService {
       return BaseApiResponse.fromJson(json);
     } catch (e) {
       print("Произошла ошибка при привязке токена");
-      print(e.toString());
       return BaseApiResponse(isSucceeded: false, message: "Произошла ошибка");
     }
   }

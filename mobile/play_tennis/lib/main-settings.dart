@@ -13,3 +13,9 @@ class MainSettings {
 
   static const bool showSiteUrls = false;
 }
+
+class TelegramBotSettings {
+  static const String link = "tg://resolve?domain=@tennis_play_bot";
+
+  static const String profileLinkCommandFormat = "/link id some-new-id";
+}

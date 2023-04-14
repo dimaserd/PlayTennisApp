@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/images/PlayerAvatar.dart';
 import 'package:play_tennis/app/ptc/widgets/profile/PlayerConfirmationWidget.dart';
 import 'package:play_tennis/logic/clt/models/models.dart';
+import 'package:play_tennis/app/ptc/widgets/profile/TelegramLinkTipWidget.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerData.dart';
 import 'package:play_tennis/main-routes.dart';
 import 'package:play_tennis/main-services.dart';
@@ -16,6 +17,11 @@ class ProfileData extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        player.telegramUserId == null
+            ? TelegramLinkTipWidget(
+                player: player,
+              )
+            : const SizedBox.shrink(),
         !player.accountConfirmed
             ? PlayerConfirmationWidget(
                 player: player,
@@ -41,7 +47,9 @@ class ProfileData extends StatelessWidget {
                 Text(
                   "Имя: ${player.surname!} ${player.name!}",
                 ),
-                Text("Email: ${player.email}"),
+                player.noEmail
+                    ? const SizedBox.shrink()
+                    : Text("Email: ${player.email}"),
                 Text("Номер телефона: ${player.phoneNumber}"),
                 Text("Ntrp: ${player.ntrpRating}"),
                 Text("Рейтинг силы: ${player.rating}"),
