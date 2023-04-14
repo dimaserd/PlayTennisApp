@@ -46,13 +46,12 @@ void main() async {
   } else {
     print('User did not grant permission to receive notifications');
   }
-  await messaging.getToken().then((token) {
-    print('Token: $token');
 
-    if (token != null) {
-      AppServices.appNotificationTokenService.addToken(token);
-    }
-  });
+  String? token = await FirebaseMessaging.instance.getToken();
+
+  if (token != null) {
+    AppServices.appNotificationTokenService.addToken(token);
+  }
 
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     print('Got a message whilst in the foreground!');

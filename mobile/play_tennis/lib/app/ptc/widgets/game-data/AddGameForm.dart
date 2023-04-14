@@ -208,34 +208,38 @@ class _AddGameFormState extends State<AddGameForm> {
           height: 5,
         ),
         !hasScore
-            ? Card(
-                margin: const EdgeInsets.only(top: 0, left: 0, right: 0),
-                elevation: 5,
-                child: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: Column(children: [
-                    const Text(
-                      "Счёт матча",
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w600,
+            ? GestureDetector(
+                onVerticalDragDown: (_) {
+                  FocusScope.of(context).unfocus();
+                },
+                child: Card(
+                  margin: const EdgeInsets.only(top: 0, left: 0, right: 0),
+                  elevation: 5,
+                  child: Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: Column(children: [
+                      const Text(
+                        "Счёт матча",
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                    ),
-                    GameDataWidget(controller: gameDataWidgetController),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.black,
-                        minimumSize: const Size.fromHeight(48),
+                      GameDataWidget(controller: gameDataWidgetController),
+                      const SizedBox(
+                        height: 20,
                       ),
-                      onPressed: _saveScore,
-                      child: const Text("Далее"),
-                    )
-                  ]),
-                ),
-              )
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.black,
+                          minimumSize: const Size.fromHeight(48),
+                        ),
+                        onPressed: _saveScore,
+                        child: const Text("Далее"),
+                      )
+                    ]),
+                  ),
+                ))
             : const SizedBox.shrink(),
         const SizedBox(
           height: 10,
