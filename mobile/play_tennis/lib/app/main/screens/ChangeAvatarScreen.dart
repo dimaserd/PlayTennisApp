@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/Loading.dart';
 import 'package:play_tennis/app/ptc/widgets/profile/EditPlayerAvatarWidget.dart';
@@ -52,6 +51,9 @@ class _ChangeAvatarScreenState extends State<ChangeAvatarScreen> {
                         );
                       },
                     ),
+                    const SizedBox(
+                      height: 10,
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(
                         top: 0,
@@ -60,8 +62,9 @@ class _ChangeAvatarScreenState extends State<ChangeAvatarScreen> {
                       ),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.black,
-                          minimumSize: const Size.fromHeight(32),
+                          backgroundColor:
+                              const Color.fromARGB(255, 255, 255, 137),
+                          minimumSize: const Size.fromHeight(36),
                         ),
                         onPressed: () {
                           Navigator.of(context).pushNamedAndRemoveUntil(
@@ -70,10 +73,11 @@ class _ChangeAvatarScreenState extends State<ChangeAvatarScreen> {
                           );
                         },
                         child: const Text(
-                          "Пропустить",
+                          "Продолжить без фотографии",
                           style: TextStyle(
-                            fontSize: 14,
+                            fontSize: 16,
                             fontWeight: FontWeight.bold,
+                            color: Colors.black,
                           ),
                         ),
                       ),

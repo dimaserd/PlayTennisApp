@@ -94,45 +94,28 @@ class ProfileData extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    actionsAlignment: MainAxisAlignment.center,
-                    title:
-                        const Text('Вы действительно хотите удалить аккаунт?'),
-                    actions: [
-                      ElevatedButton(
-                        child: const Text('Отменить'),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                      ElevatedButton(
-                        child: const Text('Да'),
-                        onPressed: () {
-                          if (loginData?.userId != null) {
-                            final userId = loginData!.userId!;
-                            deleteAccount(context, userId);
-                          }
-                        },
-                      ),
-                    ],
-                  );
-                });
+            showDialogHandler(context);
           },
           child: const SizedBox(
-              height: 50,
-              width: double.infinity,
-              child: Card(
-                  margin: const EdgeInsets.only(top: 5, left: 5, right: 5),
-                  elevation: 5,
-                  child: Center(
-                      child: Text("Удалить аккаунт",
-                          style: TextStyle(color: Colors.red))))),
+            height: 50,
+            width: double.infinity,
+            child: Card(
+              margin: EdgeInsets.only(top: 5, left: 5, right: 5),
+              elevation: 5,
+              child: Center(
+                child: Text(
+                  "Удалить аккаунт",
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
+          ),
         ),
         const SizedBox(
-          height: 10,
+          height: 30,
         ),
       ],
     );
@@ -141,5 +124,33 @@ class ProfileData extends StatelessWidget {
   Future<void> deleteAccount(context, String userId) async {
     await AppServices.deletePlayerService.delete(userId, (er) {});
     Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+  }
+
+  showDialogHandler(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            actionsAlignment: MainAxisAlignment.center,
+            title: const Text('Вы действительно хотите удалить аккаунт?'),
+            actions: [
+              ElevatedButton(
+                child: const Text('Отменить'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              ElevatedButton(
+                child: const Text('Да'),
+                onPressed: () {
+                  if (loginData?.userId != null) {
+                    final userId = loginData!.userId!;
+                    deleteAccount(context, userId);
+                  }
+                },
+              ),
+            ],
+          );
+        });
   }
 }
