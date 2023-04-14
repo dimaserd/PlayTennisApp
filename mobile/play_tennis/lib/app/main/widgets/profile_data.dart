@@ -139,8 +139,7 @@ class ProfileData extends StatelessWidget {
   }
 
   Future<void> deleteAccount(context, String userId) async {
-    await AppServices.deletePlayerService.delete(userId);
-    Navigator.pushNamedAndRemoveUntil(
-                                context, '/login', (route) => false);
+    await AppServices.deletePlayerService.delete(userId, (er) {});
+    Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
   }
 }
