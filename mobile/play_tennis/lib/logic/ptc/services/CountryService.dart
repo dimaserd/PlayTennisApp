@@ -1,10 +1,10 @@
 import 'dart:convert';
-import '../../clt/models/BaseApiResponse.dart';
-import '../../core/NetworkService.dart';
-import '../models/cities/CityModel.dart';
-import '../models/cities/CountrySimpleModel.dart';
-import '../models/cities/SearchCities.dart';
-import '../models/cities/SearchCountries.dart';
+import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
+import 'package:play_tennis/logic/core/NetworkService.dart';
+import 'package:play_tennis/logic/ptc/models/cities/CityModel.dart';
+import 'package:play_tennis/logic/ptc/models/cities/CountrySimpleModel.dart';
+import 'package:play_tennis/logic/ptc/models/cities/SearchCities.dart';
+import 'package:play_tennis/logic/ptc/models/cities/SearchCountries.dart';
 
 class CountryService {
   final NetworkService networkService;
@@ -16,7 +16,7 @@ class CountryService {
     var bodyJson = jsonEncode(map);
 
     var responseBody = await networkService.postData(
-        '/api/ptc/dlv/countries/search', bodyJson);
+        '/api/ptc/dlv/countries/search/cached', bodyJson);
 
     var json = jsonDecode(responseBody);
 

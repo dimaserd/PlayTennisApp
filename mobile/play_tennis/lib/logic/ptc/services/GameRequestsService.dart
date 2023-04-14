@@ -2,12 +2,12 @@ import 'dart:convert';
 import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
 import 'package:play_tennis/logic/core/NetworkService.dart';
 import 'package:play_tennis/logic/ptc/models/game-requests/AcceptGameRequestResponse.dart';
+import 'package:play_tennis/logic/ptc/models/game-requests/CreateGameRequest.dart';
 import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestDetailedModel.dart';
 import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestResponseSimpleModel.dart';
 import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestSimpleModel.dart';
 import 'package:play_tennis/logic/ptc/models/game-requests/SearchGameRequestResponses.dart';
 import 'package:play_tennis/logic/ptc/models/game-requests/SearchGameRequests.dart';
-import '/logic/ptc/models/game-requests/CreateGameRequest.dart';
 
 class GameRequestsService {
   final NetworkService networkService;

@@ -1,6 +1,6 @@
 import 'dart:convert';
-import '../../clt/models/BaseApiResponse.dart';
-import '../../core/NetworkService.dart';
+import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
+import 'package:play_tennis/logic/core/NetworkService.dart';
 
 class CommunityCardSimpleModel {
   late String? id;
