@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/Loading.dart';
 import 'package:play_tennis/app/main/widgets/TelegramData.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
-import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
-import 'package:play_tennis/logic/ptc/models/PlayerData.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
 import 'package:play_tennis/logic/ptc/models/cities/PublicTelegramChatForCityModel.dart';
 import 'package:play_tennis/main-services.dart';
@@ -27,7 +25,12 @@ class TelegramProfileScreenState extends State<TelegramProfileScreen>
   }
 
   void loadLocationata() {
-    AppServices.playerService.getLocationData((e) => {}).then((value) {
+    AppServices.playerService.getLocationData((e) {
+      BaseApiResponseUtils.showError(
+        context,
+        "Произошла ошибка при получении данных о вашей локации. Пожалуйста, обратитесь к администратору портала.",
+      );
+    }).then((value) {
       if (value == null) {
         BaseApiResponseUtils.showError(context, "Кажется вы были разлогинены");
         Navigator.of(context)

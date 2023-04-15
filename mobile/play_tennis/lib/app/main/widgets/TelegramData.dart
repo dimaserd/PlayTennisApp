@@ -39,15 +39,42 @@ class TelegramData extends StatelessWidget {
                 ),
                 const Text(
                   "Ваше местоположение:",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(
                   height: 5,
                 ),
                 Text(
                   "Страна: ${locationData.country!.name}",
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 Text(
                   "Город: ${locationData.city!.name}",
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                const Text(
+                  "Все заявки и новости вашего города попадают в специальный чат, где вы можете обсуждать свои достижения и знакомиться с другими участниками.",
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                const Text(
+                  "Если вы не хотите участвовать в обсуждениях и устали от возможного флуда в чате, вы можете подписаться только на канал. Туда также попадают заявки, результаты игр и важные новости.",
+                ),
+                const SizedBox(
+                  height: 5,
                 ),
               ],
             ),
@@ -115,6 +142,9 @@ class TelegramData extends StatelessWidget {
                 ),
               )
             : const SizedBox.shrink(),
+        const SizedBox(
+          height: 50,
+        ),
       ],
     );
   }
