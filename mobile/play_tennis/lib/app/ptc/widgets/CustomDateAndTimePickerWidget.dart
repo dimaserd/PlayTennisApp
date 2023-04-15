@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../main/widgets/Inputs/DatePickerInput.dart';
-import '../../main/widgets/Inputs/DropdownWidget.dart';
-import '../../main/widgets/Inputs/TimePickerInput.dart';
+import 'package:play_tennis/app/main/widgets/Inputs/DatePickerInput.dart';
+import 'package:play_tennis/app/main/widgets/Inputs/DropdownWidget.dart';
+import 'package:play_tennis/app/main/widgets/Inputs/TimePickerInput.dart';
 
 class CustomDateAndTimePickerDateTypes {
   static String toDay = "today";

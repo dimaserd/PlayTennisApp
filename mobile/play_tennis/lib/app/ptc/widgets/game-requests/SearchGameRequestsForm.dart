@@ -51,35 +51,6 @@ class _SearchGameRequestsFormState extends State<SearchGameRequestsForm> {
           onCountryChanged: (p) {},
           controller: widget.countryAndCitySelectController,
         ),
-        MainSettings.showSiteUrls
-            ? Padding(
-                padding:
-                    const EdgeInsets.only(left: 10.0, right: 10.0, top: 10),
-                child: RichText(
-                  text: TextSpan(
-                    children: [
-                      const TextSpan(
-                        text: 'Все заявки на игры попадают в специальный ',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                      TextSpan(
-                        text: 'чат',
-                        style: const TextStyle(color: Colors.blue),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            _launchUrl(Uri.parse(
-                                "https://docs.flutter.io/flutter/services/UrlLauncher-class.html"));
-                          },
-                      ),
-                      const TextSpan(
-                        text: '.',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ],
-                  ),
-                ),
-              )
-            : const SizedBox.shrink(),
         Container(
           color: Colors.white,
           margin: const EdgeInsets.only(top: 5),

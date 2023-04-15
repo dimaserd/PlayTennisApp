@@ -27,7 +27,7 @@ class CityService {
   final NetworkService networkService;
   CityService(this.networkService);
 
-  Future<PublicTelegramChatForCityModel?> getById(
+  Future<PublicTelegramChatForCityModel?> getTelegramDataById(
     String id,
     Function(String) onError,
   ) async {

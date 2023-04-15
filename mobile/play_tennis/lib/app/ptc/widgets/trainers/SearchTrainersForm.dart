@@ -162,7 +162,9 @@ class _SearchTrainersForm extends State<SearchTrainersForm> {
       }
     });
     if (cityId != null) {
-      AppServices.cityService.getById(cityId, (p0) {}).then((value) {
+      AppServices.cityService
+          .getTelegramDataById(cityId, (p0) {})
+          .then((value) {
         if (!mounted) {
           return;
         }

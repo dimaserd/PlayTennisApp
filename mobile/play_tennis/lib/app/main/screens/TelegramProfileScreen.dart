@@ -4,6 +4,7 @@ import 'package:play_tennis/app/main/widgets/TelegramData.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerData.dart';
+import 'package:play_tennis/logic/ptc/models/cities/PublicTelegramChatForCityModel.dart';
 import 'package:play_tennis/main-services.dart';
 
 class TelegramProfileScreen extends StatefulWidget {
@@ -17,6 +18,7 @@ class TelegramProfileScreenState extends State<TelegramProfileScreen>
     with SingleTickerProviderStateMixin {
   PlayerData? playerData;
   CurrentLoginData? loginData;
+  PublicTelegramChatForCityModel? telegramCityModel;
 
   @override
   void initState() {
@@ -38,6 +40,12 @@ class TelegramProfileScreenState extends State<TelegramProfileScreen>
           playerData = value;
         });
       }
+
+      if (playerData == null) {
+        return;
+      }
+
+      loadTelegramData(playerData!.cityId!);
     });
   }
 
@@ -48,6 +56,17 @@ class TelegramProfileScreenState extends State<TelegramProfileScreen>
           loginData = value;
         });
       }
+    });
+  }
+
+  void loadTelegramData(String cityId) {
+    AppServices.cityService.getTelegramDataById(cityId, (p0) {}).then((value) {
+      if (!mounted) {
+        return;
+      }
+      setState(() {
+        telegramCityModel = value;
+      });
     });
   }
 
@@ -77,6 +96,7 @@ class TelegramProfileScreenState extends State<TelegramProfileScreen>
         child: TelegramData(
           player: playerData!,
           loginData: loginData,
+          telegramCityModel: telegramCityModel!,
         ),
       ),
     ];
