@@ -21,7 +21,7 @@ class _MainScreenState extends State<MainScreen> {
   PlayerLocationData? locationData;
 
   void loadLocationData() {
-    AppServices.playerService.getLocationData().then((value) {
+    AppServices.playerService.getLocationData((e) => {}).then((value) {
       if (value == null) {
         BaseApiResponseUtils.showError(context, "Кажется вы были разлогинены");
         Navigator.of(context)

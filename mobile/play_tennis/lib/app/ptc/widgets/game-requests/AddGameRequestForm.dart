@@ -33,7 +33,7 @@ class _AddGameRequestFormState extends State<AddGameRequestForm> {
   @override
   void initState() {
     super.initState();
-    AppServices.playerService.getLocationData().then((value) {
+    AppServices.playerService.getLocationData((e) => {}).then((value) {
       if (!mounted) return;
       if (value == null) return;
 

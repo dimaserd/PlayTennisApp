@@ -135,17 +135,23 @@ class PlayerService {
     return BaseApiResponse.fromJson(json);
   }
 
-  Future<PlayerLocationData?> getLocationData() async {
-    var response =
-        await networkService.getData('/api/ptc/player/Data/Location/Get');
+  Future<PlayerLocationData?> getLocationData(Function(String) onError) async {
+    var response = await networkService.getDataInner(
+        '/api/ptc/player/Data/Location/Get', onError);
 
     if (response == "null") {
       return null;
     }
 
-    var json = jsonDecode(response!);
+    try {
+      var json = jsonDecode(response!);
 
-    return PlayerLocationData.fromJson(json);
+      return PlayerLocationData.fromJson(json);
+    } catch (e) {
+      onError(e.toString());
+    }
+
+    return PlayerLocationData(id: "", country: null, city: null);
   }
 
   Future<GenericBaseApiResponse<TelegramLinkResponse>>

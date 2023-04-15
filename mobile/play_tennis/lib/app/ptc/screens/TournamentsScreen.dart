@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/Loading.dart';
 import 'package:play_tennis/app/main/widgets/side_drawer.dart';
-import 'package:play_tennis/app/ptc/widgets/profile/TelegramLinkWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/tournaments/SearchTournamentsForm.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
@@ -18,7 +17,7 @@ class _TournamentsScreenState extends State<TournamentsScreen> {
   PlayerLocationData? locationData;
 
   void loadLocationData() {
-    AppServices.playerService.getLocationData().then((value) {
+    AppServices.playerService.getLocationData((e) => {}).then((value) {
       if (value == null) {
         BaseApiResponseUtils.showError(context, "Кажется вы были разлогинены");
         Navigator.of(context)
