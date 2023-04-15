@@ -4,6 +4,7 @@ import 'package:play_tennis/app/main/widgets/TelegramData.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerData.dart';
+import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
 import 'package:play_tennis/logic/ptc/models/cities/PublicTelegramChatForCityModel.dart';
 import 'package:play_tennis/main-services.dart';
 
@@ -16,19 +17,17 @@ class TelegramProfileScreen extends StatefulWidget {
 
 class TelegramProfileScreenState extends State<TelegramProfileScreen>
     with SingleTickerProviderStateMixin {
-  PlayerData? playerData;
-  CurrentLoginData? loginData;
+  PlayerLocationData? locationData;
   PublicTelegramChatForCityModel? telegramCityModel;
 
   @override
   void initState() {
     super.initState();
-    getPlayerData();
-    getLoginData();
+    loadLocationata();
   }
 
-  void getPlayerData() {
-    AppServices.playerService.getData().then((value) {
+  void loadLocationata() {
+    AppServices.playerService.getLocationData((e) => {}).then((value) {
       if (value == null) {
         BaseApiResponseUtils.showError(context, "Кажется вы были разлогинены");
         Navigator.of(context)
@@ -37,25 +36,15 @@ class TelegramProfileScreenState extends State<TelegramProfileScreen>
       }
       if (mounted) {
         setState(() {
-          playerData = value;
+          locationData = value;
         });
       }
 
-      if (playerData == null) {
+      if (locationData == null || locationData!.city == null) {
         return;
       }
 
-      loadTelegramData(playerData!.cityId!);
-    });
-  }
-
-  void getLoginData() {
-    AppServices.loginService.getLoginData().then((value) {
-      if (mounted) {
-        setState(() {
-          loginData = value;
-        });
-      }
+      loadTelegramData(locationData!.city!.id!);
     });
   }
 
@@ -85,7 +74,7 @@ class TelegramProfileScreenState extends State<TelegramProfileScreen>
   }
 
   List<Widget> getWidgets() {
-    if (playerData == null || loginData == null) {
+    if (locationData == null || telegramCityModel == null) {
       return const [
         Loading(text: "Загрузка"),
       ];
@@ -94,8 +83,7 @@ class TelegramProfileScreenState extends State<TelegramProfileScreen>
     return [
       Center(
         child: TelegramData(
-          player: playerData!,
-          loginData: loginData,
+          locationData: locationData!,
           telegramCityModel: telegramCityModel!,
         ),
       ),

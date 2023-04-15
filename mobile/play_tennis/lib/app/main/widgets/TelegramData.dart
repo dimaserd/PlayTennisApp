@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:play_tennis/logic/clt/models/models.dart';
-import 'package:play_tennis/logic/ptc/models/PlayerData.dart';
+import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
 import 'package:play_tennis/logic/ptc/models/cities/PublicTelegramChatForCityModel.dart';
 import 'package:play_tennis/main-extensions.dart';
 import 'package:play_tennis/main-settings.dart';
 
 class TelegramData extends StatelessWidget {
-  final PlayerData player;
-  final CurrentLoginData? loginData;
+  final PlayerLocationData locationData;
   final PublicTelegramChatForCityModel telegramCityModel;
 
   const TelegramData({
     super.key,
-    required this.player,
-    required this.loginData,
+    required this.locationData,
     required this.telegramCityModel,
   });
 
@@ -39,17 +36,17 @@ class TelegramData extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                Text(
+                const Text(
                   "Ваше местоположение:",
                 ),
                 const SizedBox(
                   height: 5,
                 ),
                 Text(
-                  "Страна: Россия",
+                  "Страна: ${locationData.country!.name}",
                 ),
                 Text(
-                  "Город: Москва",
+                  "Город: ${locationData.city!.name}",
                 ),
               ],
             ),
