@@ -1,11 +1,11 @@
 import 'dart:convert';
+import 'package:play_tennis/logic/clt/consts/SharedKeys.dart';
+import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
+import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
+import 'package:play_tennis/logic/clt/models/LoginResultModel.dart';
+import 'package:play_tennis/logic/core/NetworkService.dart';
+import 'package:play_tennis/main-services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../../main-services.dart';
-import '../../core/NetworkService.dart';
-import '../consts/SharedKeys.dart';
-import '../models/BaseApiResponse.dart';
-import '../models/CurrentLoginData.dart';
-import '../models/LoginResultModel.dart';
 
 class LoginService {
   final NetworkService networkService;
