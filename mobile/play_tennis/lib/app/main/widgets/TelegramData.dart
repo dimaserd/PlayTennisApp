@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
 import 'package:play_tennis/logic/ptc/models/cities/PublicTelegramChatForCityModel.dart';
 import 'package:play_tennis/main-extensions.dart';
@@ -56,8 +57,12 @@ class TelegramData extends StatelessWidget {
             ? GestureDetector(
                 onTap: () {
                   MainAppExtensions.launchUrlInBrowser(
-                    telegramCityModel.channelLink!,
-                  );
+                      telegramCityModel.channelLink!, (e) {
+                    BaseApiResponseUtils.showError(
+                      context,
+                      "Произошла ошибка при открытии телеграм-канала. Обратитесь к админстратору портала.",
+                    );
+                  });
                 },
                 child: const SizedBox(
                   height: 50,
@@ -83,8 +88,12 @@ class TelegramData extends StatelessWidget {
             ? GestureDetector(
                 onTap: () {
                   MainAppExtensions.launchUrlInBrowser(
-                    telegramCityModel.chatLink!,
-                  );
+                      telegramCityModel.chatLink!, (e) {
+                    BaseApiResponseUtils.showError(
+                      context,
+                      "Произошла ошибка при открытии телеграм-чата. Обратитесь к админстратору портала.",
+                    );
+                  });
                 },
                 child: const SizedBox(
                   height: 50,
