@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:play_tennis/app/main/widgets/Inputs/SetInput.dart';
+import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerSetScores.dart';
-import '../../../../baseApiResponseUtils.dart';
-import '../../../../logic/ptc/models/games/TennisSetData.dart';
-import '../../../main/widgets/Inputs/SetInput.dart';
+import 'package:play_tennis/logic/ptc/models/games/TennisSetData.dart';
 
 class GameDataWidgetExtensions {
   static String getStringValue(List<TennisSetData> value) {

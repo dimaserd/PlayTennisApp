@@ -6,6 +6,7 @@ import 'package:play_tennis/app/main/screens/LoginScreen.dart';
 import 'package:play_tennis/app/main/screens/ProfileScreen.dart';
 import 'package:play_tennis/app/main/screens/RegistrationScreen.dart';
 import 'package:play_tennis/app/main/screens/RouteNotFoundScreen.dart';
+import 'package:play_tennis/app/main/screens/TelegramProfileScreen.dart';
 import 'package:play_tennis/app/main/widgets/images/ImageViewWidget.dart';
 import 'package:play_tennis/app/ptc/screens/AboutApplicationScreen.dart';
 import 'package:play_tennis/app/ptc/screens/AddGameRequestScreen.dart';
@@ -87,6 +88,11 @@ class MainRoutes {
     if (settings.name == '/profile') {
       return MaterialPageRoute(
           builder: (context) => ProfileScreen(key: UniqueKey()));
+    }
+
+    if (settings.name == '/profile/telegram') {
+      return MaterialPageRoute(
+          builder: (context) => TelegramProfileScreen(key: UniqueKey()));
     }
 
     if (settings.name == '/profile-telegram-link') {

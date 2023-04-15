@@ -101,6 +101,29 @@ class ProfileData extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
+            Navigator.of(context).pushNamed("/profile/telegram");
+          },
+          child: const SizedBox(
+            height: 50,
+            width: double.infinity,
+            child: Card(
+              color: Color.fromRGBO(36, 168, 235, 1),
+              margin: EdgeInsets.only(top: 5, left: 5, right: 5),
+              elevation: 5,
+              child: Center(
+                child: Text(
+                  "Telegram сообщество",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+        GestureDetector(
+          onTap: () {
             copyIdHandler(context);
           },
           child: const SizedBox(
@@ -133,12 +156,13 @@ class ProfileData extends StatelessWidget {
             width: double.infinity,
             child: Card(
               margin: EdgeInsets.only(left: 5, right: 5),
+              color: Colors.red,
               elevation: 5,
               child: Center(
                 child: Text(
                   "Удалить аккаунт",
                   style: TextStyle(
-                    color: Colors.red,
+                    color: Colors.white,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
