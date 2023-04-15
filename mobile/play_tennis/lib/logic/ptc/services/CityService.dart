@@ -40,9 +40,15 @@ class CityService {
       return null;
     }
 
-    var json = jsonDecode(response!);
+    try {
+      var json = jsonDecode(response!);
 
-    return PublicTelegramChatForCityModel.fromJson(json);
+      return PublicTelegramChatForCityModel.fromJson(json);
+    } catch (e) {
+      onError(e.toString());
+    }
+
+    return PublicTelegramChatForCityModel(chatLink: null, channelLink: null);
   }
 
   Future<List<CityDistrictModel>> getCityDistricts(
@@ -50,7 +56,7 @@ class CityService {
     Function(String) onError,
   ) async {
     var response = await networkService.getDataInner(
-      '/api/ptc/dlv/city-district/query/by-city/{cityId}/cached',
+      '/api/ptc/dlv/city-district/query/by-city/$cityId/cached',
       onError,
     );
 
@@ -58,8 +64,14 @@ class CityService {
       return [];
     }
 
-    var json = jsonDecode(response!);
+    try {
+      var json = jsonDecode(response!);
 
-    return json.map((x) => CityDistrictModel.fromJson(x));
+      return json.map((x) => CityDistrictModel.fromJson(x));
+    } catch (e) {
+      onError(e.toString());
+    }
+
+    return [];
   }
 }

@@ -70,7 +70,13 @@ class TelegramLinkWidget extends StatelessWidget {
 
     MyApp.inProccess = true;
 
-    var result = await AppServices.playerService.createTelegramLink();
+    var result =
+        await AppServices.telegramPlayerService.createTelegramLink((e) {
+      BaseApiResponseUtils.showError(
+        context,
+        "Произошла ошибка при генерации ссылки для связывания с Telegram. ",
+      );
+    });
 
     if (!result.isSucceeded) {
       if (context.mounted) {

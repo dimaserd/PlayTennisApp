@@ -1,6 +1,6 @@
 import 'dart:convert';
-import '../../core/NetworkService.dart';
-import '../models/BaseApiResponse.dart';
+import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
+import 'package:play_tennis/logic/core/NetworkService.dart';
 
 class ClientService {
   final NetworkService networkService;
