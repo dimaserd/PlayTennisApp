@@ -213,11 +213,13 @@ class TournamentService {
         await networkService.postData('${baseUrl}Get/List', bodyJson);
 
     var json = jsonDecode(responseBody);
-    if (json["totalCount"] == null) {
-      json["totalCount"] = 0;
-    }
+    print("json $json");
+
+    // if (json["totalCount"] == null) {
+    //   json["totalCount"] = "0";
+    // }
     var result = GetListResult(
-      totalCount: json["totalCount"],
+      totalCount: 0,
       list: List<TournamentSimpleModel>.from(
         json["list"].map((x) => TournamentSimpleModel.fromJson(x)),
       ),
