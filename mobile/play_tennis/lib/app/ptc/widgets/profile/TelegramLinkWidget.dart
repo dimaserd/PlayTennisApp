@@ -35,15 +35,16 @@ class TelegramLinkWidget extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         InkWell(
-            child: const Text(
-              "Скопировать команду",
-              style: TextStyle(
-                color: Color.fromARGB(255, 89, 64, 255),
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-              ),
+          child: const Text(
+            "Скопировать команду",
+            style: TextStyle(
+              color: Color.fromARGB(255, 89, 64, 255),
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
             ),
-            onTap: () => _tapHandler(context)),
+          ),
+          onTap: () => _tapHandler(context),
+        ),
         const SizedBox(height: 10),
         InkWell(
           child: const Text(
@@ -58,7 +59,9 @@ class TelegramLinkWidget extends StatelessWidget {
             launchUrl(telegramUser);
           },
         ),
-        const SizedBox(height: 5),
+        const SizedBox(
+          height: 5,
+        ),
       ],
     );
   }
@@ -91,7 +94,7 @@ class TelegramLinkWidget extends StatelessWidget {
     Clipboard.setData(ClipboardData(text: text)).then((_) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text(
-          "Команда скопирована в буфер обмена. Перейдите в телеграм-бот и вставьте ему это сообщение и нажмите отправить",
+          "Команда скопирована в буфер обмена. Перейдите в телеграм-бот и вставьте ему это сообщение и нажмите отправить.",
           style: TextStyle(
             fontSize: 16,
           ),
