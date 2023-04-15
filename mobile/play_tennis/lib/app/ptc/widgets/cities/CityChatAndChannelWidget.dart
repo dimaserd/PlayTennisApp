@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/ptc/models/cities/PublicTelegramChatForCityModel.dart';
 import 'package:play_tennis/main-extensions.dart';
 
@@ -34,8 +35,12 @@ class CityChatAndChannelWidget extends StatelessWidget {
                         ),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () => MainAppExtensions.launchUrlInBrowser(
-                                model.chatLink!,
-                              )),
+                                  model.chatLink!, (e) {
+                                BaseApiResponseUtils.showError(
+                                  context,
+                                  "Произошла ошибка при открытия телеграм-канала. Обратитесь к администратору портала",
+                                );
+                              })),
                   ),
                 ),
               )
@@ -53,8 +58,12 @@ class CityChatAndChannelWidget extends StatelessWidget {
                       ),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () => MainAppExtensions.launchUrlInBrowser(
-                              model.channelLink!,
-                            )),
+                                model.channelLink!, (e) {
+                              BaseApiResponseUtils.showError(
+                                context,
+                                "Произошла ошибка при открытия телеграм-чата. Обратитесь к администратору портала",
+                              );
+                            })),
                 ),
               )
             : const SizedBox.shrink(),

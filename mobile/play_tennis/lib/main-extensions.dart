@@ -19,13 +19,21 @@ class MainAppExtensions {
     var url =
         "${MainSettings.domain}/ptc/player-login/${result.loginId!}/${result.password!}/$dottedUrl";
 
-    await launchUrlInBrowser(url);
+    await launchUrlInBrowser(url, onError);
   }
 
-  static Future<void> launchUrlInBrowser(String url) async {
+  static Future<void> launchUrlInBrowser(
+    String url,
+    Function(String) onError,
+  ) async {
     var uri = Uri.parse(url);
-    if (!await launchUrl(uri)) {
-      throw 'Could not launch $url';
+
+    try {
+      if (!await launchUrl(uri)) {
+        throw 'Could not launch $url';
+      }
+    } catch (e) {
+      onError(e.toString());
     }
   }
 }
