@@ -175,6 +175,42 @@ class MainApplicationInfo extends StatelessWidget {
             );
           },
         ),
+        const SizedBox(height: 5),
+        const Text(
+          'Информация о нас:',
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+            fontSize: 18,
+          ),
+        ),
+        const SizedBox(height: 5),
+        InkWell(
+          child: const Text(
+            'Политика обработки персональных данных',
+            style: TextStyle(
+              color: Colors.blue,
+              fontSize: 18,
+            ),
+          ),
+          onTap: () {
+            var uri = Uri.parse(MainSettings.privacyPolicy);
+            launchUrl(uri);
+          },
+        ),
+        const SizedBox(height: 5),
+        InkWell(
+          child: const Text(
+            'Соглашение об обработке персональных данных и информационной рассылке сервиса',
+            style: TextStyle(
+              color: Colors.blue,
+              fontSize: 18,
+            ),
+          ),
+          onTap: () {
+            var uri = Uri.parse(MainSettings.agreement);
+            launchUrl(uri);
+          },
+        )
       ],
     );
   }
