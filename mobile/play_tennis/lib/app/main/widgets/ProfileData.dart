@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:play_tennis/app/main/widgets/images/PlayerAvatar.dart';
 import 'package:play_tennis/app/ptc/widgets/profile/PlayerConfirmationWidget.dart';
 import 'package:play_tennis/logic/clt/models/models.dart';
@@ -10,7 +11,11 @@ class ProfileData extends StatelessWidget {
   final PlayerData player;
   final CurrentLoginData? loginData;
 
-  const ProfileData({super.key, required this.player, required this.loginData});
+  const ProfileData({
+    super.key,
+    required this.player,
+    required this.loginData,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +42,9 @@ class ProfileData extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
+                const SizedBox(
+                  height: 15,
+                ),
                 PlayerAvatar(
                   avatarFileId: player.avatarFileId,
                 ),
@@ -93,13 +101,38 @@ class ProfileData extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            showDialogHandler(context);
+            copyIdHandler(context);
           },
           child: const SizedBox(
             height: 50,
             width: double.infinity,
             child: Card(
               margin: EdgeInsets.only(top: 5, left: 5, right: 5),
+              elevation: 5,
+              child: Center(
+                child: Text(
+                  "Скопировать ID",
+                  style: TextStyle(
+                    color: Colors.blueAccent,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        GestureDetector(
+          onTap: () {
+            showDialogHandler(context);
+          },
+          child: const SizedBox(
+            height: 50,
+            width: double.infinity,
+            child: Card(
+              margin: EdgeInsets.only(left: 5, right: 5),
               elevation: 5,
               child: Center(
                 child: Text(
@@ -114,7 +147,7 @@ class ProfileData extends StatelessWidget {
           ),
         ),
         const SizedBox(
-          height: 30,
+          height: 50,
         ),
       ],
     );
@@ -151,5 +184,19 @@ class ProfileData extends StatelessWidget {
             ],
           );
         });
+  }
+
+  copyIdHandler(BuildContext context) {
+    Clipboard.setData(ClipboardData(text: loginData!.userId!)).then((_) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text(
+          "Ваш ID скопирован в буфер обмена.",
+          style: TextStyle(
+            fontSize: 16,
+          ),
+        ),
+        backgroundColor: Colors.blueAccent,
+      ));
+    });
   }
 }

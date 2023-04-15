@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:play_tennis/app/ptc/widgets/communities/SearchCommunityForm.dart';
 import 'package:play_tennis/app/ptc/widgets/courts/SearchCourtsForm.dart';
 import 'package:play_tennis/app/ptc/widgets/trainers/SearchTrainersForm.dart';
-import '../communities/SearchCommunityForm.dart';
-import '../../../../logic/ptc/models/PlayerLocationData.dart';
+import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
 
 class PlayTabbedPage extends StatefulWidget {
   final PlayerLocationData locationData;
   final Function(int index) onItemTapped;
   final int selectedIndex;
 
-  PlayTabbedPage({
+  const PlayTabbedPage({
     Key? key,
     required this.locationData,
     required this.onItemTapped,

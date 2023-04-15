@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:play_tennis/app/main/widgets/Inputs/TextInput.dart';
 import 'package:play_tennis/app/ptc/widgets/CountryAndCitySelectWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/CustomDateAndTimePickerWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/courts/CourtTypeSelect.dart';
@@ -89,15 +88,14 @@ class GameFormCourtDataWidget extends StatelessWidget {
         height: 10,
       ),
       TextField(
-        decoration: const InputDecoration(
-          labelText: "Корт",
-        ),
-        controller: courtNameController,
-        autofocus: false,
-        onTap: () {
-          scroll();
-        }
-      ),
+          decoration: const InputDecoration(
+            labelText: "Корт",
+          ),
+          controller: courtNameController,
+          autofocus: false,
+          onTap: () {
+            scroll();
+          }),
       const SizedBox(
         height: 10,
       ),

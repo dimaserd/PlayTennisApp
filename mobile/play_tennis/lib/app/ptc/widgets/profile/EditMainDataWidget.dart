@@ -8,13 +8,14 @@ import 'package:play_tennis/logic/ptc/models/players/UpdateDataByPlayerRequest.d
 import 'package:play_tennis/main-services.dart';
 
 class EditMainDataWidget extends StatefulWidget {
-  PlayerData playerData;
+  final PlayerData playerData;
   late TextEditingController surnameTextController;
   late TextEditingController nameTextController;
   late TextEditingController patronymicTextController;
   late TextEditingController aboutMeTextController;
   late DateTime birthDate;
   late DropdownWidgetItem selectedSex;
+
   EditMainDataWidget({super.key, required this.playerData}) {
     surnameTextController = TextEditingController(text: playerData.surname);
     nameTextController = TextEditingController(text: playerData.name);
