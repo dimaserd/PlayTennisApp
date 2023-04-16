@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:animated_snack_bar/animated_snack_bar.dart';
+import 'package:play_tennis/baseApiResponseUtils.dart';
 
 class FavoriteButton extends StatefulWidget {
+  const FavoriteButton({super.key});
+
   @override
   State<FavoriteButton> createState() => _FavoriteButtonState();
 }
@@ -16,7 +18,7 @@ class _FavoriteButtonState extends State<FavoriteButton> {
         _isFavorite ? Icons.favorite : Icons.favorite_border,
         color: Colors.red,
       ),
-      onPressed: () {        
+      onPressed: () {
         setState(() {
           _isFavorite = !_isFavorite;
         });
@@ -27,18 +29,9 @@ class _FavoriteButtonState extends State<FavoriteButton> {
         });
 
         if (_isFavorite) {
-          AnimatedSnackBar.material(
-            'Пока не реализовано',
-            type: AnimatedSnackBarType.info,
-            mobileSnackBarPosition: MobileSnackBarPosition
-                .bottom, // Position of snackbar on mobile devices
-            duration: const Duration(
-                seconds: 2), // Position of snackbar on desktop devices
-          ).show(context);
+          BaseApiResponseUtils.showError(context, 'Пока не реализовано');
         }
       },
     );
   }
 }
-
-

@@ -77,27 +77,25 @@ class _SearchCommunityForm extends State<SearchCommunityForm> {
                 ),
               ),
               Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      controller: _searchController,
-                      onChanged: _onSearchChanged,
-                      decoration: const InputDecoration(
-                        hintText: 'Поисковая строка',
-                        suffixIcon: Icon(Icons.search),
-                      ),
-                    ),
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: _searchController,
+                  onChanged: _onSearchChanged,
+                  decoration: const InputDecoration(
+                    hintText: 'Поисковая строка',
+                    suffixIcon: Icon(Icons.search),
                   ),
+                ),
+              ),
             ],
           ),
         ),
         cityModel != null
-            ? Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 2),
-                child: CityChatAndChannelWidget(
-                  model: cityModel!,
-                  cityName:
-                      countryAndCitySelectController.city?.name ?? "Город",
-                ),
+            ? CityChatAndChannelWidget(
+                text:
+                    "Мы поддерживаем отдельные теннисные островки и хотим их все подружить между собой. Глобальные чаты города находятся здесь.",
+                model: cityModel!,
+                cityName: countryAndCitySelectController.city?.name ?? "Город",
               )
             : const SizedBox.shrink(),
         Expanded(

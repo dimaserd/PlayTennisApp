@@ -77,9 +77,9 @@ class _SearchTrainersForm extends State<SearchTrainersForm> {
                   controller: countryAndCitySelectController,
                 ),
               ),
-               Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child:TextField(
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
                   controller: _searchController,
                   onChanged: _onSearchChanged,
                   decoration: const InputDecoration(
@@ -91,16 +91,6 @@ class _SearchTrainersForm extends State<SearchTrainersForm> {
             ],
           ),
         ),
-        cityModel != null
-            ? Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 2),
-                child: CityChatAndChannelWidget(
-                  model: cityModel!,
-                  cityName:
-                      countryAndCitySelectController.city?.name ?? "Город",
-                ),
-              )
-            : const SizedBox.shrink(),
         Expanded(
           child: Padding(
             padding: const EdgeInsets.only(top: 8, bottom: 0),

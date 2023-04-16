@@ -84,13 +84,11 @@ class _SearchTournamentsForm extends State<SearchTournamentsForm> {
           ),
         ),
         cityModel != null
-            ? Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 2),
-                child: CityChatAndChannelWidget(
-                  model: cityModel!,
-                  cityName:
-                      countryAndCitySelectController.city?.name ?? "Город",
-                ),
+            ? CityChatAndChannelWidget(
+                text:
+                    "Все результаты и новости турнира попадают в специальный чат связанный с городом.",
+                model: cityModel!,
+                cityName: countryAndCitySelectController.city?.name ?? "Город",
               )
             : const SizedBox.shrink(),
         Expanded(

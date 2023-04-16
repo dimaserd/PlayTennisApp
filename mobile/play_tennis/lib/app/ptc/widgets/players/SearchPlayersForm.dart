@@ -96,6 +96,8 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
             ? Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2),
                 child: CityChatAndChannelWidget(
+                  text:
+                      "Все результаты и новости игр попадают в специальный чат связанный с городом.",
                   model: cityModel!,
                   cityName:
                       countryAndCitySelectController.city?.name ?? "Город",
