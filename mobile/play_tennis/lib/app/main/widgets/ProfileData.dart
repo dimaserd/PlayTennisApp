@@ -7,7 +7,7 @@ import 'package:play_tennis/app/ptc/widgets/profile/TelegramLinkTipWidget.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerData.dart';
 import 'package:play_tennis/main-services.dart';
 
-class ProfileData extends StatelessWidget {
+class ProfileData extends StatefulWidget {
   final PlayerData player;
   final CurrentLoginData? loginData;
 
@@ -17,22 +17,32 @@ class ProfileData extends StatelessWidget {
     required this.loginData,
   });
 
+  State<ProfileData> createState() => _ProfileData();
+}
+
+class _ProfileData extends State<ProfileData> {
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        player.telegramUserId == null
+        widget.player.telegramUserId == null
             ? TelegramLinkTipWidget(
-                player: player,
+                player: widget.player,
+                updateTelegram: (id) {
+                  print("player telegram id: $id");
+                  setState(() {
+                    widget.player.telegramUserId = id;
+                  });
+                },
               )
             : const SizedBox.shrink(),
-        !player.accountConfirmed
+        !widget.player.accountConfirmed
             ? PlayerConfirmationWidget(
-                player: player,
+                player: widget.player,
               )
             : const SizedBox.shrink(),
         EmailConfirmationWidget(
-          player: player,
+          player: widget.player,
         ),
         Card(
           margin: const EdgeInsets.only(top: 5, left: 5, right: 5),
@@ -46,21 +56,21 @@ class ProfileData extends StatelessWidget {
                   height: 15,
                 ),
                 PlayerAvatar(
-                  avatarFileId: player.avatarFileId,
+                  avatarFileId: widget.player.avatarFileId,
                 ),
                 const SizedBox(
                   height: 10,
                 ),
                 Text(
-                  "Имя: ${player.surname!} ${player.name!}",
+                  "Имя: ${widget.player.surname!} ${widget.player.name!}",
                 ),
-                player.noEmail
+                widget.player.noEmail
                     ? const SizedBox.shrink()
-                    : Text("Email: ${player.email}"),
-                Text("Номер телефона: ${player.phoneNumber}"),
-                Text("Ntrp: ${player.ntrpRating}"),
-                Text("Рейтинг силы: ${player.rating}"),
-                Text("Пол: ${player.sex ? "Мужской" : "Женский"}")
+                    : Text("Email: ${widget.player.email}"),
+                Text("Номер телефона: ${widget.player.phoneNumber}"),
+                Text("Ntrp: ${widget.player.ntrpRating}"),
+                Text("Рейтинг силы: ${widget.player.rating}"),
+                Text("Пол: ${widget.player.sex ? "Мужской" : "Женский"}")
               ],
             ),
           ),
@@ -86,7 +96,7 @@ class ProfileData extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Text(
-                    player.aboutMe!,
+                    widget.player.aboutMe!,
                     style: const TextStyle(
                       fontSize: 16,
                     ),
@@ -199,8 +209,8 @@ class ProfileData extends StatelessWidget {
               ElevatedButton(
                 child: const Text('Да'),
                 onPressed: () {
-                  if (loginData?.userId != null) {
-                    final userId = loginData!.userId!;
+                  if (widget.loginData?.userId != null) {
+                    final userId = widget.loginData!.userId!;
                     deleteAccount(context, userId);
                   }
                 },
@@ -211,7 +221,7 @@ class ProfileData extends StatelessWidget {
   }
 
   copyIdHandler(BuildContext context) {
-    Clipboard.setData(ClipboardData(text: loginData!.userId!)).then((_) {
+    Clipboard.setData(ClipboardData(text: widget.loginData!.userId!)).then((_) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text(
           "Ваш ID скопирован в буфер обмена.",

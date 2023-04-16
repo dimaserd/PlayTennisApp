@@ -47,6 +47,7 @@ class _SearchGameRequestsFormState extends State<SearchGameRequestsForm> {
     return Column(
       children: [
         CountryAndCitySelect(
+          selector: CountryCitySections.players,
           onCityChanged: (p) {},
           onCountryChanged: (p) {},
           controller: widget.countryAndCitySelectController,

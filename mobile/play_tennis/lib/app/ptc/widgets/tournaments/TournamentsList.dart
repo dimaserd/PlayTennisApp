@@ -42,7 +42,7 @@ class TournamentsList extends StatelessWidget {
     return tournaments.isEmpty
         ? Column(children: const [
             Center(
-              child: Text("Тренеры не найдены"),
+              child: Text("Турниры не найдены"),
             ),
           ])
         : ListView.builder(

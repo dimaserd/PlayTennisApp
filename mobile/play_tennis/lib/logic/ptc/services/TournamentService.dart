@@ -212,19 +212,32 @@ class TournamentService {
     var responseBody =
         await networkService.postData('${baseUrl}Get/List', bodyJson);
 
-    var json = jsonDecode(responseBody);
-    if (json["totalCount"] == null) {
-      json["totalCount"] = 0;
-    }
-    var result = GetListResult(
-      totalCount: json["totalCount"],
-      list: List<TournamentSimpleModel>.from(
-        json["list"].map((x) => TournamentSimpleModel.fromJson(x)),
-      ),
-      count: json["count"],
-      offSet: json["offSet"],
-    );
+    try {
+      var json = await jsonDecode(responseBody);
 
-    return result;
+      if (json["totalCount"] == null) {
+        json["totalCount"] = 0;
+      }
+
+      var result = GetListResult(
+        totalCount: 0,
+        list: List<TournamentSimpleModel>.from(
+          json["list"].map((x) => TournamentSimpleModel.fromJson(x)),
+        ),
+        count: json["count"],
+        offSet: json["offSet"],
+      );
+
+      return result;
+    } catch (e) {
+    var result = GetListResult<TournamentSimpleModel>(
+        totalCount: 0,
+        list: List.empty(),
+        count: 0,
+        offSet: 0,
+      );
+
+      return result;
   }
+}
 }

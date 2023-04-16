@@ -70,6 +70,7 @@ class _AddGameRequestFormState extends State<AddGameRequestForm> {
   List<Widget> getStepWidgets() {
     return [
       CountryAndCitySelect(
+        selector: CountryCitySections.players,
         onCityChanged: (p) {},
         onCountryChanged: (p) {},
         controller: countryAndCitySelectController,

@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/palette.dart';
+import 'package:play_tennis/app/ptc/widgets/FavoritesButton.dart';
 import 'package:play_tennis/logic/ptc/services/CourtCardService.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -21,13 +22,17 @@ class CourtCard extends StatelessWidget {
           margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
           elevation: 4,
           child: ListTile(
-            title: Text(
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+              Text(
               courtCard.name!,
               style: Theme.of(context).textTheme.titleLarge,
             ),
+            FavoriteButton()
+            ],),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text("${courtCard.description}"),
                 courtCard.phoneNumber != null
@@ -72,7 +77,7 @@ class CourtCard extends StatelessWidget {
     }
 
     return Padding(
-      padding: const EdgeInsets.only(top: 5.0),
+      padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
       child: InkWell(
         child: Text(
           courtCard.address!,

@@ -265,6 +265,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
       Padding(
         padding: padding,
         child: CountryAndCitySelect(
+          selector: CountryCitySections.players,
           onCountryChanged: (p) {},
           onCityChanged: (p) {},
           controller: countryAndCitySelectController,

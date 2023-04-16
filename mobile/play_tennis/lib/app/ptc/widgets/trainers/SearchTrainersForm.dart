@@ -61,27 +61,34 @@ class _SearchTrainersForm extends State<SearchTrainersForm> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 2),
-          child: CountryAndCitySelect(
-            onCityChanged: (p) {
-              onCountryChanged();
-            },
-            onCountryChanged: (p) {
-              onCountryChanged();
-            },
-            controller: countryAndCitySelectController,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 2),
-          child: TextField(
-            controller: _searchController,
-            onChanged: _onSearchChanged,
-            decoration: const InputDecoration(
-              hintText: 'Поисковая строка',
-              suffixIcon: Icon(Icons.search),
-            ),
+        Card(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 2),
+                child: CountryAndCitySelect(
+                  selector: CountryCitySections.trainers,
+                  onCityChanged: (p) {
+                    onCountryChanged();
+                  },
+                  onCountryChanged: (p) {
+                    onCountryChanged();
+                  },
+                  controller: countryAndCitySelectController,
+                ),
+              ),
+               Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child:TextField(
+                  controller: _searchController,
+                  onChanged: _onSearchChanged,
+                  decoration: const InputDecoration(
+                    hintText: 'Поисковая строка',
+                    suffixIcon: Icon(Icons.search),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
         cityModel != null

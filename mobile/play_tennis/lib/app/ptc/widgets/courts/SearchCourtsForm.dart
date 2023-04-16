@@ -59,59 +59,69 @@ class _SearchCourtsForm extends State<SearchCourtsForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 2),
-          child: CountryAndCitySelect(
-            onCityChanged: (p) {
-              onCountryChanged();
-            },
-            onCountryChanged: (p) {
-              onCountryChanged();
-            },
-            controller: countryAndCitySelectController,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 2),
-          child: TextField(
-            controller: _searchController,
-            onChanged: _onSearchChanged,
-            decoration: const InputDecoration(
-              hintText: 'Поисковая строка',
-              suffixIcon: Icon(Icons.search),
-            ),
-          ),
-        ),
-        cityModel != null
-            ? Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 2),
-                child: CityChatAndChannelWidget(
-                  model: cityModel!,
-                  cityName:
-                      countryAndCitySelectController.city?.name ?? "Город",
+    return  Column(
+        children: [
+          Card(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 2),
+                  child: CountryAndCitySelect(
+                    selector: CountryCitySections.courts,
+                    onCityChanged: (p) {
+                      onCountryChanged();
+                    },
+                    onCountryChanged: (p) {
+                      onCountryChanged();
+                    },
+                    controller: countryAndCitySelectController,
+                  ),
                 ),
-              )
-            : const SizedBox.shrink(),
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 8, bottom: 0),
-            child: CourtsList(
-              isActiveLoader: _isActiveLoader,
-              offset: _offSet,
-              courts: courts,
-              getData: (offSet) {
-                _offSet = offSet;
-                getData();
-              },
-              onTapHandler: (id) {
-                // widget.onTapHandler(id);
-              },
+                 Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                    controller: _searchController,
+                    onChanged: _onSearchChanged,
+                    decoration: const InputDecoration(
+                      hintText: 'Поисковая строка',
+                      suffixIcon: Icon(Icons.search),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
-        ),
-      ],
+          cityModel != null
+              ? Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 2),
+                  child: CityChatAndChannelWidget(
+                    model: cityModel!,
+                    cityName:
+                        countryAndCitySelectController.city?.name ?? "Город",
+                  ),
+                )
+              : const SizedBox.shrink(),
+              
+          Expanded(
+            child: 
+            Padding(
+              padding: const EdgeInsets.only(top: 8, bottom: 0),
+              child: CourtsList(
+                isActiveLoader: _isActiveLoader,
+                offset: _offSet,
+                courts: courts,
+                getData: (offSet) {
+                  _offSet = offSet;
+                  getData();
+                },
+                onTapHandler: (id) {
+                  // widget.onTapHandler(id);
+                },
+              ),
+            ),
+          ),
+        ],
+
     );
   }
 
