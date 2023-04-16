@@ -34,9 +34,12 @@ dependencies:
 
   intl: ^0.17.0
   http: ^0.13.0
-  loader_overlay: 2.0.2+1
   shared_preferences: ^2.0.7
-  flutter_html: ^2.1.5
+  flutter_html: ^2.2.1
+  animated_snack_bar: ^0.3.0
+  loader_overlay: 2.0.2+1
+
+  # advance_notification: ^1.0.6
   photo_view: ^0.14.0
   badges: ^2.0.2
   dropdown_search: ^5.0.6
