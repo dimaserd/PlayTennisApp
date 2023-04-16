@@ -3,7 +3,8 @@ import 'package:play_tennis/logic/ptc/models/PlayerData.dart';
 
 class TelegramLinkTipWidget extends StatelessWidget {
   final PlayerData player;
-  const TelegramLinkTipWidget({super.key, required this.player});
+  final void Function(int id) updateTelegram;
+  const TelegramLinkTipWidget({super.key, required this.player, required this.updateTelegram});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class TelegramLinkTipWidget extends StatelessWidget {
           children: [
             InkWell(
               onTap: () {
-                Navigator.of(context).pushNamed('/profile-telegram-link');
+                showTelegram(context);
               },
               child: const Padding(
                 padding: EdgeInsets.all(10.0),
@@ -40,5 +41,10 @@ class TelegramLinkTipWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void showTelegram(context) async {
+    var returnValue = await Navigator.of(context).pushNamed('/profile-telegram-link');
+    print("returs $returnValue");
   }
 }

@@ -99,6 +99,7 @@ class _MyStatefulWidgetState extends State<EditProfileWidget> {
                   horizontal: 15.0,
                 ),
                 child: CountryAndCitySelect(
+                  selector: CountryCitySections.players,
                   onCountryChanged: (p) {},
                   onCityChanged: (p) {},
                   controller: countryAndCitySelectController,

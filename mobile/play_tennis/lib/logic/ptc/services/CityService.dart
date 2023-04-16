@@ -65,9 +65,11 @@ class CityService {
     }
 
     try {
-      var json = jsonDecode(response!);
-
-      return json.map((x) => CityDistrictModel.fromJson(x));
+      var json = jsonDecode(response!) as List<dynamic>;
+      print("jsons sadas $json");
+      var districts =
+          json.map((value) => CityDistrictModel.fromJson(value)).toList();
+      return districts;
     } catch (e) {
       onError(e.toString());
     }
