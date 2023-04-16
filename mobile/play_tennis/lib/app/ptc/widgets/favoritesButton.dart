@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:animated_snack_bar/animated_snack_bar.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
 class FavoriteButton extends StatefulWidget {
   @override
-  _FavoriteButtonState createState() => _FavoriteButtonState();
+  State<FavoriteButton> createState() => _FavoriteButtonState();
 }
 
 class _FavoriteButtonState extends State<FavoriteButton> {
@@ -17,10 +18,13 @@ class _FavoriteButtonState extends State<FavoriteButton> {
         color: Colors.red,
       ),
       onPressed: () {
+        context.loaderOverlay.show();
+        
         setState(() {
           _isFavorite = !_isFavorite;
         });
         Future.delayed(const Duration(seconds: 1), () {
+          context.loaderOverlay.hide();
           setState(() {
             _isFavorite = false;
           });
@@ -40,3 +44,5 @@ class _FavoriteButtonState extends State<FavoriteButton> {
     );
   }
 }
+
+
