@@ -92,7 +92,7 @@ class CityChatButtonsWidget extends StatelessWidget {
                         (e) {
                           BaseApiResponseUtils.showError(
                             context,
-                            "Произошла ошибка при открытия телеграм-чата. Обратитесь к администратору портала",
+                            "Произошла ошибка при открытии телеграм-чата. Пожалуйста, обратитесь к администратору портала.",
                           );
                         },
                       );
@@ -108,7 +108,7 @@ class CityChatButtonsWidget extends StatelessWidget {
                         (e) {
                           BaseApiResponseUtils.showError(
                             context,
-                            "Произошла ошибка при открытия телеграм-чата. Обратитесь к администратору портала",
+                            "Произошла ошибка при открытии телеграм-канала. Пожалуйста, обратитесь к администратору портала.",
                           );
                         },
                       );

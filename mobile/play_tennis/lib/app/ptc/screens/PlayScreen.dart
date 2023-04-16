@@ -90,7 +90,7 @@ class _PlayScreenState extends State<PlayScreen> {
           ),
           drawer: const SideDrawer(),
           body: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(10.0),
             child: Container(
               color: Colors.white,
               child: TabBarView(

@@ -1,14 +1,13 @@
 import 'dart:async';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/ptc/widgets/CountryAndCitySelectWidget.dart';
+import 'package:play_tennis/app/ptc/widgets/cities/CityChatAndChannelWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/game-requests/GameRequestsList.dart';
 import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
+import 'package:play_tennis/logic/ptc/models/cities/PublicTelegramChatForCityModel.dart';
 import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestSimpleModel.dart';
 import 'package:play_tennis/logic/ptc/models/game-requests/SearchGameRequests.dart';
 import 'package:play_tennis/main-services.dart';
-import 'package:play_tennis/main-settings.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class SearchGameRequestsForm extends StatefulWidget {
   final bool showMine;
@@ -35,6 +34,7 @@ class _SearchGameRequestsFormState extends State<SearchGameRequestsForm> {
 
   List<GameRequestSimpleModel> requests = [];
   Timer? timer;
+  PublicTelegramChatForCityModel? cityModel;
 
   @override
   void initState() {
@@ -46,38 +46,57 @@ class _SearchGameRequestsFormState extends State<SearchGameRequestsForm> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CountryAndCitySelect(
-          selector: CountryCitySections.players,
-          onCityChanged: (p) {},
-          onCountryChanged: (p) {},
-          controller: widget.countryAndCitySelectController,
-        ),
-        Container(
-          color: Colors.white,
-          margin: const EdgeInsets.only(top: 5),
-          width: double.infinity,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: 8.0,
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Column(
+              children: [
+                CountryAndCitySelect(
+                  selector: CountryCitySections.players,
+                  onCityChanged: (p) {},
+                  onCountryChanged: (p) {},
+                  controller: widget.countryAndCitySelectController,
                 ),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black,
-                    minimumSize: const Size.fromHeight(36), // NEW
+                Container(
+                  color: Colors.white,
+                  margin: const EdgeInsets.only(top: 5),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          top: 8.0,
+                          left: 5,
+                          right: 5,
+                        ),
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.black,
+                            minimumSize: const Size.fromHeight(36),
+                          ),
+                          onPressed: () {
+                            getData();
+                          },
+                          child: const Text("Поиск"),
+                        ),
+                      ),
+                    ],
                   ),
-                  onPressed: () {
-                    getData();
-                  },
-                  child: const Text("Поиск"),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
+        cityModel != null
+            ? CityChatAndChannelWidget(
+                text:
+                    "Мы поддерживаем отдельные теннисные островки и хотим им помочь в их техническом развитии. Глобальные чаты куда попадают все значимые новости города находятся здесь.",
+                model: cityModel!,
+                cityName:
+                    widget.countryAndCitySelectController.city?.name ?? "Город",
+              )
+            : const SizedBox.shrink(),
         Expanded(
           child: Padding(
             padding: const EdgeInsets.only(top: 8.0),
@@ -120,11 +139,5 @@ class _SearchGameRequestsFormState extends State<SearchGameRequestsForm> {
   dispose() {
     timer?.cancel();
     super.dispose();
-  }
-
-  Future<void> _launchUrl(Uri url) async {
-    if (!await launchUrl(url)) {
-      throw 'Could not launch $url';
-    }
   }
 }
