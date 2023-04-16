@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
 import 'package:play_tennis/logic/core/NetworkService.dart';
+import 'package:play_tennis/logic/ptc/services/CityService.dart';
 
 class SearchCourtCards {
   late String? q;
@@ -42,6 +43,7 @@ class CourtCardSimpleModel {
   late double yandexMapsLongitude;
   late String? yandexMapsOrganizationId;
   late String? yandexMapsAppLink;
+  late List<CityDistrictModel>? districts;
 
   CourtCardSimpleModel({
     required this.id,
@@ -54,6 +56,7 @@ class CourtCardSimpleModel {
     required this.yandexMapsLongitude,
     required this.yandexMapsOrganizationId,
     required this.yandexMapsAppLink,
+    required this.districts,
   });
 
   factory CourtCardSimpleModel.fromJson(Map<String, dynamic> json) =>
@@ -68,6 +71,8 @@ class CourtCardSimpleModel {
         yandexMapsLongitude: json["yandexMapsLongitude"],
         yandexMapsOrganizationId: json["yandexMapsOrganizationId"],
         yandexMapsAppLink: json["yandexMapsAppLink"],
+        districts: List<CityDistrictModel>.from(
+            json["districts"].map((x) => CityDistrictModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -81,6 +86,7 @@ class CourtCardSimpleModel {
         'yandexMapsLongitude': yandexMapsLongitude,
         'yandexMapsOrganizationId': yandexMapsOrganizationId,
         'yandexMapsAppLink': yandexMapsAppLink,
+        'districts': districts?.map((e) => e.toJson()).toList(),
       };
 }
 
