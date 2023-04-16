@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/ptc/widgets/profile/TelegramLinkWidget.dart';
-import 'package:play_tennis/logic/ptc/services/TelegramPlayerService.dart';
 import 'package:play_tennis/main-services.dart';
 
 class TelegramLinkScreen extends StatefulWidget {

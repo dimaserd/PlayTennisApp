@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:play_tennis/app/main/widgets/images/PlayerAvatar.dart';
+import 'package:play_tennis/app/ptc/widgets/cities/CityChatAndChannelWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/profile/PlayerConfirmationWidget.dart';
 import 'package:play_tennis/logic/clt/models/models.dart';
 import 'package:play_tennis/app/ptc/widgets/profile/TelegramLinkTipWidget.dart';
@@ -29,7 +30,6 @@ class _ProfileData extends State<ProfileData> {
             ? TelegramLinkTipWidget(
                 player: widget.player,
                 updateTelegram: (id) {
-                  print("player telegram id: $id");
                   setState(() {
                     widget.player.telegramUserId = id;
                   });
@@ -109,27 +109,13 @@ class _ProfileData extends State<ProfileData> {
             ),
           ),
         ),
-        GestureDetector(
-          onTap: () {
-            Navigator.of(context).pushNamed("/profile/telegram");
-          },
-          child: const SizedBox(
-            height: 50,
-            width: double.infinity,
-            child: Card(
-              color: Color.fromRGBO(36, 168, 235, 1),
-              margin: EdgeInsets.only(top: 5, left: 5, right: 5),
-              elevation: 5,
-              child: Center(
-                child: Text(
-                  "Telegram сообщество",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-            ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: ToTelegramButton(
+            text: "Telegram cообщество",
+            tapHandler: () {
+              Navigator.of(context).pushNamed("/profile/telegram");
+            },
           ),
         ),
         GestureDetector(

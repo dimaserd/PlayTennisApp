@@ -4,7 +4,8 @@ import 'package:play_tennis/logic/ptc/models/PlayerData.dart';
 class TelegramLinkTipWidget extends StatelessWidget {
   final PlayerData player;
   final void Function(int id) updateTelegram;
-  const TelegramLinkTipWidget({super.key, required this.player, required this.updateTelegram});
+  const TelegramLinkTipWidget(
+      {super.key, required this.player, required this.updateTelegram});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class TelegramLinkTipWidget extends StatelessWidget {
                 padding: EdgeInsets.all(10.0),
                 child: Center(
                   child: Text(
-                    "Привяжите вашу учетную запись телеграм",
+                    "Привяжите вашу учетную запись Telegram",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
@@ -44,7 +45,8 @@ class TelegramLinkTipWidget extends StatelessWidget {
   }
 
   void showTelegram(context) async {
-    var returnValue = await Navigator.of(context).pushNamed('/profile-telegram-link');
+    var returnValue =
+        await Navigator.of(context).pushNamed('/profile-telegram-link');
     print("returs $returnValue");
   }
 }

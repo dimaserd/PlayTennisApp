@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:play_tennis/app/ptc/widgets/cities/CityChatAndChannelWidget.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/main-services.dart';
 import 'package:play_tennis/main-settings.dart';
@@ -46,15 +47,9 @@ class TelegramLinkWidget extends StatelessWidget {
           onTap: () => _tapHandler(context),
         ),
         const SizedBox(height: 10),
-        InkWell(
-          child: const Text(
-            'Телеграм-бот ${MainSettings.appName}',
-            style: TextStyle(
-              color: Colors.blue,
-              fontSize: 18,
-            ),
-          ),
-          onTap: () {
+        ToTelegramButton(
+          text: "Бот ${MainSettings.appName}",
+          tapHandler: () {
             var telegramUser = Uri.parse(TelegramBotSettings.link);
             launchUrl(telegramUser);
           },

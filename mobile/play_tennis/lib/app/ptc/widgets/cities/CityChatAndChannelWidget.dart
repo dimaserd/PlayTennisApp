@@ -153,6 +153,7 @@ class ToTelegramButton extends StatelessWidget {
           elevation: 5,
           child: Center(
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(
                   width: 10,
