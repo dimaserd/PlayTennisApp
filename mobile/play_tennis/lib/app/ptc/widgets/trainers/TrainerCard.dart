@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/palette.dart';
-import 'package:play_tennis/app/ptc/widgets/FavoritesButton.dart';
+import 'package:play_tennis/app/ptc/widgets/FavoriteButton.dart';
 import 'package:play_tennis/logic/ptc/services/TrainerCardService.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -29,7 +29,7 @@ class TrainerCard extends StatelessWidget {
                   "${trainer.surname!} ${trainer.name!}",
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
-                FavoriteButton()
+                const FavoriteButton()
               ],
             ),
             subtitle: Column(
