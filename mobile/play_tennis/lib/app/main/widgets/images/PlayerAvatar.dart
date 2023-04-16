@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:play_tennis/main-settings.dart';
 import 'CrocoAppImage.dart';
 
 class PlayerAvatar extends StatelessWidget {
@@ -15,8 +16,10 @@ class PlayerAvatar extends StatelessWidget {
         ? CrocoAppImage(
             imageFileId: avatarFileId!,
           )
-        : const CrocoAppImage(
-            imageFileId: 63,
+        : const Image(
+            image: NetworkImage(
+              "${MainSettings.domain}/images/telegram/BotLogo.jpg",
+            ),
           );
   }
 }
