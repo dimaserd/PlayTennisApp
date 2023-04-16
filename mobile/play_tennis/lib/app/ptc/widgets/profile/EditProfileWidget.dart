@@ -31,7 +31,10 @@ List<Item> generateItems(int numberOfItems) {
 class EditProfileWidget extends StatefulWidget {
   final PlayerData playerData;
 
-  const EditProfileWidget({super.key, required this.playerData});
+  const EditProfileWidget({
+    super.key,
+    required this.playerData,
+  });
 
   @override
   State<EditProfileWidget> createState() => _MyStatefulWidgetState();

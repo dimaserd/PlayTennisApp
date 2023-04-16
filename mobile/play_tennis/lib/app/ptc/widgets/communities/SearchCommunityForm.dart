@@ -93,7 +93,7 @@ class _SearchCommunityForm extends State<SearchCommunityForm> {
         cityModel != null
             ? CityChatAndChannelWidget(
                 text:
-                    "Мы поддерживаем отдельные теннисные островки и хотим их все подружить между собой. Глобальные чаты города находятся здесь.",
+                    "Мы поддерживаем отдельные теннисные островки и хотим им помочь в техническом плане. Глобальные чаты города находятся здесь.",
                 model: cityModel!,
                 cityName: countryAndCitySelectController.city?.name ?? "Город",
               )

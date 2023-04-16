@@ -4,7 +4,7 @@ import 'package:play_tennis/logic/ptc/models/cities/PublicTelegramChatForCityMod
 import 'package:play_tennis/main-extensions.dart';
 import 'package:play_tennis/main-settings.dart';
 
-class CityChatAndChannelWidget extends StatelessWidget {
+class CityChatAndChannelWidget extends StatefulWidget {
   final PublicTelegramChatForCityModel model;
   final String cityName;
   final String text;
@@ -17,67 +17,111 @@ class CityChatAndChannelWidget extends StatelessWidget {
   });
 
   @override
+  State<CityChatAndChannelWidget> createState() =>
+      _CityChatAndChannelWidgetState();
+}
+
+class _CityChatAndChannelWidgetState extends State<CityChatAndChannelWidget> {
+  bool isExpanded = false;
+
+  @override
   Widget build(BuildContext context) {
     return Card(
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 10,
-          vertical: 5,
+          vertical: 10,
         ),
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 5,
-            ),
-            Text(
-              text,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
+        child: isExpanded
+            ? CityChatButtonsWidget(
+                text: widget.text,
+                model: widget.model,
+                cityName: widget.cityName,
+              )
+            : Padding(
+                padding: const EdgeInsets.only(
+                  bottom: 5.0,
+                ),
+                child: ToTelegramButton(
+                  text: "Telegram",
+                  tapHandler: () {
+                    setState(() {
+                      isExpanded = true;
+                    });
+                  },
+                ),
               ),
-            ),
-            Column(
-              children: [
-                model.chatLink != null && model.chatLink != ""
-                    ? ToTelegramButton(
-                        tapHandler: () {
-                          MainAppExtensions.launchUrlInBrowser(
-                            model.chatLink!,
-                            (e) {
-                              BaseApiResponseUtils.showError(
-                                context,
-                                "Произошла ошибка при открытия телеграм-чата. Обратитесь к администратору портала",
-                              );
-                            },
+      ),
+    );
+  }
+}
+
+class CityChatButtonsWidget extends StatelessWidget {
+  const CityChatButtonsWidget({
+    super.key,
+    required this.text,
+    required this.model,
+    required this.cityName,
+  });
+
+  final String text;
+  final PublicTelegramChatForCityModel model;
+  final String cityName;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const SizedBox(
+          height: 5,
+        ),
+        Text(
+          text,
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+        Column(
+          children: [
+            model.chatLink != null && model.chatLink != ""
+                ? ToTelegramButton(
+                    tapHandler: () {
+                      MainAppExtensions.launchUrlInBrowser(
+                        model.chatLink!,
+                        (e) {
+                          BaseApiResponseUtils.showError(
+                            context,
+                            "Произошла ошибка при открытия телеграм-чата. Обратитесь к администратору портала",
                           );
                         },
-                        text: "чат города $cityName",
-                      )
-                    : const SizedBox.shrink(),
-                model.channelLink != null && model.channelLink != ""
-                    ? ToTelegramButton(
-                        tapHandler: () {
-                          MainAppExtensions.launchUrlInBrowser(
-                            model.channelLink!,
-                            (e) {
-                              BaseApiResponseUtils.showError(
-                                context,
-                                "Произошла ошибка при открытия телеграм-чата. Обратитесь к администратору портала",
-                              );
-                            },
+                      );
+                    },
+                    text: "чат города $cityName",
+                  )
+                : const SizedBox.shrink(),
+            model.channelLink != null && model.channelLink != ""
+                ? ToTelegramButton(
+                    tapHandler: () {
+                      MainAppExtensions.launchUrlInBrowser(
+                        model.channelLink!,
+                        (e) {
+                          BaseApiResponseUtils.showError(
+                            context,
+                            "Произошла ошибка при открытия телеграм-чата. Обратитесь к администратору портала",
                           );
                         },
-                        text: "канал города $cityName",
-                      )
-                    : const SizedBox.shrink(),
-              ],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
+                      );
+                    },
+                    text: "канал города $cityName",
+                  )
+                : const SizedBox.shrink(),
           ],
         ),
-      ),
+        const SizedBox(
+          height: 10,
+        ),
+      ],
     );
   }
 }

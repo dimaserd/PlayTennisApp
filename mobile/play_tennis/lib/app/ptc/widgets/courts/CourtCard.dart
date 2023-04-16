@@ -30,7 +30,7 @@ class CourtCard extends StatelessWidget {
                   courtCard.name!,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
-                FavoriteButton()
+                const FavoriteButton()
               ],
             ),
             subtitle: Column(
@@ -43,7 +43,10 @@ class CourtCard extends StatelessWidget {
                         child: RichText(
                           text: TextSpan(
                             text: "Телефон для записи: ",
-                            style: const TextStyle(color: mainColor),
+                            style: const TextStyle(
+                              color: mainColor,
+                              fontSize: 16,
+                            ),
                             children: [
                               TextSpan(
                                 text: courtCard.phoneNumber,
@@ -61,7 +64,7 @@ class CourtCard extends StatelessWidget {
                         ),
                       )
                     : const SizedBox.shrink(),
-                getAddress(),
+                getAddress(context),
               ],
               // ),
             ),
@@ -84,22 +87,58 @@ class CourtCard extends StatelessWidget {
     }
   }
 
-  Widget getAddress() {
+  Widget getAddress(BuildContext context) {
     if (courtCard.address == null || courtCard.yandexMapsAppLink == null) {
       return const SizedBox.shrink();
     }
 
     return Padding(
       padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
-      child: InkWell(
-        child: Text(
-          courtCard.address!,
-          style: const TextStyle(color: Colors.blue),
-        ),
-        onTap: () {
-          var link = Uri.parse(courtCard.yandexMapsAppLink!);
-          launchUrl(link);
-        },
+      child: Column(
+        children: [
+          courtCard.districts != null && courtCard.districts!.isNotEmpty
+              ? Align(
+                  alignment: Alignment.centerLeft,
+                  child: Column(
+                    children: [
+                      Text(
+                        "Район: ${courtCard.districts![0].name}",
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              : const SizedBox.shrink(),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Column(
+              children: [
+                InkWell(
+                  child: Text(
+                    courtCard.address!,
+                    style: const TextStyle(
+                      color: Colors.blue,
+                      fontSize: 16,
+                    ),
+                  ),
+                  onTap: () {
+                    var link = Uri.parse(courtCard.yandexMapsAppLink!);
+
+                    try {
+                      launchUrl(link);
+                    } catch (e) {
+                      BaseApiResponseUtils.showError(context,
+                          "Произошла ошибка при попытке запустить Yandex карты");
+                    }
+                  },
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
