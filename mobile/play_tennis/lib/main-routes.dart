@@ -26,7 +26,6 @@ class MainRoutes {
   }
 
   static MaterialPageRoute onGenerateRoute(RouteSettings settings) {
-    print("settings.name ${settings.name}");
     if (settings.name == '/') {
       return MaterialPageRoute(builder: (context) => const CheckAuthScreen());
     }

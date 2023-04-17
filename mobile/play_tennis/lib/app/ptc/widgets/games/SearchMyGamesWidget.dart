@@ -57,7 +57,7 @@ class _SearchMyGamesWidgetState extends State<SearchMyGamesWidget> {
     });
   }
 
-  _errorHandler(String error) {
+  void _errorHandler(String error) {
     BaseApiResponseUtils.showError(context, error);
   }
 }

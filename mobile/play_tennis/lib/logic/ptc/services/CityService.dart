@@ -66,7 +66,6 @@ class CityService {
 
     try {
       var json = jsonDecode(response!) as List<dynamic>;
-      print("jsons sadas $json");
       var districts =
           json.map((value) => CityDistrictModel.fromJson(value)).toList();
       return districts;

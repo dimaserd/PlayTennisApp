@@ -3,7 +3,10 @@ import 'package:play_tennis/app/main/widgets/Inputs/TextInput.dart';
 import 'package:play_tennis/app/main/widgets/Loading.dart';
 import 'package:play_tennis/app/ptc/widgets/CountryAndCitySelectWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/CustomDateAndTimePickerWidget.dart';
+import 'package:play_tennis/app/ptc/widgets/profile/PlayerConfirmationWidget.dart';
+import 'package:play_tennis/app/ptc/widgets/profile/TelegramLinkTipWidget.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
+import 'package:play_tennis/logic/ptc/models/PlayerData.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
 import 'package:play_tennis/logic/ptc/models/game-requests/CreateGameRequest.dart';
 import 'package:play_tennis/main-services.dart';
@@ -29,10 +32,16 @@ class _AddGameRequestFormState extends State<AddGameRequestForm> {
   DateTime selectedDate = DateTime.now();
 
   PlayerLocationData? locationData;
+  PlayerData? playerData;
 
   @override
   void initState() {
     super.initState();
+    getLocationData();
+    getPlayerData();
+  }
+
+  void getLocationData() {
     AppServices.playerService.getLocationData((e) => {}).then((value) {
       if (!mounted || value == null) {
         return;
@@ -45,9 +54,25 @@ class _AddGameRequestFormState extends State<AddGameRequestForm> {
     });
   }
 
+  void getPlayerData() {
+    AppServices.playerService.getData().then((value) {
+      if (value == null) {
+        BaseApiResponseUtils.showError(context, "Кажется вы были разлогинены");
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil('/login', (route) => true);
+        return;
+      }
+      if (mounted) {
+        setState(() {
+          playerData = value;
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    if (locationData == null) {
+    if (locationData == null || playerData == null) {
       return SizedBox(
         child: Column(
           children: const [
@@ -60,58 +85,113 @@ class _AddGameRequestFormState extends State<AddGameRequestForm> {
     return SingleChildScrollView(
       child: Container(
         alignment: Alignment.center,
-        padding: const EdgeInsets.all(5.0),
-        child: Card(
-          child: Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Column(
-              children: getStepWidgets(),
-            ),
+        child: Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: Column(
+            children: [
+              ...getConfirmationWidgets(),
+              Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Column(
+                    children: getStepWidgets(),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
     );
   }
 
+  List<Widget> getConfirmationWidgets() {
+    if (playerData == null) {
+      return [];
+    }
+
+    return [
+      playerData!.telegramUserId == null
+          ? TelegramLinkTipWidget(
+              player: playerData!,
+              updateTelegram: (id) {
+                setState(() {
+                  playerData!.telegramUserId = id;
+                });
+              },
+            )
+          : const SizedBox.shrink(),
+      !playerData!.accountConfirmed
+          ? PlayerConfirmationWidget(
+              player: playerData!,
+            )
+          : const SizedBox.shrink(),
+      const SizedBox(
+        height: 5,
+      ),
+    ];
+  }
+
   List<Widget> getStepWidgets() {
     return [
-      CountryAndCitySelect(
-        showDistrictSelect: false,
-        onCityChanged: (p) {},
-        onCountryChanged: (p) {},
-        controller: countryAndCitySelectController,
+      Column(
+        children: [
+          CountryAndCitySelect(
+            showDistrictSelect: false,
+            onCityChanged: (p) {},
+            onCountryChanged: (p) {},
+            controller: countryAndCitySelectController,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          CustomDateAndTimePickerWidget(
+            dataChanged: (p) => {},
+            dateLabel: "Выбрать дату игры",
+            timeLabel: "Время игры",
+            dateDropDownLabel: "Дата игры",
+            controller: dateAndTimeWidgetController,
+          ),
+          TextAreaInput(
+            labelText: "Текст заявки",
+            textController: textEditingController,
+            maxLines: 3,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.black,
+              minimumSize: const Size.fromHeight(40),
+            ),
+            onPressed: _clickHandler,
+            child: const Text(
+              "Создать",
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          )
+        ],
       ),
-      const SizedBox(
-        height: 10,
-      ),
-      CustomDateAndTimePickerWidget(
-        dataChanged: (p) => {},
-        dateLabel: "Выбрать дату игры",
-        timeLabel: "Время игры",
-        dateDropDownLabel: "Дата игры",
-        controller: dateAndTimeWidgetController,
-      ),
-      TextAreaInput(
-        labelText: "Текст заявки",
-        textController: textEditingController,
-        maxLines: 3,
-      ),
-      const SizedBox(
-        height: 10,
-      ),
-      ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.black,
-          minimumSize: const Size.fromHeight(35),
-        ),
-        onPressed: _clickHandler,
-        child: const Text("Создать"),
-      )
     ];
   }
 
   Future _clickHandler() async {
     if (MyApp.inProccess) {
+      return;
+    }
+
+    if (playerData == null) {
+      return;
+    }
+
+    if (!playerData!.accountConfirmed) {
+      BaseApiResponseUtils.showError(
+        context,
+        "Чтобы создавать заявки на игру вам необходимо подтвердить вашу учётную запись.",
+      );
       return;
     }
 

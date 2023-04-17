@@ -50,8 +50,8 @@ class TelegramLinkWidget extends StatelessWidget {
         ToTelegramButton(
           text: "Бот ${MainSettings.appName}",
           tapHandler: () {
-            var telegramUser = Uri.parse(TelegramBotSettings.link);
-            launchUrl(telegramUser);
+            var uri = Uri.parse(TelegramBotSettings.link);
+            launchUrl(uri);
           },
         ),
         const SizedBox(

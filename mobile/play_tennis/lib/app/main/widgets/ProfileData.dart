@@ -18,10 +18,11 @@ class ProfileData extends StatefulWidget {
     required this.loginData,
   });
 
-  State<ProfileData> createState() => _ProfileData();
+  @override
+  State<ProfileData> createState() => ProfileDataState();
 }
 
-class _ProfileData extends State<ProfileData> {
+class ProfileDataState extends State<ProfileData> {
   @override
   Widget build(BuildContext context) {
     return Column(

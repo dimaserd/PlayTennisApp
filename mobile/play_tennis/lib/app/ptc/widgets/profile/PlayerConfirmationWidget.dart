@@ -17,13 +17,13 @@ class _PlayerConfirmationWidgetState extends State<PlayerConfirmationWidget> {
 
   @override
   Widget build(BuildContext context) {
-    var text = "Ваша учетная запись не подтверждена!";
+    var text = "Ваша учётная запись не подтверждена!";
 
     if (!widget.player.emailConfirmed) {
       text += " Подтвердите адрес электронной почты.";
     } else if (!widget.player.accountConfirmed) {
       text +=
-          " В ближайшее время с вами свяжется админстратор портала. Мы вам позвоним на ${widget.player.phoneNumber}.";
+          " В ближайшее время с вами свяжется админстратор портала. Мы вам позвоним на ${widget.player.phoneNumber}. Вы можете подтвердить свою учётную запись самостоятельно, привязав ваш Telegram.";
     }
 
     return SizedBox(
@@ -37,12 +37,15 @@ class _PlayerConfirmationWidgetState extends State<PlayerConfirmationWidget> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.all(5.0),
+              padding: const EdgeInsets.all(10.0),
               child: Center(
                 child: Text(
                   text,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ),
@@ -54,8 +57,8 @@ class _PlayerConfirmationWidgetState extends State<PlayerConfirmationWidget> {
 }
 
 class EmailConfirmationWidget extends StatefulWidget {
-  PlayerData player;
-  EmailConfirmationWidget({super.key, required this.player});
+  final PlayerData player;
+  const EmailConfirmationWidget({super.key, required this.player});
 
   @override
   State<EmailConfirmationWidget> createState() =>

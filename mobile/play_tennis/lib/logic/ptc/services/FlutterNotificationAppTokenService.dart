@@ -65,7 +65,6 @@ class FlutterNotificationAppTokenService {
 
     updateAppToken(appInstanceToken!).then(
       (value) {
-        print("Token updated");
         print(value.message);
       },
     );
