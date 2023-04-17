@@ -59,27 +59,38 @@ class _SearchTournamentsForm extends State<SearchTournamentsForm> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 2),
-          child: CountryAndCitySelect(
-            showDistrictSelect: false,
-            onCityChanged: (p) {
-              onCountryChanged();
-            },
-            onCountryChanged: (p) {
-              onCountryChanged();
-            },
-            controller: countryAndCitySelectController,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 2),
-          child: TextField(
-            controller: _searchController,
-            onChanged: _onSearchChanged,
-            decoration: const InputDecoration(
-              hintText: 'Поисковая строка',
-              suffixIcon: Icon(Icons.search),
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 15,
+            ),
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 5,
+                ),
+                CountryAndCitySelect(
+                  showDistrictSelect: false,
+                  onCityChanged: (p) {
+                    onCountryChanged();
+                  },
+                  onCountryChanged: (p) {
+                    onCountryChanged();
+                  },
+                  controller: countryAndCitySelectController,
+                ),
+                TextField(
+                  controller: _searchController,
+                  onChanged: _onSearchChanged,
+                  decoration: const InputDecoration(
+                    hintText: 'Поисковая строка',
+                    suffixIcon: Icon(Icons.search),
+                  ),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+              ],
             ),
           ),
         ),

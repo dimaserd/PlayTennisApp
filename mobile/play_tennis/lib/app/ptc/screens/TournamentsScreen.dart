@@ -59,7 +59,7 @@ class _TournamentsScreenState extends State<TournamentsScreen> {
           ),
           drawer: const SideDrawer(),
           body: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(5.0),
             child: TabBarView(
               children: getWidgets(),
             ),
