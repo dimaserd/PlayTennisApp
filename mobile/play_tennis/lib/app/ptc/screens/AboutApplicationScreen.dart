@@ -178,7 +178,7 @@ class MainApplicationInfo extends StatelessWidget {
         ),
         const SizedBox(height: 25),
         const Text(
-          'Продолжая работу с приложением вы соглашаетесь со следующими политиками:',
+          'Продолжая работу с приложением вы соглашаетесь со следующими документами:',
           style: TextStyle(
             fontWeight: FontWeight.w600,
             fontSize: 18,
