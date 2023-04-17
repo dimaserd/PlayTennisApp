@@ -17,11 +17,6 @@ class TelegramData extends StatelessWidget {
   });
 
   List<Widget> getButtons(BuildContext context) {
-    if (telegramCityModel.channelLink == null &&
-        telegramCityModel.chatLink == null) {
-      return [];
-    }
-
     return [
       telegramCityModel.channelLink != null
           ? Padding(
@@ -39,7 +34,7 @@ class TelegramData extends StatelessWidget {
                   }),
             )
           : const SizedBox.shrink(),
-      telegramCityModel.chatLink != null
+      telegramCityModel!.chatLink != null
           ? Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: ToTelegramButton(
