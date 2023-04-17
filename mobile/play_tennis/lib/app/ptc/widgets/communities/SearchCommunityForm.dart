@@ -61,11 +61,14 @@ class _SearchCommunityForm extends State<SearchCommunityForm> {
     return Column(
       children: [
         Card(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 2),
-                child: CountryAndCitySelect(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 5,
+                ),
+                CountryAndCitySelect(
                   showDistrictSelect: false,
                   onCityChanged: (p) {
                     onCountryChanged();
@@ -75,10 +78,7 @@ class _SearchCommunityForm extends State<SearchCommunityForm> {
                   },
                   controller: countryAndCitySelectController,
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
+                TextField(
                   controller: _searchController,
                   onChanged: _onSearchChanged,
                   decoration: const InputDecoration(
@@ -86,8 +86,11 @@ class _SearchCommunityForm extends State<SearchCommunityForm> {
                     suffixIcon: Icon(Icons.search),
                   ),
                 ),
-              ),
-            ],
+                const SizedBox(
+                  height: 15,
+                ),
+              ],
+            ),
           ),
         ),
         cityModel != null
