@@ -52,7 +52,11 @@ class TelegramProfileScreenState extends State<TelegramProfileScreen>
   }
 
   void loadTelegramData(String cityId) {
-    AppServices.cityService.getTelegramDataById(cityId, (p0) {}).then((value) {
+    print("loadTelegramData " + cityId);
+    AppServices.cityService.getTelegramDataById(cityId, (p0) {
+      BaseApiResponseUtils.showError(context,
+          "Произошла ошибка при загрузке данных о Telegram чатах города.");
+    }).then((value) {
       if (!mounted) {
         return;
       }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:play_tennis/app/ptc/widgets/cities/CityChatAndChannelWidget.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
 import 'package:play_tennis/logic/ptc/models/cities/PublicTelegramChatForCityModel.dart';
@@ -14,6 +15,49 @@ class TelegramData extends StatelessWidget {
     required this.locationData,
     required this.telegramCityModel,
   });
+
+  List<Widget> getButtons(BuildContext context) {
+    if (telegramCityModel.channelLink == null &&
+        telegramCityModel.chatLink == null) {
+      return [];
+    }
+
+    return [
+      telegramCityModel.channelLink != null
+          ? Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: ToTelegramButton(
+                  text: "Канал города ",
+                  tapHandler: () {
+                    MainAppExtensions.launchUrlInBrowser(
+                        telegramCityModel.channelLink!, (e) {
+                      BaseApiResponseUtils.showError(
+                        context,
+                        "Произошла ошибка при открытии телеграм-канала. Обратитесь к админстратору портала.",
+                      );
+                    });
+                  }),
+            )
+          : const SizedBox.shrink(),
+      telegramCityModel.chatLink != null
+          ? Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: ToTelegramButton(
+                tapHandler: () {
+                  MainAppExtensions.launchUrlInBrowser(
+                      telegramCityModel.chatLink!, (e) {
+                    BaseApiResponseUtils.showError(
+                      context,
+                      "Произошла ошибка при открытии телеграм-чата. Обратитесь к админстратору портала.",
+                    );
+                  });
+                },
+                text: "Чат города ",
+              ),
+            )
+          : const SizedBox.shrink(),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,68 +124,7 @@ class TelegramData extends StatelessWidget {
             ),
           ),
         ),
-        telegramCityModel.channelLink != null
-            ? GestureDetector(
-                onTap: () {
-                  MainAppExtensions.launchUrlInBrowser(
-                      telegramCityModel.channelLink!, (e) {
-                    BaseApiResponseUtils.showError(
-                      context,
-                      "Произошла ошибка при открытии телеграм-канала. Обратитесь к админстратору портала.",
-                    );
-                  });
-                },
-                child: const SizedBox(
-                  height: 50,
-                  width: double.infinity,
-                  child: Card(
-                    color: Color.fromRGBO(36, 168, 235, 1),
-                    margin: EdgeInsets.only(top: 5, left: 5, right: 5),
-                    elevation: 5,
-                    child: Center(
-                      child: Text(
-                        "Канал города ",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              )
-            : const SizedBox.shrink(),
-        telegramCityModel.chatLink != null
-            ? GestureDetector(
-                onTap: () {
-                  MainAppExtensions.launchUrlInBrowser(
-                      telegramCityModel.chatLink!, (e) {
-                    BaseApiResponseUtils.showError(
-                      context,
-                      "Произошла ошибка при открытии телеграм-чата. Обратитесь к админстратору портала.",
-                    );
-                  });
-                },
-                child: const SizedBox(
-                  height: 50,
-                  width: double.infinity,
-                  child: Card(
-                    margin: EdgeInsets.only(top: 5, left: 5, right: 5),
-                    elevation: 5,
-                    color: Color.fromRGBO(36, 168, 235, 1),
-                    child: Center(
-                      child: Text(
-                        "Чат города ",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              )
-            : const SizedBox.shrink(),
+        ...getButtons(context),
         const SizedBox(
           height: 50,
         ),

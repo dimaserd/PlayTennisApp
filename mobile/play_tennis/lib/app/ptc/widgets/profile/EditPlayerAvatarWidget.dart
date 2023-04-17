@@ -49,7 +49,7 @@ class _EditPlayerAvatarWidgetState extends State<EditPlayerAvatarWidget> {
     return [
       !isEdit
           ? Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: PlayerAvatar(
                 avatarFileId: avatarFileId,
               ),
@@ -59,11 +59,12 @@ class _EditPlayerAvatarWidgetState extends State<EditPlayerAvatarWidget> {
           ? Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 20,
+                vertical: 10,
               ),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blueAccent,
-                  minimumSize: const Size.fromHeight(30),
+                  minimumSize: const Size.fromHeight(40),
                 ),
                 onPressed: (() {
                   setState(() {

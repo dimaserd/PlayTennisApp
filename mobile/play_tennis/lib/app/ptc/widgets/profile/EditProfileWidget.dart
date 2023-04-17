@@ -64,7 +64,14 @@ class _MyStatefulWidgetState extends State<EditProfileWidget> {
     return SingleChildScrollView(
       child: Container(
         alignment: Alignment.center,
-        child: _buildPanel(),
+        child: Column(
+          children: [
+            _buildPanel(),
+            const SizedBox(
+              height: 50,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -107,6 +114,9 @@ class _MyStatefulWidgetState extends State<EditProfileWidget> {
                   onCityChanged: (p) {},
                   controller: countryAndCitySelectController,
                 ),
+              ),
+              const SizedBox(
+                height: 10,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(
