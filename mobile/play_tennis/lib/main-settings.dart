@@ -13,9 +13,13 @@ class MainSettings {
 
   static const bool showSiteUrls = false;
 
-  static const String privacyPolicy = "https://play-tennis.online/docs/politics.html";
+  static const String privacyPolicy =
+      "https://play-tennis.online/docs/politics.html";
 
-  static const String agreement = "https://play-tennis.online/docs/agreement.html";
+  static const String agreement =
+      "https://play-tennis.online/docs/agreement.html";
+
+  static const String dimaSerdTelegramUrl = "tg://resolve?domain=@dimaserd";
 }
 
 class TelegramBotSettings {

@@ -17,24 +17,62 @@ class TelegramData extends StatelessWidget {
   });
 
   List<Widget> getButtons(BuildContext context) {
+    if (telegramCityModel.channelLink == null &&
+        telegramCityModel.chatLink == null) {
+      return [
+        Card(
+          child: SizedBox(
+            width: double.infinity,
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Column(
+                children: [
+                  const Text(
+                    "Для вашего города не создан чат и канал, вы можете создать их самостоятельно или привязать уже существующий чат в Telegram. Чтобы подлкючить чат к платформе PlayTennis вам необходимо связаться с администраторами портала.",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  ToTelegramButton(
+                    text: "написать администратору",
+                    tapHandler: () {
+                      MainAppExtensions.launchUrlInBrowser(
+                          MainSettings.dimaSerdTelegramUrl, (e) {
+                        BaseApiResponseUtils.showError(
+                          context,
+                          "Произошла ошибка при открытии телеграм-ссылки. Пожалуйста, обратитесь к админстратору портала.",
+                        );
+                      });
+                    },
+                  )
+                ],
+              ),
+            ),
+          ),
+        )
+      ];
+    }
+
     return [
       telegramCityModel.channelLink != null
           ? Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: ToTelegramButton(
-                  text: "Канал города ",
-                  tapHandler: () {
-                    MainAppExtensions.launchUrlInBrowser(
-                        telegramCityModel.channelLink!, (e) {
-                      BaseApiResponseUtils.showError(
-                        context,
-                        "Произошла ошибка при открытии телеграм-канала. Обратитесь к админстратору портала.",
-                      );
-                    });
-                  }),
+                text: "Канал города ",
+                tapHandler: () {
+                  MainAppExtensions.launchUrlInBrowser(
+                      telegramCityModel.channelLink!, (e) {
+                    BaseApiResponseUtils.showError(
+                      context,
+                      "Произошла ошибка при открытии телеграм-канала. Обратитесь к админстратору портала.",
+                    );
+                  });
+                },
+              ),
             )
           : const SizedBox.shrink(),
-      telegramCityModel!.chatLink != null
+      telegramCityModel.chatLink != null
           ? Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: ToTelegramButton(
@@ -71,7 +109,8 @@ class TelegramData extends StatelessWidget {
                 ),
                 const Image(
                   image: NetworkImage(
-                      "${MainSettings.domain}/images/telegram/TelegramLogo.png"),
+                    "${MainSettings.domain}/images/telegram/TelegramLogo.png",
+                  ),
                 ),
                 const SizedBox(
                   height: 10,
@@ -104,7 +143,7 @@ class TelegramData extends StatelessWidget {
                   height: 5,
                 ),
                 const Text(
-                  "Все заявки на игру и новости и результаты матчей вашего города попадают в специальный чат, где вы можете обсуждать свои достижения и знакомиться с другими участниками.",
+                  "Все заявки на игру, новости, турниры и результаты матчей вашего города попадают в специальный чат, где вы можете обсуждать свои достижения и знакомиться с другими участниками.",
                 ),
                 const SizedBox(
                   height: 5,

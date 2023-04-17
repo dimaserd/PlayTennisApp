@@ -110,7 +110,7 @@ class MainApplicationInfo extends StatelessWidget {
             ),
           ),
           onTap: () {
-            var telegramUser = Uri.parse("tg://resolve?domain=@dimaserd");
+            var telegramUser = Uri.parse(MainSettings.dimaSerdTelegramUrl);
             launchUrl(telegramUser);
           },
         ),
