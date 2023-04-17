@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:play_tennis/app/main/extensions/AppUtils.dart';
 import 'package:play_tennis/app/main/widgets/Loading.dart';
 import 'package:play_tennis/app/main/widgets/side_drawer.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
@@ -63,7 +64,7 @@ class MainApplicationInfo extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         const Text(
-          'Мобильное приложение PlayTennis',
+          'Мобильное приложение ${MainSettings.appName}',
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w600,
@@ -175,9 +176,9 @@ class MainApplicationInfo extends StatelessWidget {
             );
           },
         ),
-        const SizedBox(height: 5),
+        const SizedBox(height: 25),
         const Text(
-          'Информация о нас:',
+          'Продолжая работу с приложением вы соглашаетесь со следующими политиками:',
           style: TextStyle(
             fontWeight: FontWeight.w600,
             fontSize: 18,
@@ -193,8 +194,14 @@ class MainApplicationInfo extends StatelessWidget {
             ),
           ),
           onTap: () {
-            var uri = Uri.parse(MainSettings.privacyPolicy);
-            launchUrl(uri);
+            AppUtils.tryAndShowMessageIfError(
+              () {
+                var uri = Uri.parse(MainSettings.privacyPolicy);
+                launchUrl(uri);
+              },
+              context,
+              "Произошла ошибка при переходе к политике обработки персональных данных. Пожалуйста, обратитесь к администратору портала.",
+            );
           },
         ),
         const SizedBox(height: 5),
@@ -207,8 +214,14 @@ class MainApplicationInfo extends StatelessWidget {
             ),
           ),
           onTap: () {
-            var uri = Uri.parse(MainSettings.agreement);
-            launchUrl(uri);
+            AppUtils.tryAndShowMessageIfError(
+              () {
+                var uri = Uri.parse(MainSettings.agreement);
+                launchUrl(uri);
+              },
+              context,
+              "Произошла ошибка при переходе к соглашению об обработке персональных данных и информационной рассылке сервиса. Пожалуйста, обратитесь к администратору портала.",
+            );
           },
         )
       ],

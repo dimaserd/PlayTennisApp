@@ -69,7 +69,7 @@ class GameFormCourtDataWidget extends StatelessWidget {
         height: 10,
       ),
       CountryAndCitySelect(
-        selector: CountryCitySections.courts,
+        showDistrictSelect: false,
         onCityChanged: (p) {},
         onCountryChanged: (p) {},
         controller: countryAndCitySelectController,

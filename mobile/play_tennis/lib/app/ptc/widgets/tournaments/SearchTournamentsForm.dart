@@ -62,7 +62,7 @@ class _SearchTournamentsForm extends State<SearchTournamentsForm> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 2),
           child: CountryAndCitySelect(
-            selector: CountryCitySections.communities,
+            showDistrictSelect: false,
             onCityChanged: (p) {
               onCountryChanged();
             },

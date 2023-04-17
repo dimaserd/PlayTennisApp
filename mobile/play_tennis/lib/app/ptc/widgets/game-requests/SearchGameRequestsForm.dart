@@ -48,11 +48,11 @@ class _SearchGameRequestsFormState extends State<SearchGameRequestsForm> {
       children: [
         Card(
           child: Padding(
-            padding: const EdgeInsets.all(5.0),
+            padding: const EdgeInsets.all(10.0),
             child: Column(
               children: [
                 CountryAndCitySelect(
-                  selector: CountryCitySections.players,
+                  showDistrictSelect: false,
                   onCityChanged: (p) {},
                   onCountryChanged: (p) {},
                   controller: widget.countryAndCitySelectController,
@@ -64,22 +64,15 @@ class _SearchGameRequestsFormState extends State<SearchGameRequestsForm> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          top: 8.0,
-                          left: 5,
-                          right: 5,
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.black,
+                          minimumSize: const Size.fromHeight(36),
                         ),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.black,
-                            minimumSize: const Size.fromHeight(36),
-                          ),
-                          onPressed: () {
-                            getData();
-                          },
-                          child: const Text("Поиск"),
-                        ),
+                        onPressed: () {
+                          getData();
+                        },
+                        child: const Text("Поиск"),
                       ),
                     ],
                   ),

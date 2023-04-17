@@ -34,8 +34,9 @@ class _AddGameRequestFormState extends State<AddGameRequestForm> {
   void initState() {
     super.initState();
     AppServices.playerService.getLocationData((e) => {}).then((value) {
-      if (!mounted) return;
-      if (value == null) return;
+      if (!mounted || value == null) {
+        return;
+      }
 
       setState(() {
         locationData = value;
@@ -59,9 +60,14 @@ class _AddGameRequestFormState extends State<AddGameRequestForm> {
     return SingleChildScrollView(
       child: Container(
         alignment: Alignment.center,
-        padding: const EdgeInsets.all(15.0),
-        child: Column(
-          children: getStepWidgets(),
+        padding: const EdgeInsets.all(5.0),
+        child: Card(
+          child: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Column(
+              children: getStepWidgets(),
+            ),
+          ),
         ),
       ),
     );
@@ -70,7 +76,7 @@ class _AddGameRequestFormState extends State<AddGameRequestForm> {
   List<Widget> getStepWidgets() {
     return [
       CountryAndCitySelect(
-        selector: CountryCitySections.players,
+        showDistrictSelect: false,
         onCityChanged: (p) {},
         onCountryChanged: (p) {},
         controller: countryAndCitySelectController,
@@ -96,7 +102,7 @@ class _AddGameRequestFormState extends State<AddGameRequestForm> {
       ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.black,
-          minimumSize: const Size.fromHeight(35), // NEW
+          minimumSize: const Size.fromHeight(35),
         ),
         onPressed: _clickHandler,
         child: const Text("Создать"),
@@ -138,6 +144,7 @@ class _AddGameRequestFormState extends State<AddGameRequestForm> {
     AppServices.gameRequestsService.create(model).then((value) {
       BaseApiResponseUtils.handleResponse(context, value);
       if (value.isSucceeded) {
+        MyApp.inProccess = false;
         Navigator.of(context).pop();
       }
       MyApp.inProccess = false;

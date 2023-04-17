@@ -52,9 +52,15 @@ class GameRequestToSelect extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   request.description!,
-                  style: const TextStyle(fontSize: 16),
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
+            ),
+            const SizedBox(
+              height: 10,
             ),
           ],
         ),

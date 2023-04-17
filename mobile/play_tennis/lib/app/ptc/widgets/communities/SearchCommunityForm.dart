@@ -66,7 +66,7 @@ class _SearchCommunityForm extends State<SearchCommunityForm> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2),
                 child: CountryAndCitySelect(
-                  selector: CountryCitySections.communities,
+                  showDistrictSelect: false,
                   onCityChanged: (p) {
                     onCountryChanged();
                   },

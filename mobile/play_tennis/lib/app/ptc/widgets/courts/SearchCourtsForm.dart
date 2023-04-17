@@ -66,7 +66,7 @@ class _SearchCourtsForm extends State<SearchCourtsForm> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2),
                 child: CountryAndCitySelect(
-                  selector: CountryCitySections.courts,
+                  showDistrictSelect: false,
                   onCityChanged: (p) {
                     onCountryChanged();
                   },

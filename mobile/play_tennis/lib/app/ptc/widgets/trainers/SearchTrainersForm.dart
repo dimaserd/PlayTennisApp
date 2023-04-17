@@ -67,7 +67,7 @@ class _SearchTrainersForm extends State<SearchTrainersForm> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2),
                 child: CountryAndCitySelect(
-                  selector: CountryCitySections.trainers,
+                  showDistrictSelect: false,
                   onCityChanged: (p) {
                     onCountryChanged();
                   },
