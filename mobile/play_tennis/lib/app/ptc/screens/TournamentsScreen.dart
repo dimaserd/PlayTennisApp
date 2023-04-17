@@ -72,7 +72,7 @@ class _TournamentsScreenState extends State<TournamentsScreen> {
   List<Widget> getWidgets() {
     if (locationData == null) {
       return [
-        const Loading(text: "Многодневные турниры пока не реализованы"),
+        const Loading(text: "Однодневные турниры пока не реализованы"),
         const Loading(text: "Многодневные турниры пока не реализованы"),
       ];
     }

@@ -12,11 +12,26 @@ import 'package:play_tennis/logic/ptc/services/PlayerRegistrationService.dart';
 import 'package:play_tennis/main-services.dart';
 import 'package:play_tennis/main-settings.dart';
 
+class RegistrationFormOptions {
+  final bool isV2;
+  final bool showSurname;
+  final bool isAboutMeRequired;
+
+  RegistrationFormOptions({
+    required this.isV2,
+    required this.showSurname,
+    required this.isAboutMeRequired,
+  });
+}
+
 class RegistrationForm extends StatefulWidget {
   final Function onLogin;
-  final bool isV2;
-  const RegistrationForm(
-      {super.key, required this.isV2, required this.onLogin});
+  final RegistrationFormOptions options;
+  const RegistrationForm({
+    super.key,
+    required this.options,
+    required this.onLogin,
+  });
 
   @override
   State<RegistrationForm> createState() => _RegistrationFormState();
@@ -115,7 +130,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
       return false;
     }
 
-    if (patronymicTextController.text == "") {
+    if (patronymicTextController.text == "" && widget.options.showSurname) {
       showError("Вы не указали ваше отчество");
       return false;
     }
@@ -125,7 +140,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
       return false;
     }
 
-    if (aboutMeTextController.text == "") {
+    if (aboutMeTextController.text == "" && widget.options.isAboutMeRequired) {
       showError("Вы ничего не указали в разделе Обо мне");
       return false;
     }
@@ -135,7 +150,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
 
   List<Widget> getThirdStepWidgets() {
     return [
-      widget.isV2
+      widget.options.isV2
           ? const SizedBox.shrink()
           : Padding(
               padding: padding,
@@ -178,13 +193,15 @@ class _RegistrationFormState extends State<RegistrationForm> {
           textController: nameTextController,
         ),
       ),
-      Padding(
-        padding: padding,
-        child: TextInput(
-          labelText: "Отчество",
-          textController: patronymicTextController,
-        ),
-      ),
+      widget.options.showSurname
+          ? Padding(
+              padding: padding,
+              child: TextInput(
+                labelText: "Отчество",
+                textController: patronymicTextController,
+              ),
+            )
+          : const SizedBox.shrink(),
       Padding(
         padding: padding,
         child: DropdownWidget(
@@ -394,7 +411,15 @@ class _RegistrationFormState extends State<RegistrationForm> {
         registrationSource: "PlayTennisApp",
       );
 
-      var regResponse = widget.isV2
+      if (!widget.options.showSurname) {
+        model.patronymic = "Не указано";
+      }
+
+      if (!widget.options.isAboutMeRequired) {
+        model.aboutMe = "Не указано";
+      }
+
+      var regResponse = widget.options.isV2
           ? await registerHandlerV2(model)
           : await registerHandler(model);
 

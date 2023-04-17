@@ -14,7 +14,11 @@ class RegistrationScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             RegistrationForm(
-              isV2: true,
+              options: RegistrationFormOptions(
+                isV2: true,
+                showSurname: false,
+                isAboutMeRequired: false,
+              ),
               onLogin: () {
                 Navigator.of(context)
                     .pushNamedAndRemoveUntil("/change-avatar", (r) => false);

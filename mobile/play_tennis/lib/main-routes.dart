@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:play_tennis/app/main/screens/AdvancedRegistrationScreen.dart';
 import 'package:play_tennis/app/main/screens/ChangeAvatarScreen.dart';
 import 'package:play_tennis/app/main/screens/CheckAuthScreen.dart';
 import 'package:play_tennis/app/main/screens/LoginScreen.dart';
@@ -65,11 +64,6 @@ class MainRoutes {
 
     if (settings.name == '/forgotpass') {
       return MaterialPageRoute(builder: (context) => const ChangePassScreen());
-    }
-
-    if (settings.name == '/advanced-registration') {
-      return MaterialPageRoute(
-          builder: (context) => const AdvancedRegistrationScreen());
     }
 
     if (settings.name == '/change-avatar') {

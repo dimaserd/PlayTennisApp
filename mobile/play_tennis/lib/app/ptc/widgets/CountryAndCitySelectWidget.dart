@@ -119,11 +119,11 @@ class _CountryAndCitySelectState extends State<CountryAndCitySelect> {
                 itemAsString: (CityDistrictModel u) => u.name!,
                 dropdownDecoratorProps: const DropDownDecoratorProps(
                   dropdownSearchDecoration: InputDecoration(
-                      labelText: "Выбор района", hintText: "Выберите район"),
+                    labelText: "Выбор района",
+                    hintText: "Выберите район",
+                  ),
                 ),
-                onChanged: (areas) {
-                  print("areas: $areas");
-                },
+                onChanged: (areas) {},
                 selectedItems: List.empty(),
               )
             : const SizedBox.shrink()
