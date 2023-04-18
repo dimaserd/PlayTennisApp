@@ -109,7 +109,12 @@ class _SearchPlayersFormState extends State<SearchPlayersForm> {
             : const SizedBox.shrink(),
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.only(top: 8, bottom: 0),
+            padding: const EdgeInsets.only(
+              top: 8,
+              bottom: 0,
+              left: 5,
+              right: 5,
+            ),
             child: PlayersList(
               isActiveLoader: _isActiveLoader,
               offset: _offSet,

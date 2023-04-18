@@ -162,7 +162,8 @@ class ToTelegramButton extends StatelessWidget {
                   height: 30,
                   width: 30,
                   image: NetworkImage(
-                      "${MainSettings.domain}/images/telegram/TelegramLogo.png"),
+                    "${MainSettings.domain}/images/telegram/TelegramLogo.png",
+                  ),
                 ),
                 const SizedBox(
                   width: 10,

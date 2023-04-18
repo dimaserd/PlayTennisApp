@@ -39,50 +39,60 @@ class _ChangeAvatarScreenState extends State<ChangeAvatarScreen> {
       body: SingleChildScrollView(
         child: Center(
           child: loginData != null
-              ? Column(
-                  children: [
-                    EditPlayerAvatarWidget(
-                      avatarFileId: loginData!.avatarFileId,
-                      onSucceess: () {
-                        sleep(const Duration(seconds: 2));
-                        Navigator.of(context).pushNamedAndRemoveUntil(
-                          "/profile",
-                          (route) => false,
-                        );
-                      },
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        top: 0,
-                        left: 20,
-                        right: 20,
-                      ),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              const Color.fromARGB(255, 255, 255, 137),
-                          minimumSize: const Size.fromHeight(36),
+              ? Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Card(
+                    child: Column(
+                      children: [
+                        const SizedBox(
+                          height: 25,
                         ),
-                        onPressed: () {
-                          Navigator.of(context).pushNamedAndRemoveUntil(
-                            "/profile",
-                            (route) => false,
-                          );
-                        },
-                        child: const Text(
-                          "Продолжить без фотографии",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                        EditPlayerAvatarWidget(
+                          avatarFileId: loginData!.avatarFileId,
+                          onSucceess: () {
+                            Navigator.of(context).pushNamedAndRemoveUntil(
+                              "/profile",
+                              (route) => false,
+                            );
+                          },
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            top: 0,
+                            left: 20,
+                            right: 20,
+                          ),
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor:
+                                  const Color.fromARGB(255, 255, 81, 58),
+                              minimumSize: const Size.fromHeight(40),
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).pushNamedAndRemoveUntil(
+                                "/profile",
+                                (route) => false,
+                              );
+                            },
+                            child: const Text(
+                              "Продолжить без фотографии",
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    )
-                  ],
+                        const SizedBox(
+                          height: 20,
+                        ),
+                      ],
+                    ),
+                  ),
                 )
               : const Loading(text: "Получение профиля"),
         ),

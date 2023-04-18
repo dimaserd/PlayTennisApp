@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/RegistrationForm.dart';
 
 class RegistrationScreen extends StatelessWidget {
-  const RegistrationScreen({Key? key}) : super(key: key);
+  const RegistrationScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

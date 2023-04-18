@@ -39,10 +39,8 @@ class CourtsList extends StatelessWidget {
   }
 
   Widget getChild() {
-    return 
-    courts.isEmpty
-        ? 
-        Column(children: const [
+    return courts.isEmpty
+        ? Column(children: const [
             Center(
               child: Text("Корты не найдены"),
             ),
@@ -52,7 +50,10 @@ class CourtsList extends StatelessWidget {
             itemBuilder: (context, index) {
               if (index == courts.length) {
                 if (isActiveLoader == false || courts.length < 5) {
-                  return const ShowAlertContact(title: "Добавить корт", subTitle: "Для добавления корта пожалуйста напишите мне.");
+                  return const ShowAlertContact(
+                      title: "Добавить корт",
+                      subTitle:
+                          "Для добавления корта пожалуйста напишите мне.");
                 } else {
                   // Вернуть заглушку для отображения индикатора загрузки
                   return const Center(child: CircularProgressIndicator());

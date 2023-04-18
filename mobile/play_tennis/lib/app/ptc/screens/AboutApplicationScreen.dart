@@ -209,7 +209,9 @@ class MainApplicationInfo extends StatelessWidget {
 }
 
 class ToWebAppWidget extends StatelessWidget {
-  const ToWebAppWidget({super.key});
+  const ToWebAppWidget({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -226,7 +228,7 @@ class ToWebAppWidget extends StatelessWidget {
         height: 50,
         width: double.infinity,
         child: Card(
-          color: const Color.fromARGB(255, 5, 47, 69),
+          color: Colors.black,
           margin: const EdgeInsets.only(
             top: 5,
           ),
@@ -235,6 +237,19 @@ class ToWebAppWidget extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
+                SizedBox(
+                  width: 10,
+                ),
+                Image(
+                  height: 30,
+                  width: 30,
+                  image: NetworkImage(
+                    "${MainSettings.domain}/images/logos/internet.webp",
+                  ),
+                ),
+                SizedBox(
+                  width: 10,
+                ),
                 Text(
                   "Web приложение",
                   style: TextStyle(
