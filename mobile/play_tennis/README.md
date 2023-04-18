@@ -15,3 +15,9 @@ flutter run --release --no-sound-null-safety
 ## Swagger
 
 <https://api.play-tennis.online/swagger/index.html>
+
+Для публикации в AppStore
+flutter build ipa —release
+
+через Xcode необходимо выбрать Runner any device
+затем Product -> Archive
