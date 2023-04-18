@@ -18,7 +18,7 @@ class PlayerAvatar extends StatelessWidget {
           )
         : const Image(
             image: NetworkImage(
-              "${MainSettings.domain}/images/telegram/BotLogo.jpg",
+              MainSettings.defaultAvatarPath,
             ),
           );
   }

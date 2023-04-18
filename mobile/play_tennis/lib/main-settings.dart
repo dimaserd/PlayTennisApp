@@ -20,6 +20,8 @@ class MainSettings {
       "https://play-tennis.online/docs/agreement.html";
 
   static const String dimaSerdTelegramUrl = "tg://resolve?domain=@dimaserd";
+
+  static const String defaultAvatarPath = "$domain/images/avatars/default.png";
 }
 
 class TelegramBotSettings {
