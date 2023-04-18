@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/extensions/AppUtils.dart';
 import 'package:play_tennis/app/main/widgets/Loading.dart';
 import 'package:play_tennis/app/main/widgets/side_drawer.dart';
+import 'package:play_tennis/app/ptc/widgets/cities/CityChatAndChannelWidget.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/main-extensions.dart';
 import 'package:play_tennis/main-settings.dart';
@@ -145,37 +146,15 @@ class MainApplicationInfo extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 5),
-        InkWell(
-          child: const Text(
-            'Телеграм-бот ${MainSettings.appName}',
-            style: TextStyle(
-              color: Colors.blue,
-              fontSize: 18,
-            ),
-          ),
-          onTap: () {
+        ToTelegramButton(
+          text: "Бот ${MainSettings.appName}",
+          tapHandler: () {
             var uri = Uri.parse(TelegramBotSettings.link);
             launchUrl(uri);
           },
         ),
         const SizedBox(height: 5),
-        InkWell(
-          child: const Text(
-            'Web-приложение ${MainSettings.appName}',
-            style: TextStyle(
-              color: Colors.blue,
-              fontSize: 18,
-            ),
-          ),
-          onTap: () {
-            MainAppExtensions.trylaunchAppUrl(
-              "/ptc/tournaments",
-              (er) {
-                BaseApiResponseUtils.showSuccess(context, er);
-              },
-            );
-          },
-        ),
+        const ToWebAppWidget(),
         const SizedBox(height: 25),
         const Text(
           'Продолжая работу с приложением вы соглашаетесь со следующими документами:',
@@ -225,6 +204,49 @@ class MainApplicationInfo extends StatelessWidget {
           },
         )
       ],
+    );
+  }
+}
+
+class ToWebAppWidget extends StatelessWidget {
+  const ToWebAppWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        MainAppExtensions.trylaunchAppUrl(
+          "/ptc/tournaments",
+          (er) {
+            BaseApiResponseUtils.showSuccess(context, er);
+          },
+        );
+      },
+      child: SizedBox(
+        height: 50,
+        width: double.infinity,
+        child: Card(
+          color: const Color.fromARGB(255, 5, 47, 69),
+          margin: const EdgeInsets.only(
+            top: 5,
+          ),
+          elevation: 5,
+          child: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Text(
+                  "Web приложение",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
