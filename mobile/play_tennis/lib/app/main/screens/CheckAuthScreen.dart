@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:loader_overlay/loader_overlay.dart';
 import 'package:play_tennis/app/main/widgets/Loading.dart';
 import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
 import 'package:play_tennis/main-services.dart';
+import 'package:play_tennis/main-state.dart';
 
 class CheckAuthScreen extends StatefulWidget {
   const CheckAuthScreen({super.key});
@@ -18,11 +18,9 @@ class CheckAuthScreenState extends State<CheckAuthScreen> {
   void initState() {
     super.initState();
     _getLoginData().then((value) {
-      if (value) {
-        Navigator.pushNamedAndRemoveUntil(context, "/home", (r) => false);
-      } else {
-        Navigator.pushNamedAndRemoveUntil(context, "/login", (r) => false);
-      }
+      MainState.isAuthorized = value;
+
+      Navigator.pushNamedAndRemoveUntil(context, "/home", (r) => false);
     });
   }
 
