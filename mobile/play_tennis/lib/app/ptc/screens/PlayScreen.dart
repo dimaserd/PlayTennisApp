@@ -35,10 +35,8 @@ class _PlayScreenState extends State<PlayScreen> {
   void loadLoginData() {
     AppServices.loginService.getLoginData().then((value) {
       if (!value.isAuthenticated) {
-        BaseApiResponseUtils.showError(context, "Кажется вы были разлогинены");
-        Navigator.of(context)
-            .pushNamedAndRemoveUntil('/login', (route) => true);
-        return;
+        BaseApiResponseUtils.showInfo(context,
+            "Вы не можете пользоваться функционалом заявок на игру в полном объеме. Для этого вам необходимо зарегистрироваться/авторизоваться. Перейдите в меню и нажмите 'Логин'.");
       }
       setState(() {
         loginData = value;

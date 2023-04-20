@@ -25,6 +25,7 @@ class MainRoutes {
   static String checkAuth = '/';
   static String home = '/home';
   static String login = '/login';
+  static String play = "/play";
 
   static void toPlayerCard(BuildContext context, String playerId) {
     Navigator.of(context).pushNamed('/player/$playerId');
@@ -57,8 +58,10 @@ class MainRoutes {
       return MaterialPageRoute(builder: (context) => const TournamentsScreen());
     }
 
-    if (settings.name == '/play') {
-      return MaterialPageRoute(builder: (context) => const PlayScreen());
+    if (settings.name == play) {
+      return MaterialPageRoute(
+        builder: (context) => const PlayScreen(),
+      );
     }
 
     if (settings.name == login) {

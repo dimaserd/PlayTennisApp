@@ -7,6 +7,7 @@ import 'package:play_tennis/logic/clt/models/models.dart';
 import 'package:play_tennis/main-routes.dart';
 import 'package:play_tennis/main-services.dart';
 import 'package:play_tennis/main-settings.dart';
+import 'package:play_tennis/main-state.dart';
 
 class LoginForm extends StatefulWidget {
   final Function onLogin;
@@ -143,6 +144,7 @@ class _LoginFormState extends State<LoginForm> {
       onLoginHandler(data.succeeded, message);
 
       if (data.succeeded) {
+        MainState.isAuthorized = true;
         widget.onLogin();
       }
       setState(() {

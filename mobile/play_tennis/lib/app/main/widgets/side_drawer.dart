@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/palette.dart';
+import 'package:play_tennis/main-routes.dart';
 import 'package:play_tennis/main-services.dart';
 import 'package:play_tennis/main-settings.dart';
 import 'package:play_tennis/main-state.dart';
@@ -49,13 +50,20 @@ class SideDrawer extends StatelessWidget {
                         .pushNamedAndRemoveUntil("/profile", (r) => false);
                   },
                 )
-              : const SizedBox.shrink(),
+              : ListTile(
+                  leading: const Icon(Icons.account_circle),
+                  title: const Text('Логин'),
+                  onTap: () {
+                    Navigator.of(context)
+                        .pushNamedAndRemoveUntil("/login", (r) => false);
+                  },
+                ),
           ListTile(
             leading: const Icon(Icons.sports_tennis),
             title: const Text('Играть'),
             onTap: () {
               Navigator.of(context)
-                  .pushNamedAndRemoveUntil("/play", (r) => false);
+                  .pushNamedAndRemoveUntil(MainRoutes.play, (r) => false);
             },
           ),
           ListTile(
