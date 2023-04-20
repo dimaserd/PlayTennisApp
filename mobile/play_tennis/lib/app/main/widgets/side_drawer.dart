@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:play_tennis/app/main/widgets/images/ServerLogoImage.dart';
 import 'package:play_tennis/app/main/widgets/palette.dart';
 import 'package:play_tennis/main-routes.dart';
 import 'package:play_tennis/main-services.dart';
@@ -23,7 +24,11 @@ class SideDrawer extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.white, fontSize: 25),
                   ),
-                  const Padding(padding: EdgeInsets.only(top: 10)),
+                  const Padding(
+                    padding: EdgeInsets.only(
+                      top: 10,
+                    ),
+                  ),
                   Image.asset(
                     MainSettings.imageRocket,
                     height: 80,
@@ -88,6 +93,7 @@ class SideDrawer extends StatelessWidget {
                   title: const Text('Выйти'),
                   onTap: () {
                     AppServices.loginService.logOut().then((value) {
+                      MainState.isAuthorized = false;
                       Navigator.of(context)
                           .pushNamedAndRemoveUntil("/", (r) => false);
                     });

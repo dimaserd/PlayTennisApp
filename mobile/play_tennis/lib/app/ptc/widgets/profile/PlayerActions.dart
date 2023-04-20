@@ -33,9 +33,15 @@ class _PlayerActionsState extends State<PlayerActions> {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black,
-                  minimumSize: const Size.fromHeight(40), // NEW
+                  minimumSize: const Size.fromHeight(40),
                 ),
                 onPressed: () {
+                  if (!widget.loginData.isAuthenticated) {
+                    BaseApiResponseUtils.showInfo(context,
+                        "Для внесения игры вам необходимо зарегистрироваться/авторизоваться.");
+                    return;
+                  }
+
                   if (widget.loginData.userId == widget.player.id) {
                     BaseApiResponseUtils.showError(
                         context, "Вы не можете внести игру против самого себя");

@@ -18,7 +18,7 @@ class PlayerAvatar extends StatelessWidget {
           )
         : const Image(
             image: NetworkImage(
-              MainSettings.defaultAvatarPath,
+              ServerImages.defaultAvatarPath,
             ),
           );
   }

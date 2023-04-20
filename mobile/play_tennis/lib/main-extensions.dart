@@ -1,3 +1,4 @@
+import 'package:play_tennis/main-state.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'main-services.dart';
 import 'main-settings.dart';
@@ -7,11 +8,16 @@ class MainAppExtensions {
     String appRelativeUrl,
     Function(String) onError,
   ) async {
+    if (!MainState.isAuthorized) {
+      await launchUrlInBrowser(MainSettings.domain, onError);
+      return;
+    }
     final result =
         await AppServices.playerLoginLinkService.createLoginLink((p0) => {});
 
     if (!result.isSucceeded) {
       onError(result.errorMessage ?? "Ошибка при авторизации по кнопке");
+      return;
     }
 
     var dottedUrl = appRelativeUrl.replaceAll(RegExp(r'/'), '.');

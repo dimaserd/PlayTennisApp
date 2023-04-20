@@ -5,6 +5,7 @@ import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/ptc/models/LocationData.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
 import 'package:play_tennis/logic/ptc/models/cities/CityModel.dart';
+import 'package:play_tennis/main-routes.dart';
 import 'package:play_tennis/main-settings.dart';
 import 'package:play_tennis/main-state.dart';
 
@@ -44,48 +45,65 @@ class SetLocationScreenWidget extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 8.0, left: 20, right: 20),
-              child: CountryAndCitySelect(
-                showDistrictSelect: false,
-                onCountryChanged: (p) {},
-                onCityChanged: (p) {},
-                controller: countryAndCitySelectController,
+              child: Column(
+                children: [
+                  CountryAndCitySelect(
+                    showDistrictSelect: false,
+                    onCountryChanged: (p) {},
+                    onCityChanged: (p) {},
+                    controller: countryAndCitySelectController,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.black,
+                      minimumSize: const Size.fromHeight(40),
+                    ),
+                    onPressed: () {
+                      _clickHandler(context);
+                    },
+                    child: const Text("Далее"),
+                  ),
+                ],
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 8.0, left: 20, right: 20),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black,
-                  minimumSize: const Size.fromHeight(40),
-                ),
+              padding: const EdgeInsets.only(top: 10.0),
+              child: TextButton(
+                child: const Text("Авторизоваться"),
                 onPressed: () {
-                  if (countryAndCitySelectController.country == null ||
-                      countryAndCitySelectController.city == null) {
-                    BaseApiResponseUtils.showError(
-                        context, "Необходимо указать страну и город");
-                    return;
-                  }
-                  var country = countryAndCitySelectController.country!;
-
-                  var locationData = LocationData(
-                    country: CountryNameModel(
-                      name: country.name,
-                      id: country.id,
-                    ),
-                    city: countryAndCitySelectController.city,
-                  );
-
-                  MainState.locationData = locationData;
-
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, "/home", (r) => false);
+                  Navigator.of(context)
+                      .pushNamedAndRemoveUntil(MainRoutes.login, (r) => true);
                 },
-                child: const Text("Далее"),
               ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  void _clickHandler(BuildContext context) {
+    if (countryAndCitySelectController.country == null ||
+        countryAndCitySelectController.city == null) {
+      BaseApiResponseUtils.showError(
+          context, "Необходимо указать страну и город");
+      return;
+    }
+    var country = countryAndCitySelectController.country!;
+
+    var locationData = LocationData(
+      country: CountryNameModel(
+        name: country.name,
+        id: country.id,
+      ),
+      city: countryAndCitySelectController.city,
+    );
+
+    MainState.locationData = locationData;
+
+    Navigator.pushNamedAndRemoveUntil(context, "/home", (r) => false);
   }
 }

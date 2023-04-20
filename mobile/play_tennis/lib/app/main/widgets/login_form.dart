@@ -105,7 +105,10 @@ class _LoginFormState extends State<LoginForm> {
           ),
           const Text(
             MainSettings.appName,
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.w600,
+            ),
           ),
           Image.asset(
             MainSettings.imageLogoPath,

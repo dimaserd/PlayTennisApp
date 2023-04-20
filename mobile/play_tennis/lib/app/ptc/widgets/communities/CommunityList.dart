@@ -39,8 +39,16 @@ class CommunityList extends StatelessWidget {
   Widget getChild() {
     return community.isEmpty
         ? Column(children: const [
-            Center(
-              child: Text("Сообщества не найдены"),
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Center(
+                child: Text(
+                  "Теннисные сообщества не найдены ",
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+              ),
             ),
           ])
         : ListView.builder(

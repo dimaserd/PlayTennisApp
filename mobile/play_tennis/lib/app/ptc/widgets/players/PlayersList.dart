@@ -40,7 +40,12 @@ class PlayersList extends StatelessWidget {
     return players.isEmpty
         ? Column(children: const [
             Center(
-              child: Text("Игроки не найдены"),
+              child: Text(
+                "Игроки не найдены",
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
             ),
           ])
         : ListView.builder(

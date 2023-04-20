@@ -220,7 +220,7 @@ class ToWebAppWidget extends StatelessWidget {
         MainAppExtensions.trylaunchAppUrl(
           "/ptc/tournaments",
           (er) {
-            BaseApiResponseUtils.showSuccess(context, er);
+            BaseApiResponseUtils.showError(context, er);
           },
         );
       },

@@ -42,7 +42,12 @@ class TournamentsList extends StatelessWidget {
     return tournaments.isEmpty
         ? Column(children: const [
             Center(
-              child: Text("Турниры не найдены"),
+              child: Text(
+                "По вашему запросе турниры не найдены",
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
             ),
           ])
         : ListView.builder(
@@ -50,7 +55,10 @@ class TournamentsList extends StatelessWidget {
             itemBuilder: (context, index) {
               if (index == tournaments.length) {
                 if (isActiveLoader == false || tournaments.length < 5) {
-                  return const ShowAlertContact(title: "Добавить тренера", subTitle: "Для добавления тренера пожалуйста напишите мне.");
+                  return const ShowAlertContact(
+                      title: "Добавить тренера",
+                      subTitle:
+                          "Для добавления тренера пожалуйста напишите мне.");
                 } else {
                   // Вернуть заглушку для отображения индикатора загрузки
                   return const Center(child: CircularProgressIndicator());
