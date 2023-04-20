@@ -63,6 +63,11 @@ class _PlayScreenState extends State<PlayScreen> {
             actions: [
               IconButton(
                 onPressed: () {
+                  if (loginData == null || !loginData!.isAuthenticated) {
+                    BaseApiResponseUtils.showInfo(context,
+                        "Вы не можете создавать заявки на игру. Для этого вам необходимо зарегистрироваться/авторизоваться. Перейдите в меню и нажмите 'Логин'.");
+                    return;
+                  }
                   Navigator.of(context).pushNamed("/game-requests/add");
                 },
                 icon: const Icon(Icons.add_circle),
