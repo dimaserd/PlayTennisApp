@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:play_tennis/app/ptc/widgets/CountryAndCitySelectWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/cities/CityChatAndChannelWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/tournaments/TournamentsList.dart';
-import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
+import 'package:play_tennis/logic/ptc/models/LocationData.dart';
 import 'package:play_tennis/logic/ptc/models/cities/PublicTelegramChatForCityModel.dart';
 import 'package:play_tennis/logic/ptc/services/TournamentService.dart';
 import 'package:play_tennis/main-services.dart';
 import 'dart:async';
 
 class SearchTournamentsForm extends StatefulWidget {
-  final PlayerLocationData locationData;
+  final LocationData locationData;
   final void Function(TournamentSimpleModel trainer) onTapHandler;
 
   const SearchTournamentsForm({

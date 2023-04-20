@@ -5,6 +5,7 @@ import 'package:play_tennis/app/main/screens/LoginScreen.dart';
 import 'package:play_tennis/app/main/screens/ProfileScreen.dart';
 import 'package:play_tennis/app/main/screens/RegistrationScreen.dart';
 import 'package:play_tennis/app/main/screens/RouteNotFoundScreen.dart';
+import 'package:play_tennis/app/main/screens/SetLocationScreenWidget.dart';
 import 'package:play_tennis/app/ptc/screens/TelegramProfileScreen.dart';
 import 'package:play_tennis/app/main/widgets/images/ImageViewWidget.dart';
 import 'package:play_tennis/app/ptc/screens/AboutApplicationScreen.dart';
@@ -21,17 +22,25 @@ import 'package:play_tennis/app/ptc/screens/TournamentsScreen.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerModel.dart';
 
 class MainRoutes {
+  static String checkAuth = '/';
+  static String home = '/home';
+  static String login = '/login';
+
   static void toPlayerCard(BuildContext context, String playerId) {
     Navigator.of(context).pushNamed('/player/$playerId');
   }
 
   static MaterialPageRoute onGenerateRoute(RouteSettings settings) {
-    if (settings.name == '/') {
+    if (settings.name == checkAuth) {
       return MaterialPageRoute(builder: (context) => const CheckAuthScreen());
     }
 
-    if (settings.name == '/home') {
+    if (settings.name == home) {
       return MaterialPageRoute(builder: (context) => const MainScreen());
+    }
+
+    if (settings.name == '/set-location') {
+      return MaterialPageRoute(builder: (context) => SetLocationScreenWidget());
     }
 
     if (settings.name == '/about') {
@@ -52,7 +61,7 @@ class MainRoutes {
       return MaterialPageRoute(builder: (context) => const PlayScreen());
     }
 
-    if (settings.name == '/login') {
+    if (settings.name == login) {
       return MaterialPageRoute(builder: (context) => const LoginScreen());
     }
 

@@ -51,9 +51,9 @@ class _MyStatefulWidgetState extends State<EditProfileWidget> {
       return;
     }
 
-    AppServices.playerService.getLocationData((e) => {}).then((value) {
+    AppServices.playerService.getPlayerLocationData((e) => {}).then((value) {
       if (value != null && mounted) {
-        countryAndCitySelectController.setLocationData(value);
+        countryAndCitySelectController.setPlayerLocationData(value);
       }
     });
     super.initState();

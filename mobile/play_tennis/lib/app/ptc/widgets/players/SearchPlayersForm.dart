@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/ptc/widgets/CountryAndCitySelectWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/cities/CityChatAndChannelWidget.dart';
-import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
+import 'package:play_tennis/logic/ptc/models/LocationData.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerModel.dart';
 import 'package:play_tennis/logic/ptc/models/SearchPlayersRequest.dart';
 import 'package:play_tennis/logic/ptc/models/cities/PublicTelegramChatForCityModel.dart';
@@ -10,7 +10,7 @@ import 'PlayersList.dart';
 import 'dart:async';
 
 class SearchPlayersForm extends StatefulWidget {
-  final PlayerLocationData locationData;
+  final LocationData locationData;
   final void Function(PlayerModel player) onTapHandler;
 
   const SearchPlayersForm({

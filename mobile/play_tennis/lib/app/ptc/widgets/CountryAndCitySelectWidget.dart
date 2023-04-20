@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
+import 'package:play_tennis/logic/ptc/models/LocationData.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
 import 'package:play_tennis/logic/ptc/models/cities/CityModel.dart';
 import 'package:play_tennis/logic/ptc/models/cities/CountrySimpleModel.dart';
@@ -21,7 +22,15 @@ class CountryAndCitySelectController {
     );
   }
 
-  setLocationData(PlayerLocationData locationData) {
+  setPlayerLocationData(PlayerLocationData locationData) {
+    city = locationData.city;
+
+    if (locationData.country != null) {
+      setCountry(locationData.country!);
+    }
+  }
+
+  setLocationData(LocationData locationData) {
     city = locationData.city;
 
     if (locationData.country != null) {

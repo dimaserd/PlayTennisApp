@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/palette.dart';
 import 'package:play_tennis/main-services.dart';
 import 'package:play_tennis/main-settings.dart';
+import 'package:play_tennis/main-state.dart';
 
 class SideDrawer extends StatelessWidget {
   const SideDrawer({super.key});
@@ -39,14 +40,16 @@ class SideDrawer extends StatelessWidget {
                   .pushNamedAndRemoveUntil("/players", (r) => false);
             },
           ),
-          ListTile(
-            leading: const Icon(Icons.account_circle),
-            title: const Text('Профиль'),
-            onTap: () {
-              Navigator.of(context)
-                  .pushNamedAndRemoveUntil("/profile", (r) => false);
-            },
-          ),
+          MainState.isAuthorized
+              ? ListTile(
+                  leading: const Icon(Icons.account_circle),
+                  title: const Text('Профиль'),
+                  onTap: () {
+                    Navigator.of(context)
+                        .pushNamedAndRemoveUntil("/profile", (r) => false);
+                  },
+                )
+              : const SizedBox.shrink(),
           ListTile(
             leading: const Icon(Icons.sports_tennis),
             title: const Text('Играть'),
@@ -71,16 +74,18 @@ class SideDrawer extends StatelessWidget {
                   .pushNamedAndRemoveUntil("/about", (r) => false);
             },
           ),
-          ListTile(
-            leading: const Icon(Icons.exit_to_app),
-            title: const Text('Выйти'),
-            onTap: () {
-              AppServices.loginService.logOut().then((value) {
-                Navigator.of(context)
-                    .pushNamedAndRemoveUntil("/", (r) => false);
-              });
-            },
-          ),
+          MainState.isAuthorized
+              ? ListTile(
+                  leading: const Icon(Icons.exit_to_app),
+                  title: const Text('Выйти'),
+                  onTap: () {
+                    AppServices.loginService.logOut().then((value) {
+                      Navigator.of(context)
+                          .pushNamedAndRemoveUntil("/", (r) => false);
+                    });
+                  },
+                )
+              : const SizedBox.shrink(),
         ],
       ),
     );

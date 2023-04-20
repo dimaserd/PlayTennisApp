@@ -19,8 +19,16 @@ class CheckAuthScreenState extends State<CheckAuthScreen> {
     super.initState();
     _getLoginData().then((value) {
       MainState.isAuthorized = value;
+      if (MainState.isAuthorized || MainState.locationData != null) {
+        Navigator.pushNamedAndRemoveUntil(context, "/home", (r) => false);
+        return;
+      }
 
-      Navigator.pushNamedAndRemoveUntil(context, "/home", (r) => false);
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        "/set-location",
+        (r) => false,
+      );
     });
   }
 
@@ -32,7 +40,9 @@ class CheckAuthScreenState extends State<CheckAuthScreen> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [Loading(text: "Загрузка")],
+          children: const [
+            Loading(text: "Загрузка"),
+          ],
         ),
       ),
     );

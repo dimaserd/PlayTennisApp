@@ -14,6 +14,7 @@ import 'package:play_tennis/app/ptc/widgets/players/SearchPlayersForm.dart';
 import 'package:play_tennis/app/ptc/widgets/players/ShowPlayerData.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
+import 'package:play_tennis/logic/ptc/models/LocationData.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerModel.dart';
 import 'package:play_tennis/logic/ptc/models/cities/CityModel.dart';
@@ -97,7 +98,7 @@ class _AddGameFormState extends State<AddGameForm> {
   @override
   void initState() {
     super.initState();
-    AppServices.playerService.getLocationData((e) => {}).then((value) {
+    AppServices.playerService.getPlayerLocationData((e) => {}).then((value) {
       if (value != null) {
         countryAndCitySelectController.city = value.city;
         countryAndCitySelectController.setCountry(value.country!);
@@ -174,7 +175,9 @@ class _AddGameFormState extends State<AddGameForm> {
           height: MediaQuery.of(context).size.height - 120,
           width: double.infinity,
           child: SearchPlayersForm(
-            locationData: locationData!,
+            locationData: LocationDataMappingExtensions.toLocationData(
+              locationData!,
+            ),
             onTapHandler: (p) {
               setOpponent(p);
             },

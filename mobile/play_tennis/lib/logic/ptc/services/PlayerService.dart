@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
 import 'package:play_tennis/logic/core/NetworkService.dart';
+import 'package:play_tennis/logic/ptc/models/LocationData.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerData.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerModel.dart';
 import 'package:play_tennis/logic/ptc/models/SearchPlayersRequest.dart';
 import 'package:play_tennis/logic/ptc/models/players/UpdateDataByPlayerRequest.dart';
+import 'package:play_tennis/main-state.dart';
 
 class UpdateCountryAndCityDataRequest {
   late String? countryId;
@@ -118,7 +120,17 @@ class PlayerService {
     return BaseApiResponse.fromJson(json);
   }
 
-  Future<PlayerLocationData?> getLocationData(Function(String) onError) async {
+  Future<LocationData> getLocationData(Function(String) onError) async {
+    var data = await getPlayerLocationData(onError);
+
+    if (data == null) {
+      return MainState.locationData!;
+    }
+    return LocationDataMappingExtensions.toLocationData(data);
+  }
+
+  Future<PlayerLocationData?> getPlayerLocationData(
+      Function(String) onError) async {
     var response = await networkService.getDataInner(
         '/api/ptc/player/Data/Location/Get', onError);
 

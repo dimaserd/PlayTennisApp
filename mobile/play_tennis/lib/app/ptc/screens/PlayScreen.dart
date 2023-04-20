@@ -5,7 +5,7 @@ import 'package:play_tennis/app/ptc/widgets/CountryAndCitySelectWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/game-requests/SearchGameRequestsForm.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
-import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
+import 'package:play_tennis/logic/ptc/models/LocationData.dart';
 import 'package:play_tennis/main-services.dart';
 
 class PlayScreen extends StatefulWidget {
@@ -16,7 +16,7 @@ class PlayScreen extends StatefulWidget {
 }
 
 class _PlayScreenState extends State<PlayScreen> {
-  PlayerLocationData? locationData;
+  LocationData? locationData;
   CurrentLoginData? loginData;
   CountryAndCitySelectController citySelectController =
       CountryAndCitySelectController();
@@ -25,12 +25,6 @@ class _PlayScreenState extends State<PlayScreen> {
 
   void loadLocationData() {
     AppServices.playerService.getLocationData((e) => {}).then((value) {
-      if (value == null) {
-        BaseApiResponseUtils.showError(context, "Кажется вы были разлогинены");
-        Navigator.of(context)
-            .pushNamedAndRemoveUntil('/login', (route) => true);
-        return;
-      }
       setState(() {
         citySelectController.setLocationData(value);
         locationData = value;

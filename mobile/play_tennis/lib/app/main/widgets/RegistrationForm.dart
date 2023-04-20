@@ -62,8 +62,11 @@ class _RegistrationFormState extends State<RegistrationForm> {
   final TextEditingController phoneTextController = TextEditingController();
   final TextEditingController aboutMeTextController = TextEditingController();
 
-  final EdgeInsets padding =
-      const EdgeInsets.only(top: 10, left: 20, right: 20);
+  final EdgeInsets padding = const EdgeInsets.only(
+    top: 10,
+    left: 20,
+    right: 20,
+  );
 
   late DateTime birthDate = DateTime.now();
 

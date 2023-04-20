@@ -5,7 +5,7 @@ import 'package:play_tennis/app/ptc/widgets/communities/SearchCommunityForm.dart
 import 'package:play_tennis/app/ptc/widgets/courts/SearchCourtsForm.dart';
 import 'package:play_tennis/app/ptc/widgets/players/SearchPlayersForm.dart';
 import 'package:play_tennis/app/ptc/widgets/trainers/SearchTrainersForm.dart';
-import 'package:play_tennis/baseApiResponseUtils.dart';
+import 'package:play_tennis/logic/ptc/models/LocationData.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
 import 'package:play_tennis/main-routes.dart';
 import 'package:play_tennis/main-services.dart';
@@ -18,14 +18,10 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  PlayerLocationData? locationData;
+  LocationData? locationData;
 
   void loadLocationData() {
     AppServices.playerService.getLocationData((e) => {}).then((value) {
-      if (value == null) {
-        //locationData = PlayerLocationData(id: null, co)
-        return;
-      }
       setState(() {
         locationData = value;
       });

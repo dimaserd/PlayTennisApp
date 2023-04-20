@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/login_form.dart';
+import 'package:play_tennis/main-routes.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -15,8 +16,10 @@ class LoginScreen extends StatelessWidget {
           children: [
             LoginForm(
               onLogin: () {
-                Navigator.of(context)
-                    .pushNamedAndRemoveUntil("/home", (r) => false);
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                  MainRoutes.home,
+                  (r) => false,
+                );
               },
             ),
           ],

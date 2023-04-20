@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/ptc/widgets/CountryAndCitySelectWidget.dart';
-import 'package:play_tennis/app/ptc/widgets/cities/CityChatAndChannelWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/trainers/TrainerCard.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
+import 'package:play_tennis/logic/ptc/models/LocationData.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
 import 'package:play_tennis/logic/ptc/models/cities/PublicTelegramChatForCityModel.dart';
 import 'package:play_tennis/logic/ptc/services/TrainerCardService.dart';
@@ -11,7 +11,7 @@ import 'dart:async';
 import 'TrainerList.dart';
 
 class SearchTrainersForm extends StatefulWidget {
-  final PlayerLocationData locationData;
+  final LocationData locationData;
   final void Function(TrainerCard trainer) onTapHandler;
 
   const SearchTrainersForm({
@@ -98,7 +98,12 @@ class _SearchTrainersForm extends State<SearchTrainersForm> {
         ),
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.only(top: 8, bottom: 0),
+            padding: const EdgeInsets.only(
+              top: 8,
+              bottom: 0,
+              left: 3,
+              right: 3,
+            ),
             child: TrainerList(
               isActiveLoader: _isActiveLoader,
               offset: _offSet,

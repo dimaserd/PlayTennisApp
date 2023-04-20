@@ -42,14 +42,14 @@ class _AddGameRequestFormState extends State<AddGameRequestForm> {
   }
 
   void getLocationData() {
-    AppServices.playerService.getLocationData((e) => {}).then((value) {
+    AppServices.playerService.getPlayerLocationData((e) => {}).then((value) {
       if (!mounted || value == null) {
         return;
       }
 
       setState(() {
         locationData = value;
-        countryAndCitySelectController.setLocationData(locationData!);
+        countryAndCitySelectController.setPlayerLocationData(locationData!);
       });
     });
   }

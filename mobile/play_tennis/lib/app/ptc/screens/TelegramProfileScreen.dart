@@ -25,7 +25,7 @@ class TelegramProfileScreenState extends State<TelegramProfileScreen>
   }
 
   void loadLocationata() {
-    AppServices.playerService.getLocationData((e) {
+    AppServices.playerService.getPlayerLocationData((e) {
       BaseApiResponseUtils.showError(
         context,
         "Произошла ошибка при получении данных о вашей локации. Пожалуйста, обратитесь к администратору портала.",

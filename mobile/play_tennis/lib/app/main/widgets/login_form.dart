@@ -4,6 +4,7 @@ import 'package:play_tennis/app/main/widgets/Inputs/TextInput.dart';
 import 'package:play_tennis/app/main/widgets/Loading.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/clt/models/models.dart';
+import 'package:play_tennis/main-routes.dart';
 import 'package:play_tennis/main-services.dart';
 import 'package:play_tennis/main-settings.dart';
 
@@ -19,8 +20,11 @@ class _LoginFormState extends State<LoginForm> {
   final TextEditingController emailTextController = TextEditingController();
   final TextEditingController passTextController = TextEditingController();
 
-  final EdgeInsets padding =
-      const EdgeInsets.only(top: 10, left: 20, right: 20);
+  final EdgeInsets padding = const EdgeInsets.only(
+    top: 10,
+    left: 20,
+    right: 20,
+  );
   bool isLoginInProccess = false;
 
   List<Widget> getWidgets() {
@@ -71,6 +75,15 @@ class _LoginFormState extends State<LoginForm> {
           child: const Text("Забыли пароль?"),
           onPressed: () {
             Navigator.of(context).pushNamed("/forgotpass");
+          },
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.only(top: 10.0),
+        child: TextButton(
+          child: const Text("Демо-доступ"),
+          onPressed: () {
+            Navigator.of(context).pushNamed(MainRoutes.checkAuth);
           },
         ),
       ),
