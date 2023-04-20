@@ -19,7 +19,8 @@ class MainSettings {
   static const String agreement =
       "https://play-tennis.online/docs/agreement.html";
 
-  static const String dimaSerdTelegramUrl = "tg://resolve?domain=@dimaserd";
+  static String dimaSerdTelegramUrl =
+      TelegramRoutesProvider.resolve("dimaserd");
 }
 
 class ServerImages {
@@ -28,8 +29,14 @@ class ServerImages {
   static const String logoPath = "${MainSettings.domain}/images/logos/logo.png";
 }
 
+class TelegramRoutesProvider {
+  static String resolve(String domain) {
+    return "tg://resolve?domain=@$domain";
+  }
+}
+
 class TelegramBotSettings {
-  static const String link = "tg://resolve?domain=@tennis_play_bot";
+  static String link = TelegramRoutesProvider.resolve("tennis_play_bot");
 
   static const String profileLinkCommandFormat = "/link id some-new-id";
 }

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:play_tennis/app/main/extensions/AppUtils.dart';
 import 'package:play_tennis/app/main/widgets/images/PlayerAvatar.dart';
 import 'package:play_tennis/app/ptc/widgets/profile/PlayerActions.dart';
 import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerModel.dart';
+import 'package:play_tennis/main-settings.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ShowPlayerData extends StatelessWidget {
   final PlayerModel player;
@@ -19,12 +22,20 @@ class ShowPlayerData extends StatelessWidget {
       children: [
         PlayerCard(
           player: player,
-          margin: const EdgeInsets.only(top: 5, left: 5, right: 5),
+          margin: const EdgeInsets.only(
+            top: 5,
+            left: 5,
+            right: 5,
+          ),
         ),
         SizedBox(
           width: double.infinity,
           child: Card(
-            margin: const EdgeInsets.only(top: 5, left: 5, right: 5),
+            margin: const EdgeInsets.only(
+              top: 5,
+              left: 5,
+              right: 5,
+            ),
             elevation: 5,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,12 +95,71 @@ class PlayerCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Text("Ntrp: ${player.ntrpRating}"),
-            Text("Рейтинг силы: ${player.rating}"),
-            Text("Пол: ${player.sex ? "Мужской" : "Женский"}"),
+            Text(
+              "Ntrp: ${player.ntrpRating}",
+              style: const TextStyle(
+                color: Colors.grey,
+                fontSize: 16,
+              ),
+            ),
+            Text(
+              "Рейтинг силы: ${player.rating}",
+              style: const TextStyle(
+                color: Colors.grey,
+                fontSize: 16,
+              ),
+            ),
+            Text(
+              "Пол: ${player.sex ? "Мужской" : "Женский"}",
+              style: const TextStyle(
+                color: Colors.grey,
+                fontSize: 16,
+              ),
+            ),
+            ...getTelegramWidgets(context),
           ],
         ),
       ),
     );
+  }
+
+  List<Widget> getTelegramWidgets(BuildContext context) {
+    if (player.telegramUserId != null && player.telegramUserName != null) {
+      return [
+        Row(
+          children: [
+            const Text(
+              "Telegram: ",
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: 16,
+              ),
+            ),
+            InkWell(
+              child: Text(
+                "@${player.telegramUserName!}",
+                style: const TextStyle(
+                  color: Colors.blue,
+                  fontSize: 16,
+                ),
+              ),
+              onTap: () {
+                AppUtils.tryAndShowMessageIfError(
+                  () {
+                    var uri = Uri.parse(
+                      TelegramRoutesProvider.resolve(player.telegramUserName!),
+                    );
+                    launchUrl(uri);
+                  },
+                  context,
+                  "Произошла ошибка при переходе на Telegram игрока. Пожалуйста, обратитесь к администратору портала.",
+                );
+              },
+            )
+          ],
+        )
+      ];
+    }
+    return [];
   }
 }
