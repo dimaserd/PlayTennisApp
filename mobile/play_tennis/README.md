@@ -3,13 +3,13 @@
 ## Для андроида
 
 ```bash
-flutter build apk --split-per-abi --release --no-sound-null-safety
+flutter build apk --split-per-abi --release
 ```
 
 ## Для айфона
 
 ```bash
-flutter run --release --no-sound-null-safety
+flutter run --release
 ```
 
 ## Swagger

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:play_tennis/app/ptc/widgets/cities/CityChatAndChannelWidget.dart';
 import 'package:play_tennis/main-settings.dart';
 import 'package:play_tennis/main.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -58,7 +59,7 @@ class ResetPassViaTelegram extends StatelessWidget {
         const SizedBox(height: 10),
         RichText(
           text: const TextSpan(
-            text: 'Если ваша учетная запись была привязана к ',
+            text: 'Если ваша учетная запись привязана к ',
             style: TextStyle(fontSize: 16, color: Colors.black),
             children: <TextSpan>[
               TextSpan(
@@ -96,15 +97,9 @@ class ResetPassViaTelegram extends StatelessWidget {
             ),
             onTap: () => _tapHandler(context)),
         const SizedBox(height: 10),
-        InkWell(
-          child: const Text(
-            'Телеграм-бот ${MainSettings.appName}',
-            style: TextStyle(
-              color: Colors.blue,
-              fontSize: 18,
-            ),
-          ),
-          onTap: () {
+        ToTelegramButton(
+          text: "Бот ${MainSettings.appName}",
+          tapHandler: () {
             var uri = Uri.parse(TelegramBotSettings.link);
             launchUrl(uri);
           },
@@ -173,23 +168,17 @@ class ResetPassViaAdmins extends StatelessWidget {
                 text: '. ',
               ),
               TextSpan(
-                text: 'И попросите его сбросить пароль.',
+                text: 'Попросите его сбросить пароль.',
               ),
             ],
           ),
         ),
         const SizedBox(height: 10),
-        InkWell(
-          child: const Text(
-            'Телеграмм: @dimaserd',
-            style: TextStyle(
-              color: Colors.blue,
-              fontSize: 18,
-            ),
-          ),
-          onTap: () {
-            var telegramUser = Uri.parse("tg://resolve?domain=@dimaserd");
-            launchUrl(telegramUser);
+        ToTelegramButton(
+          text: "Дмитрий Сердюков",
+          tapHandler: () {
+            var uri = Uri.parse(MainSettings.dimaSerdTelegramUrl);
+            launchUrl(uri);
           },
         ),
         const SizedBox(height: 5),

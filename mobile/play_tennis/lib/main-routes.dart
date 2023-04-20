@@ -23,6 +23,7 @@ import 'package:play_tennis/logic/ptc/models/PlayerModel.dart';
 
 class MainRoutes {
   static String checkAuth = '/';
+  static String forgotPass = "/forgotpass";
   static String home = '/home';
   static String login = '/login';
   static String play = "/play";
@@ -73,7 +74,7 @@ class MainRoutes {
           builder: (context) => const RegistrationScreen());
     }
 
-    if (settings.name == '/forgotpass') {
+    if (settings.name == forgotPass) {
       return MaterialPageRoute(builder: (context) => const ChangePassScreen());
     }
 
