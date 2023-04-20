@@ -43,7 +43,7 @@ class TournamentsList extends StatelessWidget {
         ? Column(children: const [
             Center(
               child: Text(
-                "По вашему запросе турниры не найдены",
+                "По вашему запросу турниры не найдены",
                 style: TextStyle(
                   fontSize: 16,
                 ),
@@ -56,7 +56,7 @@ class TournamentsList extends StatelessWidget {
               if (index == tournaments.length) {
                 if (isActiveLoader == false || tournaments.length < 5) {
                   return const ShowAlertContact(
-                      title: "Добавить тренера",
+                      title: "Создать турнир",
                       subTitle:
                           "Для добавления тренера пожалуйста напишите мне.");
                 } else {
