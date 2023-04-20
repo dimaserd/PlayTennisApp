@@ -56,12 +56,14 @@ class TournamentsList extends StatelessWidget {
               if (index == tournaments.length) {
                 if (isActiveLoader == false || tournaments.length < 5) {
                   return const ShowAlertContact(
-                      title: "Создать турнир",
-                      subTitle:
-                          "Для добавления тренера пожалуйста напишите мне.");
+                    title: "Создать турнир",
+                    subTitle: "Для добавления тренера пожалуйста напишите мне.",
+                  );
                 } else {
                   // Вернуть заглушку для отображения индикатора загрузки
-                  return const Center(child: CircularProgressIndicator());
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
                 }
               } else {
                 return TournamentCard(
