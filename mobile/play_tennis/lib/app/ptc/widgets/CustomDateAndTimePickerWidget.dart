@@ -50,7 +50,9 @@ class CustomDateAndTimePickerWidgetData {
 
   static CustomDateAndTimePickerWidgetData now() {
     return CustomDateAndTimePickerWidgetData(
-      dateTime: DateUtils.dateOnly(DateTime.now()),
+      dateTime: DateUtils.dateOnly(
+        DateTime.now(),
+      ),
       selectedTime: null,
       dateType: CustomDateAndTimePickerDateTypes.toDay,
     );
@@ -65,11 +67,11 @@ class CustomDateAndTimePickerWidgetController {
 
 class CustomDateAndTimePickerWidget extends StatefulWidget {
   DateTime selectedDate = DateTime.now();
-  Function(CustomDateAndTimePickerWidgetData) dataChanged;
-  String dateLabel;
-  String timeLabel;
-  String dateDropDownLabel;
-  CustomDateAndTimePickerWidgetController controller;
+  final Function(CustomDateAndTimePickerWidgetData) dataChanged;
+  final String dateLabel;
+  final String timeLabel;
+  final String dateDropDownLabel;
+  final CustomDateAndTimePickerWidgetController controller;
   late List<DropdownWidgetItem> dateItems;
 
   CustomDateAndTimePickerWidget({
