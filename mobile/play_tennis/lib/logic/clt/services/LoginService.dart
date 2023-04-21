@@ -5,6 +5,7 @@ import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
 import 'package:play_tennis/logic/clt/models/LoginResultModel.dart';
 import 'package:play_tennis/logic/core/NetworkService.dart';
 import 'package:play_tennis/main-services.dart';
+import 'package:play_tennis/main-state.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginService {
@@ -27,6 +28,7 @@ class LoginService {
 
     if (!loginResult.succeeded) {
       if (loginResult.errorType == LoginErrorType.AlreadyAuthenticated) {
+        MainState.isAuthorized = true;
         AppServices.appNotificationTokenService.isAuthorizedHandler();
         return true;
       }
@@ -34,9 +36,11 @@ class LoginService {
       prefs.remove(SharedKeys.login);
       prefs.remove(SharedKeys.pass);
 
+      MainState.isAuthorized = false;
       return false;
     }
 
+    MainState.isAuthorized = true;
     return true;
   }
 
@@ -53,6 +57,8 @@ class LoginService {
 
     var decoded = jsonDecode(responseBody);
     var result = LoginResultModel.fromJson(decoded);
+
+    MainState.isAuthorized = result.succeeded;
 
     if (result.succeeded) {
       var prefs = await SharedPreferences.getInstance();
@@ -77,6 +83,10 @@ class LoginService {
     var response = await networkService.getData('/api/account/user');
 
     var json = jsonDecode(response!);
-    return CurrentLoginData.fromJson(json);
+    var result = CurrentLoginData.fromJson(json);
+
+    MainState.isAuthorized = result.isAuthenticated;
+
+    return result;
   }
 }

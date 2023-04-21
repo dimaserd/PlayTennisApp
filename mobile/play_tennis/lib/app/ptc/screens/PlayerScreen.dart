@@ -5,6 +5,7 @@ import 'package:play_tennis/app/ptc/widgets/players/ShowPlayerData.dart';
 import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerModel.dart';
 import 'package:play_tennis/main-services.dart';
+import 'package:play_tennis/main-state.dart';
 
 class PlayerScreen extends StatefulWidget {
   final String id;
@@ -30,6 +31,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
     AppServices.playerService.getById(widget.id).then((value) {
       setState(() {
         loaded = true;
+        MainState.isAuthorized = player != null;
         player = value;
       });
     });
