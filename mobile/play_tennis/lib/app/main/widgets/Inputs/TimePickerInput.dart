@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../extensions/TimePickerUtils.dart';
+import 'package:play_tennis/app/main/extensions/TimePickerUtils.dart';
 
 class TimePickerInput extends StatefulWidget {
   final String label;
@@ -32,7 +31,7 @@ class _TimePickerInputState extends State<TimePickerInput> {
   Future<bool> showPicker(BuildContext context) async {
     final pickedTime = await showTimePicker(
       context: context,
-      initialTime: widget.pickedTime ?? TimeOfDay(hour: 10, minute: 0),
+      initialTime: widget.pickedTime ?? const TimeOfDay(hour: 10, minute: 0),
     );
 
     if (pickedTime != null) {

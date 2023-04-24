@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 
 class CommonExampleRouteWrapper extends StatelessWidget {
   const CommonExampleRouteWrapper({
+    super.key,
     this.imageProvider,
     this.loadingBuilder,
     this.backgroundDecoration,

@@ -21,10 +21,10 @@ class TextInput extends StatelessWidget {
 }
 
 class TextAreaInput extends StatelessWidget {
-  late String labelText;
-  TextEditingController? textController;
-  int maxLines;
-  TextAreaInput({
+  final String labelText;
+  final TextEditingController? textController;
+  final int maxLines;
+  const TextAreaInput({
     super.key,
     required this.labelText,
     this.textController,

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:play_tennis/app/main/widgets/Loading.dart';
 import 'package:play_tennis/app/ptc/widgets/CountryAndCitySelectWidget.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/ptc/models/LocationData.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
-import 'package:play_tennis/logic/ptc/models/cities/CityModel.dart';
 import 'package:play_tennis/main-routes.dart';
 import 'package:play_tennis/main-settings.dart';
 import 'package:play_tennis/main-state.dart';
