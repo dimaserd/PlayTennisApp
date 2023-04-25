@@ -26,3 +26,54 @@ class Loading extends StatelessWidget {
     );
   }
 }
+
+class AnimatedLoading extends StatelessWidget {
+  const AnimatedLoading({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const Text(
+          "Добро пожаловать в PlayTennis",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        Center(
+          child: Image.network(
+            "${MainSettings.domain}/images/gifs/2.gif",
+            width: double.infinity,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class AnimatedCircleLoading extends StatelessWidget {
+  final double height;
+  const AnimatedCircleLoading({
+    super.key,
+    required this.height,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: height,
+      height: height,
+      decoration: const BoxDecoration(
+        shape: BoxShape.circle,
+        color: Color.fromRGBO(82, 186, 141, 1),
+      ),
+      child: SizedBox(
+        //height: height / 4 * 3,
+        width: height / 2,
+        child: Image.network("${MainSettings.domain}/images/gifs/2.gif"),
+      ),
+    );
+  }
+}

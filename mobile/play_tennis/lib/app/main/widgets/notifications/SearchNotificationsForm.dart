@@ -93,7 +93,9 @@ class _SearchNotificationsFormState extends State<SearchNotificationsForm> {
 
     AppServices.notificationService.search(searchModel, (e) {
       BaseApiResponseUtils.showError(
-          context, "Произошла ошибка при запросе списка уведомлений.");
+        context,
+        "Произошла ошибка при запросе списка уведомлений.",
+      );
     }).then((value) {
       if (!mounted) {
         return;

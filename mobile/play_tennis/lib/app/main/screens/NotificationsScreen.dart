@@ -75,7 +75,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       SearchNotificationsForm(
         locationData: locationData!,
       ),
-      const Loading(text: "Чаты пока не реализованы"),
+      const AnimatedCircleLoading(height: 150),
     ];
   }
 }
