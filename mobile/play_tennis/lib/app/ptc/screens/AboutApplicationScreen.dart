@@ -59,151 +59,159 @@ class MainApplicationInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        const Text(
-          'Мобильное приложение ${MainSettings.appName}',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        const SizedBox(height: 10),
-        const Text(
-          'По любым вопросам касающихся работы приложения или сотрудничества, обращайтесь ко мне:',
-          style: TextStyle(
-            fontWeight: FontWeight.w400,
-            fontSize: 16,
-          ),
-        ),
-        const SizedBox(height: 10),
-        const Text(
-          'Дмитрий Сердюков:',
-          style: TextStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 16,
-          ),
-        ),
-        const SizedBox(height: 5),
-        InkWell(
-          child: const Text(
-            'Ссылка на меня на платформе',
-            style: TextStyle(
-              color: Colors.blue,
-              fontSize: 16,
+    return SingleChildScrollView(
+      child: Container(
+        alignment: Alignment.center,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const Text(
+              'Мобильное приложение ${MainSettings.appName}',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+              ),
             ),
-          ),
-          onTap: () {
-            Navigator.of(context)
-                .pushNamed('/player/${MainSettings.dimaserdPlayerId}');
-          },
-        ),
-        const SizedBox(height: 5),
-        InkWell(
-          child: const Text(
-            'Телеграмм: @dimaserd',
-            style: TextStyle(
-              color: Colors.blue,
-              fontSize: 16,
+            const SizedBox(height: 10),
+            const Text(
+              'По любым вопросам касающихся работы приложения или сотрудничества, обращайтесь ко мне:',
+              style: TextStyle(
+                fontWeight: FontWeight.w400,
+                fontSize: 16,
+              ),
             ),
-          ),
-          onTap: () {
-            var telegramUser = Uri.parse(MainSettings.dimaSerdTelegramUrl);
-            launchUrl(telegramUser);
-          },
-        ),
-        const SizedBox(height: 5),
-        InkWell(
-          child: const Text(
-            'Телефон: +7 916 604-49-60',
-            style: TextStyle(
-              color: Colors.blue,
-              fontSize: 16,
+            const SizedBox(height: 10),
+            const Text(
+              'Дмитрий Сердюков:',
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 16,
+              ),
             ),
-          ),
-          onTap: () {
-            var phoneNumber = Uri.parse("tel://+79166044960");
-            launchUrl(phoneNumber);
-          },
-        ),
-        const SizedBox(height: 15),
-        const Text(
-          'Если вам нужна своя платформа или приложение для вашего бизнеса, буду рад вам помочь)',
-          style: TextStyle(
-            fontWeight: FontWeight.w400,
-            fontSize: 16,
-          ),
-        ),
-        const SizedBox(height: 25),
-        const Text(
-          'Другие способы работы с платформой:',
-          style: TextStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 18,
-          ),
-        ),
-        const SizedBox(height: 5),
-        ToTelegramButton(
-          text: "Бот ${MainSettings.appName}",
-          tapHandler: () {
-            var uri = Uri.parse(TelegramBotSettings.link);
-            launchUrl(uri);
-          },
-        ),
-        const SizedBox(height: 5),
-        const ToWebAppWidget(),
-        const SizedBox(height: 25),
-        const Text(
-          'Продолжая работу с приложением вы соглашаетесь со следующими документами:',
-          style: TextStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 18,
-          ),
-        ),
-        const SizedBox(height: 5),
-        InkWell(
-          child: const Text(
-            'Политика обработки персональных данных',
-            style: TextStyle(
-              color: Colors.blue,
-              fontSize: 18,
+            const SizedBox(height: 5),
+            InkWell(
+              child: const Text(
+                'Ссылка на меня на платформе',
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: 16,
+                ),
+              ),
+              onTap: () {
+                Navigator.of(context)
+                    .pushNamed('/player/${MainSettings.dimaserdPlayerId}');
+              },
             ),
-          ),
-          onTap: () {
-            AppUtils.tryAndShowMessageIfError(
-              () {
-                var uri = Uri.parse(MainSettings.privacyPolicy);
+            const SizedBox(height: 5),
+            InkWell(
+              child: const Text(
+                'Телеграмм: @dimaserd',
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: 16,
+                ),
+              ),
+              onTap: () {
+                var telegramUser = Uri.parse(MainSettings.dimaSerdTelegramUrl);
+                launchUrl(telegramUser);
+              },
+            ),
+            const SizedBox(height: 5),
+            InkWell(
+              child: const Text(
+                'Телефон: +7 916 604-49-60',
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: 16,
+                ),
+              ),
+              onTap: () {
+                var phoneNumber = Uri.parse("tel://+79166044960");
+                launchUrl(phoneNumber);
+              },
+            ),
+            const SizedBox(height: 15),
+            const Text(
+              'Если вам нужна своя платформа или приложение для вашего бизнеса, буду рад вам помочь)',
+              style: TextStyle(
+                fontWeight: FontWeight.w400,
+                fontSize: 16,
+              ),
+            ),
+            const SizedBox(height: 25),
+            const Text(
+              'Другие способы работы с платформой:',
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 18,
+              ),
+            ),
+            const SizedBox(height: 5),
+            ToTelegramButton(
+              text: "Бот ${MainSettings.appName}",
+              tapHandler: () {
+                var uri = Uri.parse(TelegramBotSettings.link);
                 launchUrl(uri);
               },
-              context,
-              "Произошла ошибка при переходе к политике обработки персональных данных. Пожалуйста, обратитесь к администратору портала.",
-            );
-          },
-        ),
-        const SizedBox(height: 5),
-        InkWell(
-          child: const Text(
-            'Соглашение об обработке персональных данных и информационной рассылке сервиса',
-            style: TextStyle(
-              color: Colors.blue,
-              fontSize: 18,
             ),
-          ),
-          onTap: () {
-            AppUtils.tryAndShowMessageIfError(
-              () {
-                var uri = Uri.parse(MainSettings.agreement);
-                launchUrl(uri);
+            const SizedBox(height: 5),
+            const ToWebAppWidget(),
+            const SizedBox(height: 25),
+            const Text(
+              'Продолжая работу с приложением вы соглашаетесь со следующими документами:',
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 18,
+              ),
+            ),
+            const SizedBox(height: 5),
+            InkWell(
+              child: const Text(
+                'Политика обработки персональных данных',
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: 18,
+                ),
+              ),
+              onTap: () {
+                AppUtils.tryAndShowMessageIfError(
+                  () {
+                    var uri = Uri.parse(MainSettings.privacyPolicy);
+                    launchUrl(uri);
+                  },
+                  context,
+                  "Произошла ошибка при переходе к политике обработки персональных данных. Пожалуйста, обратитесь к администратору портала.",
+                );
               },
-              context,
-              "Произошла ошибка при переходе к соглашению об обработке персональных данных и информационной рассылке сервиса. Пожалуйста, обратитесь к администратору портала.",
-            );
-          },
-        )
-      ],
+            ),
+            const SizedBox(height: 5),
+            InkWell(
+              child: const Text(
+                'Соглашение об обработке персональных данных и информационной рассылке сервиса',
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: 18,
+                ),
+              ),
+              onTap: () {
+                AppUtils.tryAndShowMessageIfError(
+                  () {
+                    var uri = Uri.parse(MainSettings.agreement);
+                    launchUrl(uri);
+                  },
+                  context,
+                  "Произошла ошибка при переходе к соглашению об обработке персональных данных и информационной рассылке сервиса. Пожалуйста, обратитесь к администратору портала.",
+                );
+              },
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

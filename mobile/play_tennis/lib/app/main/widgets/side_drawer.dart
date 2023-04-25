@@ -50,8 +50,8 @@ class SideDrawer extends StatelessWidget {
                   leading: const Icon(Icons.account_circle),
                   title: const Text('Профиль'),
                   onTap: () {
-                    Navigator.of(context)
-                        .pushNamedAndRemoveUntil("/profile", (r) => false);
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                        MainRoutes.profile, (r) => false);
                   },
                 )
               : ListTile(
@@ -84,7 +84,9 @@ class SideDrawer extends StatelessWidget {
                   title: const Text('Уведомления'),
                   onTap: () {
                     Navigator.of(context).pushNamedAndRemoveUntil(
-                        "/notifications", (r) => false);
+                      MainRoutes.notifications,
+                      (r) => false,
+                    );
                   },
                 )
               : const SizedBox.shrink(),

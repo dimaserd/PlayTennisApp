@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/screens/ChangeAvatarScreen.dart';
 import 'package:play_tennis/app/main/screens/CheckAuthScreen.dart';
 import 'package:play_tennis/app/main/screens/LoginScreen.dart';
+import 'package:play_tennis/app/main/screens/NotificationsScreen.dart';
 import 'package:play_tennis/app/main/screens/ProfileScreen.dart';
 import 'package:play_tennis/app/main/screens/RegistrationScreen.dart';
 import 'package:play_tennis/app/main/screens/RouteNotFoundScreen.dart';
@@ -27,6 +28,8 @@ class MainRoutes {
   static String home = '/home';
   static String login = '/login';
   static String play = "/play";
+  static String notifications = "/notificatins";
+  static String profile = "/profile";
 
   static void toPlayerCard(BuildContext context, String playerId) {
     Navigator.of(context).pushNamed('/player/$playerId');
@@ -53,6 +56,12 @@ class MainRoutes {
 
     if (settings.name == '/players') {
       return MaterialPageRoute(builder: (context) => const MainScreen());
+    }
+
+    if (settings.name == notifications) {
+      return MaterialPageRoute(
+        builder: (context) => const NotificationsScreen(),
+      );
     }
 
     if (settings.name == '/tournaments') {
@@ -83,7 +92,7 @@ class MainRoutes {
           builder: (context) => const ChangeAvatarScreen());
     }
 
-    if (settings.name == '/profile') {
+    if (settings.name == profile) {
       return MaterialPageRoute(
           builder: (context) => ProfileScreen(key: UniqueKey()));
     }
