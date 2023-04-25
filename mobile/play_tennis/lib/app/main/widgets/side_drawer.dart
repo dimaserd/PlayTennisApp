@@ -58,8 +58,8 @@ class SideDrawer extends StatelessWidget {
                   leading: const Icon(Icons.account_circle),
                   title: const Text('Логин'),
                   onTap: () {
-                    Navigator.of(context)
-                        .pushNamedAndRemoveUntil("/login", (r) => false);
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                        MainRoutes.login, (r) => false);
                   },
                 ),
           ListTile(
@@ -78,6 +78,23 @@ class SideDrawer extends StatelessWidget {
                   .pushNamedAndRemoveUntil("/tournaments", (r) => false);
             },
           ),
+          MainState.isAuthorized
+              ? ListTile(
+                  leading: const Icon(Icons.notifications),
+                  title: const Text('Уведомления'),
+                  onTap: () {
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                        "/notifications", (r) => false);
+                  },
+                )
+              : ListTile(
+                  leading: const Icon(Icons.account_circle),
+                  title: const Text('Логин'),
+                  onTap: () {
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                        MainRoutes.login, (r) => false);
+                  },
+                ),
           ListTile(
             leading: const Icon(Icons.info),
             title: const Text('О приложении'),

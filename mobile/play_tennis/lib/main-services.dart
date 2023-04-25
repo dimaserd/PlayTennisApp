@@ -1,5 +1,6 @@
 import 'package:play_tennis/logic/clt/services/ClientService.dart';
 import 'package:play_tennis/logic/clt/services/LoginService.dart';
+import 'package:play_tennis/logic/clt/services/NotificationService.dart';
 import 'package:play_tennis/logic/clt/services/RegistrationService.dart';
 import 'package:play_tennis/logic/core/NetworkService.dart';
 import 'package:play_tennis/logic/files/services/FilesService.dart';
@@ -25,6 +26,8 @@ class AppServices {
 
   static final GameService gameService = GameService(networkService);
   static final LoginService loginService = LoginService(networkService);
+  static final NotificationService notificationService =
+      NotificationService(networkService);
   static final FlutterNotificationAppTokenService appNotificationTokenService =
       FlutterNotificationAppTokenService(networkService);
   static final ClientService clientService = ClientService(networkService);
