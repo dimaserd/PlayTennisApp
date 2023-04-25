@@ -87,14 +87,7 @@ class SideDrawer extends StatelessWidget {
                         "/notifications", (r) => false);
                   },
                 )
-              : ListTile(
-                  leading: const Icon(Icons.account_circle),
-                  title: const Text('Логин'),
-                  onTap: () {
-                    Navigator.of(context).pushNamedAndRemoveUntil(
-                        MainRoutes.login, (r) => false);
-                  },
-                ),
+              : const SizedBox.shrink(),
           ListTile(
             leading: const Icon(Icons.info),
             title: const Text('О приложении'),
