@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/Loading.dart';
+import 'package:play_tennis/app/main/widgets/notifications/SearchNotificationsForm.dart';
 import 'package:play_tennis/app/main/widgets/side_drawer.dart';
 import 'package:play_tennis/app/ptc/widgets/tournaments/SearchTournamentsForm.dart';
 import 'package:play_tennis/logic/ptc/models/LocationData.dart';
@@ -48,7 +49,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                 ),
               ],
             ),
-            title: const Text('Турниры'),
+            title: const Text('Уведомления'),
           ),
           drawer: const SideDrawer(),
           body: Padding(
@@ -71,9 +72,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     }
 
     return [
-      SearchTournamentsForm(
+      SearchNotificationsForm(
         locationData: locationData!,
-        onTapHandler: (trainer) {},
       ),
       const Loading(text: "Чаты пока не реализованы"),
     ];

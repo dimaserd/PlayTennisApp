@@ -1,29 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:play_tennis/app/main/widgets/notifications/NotificationsList.dart';
 import 'package:play_tennis/app/ptc/widgets/CountryAndCitySelectWidget.dart';
-import 'package:play_tennis/app/ptc/widgets/cities/CityChatAndChannelWidget.dart';
-import 'package:play_tennis/app/ptc/widgets/tournaments/TournamentsList.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
+import 'package:play_tennis/logic/clt/services/NotificationService.dart';
 import 'package:play_tennis/logic/ptc/models/LocationData.dart';
-import 'package:play_tennis/logic/ptc/models/cities/PublicTelegramChatForCityModel.dart';
 import 'package:play_tennis/logic/ptc/services/TournamentService.dart';
 import 'package:play_tennis/main-services.dart';
 import 'dart:async';
 
-class SearchTournamentsForm extends StatefulWidget {
+class SearchNotificationsForm extends StatefulWidget {
   final LocationData locationData;
-  final void Function(TournamentSimpleModel trainer) onTapHandler;
 
-  const SearchTournamentsForm({
+  const SearchNotificationsForm({
     super.key,
     required this.locationData,
-    required this.onTapHandler,
   });
 
   @override
-  State<SearchTournamentsForm> createState() => _SearchTournamentsForm();
+  State<SearchNotificationsForm> createState() =>
+      _SearchNotificationsFormState();
 }
 
-class _SearchTournamentsForm extends State<SearchTournamentsForm> {
+class _SearchNotificationsFormState extends State<SearchNotificationsForm> {
   final ButtonStyle style =
       ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
   final CountryAndCitySelectController countryAndCitySelectController =
@@ -32,8 +30,7 @@ class _SearchTournamentsForm extends State<SearchTournamentsForm> {
   final TextEditingController _searchController = TextEditingController();
   Timer? _debounce;
 
-  List<TournamentSimpleModel> tournaments = [];
-  PublicTelegramChatForCityModel? cityModel;
+  List<NotificationModel> notifications = [];
 
   int _offSet = 0;
   bool _isTapSearch = false;
@@ -95,21 +92,13 @@ class _SearchTournamentsForm extends State<SearchTournamentsForm> {
             ),
           ),
         ),
-        cityModel != null
-            ? CityChatAndChannelWidget(
-                text:
-                    "Все результаты и новости турнира попадают в специальный чат связанный с городом.",
-                model: cityModel!,
-                cityName: countryAndCitySelectController.city?.name ?? "Город",
-              )
-            : const SizedBox.shrink(),
         Expanded(
           child: Padding(
             padding: const EdgeInsets.only(top: 8, bottom: 0),
-            child: TournamentsList(
+            child: NotificationsList(
               isActiveLoader: _isActiveLoader,
               offset: _offSet,
-              tournaments: tournaments,
+              notifications: notifications,
               getData: (offSet) {
                 _offSet = offSet;
                 getData();
@@ -138,24 +127,16 @@ class _SearchTournamentsForm extends State<SearchTournamentsForm> {
   }
 
   getData() {
-    var cityId = countryAndCitySelectController.city?.id;
-
-    var trainerRequest = GetTournamentsRequest(
-      openForParticipantsJoining: null,
-      activityStatus: null,
-      durationType: null,
-      showMine: null,
-      useHiddenFilter: false,
-      hidden: null,
-      isExternal: null,
-      cityId: cityId,
+    var searchModel = ClientNotificationsSearchQueryModel(
+      createdOn: null,
+      read: null,
       count: 10,
       offSet: _offSet,
     );
 
-    AppServices.tournamentService.search(trainerRequest, (e) {
+    AppServices.notificationService.search(searchModel, (e) {
       BaseApiResponseUtils.showError(
-          context, "Произошла ошибка при поиске турниров.");
+          context, "Произошла ошибка при запросе списка уведомлений.");
     }).then((value) {
       if (!mounted) {
         return;
@@ -169,39 +150,13 @@ class _SearchTournamentsForm extends State<SearchTournamentsForm> {
       if (_offSet == 0 || _isTapSearch == true) {
         _isTapSearch = false;
         setState(() {
-          tournaments = value.list;
+          notifications = value.list;
         });
       } else {
         setState(() {
-          tournaments += value.list;
+          notifications += value.list;
         });
       }
     });
-
-    getCityData();
-  }
-
-  getCityData() {
-    var cityId = countryAndCitySelectController.city?.id;
-
-    if (cityId != null) {
-      AppServices.cityService
-          .getTelegramDataById(cityId, (p0) {})
-          .then((value) {
-        if (!mounted) {
-          return;
-        }
-        setState(() {
-          cityModel = value;
-        });
-      });
-    } else {
-      if (!mounted) {
-        return;
-      }
-      setState(() {
-        cityModel = null;
-      });
-    }
   }
 }

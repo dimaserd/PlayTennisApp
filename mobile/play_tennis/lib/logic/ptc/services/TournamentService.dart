@@ -205,12 +205,14 @@ class TournamentService {
   TournamentService(this.networkService);
 
   Future<GetListResult<TournamentSimpleModel>> search(
-      GetTournamentsRequest model) async {
+    GetTournamentsRequest model,
+    Function(String) onError,
+  ) async {
     var map = model.toJson();
     var bodyJson = jsonEncode(map);
 
-    var responseBody =
-        await networkService.postData('${baseUrl}Get/List', bodyJson);
+    var responseBody = await networkService.postDataV2(
+        '${baseUrl}Get/List', bodyJson, onError);
 
     try {
       var json = await jsonDecode(responseBody);
@@ -230,7 +232,7 @@ class TournamentService {
 
       return result;
     } catch (e) {
-    var result = GetListResult<TournamentSimpleModel>(
+      var result = GetListResult<TournamentSimpleModel>(
         totalCount: 0,
         list: List.empty(),
         count: 0,
@@ -238,6 +240,6 @@ class TournamentService {
       );
 
       return result;
+    }
   }
-}
 }

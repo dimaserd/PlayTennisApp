@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:play_tennis/app/main/widgets/palette.dart';
 import 'package:play_tennis/logic/ptc/services/TournamentService.dart';
 import 'package:play_tennis/app/ptc/widgets/html/HtmlViewWidget.dart';
 import 'package:play_tennis/main-extensions.dart';
