@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/notifications/NotificationsList.dart';
-import 'package:play_tennis/app/ptc/widgets/CountryAndCitySelectWidget.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/clt/services/NotificationService.dart';
 import 'package:play_tennis/logic/ptc/models/LocationData.dart';
-import 'package:play_tennis/logic/ptc/services/TournamentService.dart';
 import 'package:play_tennis/main-services.dart';
 import 'dart:async';
 
@@ -24,8 +22,6 @@ class SearchNotificationsForm extends StatefulWidget {
 class _SearchNotificationsFormState extends State<SearchNotificationsForm> {
   final ButtonStyle style =
       ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
-  final CountryAndCitySelectController countryAndCitySelectController =
-      CountryAndCitySelectController();
 
   final TextEditingController _searchController = TextEditingController();
   Timer? _debounce;
@@ -41,7 +37,6 @@ class _SearchNotificationsFormState extends State<SearchNotificationsForm> {
     if (!mounted) {
       return;
     }
-    countryAndCitySelectController.setLocationData(widget.locationData);
     super.initState();
     getData();
   }
@@ -57,56 +52,18 @@ class _SearchNotificationsFormState extends State<SearchNotificationsForm> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Card(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 15,
-            ),
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 5,
-                ),
-                CountryAndCitySelect(
-                  showDistrictSelect: false,
-                  onCityChanged: (p) {
-                    onCountryChanged();
-                  },
-                  onCountryChanged: (p) {
-                    onCountryChanged();
-                  },
-                  controller: countryAndCitySelectController,
-                ),
-                TextField(
-                  controller: _searchController,
-                  onChanged: _onSearchChanged,
-                  decoration: const InputDecoration(
-                    hintText: 'Поисковая строка',
-                    suffixIcon: Icon(Icons.search),
-                  ),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-              ],
-            ),
-          ),
-        ),
         Expanded(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 8, bottom: 0),
-            child: NotificationsList(
-              isActiveLoader: _isActiveLoader,
-              offset: _offSet,
-              notifications: notifications,
-              getData: (offSet) {
-                _offSet = offSet;
-                getData();
-              },
-              onTapHandler: (id) {
-                // widget.onTapHandler(id);
-              },
-            ),
+          child: NotificationsList(
+            isActiveLoader: _isActiveLoader,
+            offset: _offSet,
+            notifications: notifications,
+            getData: (offSet) {
+              _offSet = offSet;
+              getData();
+            },
+            onTapHandler: (id) {
+              // widget.onTapHandler(id);
+            },
           ),
         ),
       ],

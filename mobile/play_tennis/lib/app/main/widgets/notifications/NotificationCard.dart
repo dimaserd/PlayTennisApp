@@ -14,23 +14,54 @@ class NotificationCard extends StatelessWidget {
       onTap: () {
         // onTapHandler(trainers[index]);
       },
-      child: Card(
+      child: Padding(
+        padding: const EdgeInsets.all(5.0),
+        child: Card(
+          color: Colors.blueAccent,
           margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
           elevation: 4,
-          child: ListTile(
-            title: Text(
-              "${notification.title!} ",
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            subtitle: Column(
+          child: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text(notification.text!),
+                Text(
+                  notification.title!,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 20,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  notification.text!,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                  ),
+                ),
+                const NotificationCardActions(),
               ],
               // ),
             ),
-          )),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class NotificationCardActions extends StatelessWidget {
+  const NotificationCardActions({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: const [],
     );
   }
 }
