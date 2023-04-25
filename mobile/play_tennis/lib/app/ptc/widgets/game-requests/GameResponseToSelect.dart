@@ -33,16 +33,21 @@ class GameResponseToSelect extends StatelessWidget {
         elevation: 5,
         child: Column(
           children: [
+            const SizedBox(
+              height: 5,
+            ),
             PlayerDataWidget(
               player: player,
             ),
             const SizedBox(
               height: 5,
             ),
-            const SizedBox.shrink(),
             loginData.userId != player.id
                 ? GameResponseActions(requestId: requestId, response: response)
                 : const SizedBox.shrink(),
+            const SizedBox(
+              height: 15,
+            ),
           ],
         ),
       ),

@@ -50,7 +50,7 @@ class ShowGameRequestData extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      height: 5,
+                      height: 15,
                     )
                   ],
                 ),

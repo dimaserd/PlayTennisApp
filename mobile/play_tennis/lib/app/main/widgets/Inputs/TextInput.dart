@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 class TextInput extends StatelessWidget {
   late String labelText;
   TextEditingController? textController;
-  TextInput({super.key, required this.labelText, this.textController});
+  TextInput({
+    super.key,
+    required this.labelText,
+    this.textController,
+  });
   @override
   Widget build(BuildContext context) {
     return Container(

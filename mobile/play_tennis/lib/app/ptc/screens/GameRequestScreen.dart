@@ -10,7 +10,10 @@ import 'package:play_tennis/main-services.dart';
 
 class GameRequestScreen extends StatefulWidget {
   final String id;
-  const GameRequestScreen({super.key, required this.id});
+  const GameRequestScreen({
+    super.key,
+    required this.id,
+  });
 
   @override
   State<GameRequestScreen> createState() => _GameRequestScreenState();

@@ -41,7 +41,9 @@ class CheckAuthScreenState extends State<CheckAuthScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: const [
-            Loading(text: "Загрузка"),
+            Loading(
+              text: "Загрузка",
+            ),
           ],
         ),
       ),
