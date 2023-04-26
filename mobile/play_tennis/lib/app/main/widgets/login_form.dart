@@ -8,10 +8,14 @@ import 'package:play_tennis/main-routes.dart';
 import 'package:play_tennis/main-services.dart';
 import 'package:play_tennis/main-settings.dart';
 import 'package:play_tennis/main-state.dart';
+import 'package:play_tennis/main.dart';
 
 class LoginForm extends StatefulWidget {
   final Function onLogin;
-  const LoginForm({super.key, required this.onLogin});
+  const LoginForm({
+    super.key,
+    required this.onLogin,
+  });
 
   @override
   State<LoginForm> createState() => _LoginFormState();
@@ -20,6 +24,20 @@ class LoginForm extends StatefulWidget {
 class _LoginFormState extends State<LoginForm> {
   final TextEditingController emailTextController = TextEditingController();
   final TextEditingController passTextController = TextEditingController();
+
+  @override
+  void initState() {
+    AppServices.loginService.checkLogin().then((value) => {
+          if (value)
+            {
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                MainRoutes.home,
+                (route) => false,
+              )
+            }
+        });
+    super.initState();
+  }
 
   final EdgeInsets padding = const EdgeInsets.only(
     top: 10,
@@ -54,7 +72,7 @@ class _LoginFormState extends State<LoginForm> {
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.black,
-            minimumSize: const Size.fromHeight(40), // NEW
+            minimumSize: const Size.fromHeight(40),
           ),
           onPressed: () => onPressed(context),
           child: const Text("Войти"),
@@ -94,36 +112,44 @@ class _LoginFormState extends State<LoginForm> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-        child: SingleChildScrollView(
-      padding: const EdgeInsets.only(bottom: 15, top: 20),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const SizedBox(
-            height: 60,
-          ),
-          const Text(
-            MainSettings.appName,
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.w600,
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.only(
+          bottom: 15,
+          top: 20,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SizedBox(
+              height: 60,
             ),
-          ),
-          Image.asset(
-            MainSettings.imageLogoPath,
-            height: 150,
-            width: 150,
-          ),
-          ...getWidgets(),
-        ],
+            const Text(
+              MainSettings.appName,
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            Image.asset(
+              MainSettings.imageLogoPath,
+              height: 150,
+              width: 150,
+            ),
+            ...getWidgets(),
+          ],
+        ),
       ),
-    ));
+    );
   }
 
   onLoginHandler(bool isSucceeded, String message) {
     BaseApiResponseUtils.handleResponse(
-        context, BaseApiResponse(isSucceeded: isSucceeded, message: message));
+        context,
+        BaseApiResponse(
+          isSucceeded: isSucceeded,
+          message: message,
+        ));
   }
 
   Future<void> onPressed(BuildContext context) async {

@@ -129,9 +129,13 @@ class ProfileScreenState extends State<ProfileScreen>
 
   List<Widget> getWidgets() {
     if (playerData == null || loginData == null) {
-      return const [
-        Loading(text: "Загрузка"),
-        Loading(text: "Загрузка"),
+      return [
+        AnimatedCircleLoading(
+          height: MediaQuery.of(context).size.width,
+        ),
+        AnimatedCircleLoading(
+          height: MediaQuery.of(context).size.width,
+        ),
       ];
     }
 

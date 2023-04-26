@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
+import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
 import 'package:play_tennis/logic/ptc/models/game-requests/AcceptGameRequestResponse.dart';
 import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestResponseSimpleModel.dart';
 import 'package:play_tennis/main-services.dart';
@@ -10,12 +11,18 @@ class GameResponseActions extends StatelessWidget {
     Key? key,
     required this.requestId,
     required this.response,
+    required this.loginData,
   }) : super(key: key);
 
   final String requestId;
   final GameRequestResponseSimpleModel response;
+  final CurrentLoginData loginData;
 
   List<Widget> getButtons(BuildContext context) {
+    if (response.author == null || response.author!.id != loginData.userId) {
+      return [];
+    }
+
     if (response.acceptedByRequestAuthor) {
       return [
         Expanded(
@@ -25,6 +32,7 @@ class GameResponseActions extends StatelessWidget {
               minimumSize: const Size.fromHeight(36),
             ),
             onPressed: () {
+              BaseApiResponseUtils.showError(context, "Не реализовано");
               MyApp.inProccess = true;
               MyApp.inProccess = false;
             },

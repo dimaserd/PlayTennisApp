@@ -102,9 +102,13 @@ class _PlayScreenState extends State<PlayScreen> {
 
   List<Widget> getWidgets() {
     if (locationData == null || loginData == null) {
-      return const [
-        Loading(text: "Загрузка"),
-        Loading(text: "Загрузка"),
+      return [
+        AnimatedCircleLoading(
+          height: MediaQuery.of(context).size.width,
+        ),
+        AnimatedCircleLoading(
+          height: MediaQuery.of(context).size.width,
+        ),
       ];
     }
 

@@ -43,8 +43,8 @@ class AnimatedLoading extends StatelessWidget {
           ),
         ),
         Center(
-          child: Image.network(
-            "${MainSettings.domain}/images/gifs/2.gif",
+          child: Image.asset(
+            MainSettings.loadingGif,
             width: double.infinity,
           ),
         ),
@@ -74,10 +74,8 @@ class AnimatedCircleLoading extends StatelessWidget {
           ),
         ),
         SizedBox(
-          width: height / 2,
-          child: Image.asset(
-            MainSettings.loadingGif
-          ),
+          width: height / 4 * 3,
+          child: Image.asset(MainSettings.loadingGif),
         ),
       ],
     );

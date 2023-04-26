@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/Loading.dart';
 import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
@@ -20,7 +21,10 @@ class CheckAuthScreenState extends State<CheckAuthScreen> {
     _getLoginData().then((value) {
       MainState.isAuthorized = value;
       if (MainState.isAuthorized || MainState.locationData != null) {
-        Navigator.pushNamedAndRemoveUntil(context, "/home", (r) => false);
+        Timer(const Duration(seconds: 3), () {
+          Navigator.pushNamedAndRemoveUntil(context, "/home", (r) => false);
+        });
+
         return;
       }
 
@@ -48,7 +52,9 @@ class CheckAuthScreenState extends State<CheckAuthScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: const [AnimatedLoading()],
+                children: const [
+                  AnimatedLoading(),
+                ],
               ),
             ),
           ],

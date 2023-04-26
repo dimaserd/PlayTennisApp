@@ -30,8 +30,10 @@ class GameRequestToSelect extends StatelessWidget {
               height: 10,
             ),
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 15.0,
+                vertical: 5,
+              ),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:play_tennis/app/ptc/widgets/CountryAndCitySelectWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/cities/CityChatAndChannelWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/game-requests/GameRequestsList.dart';
+import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
 import 'package:play_tennis/logic/ptc/models/cities/PublicTelegramChatForCityModel.dart';
 import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestSimpleModel.dart';
@@ -122,7 +123,12 @@ class _SearchGameRequestsFormState extends State<SearchGameRequestsForm> {
       offSet: 0,
     );
 
-    AppServices.gameRequestsService.search(playerRequest).then((value) {
+    AppServices.gameRequestsService.search(playerRequest, (e) {
+      BaseApiResponseUtils.showError(
+        context,
+        "Произошла ошибка при поиске заявок на игру.",
+      );
+    }).then((value) {
       if (!mounted) return;
       setState(() {
         isLoader = false;

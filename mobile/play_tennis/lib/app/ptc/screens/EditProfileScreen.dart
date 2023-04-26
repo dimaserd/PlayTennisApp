@@ -39,8 +39,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       child: Scaffold(
         body: loginData != null
             ? EditProfileWidget(playerData: loginData!)
-            : const Loading(
-                text: "Получение профиля",
+            : Center(
+                child: AnimatedCircleLoading(
+                  height: MediaQuery.of(context).size.width / 2,
+                ),
               ),
         drawer: const SideDrawer(),
         appBar: AppBar(

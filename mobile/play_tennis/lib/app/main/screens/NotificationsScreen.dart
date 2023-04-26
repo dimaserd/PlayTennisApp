@@ -75,7 +75,24 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       SearchNotificationsForm(
         locationData: locationData!,
       ),
-      const AnimatedCircleLoading(height: 150),
+      Column(
+        children: [
+          const SizedBox(
+            height: 20,
+          ),
+          const Text(
+            "Чаты пока не реализованы",
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          AnimatedCircleLoading(height: MediaQuery.of(context).size.width),
+        ],
+      ),
     ];
   }
 }

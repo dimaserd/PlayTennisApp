@@ -39,49 +39,53 @@ class GameToSelect extends StatelessWidget {
           padding: const EdgeInsets.only(
             left: 10,
             right: 10,
-            top: 10,
+            top: 15,
             bottom: 10,
           ),
           child: Column(
             children: [
-              // Center(
-              //   child: Text(
-              //     "${player1.surname} ${player1.name} vs ${player2.surname} ${player2.name}",
-              //     textAlign: TextAlign.center,
-              //     style: const TextStyle(
-              //       fontSize: 16,
-              //       fontWeight: FontWeight.w600,
-              //     ),
-              //   ),
-              // ),
-              // const SizedBox(
-              //   height: 10,
-              // ),
               game.imageFileId != null
                   ? CrocoAppImage(
                       imageFileId: game.imageFileId!,
                     )
                   : const SizedBox.shrink(),
               Container(
-                height: 5,
+                height: 10,
               ),
-              PlayerSetsScoreList(
-                sets: game.scoreData!.sets,
-                player: player1,
-                gameScores: gamePlayer1,
-                playerId: 0,
-                onTapped: (p) {
-                  onTappedHandler(p, context);
-                },
-              ),
-              PlayerSetsScoreList(
-                sets: game.scoreData!.sets,
-                player: player2,
-                gameScores: gamePlayer2,
-                playerId: 1,
-                onTapped: (p) {
-                  onTappedHandler(p, context);
-                },
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Column(
+                  children: [
+                    PlayerSetsScoreList(
+                      sets: game.scoreData!.sets,
+                      player: player1,
+                      gameScores: gamePlayer1,
+                      playerId: 0,
+                      onTapped: (p) {
+                        onTappedHandler(p, context);
+                      },
+                      isWinner: game.players!
+                              .firstWhere((e) => e.isWinner)
+                              .player!
+                              .id ==
+                          player1.id,
+                    ),
+                    PlayerSetsScoreList(
+                      sets: game.scoreData!.sets,
+                      player: player2,
+                      gameScores: gamePlayer2,
+                      playerId: 1,
+                      onTapped: (p) {
+                        onTappedHandler(p, context);
+                      },
+                      isWinner: game.players!
+                              .firstWhere((e) => e.isWinner)
+                              .player!
+                              .id ==
+                          player2.id,
+                    )
+                  ],
+                ),
               )
             ],
           ),

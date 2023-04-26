@@ -22,7 +22,7 @@ class GameRequestsList extends StatelessWidget {
     return requests.isEmpty
         ? Column(children: [
             Center(
-              child: loading(),
+              child: loading(context),
             ),
           ])
         : SizedBox(
@@ -41,9 +41,10 @@ class GameRequestsList extends StatelessWidget {
           );
   }
 
-  Widget loading() {
+  Widget loading(BuildContext context) {
+    var size = MediaQuery.of(context).size.width / 2;
     return isLoader
-        ? const AnimatedCircleLoading(height: 52)
+        ? AnimatedCircleLoading(height: size)
         : const Text("Заявки на игру не найдены");
   }
 }

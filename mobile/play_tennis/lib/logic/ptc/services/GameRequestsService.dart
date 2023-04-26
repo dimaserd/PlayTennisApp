@@ -15,37 +15,58 @@ class GameRequestsService {
   GameRequestsService(this.networkService);
 
   Future<GetListResult<GameRequestSimpleModel>> search(
-      SearchGameRequests model) async {
+    SearchGameRequests model,
+    Function(String) errorHandler,
+  ) async {
     var map = model.toJson();
     var bodyJson = jsonEncode(map);
 
-    var responseBody =
-        await networkService.postData('${baseUrl}search', bodyJson);
-
-    var json = jsonDecode(responseBody);
-
-    var result = GetListResult(
-      totalCount: json["totalCount"],
-      list: List<GameRequestSimpleModel>.from(
-        json["list"].map((x) => GameRequestSimpleModel.fromJson(x)),
-      ),
-      count: json["count"],
-      offSet: json["offSet"],
+    var responseBody = await networkService.postDataV2(
+      '${baseUrl}search',
+      bodyJson,
+      errorHandler,
     );
 
-    return result;
+    try {
+      var json = jsonDecode(responseBody);
+
+      var result = GetListResult(
+        totalCount: json["totalCount"],
+        list: List<GameRequestSimpleModel>.from(
+          json["list"].map((x) => GameRequestSimpleModel.fromJson(x)),
+        ),
+        count: json["count"],
+        offSet: json["offSet"],
+      );
+
+      return result;
+    } catch (e) {
+      errorHandler(e.toString());
+      return GetListResult(totalCount: 0, list: [], count: 0, offSet: 0);
+    }
   }
 
-  Future<GameRequestDetailedModel?> getById(String id) async {
-    var response = await networkService.getData('${baseUrl}getById/$id');
+  Future<GameRequestDetailedModel?> getById(
+    String id,
+    Function(String) errorHandler,
+  ) async {
+    var response = await networkService.getDataInner(
+      '${baseUrl}getById/$id',
+      errorHandler,
+    );
 
     if (response == "null") {
       return null;
     }
 
-    var json = jsonDecode(response!);
+    try {
+      var json = jsonDecode(response!);
 
-    return GameRequestDetailedModel.fromJson(json);
+      return GameRequestDetailedModel.fromJson(json);
+    } catch (e) {
+      errorHandler(e.toString());
+      return null;
+    }
   }
 
   Future<GetListResult<GameRequestResponseSimpleModel>> searchResponses(

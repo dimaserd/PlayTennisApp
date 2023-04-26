@@ -75,11 +75,19 @@ class _MainScreenState extends State<MainScreen> {
 
   List<Widget> getWidgets() {
     if (locationData == null) {
-      return const [
-        Loading(text: "Загрузка"),
-        Loading(text: "Загрузка"),
-        Loading(text: "Загрузка"),
-        Loading(text: "Загрузка"),
+      return [
+        AnimatedCircleLoading(
+          height: MediaQuery.of(context).size.width,
+        ),
+        AnimatedCircleLoading(
+          height: MediaQuery.of(context).size.width,
+        ),
+        AnimatedCircleLoading(
+          height: MediaQuery.of(context).size.width,
+        ),
+        AnimatedCircleLoading(
+          height: MediaQuery.of(context).size.width,
+        ),
       ];
     }
 
