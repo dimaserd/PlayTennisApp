@@ -114,13 +114,13 @@ class _GameRequestScreenState extends State<GameRequestScreen> {
   }
 
   String getTitleText() {
-    if (loaded) {
-      if (request!.author!.id == loginData.userId) {
-        return "Ваша заявка на игру";
-      }
-      return "Заявка на игру";
+    if (!loaded) {
+      return "Загрузка заявки...";
     }
 
-    return "Загрузка заявки...";
+    if (request!.author!.id == loginData.userId) {
+      return "Ваша заявка на игру";
+    }
+    return "Заявка на игру";
   }
 }

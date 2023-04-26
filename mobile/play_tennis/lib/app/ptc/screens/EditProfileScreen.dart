@@ -38,7 +38,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
         body: loginData != null
-            ? EditProfileWidget(playerData: loginData!)
+            ? EditProfileWidget(
+                playerData: loginData!,
+              )
             : Center(
                 child: AnimatedCircleLoading(
                   height: MediaQuery.of(context).size.width / 2,

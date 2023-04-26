@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:play_tennis/app/main/widgets/Loading.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
 
@@ -25,6 +26,7 @@ class FinalGameImageCardWidget extends StatefulWidget {
 
 class _FinalGameImageCardWidgetState extends State<FinalGameImageCardWidget> {
   bool inProccess = false;
+  bool gameCreationStarted = false;
   bool hasError = false;
 
   @override
@@ -65,11 +67,9 @@ class _FinalGameImageCardWidgetState extends State<FinalGameImageCardWidget> {
 
   List<Widget> getInProccessWidgets() {
     return [
-      const Text(
-        "Создаётся игра",
-        style: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
+      Center(
+        child: AnimatedCircleLoading(
+          height: MediaQuery.of(context).size.width,
         ),
       )
     ];
@@ -83,19 +83,24 @@ class _FinalGameImageCardWidgetState extends State<FinalGameImageCardWidget> {
           minimumSize: const Size.fromHeight(40),
         ),
         onPressed: () async {
-          if (inProccess) {
+          if (gameCreationStarted) {
             return;
           }
+          gameCreationStarted = true;
+          setState(() {
+            inProccess = true;
+          });
           widget.createClickHandler().then((value) {
             BaseApiResponseUtils.handleResponse(context, value);
 
             setState(() {
               hasError = value.isSucceeded;
-              inProccess = true;
+              inProccess = false;
             });
 
             if (value.isSucceeded) {
               widget.onSuccess();
+              gameCreationStarted = false;
             }
           });
         },
