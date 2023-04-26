@@ -55,8 +55,8 @@ class ImageViewWidget extends StatelessWidget {
         Navigator.of(context).pushNamed('/show-image/$fileId');
       },
       child: Image(
-        image: NetworkImage(ImageViewWidgetExtensions.buildMediumUrl(fileId)),
-      ),
+          image: NetworkImage(ImageViewWidgetExtensions.buildMediumUrl(fileId)),
+        ),
     );
   }
 }

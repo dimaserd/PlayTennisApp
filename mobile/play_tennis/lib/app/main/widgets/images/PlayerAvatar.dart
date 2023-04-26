@@ -13,9 +13,9 @@ class PlayerAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return avatarFileId != null
-        ? CrocoAppImage(
-            imageFileId: avatarFileId!,
-          )
+        ?  CrocoAppImage(
+              imageFileId: avatarFileId!,
+            )
         : const Image(
             image: NetworkImage(
               ServerImages.defaultAvatarPath,
