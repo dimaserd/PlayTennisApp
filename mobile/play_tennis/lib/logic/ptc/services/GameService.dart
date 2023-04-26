@@ -180,16 +180,32 @@ class GameService {
   final String baseUrl = "/api/ptc/game/";
   GameService(this.networkService);
 
-  Future<BaseApiResponse> create(CreateSinglesGame model) async {
+  Future<BaseApiResponse> create(
+    CreateSinglesGame model,
+    Function(String) errorHandler,
+  ) async {
     var map = model.toJson();
 
     var bodyJson = jsonEncode(map);
-    var responseBody =
-        await networkService.postData('${baseUrl}create', bodyJson);
+    var responseBody = await networkService.postDataV2(
+      '${baseUrl}create',
+      bodyJson,
+      errorHandler,
+    );
 
-    var json = jsonDecode(responseBody);
+    try {
+      var json = jsonDecode(responseBody);
 
-    return BaseApiResponse.fromJson(json);
+      return BaseApiResponse.fromJson(json);
+    } catch (e) {
+      errorHandler(e.toString());
+    }
+
+    return BaseApiResponse(
+      isSucceeded: false,
+      message:
+          "Произошла ошибка при создании игры. Пожалуйста, попробуйте еще раз.",
+    );
   }
 
   Future<GetListResult<SinglesGameSimpleModel>> searchMine(
@@ -220,24 +236,36 @@ class GameService {
   }
 
   Future<GetListResult<SinglesGameSimpleModel>> searchGames(
-      SearchGamesRequest model) async {
+    SearchGamesRequest model,
+    Function(String) errorHandler,
+  ) async {
     var map = model.toJson();
 
     var bodyJson = jsonEncode(map);
-    var responseBody =
-        await networkService.postData('${baseUrl}search', bodyJson);
-
-    var json = jsonDecode(responseBody);
-
-    var result = GetListResult(
-      totalCount: json["totalCount"],
-      list: List<SinglesGameSimpleModel>.from(
-        json["list"].map((x) => SinglesGameSimpleModel.fromJson(x)),
-      ),
-      count: json["count"],
-      offSet: json["offSet"],
+    var responseBody = await networkService.postDataV2(
+      '${baseUrl}search',
+      bodyJson,
+      errorHandler,
     );
 
-    return result;
+    try {
+      var json = jsonDecode(responseBody);
+
+      return GetListResult(
+        totalCount: json["totalCount"],
+        list: List<SinglesGameSimpleModel>.from(
+          json["list"].map((x) => SinglesGameSimpleModel.fromJson(x)),
+        ),
+        count: json["count"],
+        offSet: json["offSet"],
+      );
+    } catch (e) {
+      return GetListResult(
+        totalCount: 0,
+        list: [],
+        count: 0,
+        offSet: 0,
+      );
+    }
   }
 }

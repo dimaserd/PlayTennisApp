@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
 import 'package:play_tennis/logic/ptc/services/GameService.dart';
 import 'package:play_tennis/main-services.dart';
@@ -55,13 +56,18 @@ class _SearchGamesWidgetState extends State<SearchGamesWidget> {
       q: null,
     );
 
-    AppServices.gameService.searchGames(playerRequest).then((value) {
+    AppServices.gameService.searchGames(playerRequest, (e) {
+      BaseApiResponseUtils.showError(
+        context,
+        "Произошла ошибка при поиске игр.",
+      );
+    }).then((value) {
       games = value.list;
-      setState(() {
-        if (mounted) {
-        gamesLoaded = true;
-        }
-      });
+      if (mounted) {
+        setState(() {
+          gamesLoaded = true;
+        });
+      }
     });
   }
 }

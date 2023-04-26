@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/Loading.dart';
 import 'package:play_tennis/app/ptc/widgets/game-data/AddGameForm.dart';
+import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
 import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
 import 'package:play_tennis/logic/ptc/models/games/CreateSinglesGame.dart';
 import 'package:play_tennis/main-services.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerModel.dart';
+import 'package:play_tennis/main.dart';
 
 class CreateGameScreen extends StatefulWidget {
   final PlayerModel? player;
-  const CreateGameScreen({Key? key, required this.player}) : super(key: key);
+  const CreateGameScreen({
+    Key? key,
+    required this.player,
+  }) : super(key: key);
 
   @override
   State<CreateGameScreen> createState() => _CreateGameScreenState();
@@ -52,6 +57,12 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
 
   Future<BaseApiResponse> _createGameClickHandler(
       SingleGameData gameData) async {
+    if (MyApp.inProccess) {
+      return BaseApiResponse(isSucceeded: false, message: "Игра уже создается");
+    }
+
+    MyApp.inProccess = true;
+
     var matchData = TennisMatchData(
       sets: gameData.score,
       winnerPlayerId:
@@ -68,6 +79,13 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
       gameData: matchData,
     );
 
-    return AppServices.gameService.create(model);
+    var result = await AppServices.gameService.create(model, (e) {
+      BaseApiResponseUtils.showError(
+        context,
+        "Произошла ошибка при создании игры. Пожалуйста, попробуйте еще раз.",
+      );
+    });
+    MyApp.inProccess = false;
+    return result;
   }
 }

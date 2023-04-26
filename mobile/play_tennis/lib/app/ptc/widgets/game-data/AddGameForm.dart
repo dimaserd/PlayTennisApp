@@ -152,10 +152,12 @@ class _AddGameFormState extends State<AddGameForm> {
   }
 
   void setOpponent(PlayerModel player) {
-    opponent = player;
-    setState(() {
-      step = 1;
-    });
+    if (mounted) {
+      opponent = player;
+      setState(() {
+        step = 1;
+      });
+    }
   }
 
   List<Widget> getStepWidgets() {
