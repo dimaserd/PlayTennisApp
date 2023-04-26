@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/ptc/widgets/game-requests/GameResponseToSelect.dart';
 import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
+import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestDetailedModel.dart';
 import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestResponseSimpleModel.dart';
 
 class GameRequestResponsesList extends StatelessWidget {
   final List<GameRequestResponseSimpleModel> responses;
   final CurrentLoginData loginData;
-  final String requestId;
+  final GameRequestDetailedModel request;
 
   const GameRequestResponsesList({
     super.key,
-    required this.requestId,
+    required this.request,
     required this.responses,
     required this.loginData,
   });
@@ -62,7 +63,7 @@ class GameRequestResponsesList extends StatelessWidget {
                     shrinkWrap: true,
                     itemBuilder: (ctx, index) {
                       return GameResponseToSelect(
-                        requestId: requestId,
+                        request: request,
                         response: responses[index],
                         loginData: loginData,
                         onChanged: () {},

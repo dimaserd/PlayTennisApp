@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
-import 'package:play_tennis/logic/ptc/models/game-requests/AcceptGameRequestResponse.dart';
+import 'package:play_tennis/logic/ptc/models/game-requests/ResponseForGameRequestIdModel.dart';
+import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestDetailedModel.dart';
 import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestResponseSimpleModel.dart';
 import 'package:play_tennis/main-services.dart';
 import 'package:play_tennis/main.dart';
@@ -9,17 +10,17 @@ import 'package:play_tennis/main.dart';
 class GameResponseActions extends StatelessWidget {
   const GameResponseActions({
     Key? key,
-    required this.requestId,
+    required this.request,
     required this.response,
     required this.loginData,
   }) : super(key: key);
 
-  final String requestId;
+  final GameRequestDetailedModel request;
   final GameRequestResponseSimpleModel response;
   final CurrentLoginData loginData;
 
   List<Widget> getButtons(BuildContext context) {
-    if (response.author == null || response.author!.id != loginData.userId) {
+    if (request.author == null || request.author!.id != loginData.userId) {
       return [];
     }
 
@@ -38,7 +39,10 @@ class GameResponseActions extends StatelessWidget {
             },
             child: const Text("Запросить контакты"),
           ),
-        )
+        ),
+        const SizedBox(
+          height: 10,
+        ),
       ];
     }
 
@@ -55,9 +59,13 @@ class GameResponseActions extends StatelessWidget {
             }
 
             MyApp.inProccess = true;
-            var model = AcceptGameRequestResponse(
-                gameRequestId: requestId, playerId: response.author!.id!);
-            AppServices.gameRequestsService.acceptResponse(model).then((resp) {
+            var model = ResponseForGameRequestIdModel(
+              gameRequestId: request.id!,
+              playerId: response.author!.id!,
+            );
+            AppServices.gameRequestsService
+                .acceptResponse(model, (e) {})
+                .then((resp) {
               MyApp.inProccess = false;
               BaseApiResponseUtils.handleResponse(context, resp);
             });

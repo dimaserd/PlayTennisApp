@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/Loading.dart';
 import 'package:play_tennis/app/ptc/widgets/game-requests/ShowGameRequestData.dart';
+import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
 import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestDetailedModel.dart';
 import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestResponseSimpleModel.dart';
@@ -47,7 +48,12 @@ class _GameRequestScreenState extends State<GameRequestScreen> {
     if (!loginDataLoaded) {
       return;
     }
-    AppServices.gameRequestsService.getById(widget.id).then((value) {
+    AppServices.gameRequestsService.getById(widget.id, (e) {
+      BaseApiResponseUtils.showError(
+        context,
+        "Произошла ошибка при получении заявки на игру.",
+      );
+    }).then((value) {
       request = value;
       loadResponses();
     });
@@ -60,7 +66,12 @@ class _GameRequestScreenState extends State<GameRequestScreen> {
       count: 10,
       offSet: 0,
     );
-    AppServices.gameRequestsService.searchResponses(model).then((value) {
+    AppServices.gameRequestsService.searchResponses(model, (e) {
+      BaseApiResponseUtils.showError(
+        context,
+        "Произошла ошибка при запросе откликов на заявку.",
+      );
+    }).then((value) {
       responses = value.list;
       if (!mounted) {
         return;
@@ -94,7 +105,9 @@ class _GameRequestScreenState extends State<GameRequestScreen> {
             : const Loading(text: "Заявка на игру загружается"),
         appBar: AppBar(
           leading: const BackButton(),
-          title: Text(getTitleText()),
+          title: Text(
+            getTitleText(),
+          ),
         ),
       ),
     );

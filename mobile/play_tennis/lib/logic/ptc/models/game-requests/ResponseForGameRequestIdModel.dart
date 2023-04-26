@@ -1,14 +1,14 @@
-class AcceptGameRequestResponse {
+class ResponseForGameRequestIdModel {
   late String? gameRequestId;
   late String? playerId;
 
-  AcceptGameRequestResponse({
+  ResponseForGameRequestIdModel({
     required this.gameRequestId,
     required this.playerId,
   });
 
-  factory AcceptGameRequestResponse.fromJson(Map<String, dynamic> json) =>
-      AcceptGameRequestResponse(
+  factory ResponseForGameRequestIdModel.fromJson(Map<String, dynamic> json) =>
+      ResponseForGameRequestIdModel(
         gameRequestId: json["gameRequestId"],
         playerId: json["playerId"],
       );

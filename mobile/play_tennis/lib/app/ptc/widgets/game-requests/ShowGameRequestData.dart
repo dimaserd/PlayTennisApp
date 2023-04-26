@@ -59,7 +59,7 @@ class ShowGameRequestData extends StatelessWidget {
           ),
         ),
         GameRequestResponsesList(
-          requestId: request.id!,
+          request: request,
           responses: responses,
           loginData: loginData,
         ),

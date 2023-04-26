@@ -3,7 +3,8 @@ import 'package:play_tennis/app/ptc/widgets/game-requests/GameResponseActions.da
 import 'package:play_tennis/app/ptc/widgets/players/PlayerDataWidget.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
-import 'package:play_tennis/logic/ptc/models/game-requests/AcceptGameRequestResponse.dart';
+import 'package:play_tennis/logic/ptc/models/game-requests/ResponseForGameRequestIdModel.dart';
+import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestDetailedModel.dart';
 import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestResponseSimpleModel.dart';
 import 'package:play_tennis/main-services.dart';
 import 'package:play_tennis/main.dart';
@@ -11,13 +12,13 @@ import 'package:play_tennis/main.dart';
 class GameResponseToSelect extends StatelessWidget {
   final GameRequestResponseSimpleModel response;
   final CurrentLoginData loginData;
-  final String requestId;
+  final GameRequestDetailedModel request;
   final Function onChanged;
   const GameResponseToSelect({
     super.key,
     required this.response,
     required this.loginData,
-    required this.requestId,
+    required this.request,
     required this.onChanged,
   });
 
@@ -44,7 +45,7 @@ class GameResponseToSelect extends StatelessWidget {
             ),
             loginData.userId != player.id
                 ? GameResponseActions(
-                    requestId: requestId,
+                    request: request,
                     response: response,
                     loginData: loginData,
                   )
@@ -78,12 +79,15 @@ class GameResponseToSelect extends StatelessWidget {
 
     MyApp.inProccess = true;
 
-    var model = AcceptGameRequestResponse(
-      gameRequestId: requestId,
+    var model = ResponseForGameRequestIdModel(
+      gameRequestId: request.id!,
       playerId: response.author!.id,
     );
-    AppServices.gameRequestsService.acceptResponse(model).then((value) {
-      BaseApiResponseUtils.handleResponse(context, value);
+    AppServices.gameRequestsService.acceptResponse(model, (e) {}).then((value) {
+      BaseApiResponseUtils.handleResponse(
+        context,
+        value,
+      );
       MyApp.inProccess = false;
     });
   }

@@ -109,7 +109,7 @@ class GameRequestRepondingWidget extends StatelessWidget {
 
     MyApp.inProccess = true;
 
-    AppServices.gameRequestsService.respond(request.id!).then((value) {
+    AppServices.gameRequestsService.respond(request.id!, (e) {}).then((value) {
       BaseApiResponseUtils.handleResponse(context, value);
       MyApp.inProccess = false;
     });
