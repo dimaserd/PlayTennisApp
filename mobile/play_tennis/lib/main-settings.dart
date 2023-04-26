@@ -5,6 +5,8 @@ class MainSettings {
 
   static const String imageLogoPath = "assets/icons/icon.png";
 
+  static const String loadingGif = "assets/icons/animationLoader.gif";
+
   static const String loadingPath = "assets/icons/icon.png";
 
   static const String imageRocket = "assets/icons/icon.png";

@@ -44,19 +44,19 @@ class GameToSelect extends StatelessWidget {
           ),
           child: Column(
             children: [
-              Center(
-                child: Text(
-                  "${player1.surname} ${player1.name} vs ${player2.surname} ${player2.name}",
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
+              // Center(
+              //   child: Text(
+              //     "${player1.surname} ${player1.name} vs ${player2.surname} ${player2.name}",
+              //     textAlign: TextAlign.center,
+              //     style: const TextStyle(
+              //       fontSize: 16,
+              //       fontWeight: FontWeight.w600,
+              //     ),
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: 10,
+              // ),
               game.imageFileId != null
                   ? CrocoAppImage(
                       imageFileId: game.imageFileId!,

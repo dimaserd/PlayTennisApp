@@ -62,18 +62,24 @@ class AnimatedCircleLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: height,
-      height: height,
-      decoration: const BoxDecoration(
-        shape: BoxShape.circle,
-        color: Color.fromRGBO(82, 186, 141, 1),
-      ),
-      child: SizedBox(
-        //height: height / 4 * 3,
-        width: height / 2,
-        child: Image.network("${MainSettings.domain}/images/gifs/2.gif"),
-      ),
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Container(
+          width: height,
+          height: height,
+          decoration: const BoxDecoration(
+            shape: BoxShape.circle,
+            color: Color.fromRGBO(82, 186, 141, 1),
+          ),
+        ),
+        SizedBox(
+          width: height / 2,
+          child: Image.asset(
+            MainSettings.loadingGif
+          ),
+        ),
+      ],
     );
   }
 }

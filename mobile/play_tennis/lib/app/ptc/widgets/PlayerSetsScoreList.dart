@@ -19,69 +19,62 @@ class PlayerSetsScoreList extends StatelessWidget {
   final List<TennisSetData>? sets;
   final int playerId;
 
-
   @override
   Widget build(BuildContext context) {
     var childrens = getElements();
     return Padding(
       padding: const EdgeInsets.only(top: 4, bottom: 4),
-      child: Container(
-        height: 40,
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(3)),
-          border: Border.all(
-            color: Colors.black,
-            width: 1,
-          ),
-        ),
-        child: Row(
-          children: [
-            Expanded(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Expanded(
               flex: 2,
-              child: Container(
-                decoration: const BoxDecoration(
-                  border: Border(
-                    right: BorderSide(
-                      color: Colors.black,
-                      width: 1,
-                    ),
+              child: ClipRRect(
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    bottomLeft: Radius.circular(30),
+                    topRight: Radius.circular(
+                        30)), // Замените "radius" на значение радиуса
+                child: Container(
+                  color: const Color(0xFFECECEC),
+                  child: PlayerAvatar(
+                    avatarFileId: player.avatarFileId,
                   ),
                 ),
-                child: PlayerAvatar(
-                  avatarFileId: player.avatarFileId,
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 6,
+              )),
+          Expanded(
+            flex: 6,
+            child: InkWell(
+              onTap: () => onTapped(player),
               child: Container(
-                height: 50,
+                height: 40,
                 decoration: const BoxDecoration(
-                  border: Border(
-                    right: BorderSide(
-                      color: Colors.black,
-                      width: 1,
-                    ),
-                  ),
+                  color:  Color(0xFFECECEC),
+                  borderRadius:  BorderRadius.only(
+                      topRight: Radius.circular(3),
+                      bottomRight: Radius.circular(3)),// Задаем радиус закругления углов
                 ),
-                child: InkWell(
-                  onTap: () => onTapped(player),
-                  child: Center(
+                child: Align(
+                  alignment: Alignment
+                      .centerLeft, // выравнивание по вертикали по центру и горизонтали слева
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 5),
                     child: Text(
                       "${player.surname} ${player.name}",
-                      textAlign: TextAlign.center,
+                      textAlign: TextAlign.left,
                       style: const TextStyle(
                         color: Colors.black,
-                        fontSize: 14,
+                        fontSize: 13,
                       ),
                     ),
                   ),
                 ),
               ),
             ),
-            ...childrens
-          ],
-        ),
+          ),
+          const SizedBox(width: 10),
+          ...childrens
+        ],
       ),
     );
   }
@@ -91,50 +84,57 @@ class PlayerSetsScoreList extends StatelessWidget {
     var setsLengh = sets?.length ?? 0;
     for (var i = 0; i < setsLengh; i++) {
       var setData = sets![i];
-      var score = playerId == 0 ? setData.score1 ?? "": setData.score2 ?? "";
+      var score = playerId == 0 ? setData.score1 ?? "" : setData.score2 ?? "";
+      var enemyScore = playerId == 0 ? setData.score2 ?? "" : setData.score1 ?? "";
       var currentScore = score;
       if (currentScore.isEmpty != true) {
-      if (i == setsLengh - 1) {
-        elements.add(Expanded(
-          flex: 1,
-          child: SizedBox(
-            height: 50,
-            child: Center(
-              child: Text(
-                currentScore,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 14,
+        if (i == setsLengh - 1) {
+          elements.add(Expanded(
+            flex: 1,
+            child: Container(
+              height: 40,
+              decoration: BoxDecoration(
+                color: const Color(0xFFECECEC),
+                borderRadius: BorderRadius.circular(3),// Задаем радиус закругления углов
+              ),
+              child: Center(
+                child: Text(
+                  currentScore,
+                  textAlign: TextAlign.center,
+                  style:  TextStyle(
+                    color: Colors.black,
+                    fontSize: 13,
+                    fontFamily: int.parse(currentScore) >= int.parse(enemyScore) ? "QuickSand-bold" : "QuickSand", 
+                  ),
                 ),
               ),
             ),
-          ),
-        ));
-      } else {
-        elements.add(Expanded(
-          flex: 1,
-          child: Container(
-            height: 50,
-            decoration: const BoxDecoration(
-              border: Border(
-                right: BorderSide(
-                  color: Colors.black,
-                  width: 1,
-                ),
-              ),
-            ),
-            child: Center(
-              child: Text(
-                currentScore,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 14,
-                ),
-              ),
-            ),
-          ),
-        ));
-      }
+          ));
+        } else {
+          elements.add(
+            Expanded(
+                flex: 1,
+                child: Container(
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFECECEC),
+                    borderRadius: BorderRadius.circular(3),// Задаем радиус закругления углов
+                  ),
+                  child: Center(
+                    child: Text(
+                      currentScore,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 13,
+                        fontFamily: int.parse(currentScore) >= int.parse(enemyScore) ? "QuickSand-bold" : "QuickSand", 
+                      ),
+                    ),
+                  ),
+                )),
+          );
+          elements.add(const SizedBox(width: 5));
+        }
       }
     }
 

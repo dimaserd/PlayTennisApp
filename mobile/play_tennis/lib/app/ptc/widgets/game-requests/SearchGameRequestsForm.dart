@@ -32,6 +32,7 @@ class _SearchGameRequestsFormState extends State<SearchGameRequestsForm> {
 
   final TextEditingController queryController = TextEditingController();
 
+  bool isLoader = true;
   List<GameRequestSimpleModel> requests = [];
   Timer? timer;
   PublicTelegramChatForCityModel? cityModel;
@@ -95,6 +96,7 @@ class _SearchGameRequestsFormState extends State<SearchGameRequestsForm> {
             padding: const EdgeInsets.only(top: 8.0),
             child: SingleChildScrollView(
               child: GameRequestsList(
+                isLoader: isLoader,
                 requests: requests,
                 loginData: widget.loginData!,
                 onChange: getData,
@@ -123,6 +125,7 @@ class _SearchGameRequestsFormState extends State<SearchGameRequestsForm> {
     AppServices.gameRequestsService.search(playerRequest).then((value) {
       if (!mounted) return;
       setState(() {
+        isLoader = false;
         requests = value.list;
       });
     });
