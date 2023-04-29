@@ -33,8 +33,8 @@ class PlayerSetsScoreList extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Expanded(
-              flex: 2,
+          SizedBox(
+            height: 60,
               child: ClipRRect(
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(30),
@@ -99,9 +99,9 @@ class PlayerSetsScoreList extends StatelessWidget {
       var currentScore = score;
       if (currentScore.isEmpty != true) {
         if (i == setsLengh - 1) {
-          elements.add(Expanded(
-            flex: 1,
-            child: Container(
+          elements.add(
+             Container(
+              width: 24,
               height: 40,
               decoration: BoxDecoration(
                 color: const Color(0xFFECECEC),
@@ -122,12 +122,11 @@ class PlayerSetsScoreList extends StatelessWidget {
                 ),
               ),
             ),
-          ));
+          );
         } else {
           elements.add(
-            Expanded(
-                flex: 1,
-                child: Container(
+             Container(
+              width: 24,
                   height: 40,
                   decoration: BoxDecoration(
                     color: const Color(0xFFECECEC),
@@ -149,7 +148,7 @@ class PlayerSetsScoreList extends StatelessWidget {
                       ),
                     ),
                   ),
-                )),
+                ),
           );
           elements.add(const SizedBox(
             width: 5,
