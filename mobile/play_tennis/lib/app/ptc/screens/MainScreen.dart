@@ -9,6 +9,8 @@ import 'package:play_tennis/logic/ptc/models/LocationData.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
 import 'package:play_tennis/main-routes.dart';
 import 'package:play_tennis/main-services.dart';
+import 'package:uni_links/uni_links.dart';
+import 'dart:async';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -19,6 +21,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   LocationData? locationData;
+  StreamSubscription? _sub;
 
   void loadLocationData() {
     AppServices.playerService.getLocationData((e) => {}).then((value) {
@@ -32,6 +35,20 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     super.initState();
     loadLocationData();
+    initPlatformState();
+  }
+
+  Future<void> initPlatformState() async {
+    if (!mounted) return;
+
+    _sub?.cancel();
+    _sub = uriLinkStream.listen((Uri? uri) {
+      if (uri != null) {
+        // Вот тут обрабатывать ссылку 
+      }
+    }, onError: (err) {
+      print('Failed to get link stream: $err');
+    });
   }
 
   @override

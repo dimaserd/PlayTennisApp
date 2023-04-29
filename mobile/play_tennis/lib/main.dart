@@ -10,6 +10,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:uni_links/uni_links.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
@@ -55,7 +56,6 @@ void main() async {
       AppServices.appNotificationTokenService.addToken(token);
     }
   } catch (e) {
-    //TODO надо починить
     print(e);
   }
 
@@ -77,10 +77,12 @@ void main() async {
   );
 }
 
+
 class MyApp extends StatelessWidget {
   static bool inProccess = false;
 
   const MyApp({super.key});
+  
 
   @override
   Widget build(BuildContext context) {
@@ -114,4 +116,5 @@ class MyApp extends StatelessWidget {
     await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
   }
+  
 }
