@@ -36,7 +36,7 @@ enum LoginErrorType {
 class LoginErrorTypeDartJsonGenerator {
   static getFromString(String value) {
     return LoginErrorType.values
-        .firstWhere((e) => e.toString() == 'LoginErrorType.' + value);
+        .firstWhere((e) => e.toString() == 'LoginErrorType.$value');
   }
 
   static getFromStringOrNull(String? value) {
