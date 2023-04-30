@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
+import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
 import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
 import 'package:play_tennis/logic/ptc/models/game-requests/ResponseForGameRequestIdModel.dart';
 import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestDetailedModel.dart';
@@ -32,11 +33,7 @@ class GameResponseActions extends StatelessWidget {
               backgroundColor: Colors.blueAccent,
               minimumSize: const Size.fromHeight(36),
             ),
-            onPressed: () {
-              BaseApiResponseUtils.showError(context, "Не реализовано");
-              MyApp.inProccess = true;
-              MyApp.inProccess = false;
-            },
+            onPressed: () => _contactsHandler(context),
             child: const Text("Запросить контакты"),
           ),
         ),
@@ -53,23 +50,7 @@ class GameResponseActions extends StatelessWidget {
             backgroundColor: Colors.greenAccent,
             minimumSize: const Size.fromHeight(40),
           ),
-          onPressed: () {
-            if (MyApp.inProccess) {
-              return;
-            }
-
-            MyApp.inProccess = true;
-            var model = ResponseForGameRequestIdModel(
-              gameRequestId: request.id!,
-              playerId: response.author!.id!,
-            );
-            AppServices.gameRequestsService
-                .acceptResponse(model, (e) {})
-                .then((resp) {
-              MyApp.inProccess = false;
-              BaseApiResponseUtils.handleResponse(context, resp);
-            });
-          },
+          onPressed: () => _acceptHandler(context),
           child: const Text("Принять"),
         ),
       ),
@@ -82,9 +63,7 @@ class GameResponseActions extends StatelessWidget {
             backgroundColor: Colors.redAccent,
             minimumSize: const Size.fromHeight(40),
           ),
-          onPressed: () {
-            BaseApiResponseUtils.showError(context, "Не реализовано");
-          },
+          onPressed: () => _declineHandler(context),
           child: const Text("Отказать"),
         ),
       ),
@@ -102,6 +81,68 @@ class GameResponseActions extends StatelessWidget {
           children: getButtons(context),
         ),
       ),
+    );
+  }
+
+  _contactsHandler(BuildContext context) async {
+    if (MyApp.inProccess) {
+      return;
+    }
+
+    MyApp.inProccess = true;
+    var response = await AppServices.gameRequestsService
+        .requestContactData(request.id!, (p) => {});
+
+    if (context.mounted) {
+      BaseApiResponseUtils.handleResponse(
+        context,
+        BaseApiResponse(
+          isSucceeded: response.isSucceeded,
+          message: response.message,
+        ),
+      );
+    }
+
+    MyApp.inProccess = false;
+  }
+
+  _acceptHandler(BuildContext context) {
+    if (MyApp.inProccess) {
+      return;
+    }
+
+    MyApp.inProccess = true;
+    var model = ResponseForGameRequestIdModel(
+      gameRequestId: request.id!,
+      playerId: response.author!.id!,
+    );
+    AppServices.gameRequestsService.acceptResponse(model, (e) {}).then(
+      (resp) {
+        MyApp.inProccess = false;
+        if (context.mounted) {
+          BaseApiResponseUtils.handleResponse(context, resp);
+        }
+      },
+    );
+  }
+
+  _declineHandler(BuildContext context) {
+    if (MyApp.inProccess) {
+      return;
+    }
+
+    MyApp.inProccess = true;
+    var model = ResponseForGameRequestIdModel(
+      gameRequestId: request.id!,
+      playerId: response.author!.id!,
+    );
+    AppServices.gameRequestsService.declineResponse(model, (e) {}).then(
+      (resp) {
+        MyApp.inProccess = false;
+        if (context.mounted) {
+          BaseApiResponseUtils.handleResponse(context, resp);
+        }
+      },
     );
   }
 }

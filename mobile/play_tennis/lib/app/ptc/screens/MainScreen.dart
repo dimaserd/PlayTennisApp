@@ -39,12 +39,17 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   Future<void> initPlatformState() async {
-    if (!mounted) return;
+    if (!mounted) {
+      return;
+    }
 
     _sub?.cancel();
     _sub = uriLinkStream.listen((Uri? uri) {
       if (uri != null) {
-        // Вот тут обрабатывать ссылку 
+        var path = uri.path;
+
+        //Uri parsing
+        Navigator.of(context).pushNamed(path);
       }
     }, onError: (err) {
       print('Failed to get link stream: $err');
