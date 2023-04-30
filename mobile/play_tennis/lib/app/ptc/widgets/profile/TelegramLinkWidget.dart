@@ -85,7 +85,15 @@ class TelegramLinkWidget extends StatelessWidget {
       return;
     }
 
-    var text = result.responseObject.command!;
+    if (result.responseObject == null) {
+      if (context.mounted) {
+        BaseApiResponseUtils.showError(
+            context, "Произошла ошибка при запросе команды");
+      }
+      return;
+    }
+
+    var text = result.responseObject!.command!;
 
     Clipboard.setData(ClipboardData(text: text)).then((_) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(

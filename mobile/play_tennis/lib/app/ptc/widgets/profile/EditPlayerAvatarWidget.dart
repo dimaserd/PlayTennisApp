@@ -100,11 +100,14 @@ class _EditPlayerAvatarWidgetState extends State<EditPlayerAvatarWidget> {
 
   Future<BaseApiResponse> saveFile(File file) async {
     var response = await AppServices.filesService.postFile(file);
-    if (!response.isSucceeded) {
+    if (!response.isSucceeded || response.responseObject == null) {
       return BaseApiResponse(
-          isSucceeded: false, message: "Произошла ошибка при загрузке файла");
+        isSucceeded: false,
+        message: "Произошла ошибка при загрузке файла",
+      );
     }
-    var newAvatarFileId = response.responseObject.first;
+
+    var newAvatarFileId = response.responseObject!.first;
 
     var avatarResponse =
         await AppServices.clientService.updatePhoto(newAvatarFileId);

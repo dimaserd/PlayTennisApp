@@ -64,13 +64,13 @@ class _AddGameImageWidgetState extends State<AddGameImageWidget> {
 
   Future<BaseApiResponse> saveFile(File file) async {
     var response = await AppServices.filesService.postFile(file);
-    if (!response.isSucceeded) {
+    if (!response.isSucceeded || response.responseObject == null) {
       return BaseApiResponse(
         isSucceeded: false,
         message: "Произошла ошибка при загрузке файла изображения",
       );
     }
-    var imagefileId = response.responseObject.first;
+    var imagefileId = response.responseObject!.first;
 
     widget.imageReady(imagefileId, file);
 
