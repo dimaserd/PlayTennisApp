@@ -35,6 +35,10 @@ class MainRoutes {
     Navigator.of(context).pushNamed('/player/$playerId');
   }
 
+  static void toGameRequestCard(BuildContext context, String requestId) {
+    Navigator.of(context).pushNamed("/game-request/$requestId");
+  }
+
   static MaterialPageRoute onGenerateRoute(RouteSettings settings) {
     if (settings.name == checkAuth) {
       return MaterialPageRoute(

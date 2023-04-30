@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:play_tennis/main-settings.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ShowAlertContact extends StatelessWidget {
   final String title;
   final String subTitle;
-  const ShowAlertContact({super.key, required this.title, required this.subTitle});
+  const ShowAlertContact(
+      {super.key, required this.title, required this.subTitle});
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +51,7 @@ class ShowAlertContact extends StatelessWidget {
                   ),
                   onTap: () {
                     var telegramUser =
-                        Uri.parse("tg://resolve?domain=@dimaserd");
+                        Uri.parse(MainSettings.dimaSerdTelegramUrl());
                     launchUrl(telegramUser);
                   },
                 ),

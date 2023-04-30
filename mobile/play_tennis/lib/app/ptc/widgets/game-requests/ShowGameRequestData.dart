@@ -6,6 +6,7 @@ import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
 import 'package:play_tennis/logic/ptc/extensions/GameRequestMappingExtensions.dart';
 import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestDetailedModel.dart';
 import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestResponseSimpleModel.dart';
+import 'package:play_tennis/main-settings.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ShowGameRequestData extends StatelessWidget {
@@ -93,10 +94,15 @@ class ShowGameRequestData extends StatelessWidget {
               InkWell(
                 child: const Text(
                   'Телеграмм: @dimaserd',
-                  style: TextStyle(color: Colors.blue, fontSize: 16),
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontSize: 16,
+                  ),
                 ),
                 onTap: () {
-                  var telegramUser = Uri.parse("tg://resolve?domain=@dimaserd");
+                  var telegramUser = Uri.parse(
+                    MainSettings.dimaSerdTelegramUrl(),
+                  );
                   launchUrl(telegramUser);
                 },
               ),
@@ -104,7 +110,10 @@ class ShowGameRequestData extends StatelessWidget {
               InkWell(
                 child: Text(
                   'Телефон: ${player.phoneNumber}',
-                  style: const TextStyle(color: Colors.blue, fontSize: 16),
+                  style: const TextStyle(
+                    color: Colors.blue,
+                    fontSize: 16,
+                  ),
                 ),
                 onTap: () {
                   var phoneNumber = Uri.parse("tel://${player.phoneNumber}");

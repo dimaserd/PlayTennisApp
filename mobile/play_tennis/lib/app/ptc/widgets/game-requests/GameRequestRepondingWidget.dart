@@ -4,7 +4,6 @@ import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
 import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestSimpleModel.dart';
 import 'package:play_tennis/main-services.dart';
 import 'package:play_tennis/main.dart';
-
 import 'GameRequestExtensions.dart';
 
 class GameRequestRepondingWidget extends StatelessWidget {

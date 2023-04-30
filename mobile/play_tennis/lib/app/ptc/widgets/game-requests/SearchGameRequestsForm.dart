@@ -28,7 +28,9 @@ class SearchGameRequestsForm extends StatefulWidget {
 
 class _SearchGameRequestsFormState extends State<SearchGameRequestsForm> {
   final ButtonStyle style = ElevatedButton.styleFrom(
-    textStyle: const TextStyle(fontSize: 20),
+    textStyle: const TextStyle(
+      fontSize: 20,
+    ),
   );
 
   final TextEditingController queryController = TextEditingController();
@@ -41,7 +43,10 @@ class _SearchGameRequestsFormState extends State<SearchGameRequestsForm> {
   @override
   void initState() {
     super.initState();
-    timer = Timer.periodic(const Duration(seconds: 2), (Timer t) => getData());
+    timer = Timer.periodic(
+      const Duration(seconds: 2),
+      (Timer t) => getData(),
+    );
   }
 
   @override

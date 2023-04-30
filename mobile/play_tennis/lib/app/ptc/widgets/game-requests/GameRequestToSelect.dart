@@ -3,6 +3,7 @@ import 'package:play_tennis/app/ptc/widgets/game-requests/GameRequestExtensions.
 import 'package:play_tennis/app/ptc/widgets/players/PlayerDataWidget.dart';
 import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
 import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestSimpleModel.dart';
+import 'package:play_tennis/main-routes.dart';
 
 class GameRequestToSelect extends StatelessWidget {
   final GameRequestSimpleModel request;
@@ -18,7 +19,7 @@ class GameRequestToSelect extends StatelessWidget {
     var player = request.author!;
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed("/game-request/${request.id}");
+        MainRoutes.toGameRequestCard(context, request.id!);
       },
       child: Card(
         color: Colors.white,

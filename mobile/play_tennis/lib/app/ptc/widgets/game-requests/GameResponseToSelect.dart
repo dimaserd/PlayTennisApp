@@ -6,6 +6,7 @@ import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
 import 'package:play_tennis/logic/ptc/models/game-requests/ResponseForGameRequestIdModel.dart';
 import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestDetailedModel.dart';
 import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestResponseSimpleModel.dart';
+import 'package:play_tennis/main-routes.dart';
 import 'package:play_tennis/main-services.dart';
 import 'package:play_tennis/main.dart';
 
@@ -27,7 +28,7 @@ class GameResponseToSelect extends StatelessWidget {
     var player = response.author!;
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed("/player/${player.id}");
+        MainRoutes.toPlayerCard(context, player.id!);
       },
       child: Card(
         margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 5),
@@ -83,12 +84,14 @@ class GameResponseToSelect extends StatelessWidget {
       gameRequestId: request.id!,
       playerId: response.author!.id,
     );
-    AppServices.gameRequestsService.acceptResponse(model, (e) {}).then((value) {
-      BaseApiResponseUtils.handleResponse(
-        context,
-        value,
-      );
-      MyApp.inProccess = false;
-    });
+    AppServices.gameRequestsService.acceptResponse(model, (e) {}).then(
+      (value) {
+        BaseApiResponseUtils.handleResponse(
+          context,
+          value,
+        );
+        MyApp.inProccess = false;
+      },
+    );
   }
 }

@@ -7,6 +7,7 @@ import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestDetailedMo
 import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestResponseSimpleModel.dart';
 import 'package:play_tennis/logic/ptc/services/GameRequestsService.dart';
 import 'package:play_tennis/main-services.dart';
+import 'package:play_tennis/main-settings.dart';
 import 'package:play_tennis/main.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -30,34 +31,60 @@ class GameResponseActions extends StatelessWidget {
     if (response.acceptedByRequestAuthor) {
       return [
         Expanded(
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blueAccent,
-              minimumSize: const Size.fromHeight(36),
-            ),
-            onPressed: () => _contactsHandler(context),
-            child: const Text("Запросить контакты"),
+          child: Column(
+            children: const [
+              Text(
+                "Вы приняли отклик этого игрока. Его контактные данные отправлены вам. Проверьте список уведомлений.",
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+            ],
           ),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
+        )
+      ];
+    }
+
+    if (response.declinedByRequestAuthor) {
+      return [
+        Expanded(
+          child: Column(
+            children: const [
+              Text(
+                "Вы не приняли отклик этого игрока.",
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+            ],
+          ),
+        )
       ];
     }
 
     return [
       Expanded(
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.greenAccent,
-            minimumSize: const Size.fromHeight(40),
-          ),
-          onPressed: () => _acceptHandler(context),
-          child: const Text("Принять"),
+        child: Column(
+          children: [
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.greenAccent,
+                minimumSize: const Size.fromHeight(40),
+              ),
+              onPressed: () => _acceptHandler(context),
+              child: const Text("Принять"),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+          ],
         ),
-      ),
-      const SizedBox(
-        width: 20,
       ),
       Expanded(
         child: ElevatedButton(
@@ -84,6 +111,24 @@ class GameResponseActions extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  List<Widget> getContactsWidget(BuildContext context) {
+    return [
+      Expanded(
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.blueAccent,
+            minimumSize: const Size.fromHeight(36),
+          ),
+          onPressed: () => _contactsHandler(context),
+          child: const Text("Запросить контакты"),
+        ),
+      ),
+      const SizedBox(
+        height: 20,
+      ),
+    ];
   }
 
   _contactsHandler(BuildContext context) async {
@@ -180,8 +225,9 @@ class GameResponseActions extends StatelessWidget {
                     style: TextStyle(color: Colors.blue),
                   ),
                   onTap: () {
-                    var telegramUser =
-                        Uri.parse("tg://resolve?domain=@dimaserd");
+                    var telegramUser = Uri.parse(
+                      MainSettings.dimaSerdTelegramUrl(),
+                    );
                     launchUrl(telegramUser);
                   },
                 ),
