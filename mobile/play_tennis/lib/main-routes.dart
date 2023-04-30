@@ -37,15 +37,21 @@ class MainRoutes {
 
   static MaterialPageRoute onGenerateRoute(RouteSettings settings) {
     if (settings.name == checkAuth) {
-      return MaterialPageRoute(builder: (context) => const CheckAuthScreen());
+      return MaterialPageRoute(
+        builder: (context) => const CheckAuthScreen(),
+      );
     }
 
     if (settings.name == home) {
-      return MaterialPageRoute(builder: (context) => const MainScreen());
+      return MaterialPageRoute(
+        builder: (context) => const MainScreen(),
+      );
     }
 
     if (settings.name == '/set-location') {
-      return MaterialPageRoute(builder: (context) => SetLocationScreenWidget());
+      return MaterialPageRoute(
+        builder: (context) => SetLocationScreenWidget(),
+      );
     }
 
     if (settings.name == '/about') {
@@ -55,7 +61,9 @@ class MainRoutes {
     }
 
     if (settings.name == '/players') {
-      return MaterialPageRoute(builder: (context) => const MainScreen());
+      return MaterialPageRoute(
+        builder: (context) => const MainScreen(),
+      );
     }
 
     if (settings.name == notifications) {
@@ -65,7 +73,9 @@ class MainRoutes {
     }
 
     if (settings.name == '/tournaments') {
-      return MaterialPageRoute(builder: (context) => const TournamentsScreen());
+      return MaterialPageRoute(
+        builder: (context) => const TournamentsScreen(),
+      );
     }
 
     if (settings.name == play) {
@@ -75,16 +85,21 @@ class MainRoutes {
     }
 
     if (settings.name == login) {
-      return MaterialPageRoute(builder: (context) => const LoginScreen());
+      return MaterialPageRoute(
+        builder: (context) => const LoginScreen(),
+      );
     }
 
     if (settings.name == '/registration') {
       return MaterialPageRoute(
-          builder: (context) => const RegistrationScreen());
+        builder: (context) => const RegistrationScreen(),
+      );
     }
 
     if (settings.name == forgotPass) {
-      return MaterialPageRoute(builder: (context) => const ChangePassScreen());
+      return MaterialPageRoute(
+        builder: (context) => const ChangePassScreen(),
+      );
     }
 
     if (settings.name == '/change-avatar') {
@@ -94,21 +109,32 @@ class MainRoutes {
 
     if (settings.name == profile) {
       return MaterialPageRoute(
-          builder: (context) => ProfileScreen(key: UniqueKey()));
+        builder: (context) => ProfileScreen(
+          key: UniqueKey(),
+        ),
+      );
     }
 
     if (settings.name == '/profile/telegram') {
       return MaterialPageRoute(
-          builder: (context) => TelegramProfileScreen(key: UniqueKey()));
+        builder: (context) => TelegramProfileScreen(
+          key: UniqueKey(),
+        ),
+      );
     }
 
     if (settings.name == '/profile-telegram-link') {
       return MaterialPageRoute(
-          builder: (context) => TelegramLinkScreen(key: UniqueKey()));
+        builder: (context) => TelegramLinkScreen(
+          key: UniqueKey(),
+        ),
+      );
     }
 
     if (settings.name == '/profile-edit') {
-      return MaterialPageRoute(builder: (context) => const EditProfileScreen());
+      return MaterialPageRoute(
+        builder: (context) => const EditProfileScreen(),
+      );
     }
 
     //Многоуровневые маршруты
@@ -143,23 +169,31 @@ class MainRoutes {
 
     if (settings.name == '/game-requests/add') {
       return MaterialPageRoute(
-          builder: (context) => const AddGameRequestScreen());
+        builder: (context) => const AddGameRequestScreen(),
+      );
     }
 
     if (settings.name == '/games/add') {
       return MaterialPageRoute(
-          builder: (context) =>
-              CreateGameScreen(player: null, key: UniqueKey()));
+        builder: (context) => CreateGameScreen(
+          player: null,
+          key: UniqueKey(),
+        ),
+      );
     }
 
     if (settings.name == '/create/game') {
       var playerArguments = settings.arguments as PlayerModel;
       return MaterialPageRoute(
-          builder: (context) =>
-              CreateGameScreen(player: playerArguments, key: UniqueKey()));
+        builder: (context) => CreateGameScreen(
+          player: playerArguments,
+          key: UniqueKey(),
+        ),
+      );
     }
 
     return MaterialPageRoute(
-        builder: (context) => RouteNotFoundScreen(settings.name));
+      builder: (context) => RouteNotFoundScreen(settings.name),
+    );
   }
 }

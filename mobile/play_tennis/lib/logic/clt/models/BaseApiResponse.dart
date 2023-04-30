@@ -8,17 +8,17 @@ class BaseApiResponse {
   });
 
   factory BaseApiResponse.fromJson(Map<String, dynamic> json) {
-      return BaseApiResponse(
-        isSucceeded: json["isSucceeded"],
-        message: json["message"],
-      );
+    return BaseApiResponse(
+      isSucceeded: json["isSucceeded"],
+      message: json["message"],
+    );
   }
 }
 
 class GenericBaseApiResponse<T> {
   late bool isSucceeded;
   late String message;
-  late T responseObject;
+  late T? responseObject;
 
   GenericBaseApiResponse(
     BaseApiResponse response,

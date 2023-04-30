@@ -71,15 +71,23 @@ void main() async {
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then(
-    (_) => runApp(const MyApp()),
+    [
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ],
+  ).then(
+    (_) => runApp(
+      const MyApp(),
+    ),
   );
 }
 
 class MyApp extends StatelessWidget {
   static bool inProccess = false;
 
-  const MyApp({super.key});
+  const MyApp({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -99,8 +107,10 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           fontFamily: 'Roboto',
           bottomAppBarTheme: const BottomAppBarTheme(color: mainMaterialColor),
-          colorScheme: ColorScheme.fromSwatch(primarySwatch: mainMaterialColor)
-              .copyWith(secondary: Colors.amber),
+          colorScheme:
+              ColorScheme.fromSwatch(primarySwatch: mainMaterialColor).copyWith(
+            secondary: Colors.amber,
+          ),
         ),
         onGenerateRoute: (settings) => MainRoutes.onGenerateRoute(settings),
       ),

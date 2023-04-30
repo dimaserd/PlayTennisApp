@@ -9,6 +9,43 @@ import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestSimpleMode
 import 'package:play_tennis/logic/ptc/models/game-requests/SearchGameRequestResponses.dart';
 import 'package:play_tennis/logic/ptc/models/game-requests/SearchGameRequests.dart';
 
+class PlayerContactData {
+  late String? id;
+  late String? email;
+  late bool noEmail;
+  late int? telegramUserId;
+  late String? telegramUserName;
+  late String? phoneNumber;
+
+  PlayerContactData({
+    required this.id,
+    required this.email,
+    required this.noEmail,
+    required this.telegramUserId,
+    required this.telegramUserName,
+    required this.phoneNumber,
+  });
+
+  factory PlayerContactData.fromJson(Map<String, dynamic> json) =>
+      PlayerContactData(
+        id: json["id"],
+        email: json["email"],
+        noEmail: json["noEmail"],
+        telegramUserId: json["telegramUserId"],
+        telegramUserName: json["telegramUserName"],
+        phoneNumber: json["phoneNumber"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'email': email,
+        'noEmail': noEmail,
+        'telegramUserId': telegramUserId,
+        'telegramUserName': telegramUserName,
+        'phoneNumber': phoneNumber,
+      };
+}
+
 class GameRequestsService {
   final NetworkService networkService;
   final String baseUrl = "/api/ptc/game-request/";
@@ -67,6 +104,50 @@ class GameRequestsService {
       errorHandler(e.toString());
       return null;
     }
+  }
+
+  Future<GenericBaseApiResponse<PlayerContactData>> requestContactData(
+    String gameRequestId,
+    Function(String) errorHandler,
+  ) async {
+    var response = await networkService.getDataInner(
+      "/api/ptc/game-request/contacts/get/$gameRequestId",
+      errorHandler,
+    );
+
+    if (response == "null") {
+      return GenericBaseApiResponse(
+        BaseApiResponse(
+          isSucceeded: false,
+          message: "Произошла ошибка при запросе контактов",
+        ),
+        null,
+      );
+    }
+
+    try {
+      var json = jsonDecode(response!);
+
+      var result = BaseApiResponse.fromJson(json);
+
+      return GenericBaseApiResponse(result, getContactData(json));
+    } catch (e) {
+      errorHandler(e.toString());
+      return GenericBaseApiResponse(
+        BaseApiResponse(
+          isSucceeded: false,
+          message: "Произошла ошибка при запросе контактов",
+        ),
+        null,
+      );
+      ;
+    }
+  }
+
+  PlayerContactData getContactData(dynamic decoded) {
+    return PlayerContactData.fromJson(
+      decoded["responseObject"],
+    );
   }
 
   Future<GetListResult<GameRequestResponseSimpleModel>> searchResponses(
