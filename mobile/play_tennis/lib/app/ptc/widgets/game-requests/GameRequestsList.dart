@@ -10,12 +10,13 @@ class GameRequestsList extends StatelessWidget {
   final Function onChange;
   final bool isLoader;
 
-  const GameRequestsList(
-      {super.key,
-      required this.requests,
-      required this.loginData,
-      required this.onChange,
-      required this.isLoader});
+  const GameRequestsList({
+    super.key,
+    required this.requests,
+    required this.loginData,
+    required this.onChange,
+    required this.isLoader,
+  });
 
   @override
   Widget build(BuildContext context) {

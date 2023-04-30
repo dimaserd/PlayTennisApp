@@ -31,8 +31,12 @@ class MainRoutes {
   static String notifications = "/notificatins";
   static String profile = "/profile";
 
+  static String toPlayerCardRoute(String playerId) {
+    return '/player/$playerId';
+  }
+
   static void toPlayerCard(BuildContext context, String playerId) {
-    Navigator.of(context).pushNamed('/player/$playerId');
+    Navigator.of(context).pushNamed(toPlayerCardRoute(playerId));
   }
 
   static void toGameRequestCard(BuildContext context, String requestId) {

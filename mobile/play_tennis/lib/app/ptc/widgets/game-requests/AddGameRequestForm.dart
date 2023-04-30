@@ -76,7 +76,9 @@ class _AddGameRequestFormState extends State<AddGameRequestForm> {
       return SizedBox(
         child: Column(
           children: const [
-            Loading(text: "Загрузка"),
+            Loading(
+              text: "Загрузка",
+            ),
           ],
         ),
       );
