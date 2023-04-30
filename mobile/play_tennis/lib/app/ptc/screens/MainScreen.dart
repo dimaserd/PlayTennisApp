@@ -57,8 +57,10 @@ class _MainScreenState extends State<MainScreen> {
           return;
         }
 
-        BaseApiResponseUtils.showError(context,
-            "Приложение не смогло обработать маршрут = ${matchResult.webRoute}.");
+        BaseApiResponseUtils.showInfo(
+          context,
+          "Приложение не смогло обработать маршрут = ${matchResult.webRoute}.",
+        );
       }
     }, onError: (err) {
       print('Failed to get link stream: $err');
