@@ -52,10 +52,13 @@ class TelegramProfileScreenState extends State<TelegramProfileScreen>
   }
 
   void loadTelegramData(String cityId) {
-    AppServices.cityService.getTelegramDataById(cityId, (p0) {
-      BaseApiResponseUtils.showError(context,
-          "Произошла ошибка при загрузке данных о Telegram чатах города.");
-    }).then((value) {
+    AppServices.cityService.getTelegramDataById(
+      cityId,
+      (p0) {
+        BaseApiResponseUtils.showError(context,
+            "Произошла ошибка при загрузке данных о Telegram чатах города.");
+      },
+    ).then((value) {
       if (!mounted) {
         return;
       }
@@ -63,7 +66,10 @@ class TelegramProfileScreenState extends State<TelegramProfileScreen>
       setState(() {
         //Апишка может вернуть null
         telegramCityModel = value ??
-            PublicTelegramChatForCityModel(channelLink: null, chatLink: null);
+            PublicTelegramChatForCityModel(
+              channelLink: null,
+              chatLink: null,
+            );
       });
     });
   }

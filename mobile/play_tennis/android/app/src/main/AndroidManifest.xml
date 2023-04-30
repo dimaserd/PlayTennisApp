@@ -28,6 +28,7 @@
             <meta-data android:name="flutter_deeplinking_enabled" android:value="true" />
  <intent-filter android:autoVerify="true">
      <action android:name="android.intent.action.VIEW" />
+     <data android:scheme="tg" />
      <category android:name="android.intent.category.DEFAULT" />
      <category android:name="android.intent.category.BROWSABLE" />
      <data android:scheme="http" android:host="playtennis.page.link" />
