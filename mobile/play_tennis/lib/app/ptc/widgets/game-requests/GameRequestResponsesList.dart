@@ -57,20 +57,21 @@ class GameRequestResponsesList extends StatelessWidget {
                 ),
               ),
         Flexible(
-            child: responses.isEmpty
-                ? const SizedBox.shrink()
-                : ListView.builder(
-                    shrinkWrap: true,
-                    itemBuilder: (ctx, index) {
-                      return GameResponseToSelect(
-                        request: request,
-                        response: responses[index],
-                        loginData: loginData,
-                        onChanged: () {},
-                      );
-                    },
-                    itemCount: responses.length,
-                  )),
+          child: responses.isEmpty
+              ? const SizedBox.shrink()
+              : ListView.builder(
+                  shrinkWrap: true,
+                  itemBuilder: (ctx, index) {
+                    return GameResponseToSelect(
+                      request: request,
+                      response: responses[index],
+                      loginData: loginData,
+                      onChanged: () {},
+                    );
+                  },
+                  itemCount: responses.length,
+                ),
+        ),
       ],
     );
   }

@@ -33,8 +33,10 @@ class _GameRequestScreenState extends State<GameRequestScreen> {
     loadWidgetData();
     super.initState();
 
-    timer =
-        Timer.periodic(const Duration(seconds: 2), (Timer t) => loadRequest());
+    timer = Timer.periodic(
+      const Duration(seconds: 2),
+      (Timer t) => loadRequest(),
+    );
   }
 
   loadWidgetData() {
@@ -48,12 +50,15 @@ class _GameRequestScreenState extends State<GameRequestScreen> {
     if (!loginDataLoaded) {
       return;
     }
-    AppServices.gameRequestsService.getById(widget.id, (e) {
-      BaseApiResponseUtils.showError(
-        context,
-        "Произошла ошибка при получении заявки на игру.",
-      );
-    }).then((value) {
+    AppServices.gameRequestsService.getById(
+      widget.id,
+      (e) {
+        BaseApiResponseUtils.showError(
+          context,
+          "Произошла ошибка при получении заявки на игру.",
+        );
+      },
+    ).then((value) {
       request = value;
       loadResponses();
     });
@@ -102,7 +107,21 @@ class _GameRequestScreenState extends State<GameRequestScreen> {
                   Navigator.of(context).pop();
                 },
               )
-            : const Loading(text: "Заявка на игру загружается"),
+            : Container(
+                alignment: Alignment.center,
+                child: Center(
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      AnimatedCircleLoading(
+                        height: MediaQuery.of(context).size.width / 2,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
         appBar: AppBar(
           leading: const BackButton(),
           title: Text(
