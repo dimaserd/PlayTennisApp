@@ -13,7 +13,7 @@ class WebAppRouteMatchResult {
 }
 
 class WebAppRoutes {
-  WebAppRouteMatchResult match(String webRoute) {
+  static WebAppRouteMatchResult match(String webRoute) {
     if (webRoute.contains("/ptc/player/")) {
       var playerId = webRoute.replaceAll("/ptc/player/", "");
 

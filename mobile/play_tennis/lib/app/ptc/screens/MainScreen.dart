@@ -5,10 +5,12 @@ import 'package:play_tennis/app/ptc/widgets/communities/SearchCommunityForm.dart
 import 'package:play_tennis/app/ptc/widgets/courts/SearchCourtsForm.dart';
 import 'package:play_tennis/app/ptc/widgets/players/SearchPlayersForm.dart';
 import 'package:play_tennis/app/ptc/widgets/trainers/SearchTrainersForm.dart';
+import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/ptc/models/LocationData.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
 import 'package:play_tennis/main-routes.dart';
 import 'package:play_tennis/main-services.dart';
+import 'package:play_tennis/web-app-routes.dart';
 import 'package:uni_links/uni_links.dart';
 import 'dart:async';
 
@@ -48,8 +50,15 @@ class _MainScreenState extends State<MainScreen> {
       if (uri != null) {
         var path = uri.path;
 
-        //Uri parsing
-        Navigator.of(context).pushNamed(path);
+        var matchResult = WebAppRoutes.match(path);
+
+        if (matchResult.succeeded) {
+          Navigator.of(context).pushNamed(path);
+          return;
+        }
+
+        BaseApiResponseUtils.showError(context,
+            "Приложение не смогло обработать маршрут = ${matchResult.webRoute}.");
       }
     }, onError: (err) {
       print('Failed to get link stream: $err');
