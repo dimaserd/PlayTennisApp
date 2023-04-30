@@ -5,8 +5,10 @@ import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
 import 'package:play_tennis/logic/ptc/models/game-requests/ResponseForGameRequestIdModel.dart';
 import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestDetailedModel.dart';
 import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestResponseSimpleModel.dart';
+import 'package:play_tennis/logic/ptc/services/GameRequestsService.dart';
 import 'package:play_tennis/main-services.dart';
 import 'package:play_tennis/main.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class GameResponseActions extends StatelessWidget {
   const GameResponseActions({
@@ -101,6 +103,9 @@ class GameResponseActions extends StatelessWidget {
           message: response.message,
         ),
       );
+      if (response.responseObject != null) {
+        _showData(context, response.responseObject!);
+      }
     }
 
     MyApp.inProccess = false;
@@ -144,5 +149,64 @@ class GameResponseActions extends StatelessWidget {
         }
       },
     );
+  }
+
+  _showData(BuildContext context, PlayerContactData contactData) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Контактные данные"),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Text(
+                  "SomeTitle",
+                ),
+                const SizedBox(height: 16),
+                const Text(
+                  'Дмитрий Сердюков:',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                InkWell(
+                  child: const Text(
+                    'Телеграмм: @dimaserd',
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                  onTap: () {
+                    var telegramUser =
+                        Uri.parse("tg://resolve?domain=@dimaserd");
+                    launchUrl(telegramUser);
+                  },
+                ),
+                const SizedBox(height: 8),
+                InkWell(
+                  child: const Text(
+                    'Телефон: +7 916 604-49-60',
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                  onTap: () {
+                    var phoneNumber = Uri.parse("tel://+79166044960");
+                    launchUrl(phoneNumber);
+                  },
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                child: const Center(child: Text('OK')),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        });
   }
 }
