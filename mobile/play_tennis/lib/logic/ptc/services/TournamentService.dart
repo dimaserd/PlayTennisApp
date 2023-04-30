@@ -83,7 +83,7 @@ enum TournamentDurationType { MultiDay, OneDay }
 class TournamentDurationTypeDartJsonGenerator {
   static TournamentDurationType getFromString(String value) {
     return TournamentDurationType.values
-        .firstWhere((e) => e.toString() == 'TournamentDurationType.' + value);
+        .firstWhere((e) => e.toString() == 'TournamentDurationType.$value');
   }
 
   static TournamentDurationType? getFromStringOrNull(String? value) {

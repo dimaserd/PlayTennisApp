@@ -140,7 +140,6 @@ class GameRequestsService {
         ),
         null,
       );
-      ;
     }
   }
 

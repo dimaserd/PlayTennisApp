@@ -8,7 +8,6 @@ import 'package:play_tennis/main-routes.dart';
 import 'package:play_tennis/main-services.dart';
 import 'package:play_tennis/main-settings.dart';
 import 'package:play_tennis/main-state.dart';
-import 'package:play_tennis/main.dart';
 
 class LoginForm extends StatefulWidget {
   final Function onLogin;
