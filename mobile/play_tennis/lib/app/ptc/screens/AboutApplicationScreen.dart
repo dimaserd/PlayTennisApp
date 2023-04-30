@@ -114,7 +114,8 @@ class MainApplicationInfo extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                var telegramUser = Uri.parse(MainSettings.dimaSerdTelegramUrl);
+                var telegramUser =
+                    Uri.parse(MainSettings.dimaSerdTelegramUrl());
                 launchUrl(telegramUser);
               },
             ),
@@ -152,7 +153,7 @@ class MainApplicationInfo extends StatelessWidget {
             ToTelegramButton(
               text: "Бот ${MainSettings.appName}",
               tapHandler: () {
-                var uri = Uri.parse(TelegramBotSettings.link);
+                var uri = Uri.parse(TelegramBotSettings.link());
                 launchUrl(uri);
               },
             ),

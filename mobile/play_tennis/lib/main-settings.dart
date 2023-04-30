@@ -15,13 +15,11 @@ class MainSettings {
 
   static const bool showSiteUrls = false;
 
-  static const String privacyPolicy =
-      "https://play-tennis.online/docs/politics.html";
+  static const String privacyPolicy = "$domain/docs/politics.html";
 
-  static const String agreement =
-      "https://play-tennis.online/docs/agreement.html";
+  static const String agreement = "$domain/docs/agreement.html";
 
-  static String dimaSerdTelegramUrl =
+  static String dimaSerdTelegramUrl() =>
       TelegramRoutesProvider.resolve("dimaserd");
 }
 
@@ -38,7 +36,7 @@ class TelegramRoutesProvider {
 }
 
 class TelegramBotSettings {
-  static String link = TelegramRoutesProvider.resolve("tennis_play_bot");
+  static String link() => TelegramRoutesProvider.resolve("tennis_play_bot");
 
   static const String profileLinkCommandFormat = "/link id some-new-id";
 }

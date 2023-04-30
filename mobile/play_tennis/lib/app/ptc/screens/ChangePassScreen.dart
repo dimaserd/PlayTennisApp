@@ -100,7 +100,7 @@ class ResetPassViaTelegram extends StatelessWidget {
         ToTelegramButton(
           text: "Бот ${MainSettings.appName}",
           tapHandler: () {
-            var uri = Uri.parse(TelegramBotSettings.link);
+            var uri = Uri.parse(TelegramBotSettings.link());
             launchUrl(uri);
           },
         ),
@@ -177,7 +177,7 @@ class ResetPassViaAdmins extends StatelessWidget {
         ToTelegramButton(
           text: "Дмитрий Сердюков",
           tapHandler: () {
-            var uri = Uri.parse(MainSettings.dimaSerdTelegramUrl);
+            var uri = Uri.parse(MainSettings.dimaSerdTelegramUrl());
             launchUrl(uri);
           },
         ),

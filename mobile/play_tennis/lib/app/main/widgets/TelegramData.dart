@@ -38,7 +38,7 @@ class TelegramData extends StatelessWidget {
                     text: "написать администратору",
                     tapHandler: () {
                       MainAppExtensions.launchUrlInBrowser(
-                          MainSettings.dimaSerdTelegramUrl, (e) {
+                          MainSettings.dimaSerdTelegramUrl(), (e) {
                         BaseApiResponseUtils.showError(
                           context,
                           "Произошла ошибка при открытии телеграм-ссылки. Пожалуйста, обратитесь к админстратору портала.",
