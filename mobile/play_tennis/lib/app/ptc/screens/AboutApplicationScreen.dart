@@ -5,6 +5,7 @@ import 'package:play_tennis/app/main/widgets/side_drawer.dart';
 import 'package:play_tennis/app/ptc/widgets/cities/CityChatAndChannelWidget.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/main-extensions.dart';
+import 'package:play_tennis/main-routes.dart';
 import 'package:play_tennis/main-settings.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -100,8 +101,7 @@ class MainApplicationInfo extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                Navigator.of(context)
-                    .pushNamed('/player/${MainSettings.dimaserdPlayerId}');
+                MainRoutes.toPlayerCard(context, MainSettings.dimaserdPlayerId);
               },
             ),
             const SizedBox(height: 5),

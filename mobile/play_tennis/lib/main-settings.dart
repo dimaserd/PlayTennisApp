@@ -1,3 +1,5 @@
+import 'dart:io';
+
 class MainSettings {
   static const String domain = "https://play-tennis.online";
 
@@ -31,12 +33,10 @@ class ServerImages {
 
 class TelegramRoutesProvider {
   static String resolve(String domain) {
-    return "tg://resolve?domain=@$domain";
+    return "tg://resolve?domain=$domain";
   }
 }
 
 class TelegramBotSettings {
   static String link() => TelegramRoutesProvider.resolve("tennis_play_bot");
-
-  static const String profileLinkCommandFormat = "/link id some-new-id";
 }
