@@ -31,7 +31,7 @@
      <data android:scheme="tg" />
      <category android:name="android.intent.category.DEFAULT" />
      <category android:name="android.intent.category.BROWSABLE" />
-     <data android:scheme="http" android:host="playtennis.page.link" />
+     <data android:scheme="http" android:host="playtennis.online" />
      <data android:scheme="https" />
  </intent-filter>
         </activity>
