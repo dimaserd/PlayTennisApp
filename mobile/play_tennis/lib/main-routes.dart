@@ -39,8 +39,12 @@ class MainRoutes {
     Navigator.of(context).pushNamed(toPlayerCardRoute(playerId));
   }
 
+  static String toGameRequestCardRoute(String requestId) {
+    return "/game-request/$requestId";
+  }
+
   static void toGameRequestCard(BuildContext context, String requestId) {
-    Navigator.of(context).pushNamed("/game-request/$requestId");
+    Navigator.of(context).pushNamed(toGameRequestCardRoute(requestId));
   }
 
   static MaterialPageRoute onGenerateRoute(RouteSettings settings) {
