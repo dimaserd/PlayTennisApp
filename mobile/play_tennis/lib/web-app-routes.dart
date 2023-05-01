@@ -24,6 +24,16 @@ class WebAppRoutes {
       );
     }
 
+    if (webRoute.contains("/ptc/game-request/")) {
+      var gameRequestId = webRoute.replaceAll("/ptc/game-request/", "");
+
+      return WebAppRouteMatchResult(
+        succeeded: true,
+        appRoute: MainRoutes.toPlayerCardRoute(gameRequestId),
+        webRoute: webRoute,
+      );
+    }
+
     return WebAppRouteMatchResult(
       succeeded: false,
       appRoute: "",

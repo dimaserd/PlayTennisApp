@@ -53,7 +53,7 @@ class _MainScreenState extends State<MainScreen> {
           var matchResult = WebAppRoutes.match(path);
 
           if (matchResult.succeeded) {
-            Navigator.of(context).pushNamed(path);
+            Navigator.of(context).pushNamed(matchResult.appRoute);
             return;
           }
 
