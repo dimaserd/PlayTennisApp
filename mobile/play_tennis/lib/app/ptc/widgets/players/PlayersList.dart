@@ -64,8 +64,10 @@ class PlayersList extends StatelessWidget {
                     onTapHandler(players[index]);
                   },
                   child: Card(
-                    margin:
-                        const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
+                    margin: const EdgeInsets.symmetric(
+                      vertical: 4,
+                      horizontal: 2,
+                    ),
                     elevation: 4,
                     clipBehavior: Clip.antiAliasWithSaveLayer,
                     child: ListTile(

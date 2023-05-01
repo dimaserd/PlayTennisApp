@@ -109,7 +109,7 @@ class MyApp extends StatelessWidget {
           bottomAppBarTheme: const BottomAppBarTheme(color: mainMaterialColor),
           colorScheme:
               ColorScheme.fromSwatch(primarySwatch: mainMaterialColor).copyWith(
-            secondary: Colors.amber,
+            secondary: const Color.fromARGB(255, 0, 0, 0),
           ),
         ),
         onGenerateRoute: (settings) => MainRoutes.onGenerateRoute(settings),

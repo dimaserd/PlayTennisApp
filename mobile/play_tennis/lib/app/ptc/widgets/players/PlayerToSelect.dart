@@ -5,7 +5,11 @@ import 'package:play_tennis/logic/ptc/models/PlayerModel.dart';
 class PlayerToSelect extends StatelessWidget {
   final PlayerModel player;
   void Function(PlayerModel player) onTapHandler;
-  PlayerToSelect({super.key, required this.player, required this.onTapHandler});
+  PlayerToSelect({
+    super.key,
+    required this.player,
+    required this.onTapHandler,
+  });
 
   @override
   Widget build(BuildContext context) {

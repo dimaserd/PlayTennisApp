@@ -24,8 +24,11 @@ class SearchPlayersForm extends StatefulWidget {
 }
 
 class _SearchPlayersFormState extends State<SearchPlayersForm> {
-  final ButtonStyle style =
-      ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
+  final ButtonStyle style = ElevatedButton.styleFrom(
+    textStyle: const TextStyle(
+      fontSize: 20,
+    ),
+  );
   final CountryAndCitySelectController countryAndCitySelectController =
       CountryAndCitySelectController();
 

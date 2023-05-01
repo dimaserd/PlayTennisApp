@@ -18,9 +18,10 @@ class WebAppRoutes {
       var playerId = webRoute.replaceAll("/ptc/player/", "");
 
       return WebAppRouteMatchResult(
-          succeeded: true,
-          appRoute: MainRoutes.toPlayerCardRoute(playerId),
-          webRoute: webRoute);
+        succeeded: true,
+        appRoute: MainRoutes.toPlayerCardRoute(playerId),
+        webRoute: webRoute,
+      );
     }
 
     return WebAppRouteMatchResult(

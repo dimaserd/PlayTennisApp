@@ -1,5 +1,3 @@
-import 'dart:io';
-
 class MainSettings {
   static const String domain = "https://play-tennis.online";
 
