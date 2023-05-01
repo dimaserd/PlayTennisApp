@@ -106,7 +106,9 @@ class MyApp extends StatelessWidget {
         ],
         theme: ThemeData(
           fontFamily: 'Roboto',
-          bottomAppBarTheme: const BottomAppBarTheme(color: mainMaterialColor),
+          bottomAppBarTheme: const BottomAppBarTheme(
+            color: mainMaterialColor,
+          ),
           colorScheme:
               ColorScheme.fromSwatch(primarySwatch: mainMaterialColor).copyWith(
             secondary: const Color.fromARGB(255, 0, 0, 0),

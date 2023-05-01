@@ -88,16 +88,12 @@ class PlayerSetsScoreList extends StatelessWidget {
   }
 
   List<Widget> getElements() {
-    print("getElements()");
-
     var setsLength = sets?.length ?? 0;
     List<Widget> elements = [];
     for (var i = 0; i < setsLength; i++) {
       var setData = sets![i];
       var score1 = playerId == 0 ? setData.score1 ?? "" : setData.score2 ?? "";
       var score2 = playerId == 0 ? setData.score2 ?? "" : setData.score1 ?? "";
-
-      var str = "i = ${i.toString()} setsLength = $setsLength ";
 
       if (score1.isNotEmpty && score2.isNotEmpty) {
         elements.add(
@@ -109,9 +105,7 @@ class PlayerSetsScoreList extends StatelessWidget {
               width: 5,
             ),
           );
-          str += "sizedBox";
         }
-        print(str);
       }
     }
 

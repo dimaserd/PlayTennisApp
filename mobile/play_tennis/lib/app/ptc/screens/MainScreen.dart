@@ -7,7 +7,6 @@ import 'package:play_tennis/app/ptc/widgets/players/SearchPlayersForm.dart';
 import 'package:play_tennis/app/ptc/widgets/trainers/SearchTrainersForm.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/ptc/models/LocationData.dart';
-import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
 import 'package:play_tennis/main-routes.dart';
 import 'package:play_tennis/main-services.dart';
 import 'package:play_tennis/web-app-routes.dart';
@@ -46,25 +45,28 @@ class _MainScreenState extends State<MainScreen> {
     }
 
     _sub?.cancel();
-    _sub = uriLinkStream.listen((Uri? uri) {
-      if (uri != null) {
-        var path = uri.path;
+    _sub = uriLinkStream.listen(
+      (Uri? uri) {
+        if (uri != null) {
+          var path = uri.path;
 
-        var matchResult = WebAppRoutes.match(path);
+          var matchResult = WebAppRoutes.match(path);
 
-        if (matchResult.succeeded) {
-          Navigator.of(context).pushNamed(path);
-          return;
+          if (matchResult.succeeded) {
+            Navigator.of(context).pushNamed(path);
+            return;
+          }
+
+          BaseApiResponseUtils.showInfo(
+            context,
+            "Приложение не смогло обработать маршрут = ${matchResult.webRoute}.",
+          );
         }
-
-        BaseApiResponseUtils.showInfo(
-          context,
-          "Приложение не смогло обработать маршрут = ${matchResult.webRoute}.",
-        );
-      }
-    }, onError: (err) {
-      print('Failed to get link stream: $err');
-    });
+      },
+      onError: (err) {
+        print('Failed to get link stream: $err');
+      },
+    );
   }
 
   @override

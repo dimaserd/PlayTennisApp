@@ -6,7 +6,9 @@ import 'package:play_tennis/main-settings.dart';
 import 'package:play_tennis/main-state.dart';
 
 class SideDrawer extends StatelessWidget {
-  const SideDrawer({super.key});
+  const SideDrawer({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
