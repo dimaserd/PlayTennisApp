@@ -24,7 +24,6 @@ class PlayerSetsScoreList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var childrens = getElements();
     return Padding(
       padding: const EdgeInsets.only(
         top: 4,
@@ -34,7 +33,7 @@ class PlayerSetsScoreList extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           SizedBox(
-            height: 60,
+              height: 60,
               child: ClipRRect(
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(30),
@@ -81,82 +80,67 @@ class PlayerSetsScoreList extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: 10),
-          ...childrens
+          const SizedBox(width: 5),
+          ...getElements()
         ],
       ),
     );
   }
 
   List<Widget> getElements() {
+    print("getElements()");
+
+    var setsLength = sets?.length ?? 0;
     List<Widget> elements = [];
-    var setsLengh = sets?.length ?? 0;
-    for (var i = 0; i < setsLengh; i++) {
+    for (var i = 0; i < setsLength; i++) {
       var setData = sets![i];
-      var score = playerId == 0 ? setData.score1 ?? "" : setData.score2 ?? "";
-      var enemyScore =
-          playerId == 0 ? setData.score2 ?? "" : setData.score1 ?? "";
-      var currentScore = score;
-      if (currentScore.isEmpty != true) {
-        if (i == setsLengh - 1) {
+      var score1 = playerId == 0 ? setData.score1 ?? "" : setData.score2 ?? "";
+      var score2 = playerId == 0 ? setData.score2 ?? "" : setData.score1 ?? "";
+
+      var str = "i = ${i.toString()} setsLength = $setsLength ";
+
+      if (score1.isNotEmpty && score2.isNotEmpty) {
+        elements.add(
+          getScoreContainer(score1, score2),
+        );
+        if (i != setsLength - 1) {
           elements.add(
-             Container(
-              width: 24,
-              height: 40,
-              decoration: BoxDecoration(
-                color: const Color(0xFFECECEC),
-                borderRadius:
-                    BorderRadius.circular(3), // Задаем радиус закругления углов
-              ),
-              child: Center(
-                child: Text(
-                  currentScore,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 13,
-                    fontFamily: int.parse(currentScore) >= int.parse(enemyScore)
-                        ? "QuickSand-bold"
-                        : "QuickSand",
-                  ),
-                ),
-              ),
+            const SizedBox(
+              width: 5,
             ),
           );
-        } else {
-          elements.add(
-             Container(
-              width: 24,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFECECEC),
-                    borderRadius: BorderRadius.circular(
-                      3,
-                    ), // Задаем радиус закругления углов
-                  ),
-                  child: Center(
-                    child: Text(
-                      currentScore,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 13,
-                        fontFamily:
-                            int.parse(currentScore) >= int.parse(enemyScore)
-                                ? "QuickSand-bold"
-                                : "QuickSand",
-                      ),
-                    ),
-                  ),
-                ),
-          );
-          elements.add(const SizedBox(
-            width: 5,
-          ));
+          str += "sizedBox";
         }
+        print(str);
       }
     }
 
     return elements;
+  }
+
+  Widget getScoreContainer(String score1, String score2) {
+    return Container(
+      width: 24,
+      height: 40,
+      decoration: BoxDecoration(
+        color: const Color(0xFFECECEC),
+        borderRadius: BorderRadius.circular(
+          3,
+        ), // Задаем радиус закругления углов
+      ),
+      child: Center(
+        child: Text(
+          score1,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 13,
+            fontFamily: int.parse(score1) >= int.parse(score2)
+                ? "QuickSand-bold"
+                : "QuickSand",
+          ),
+        ),
+      ),
+    );
   }
 }

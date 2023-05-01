@@ -52,40 +52,37 @@ class GameToSelect extends StatelessWidget {
               Container(
                 height: 10,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Column(
-                  children: [
-                    PlayerSetsScoreList(
-                      sets: game.scoreData!.sets,
-                      player: player1,
-                      gameScores: gamePlayer1,
-                      playerId: 0,
-                      onTapped: (p) {
-                        onTappedHandler(p, context);
-                      },
-                      isWinner: game.players!
-                              .firstWhere((e) => e.isWinner)
-                              .player!
-                              .id ==
-                          player1.id,
-                    ),
-                    PlayerSetsScoreList(
-                      sets: game.scoreData!.sets,
-                      player: player2,
-                      gameScores: gamePlayer2,
-                      playerId: 1,
-                      onTapped: (p) {
-                        onTappedHandler(p, context);
-                      },
-                      isWinner: game.players!
-                              .firstWhere((e) => e.isWinner)
-                              .player!
-                              .id ==
-                          player2.id,
-                    )
-                  ],
-                ),
+              Column(
+                children: [
+                  PlayerSetsScoreList(
+                    sets: game.scoreData!.sets,
+                    player: player1,
+                    gameScores: gamePlayer1,
+                    playerId: 0,
+                    onTapped: (p) {
+                      onTappedHandler(p, context);
+                    },
+                    isWinner: game.players!
+                            .firstWhere((e) => e.isWinner)
+                            .player!
+                            .id ==
+                        player1.id,
+                  ),
+                  PlayerSetsScoreList(
+                    sets: game.scoreData!.sets,
+                    player: player2,
+                    gameScores: gamePlayer2,
+                    playerId: 1,
+                    onTapped: (p) {
+                      onTappedHandler(p, context);
+                    },
+                    isWinner: game.players!
+                            .firstWhere((e) => e.isWinner)
+                            .player!
+                            .id ==
+                        player2.id,
+                  )
+                ],
               )
             ],
           ),
