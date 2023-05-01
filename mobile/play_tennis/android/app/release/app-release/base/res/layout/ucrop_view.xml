@@ -1,0 +1,20 @@
+
+ö	
+;
+android*http://schemas.android.com/apk/res/androidmerge"`
+*http://schemas.android.com/apk/res/androidlayout_widthmatch_parent"(ô„2:0ÿÿÿÿÿÿÿÿÿ"a
+*http://schemas.android.com/apk/res/androidlayout_heightmatch_parent"(õ„2:0ÿÿÿÿÿÿÿÿÿ*û
+ò,com.yalantis.ucrop.view.GestureCropImageView"o
+*http://schemas.android.com/apk/res/androidid@+id/image_view_crop"(Ğ„2
+æ€ øid/image_view_crop0"`
+*http://schemas.android.com/apk/res/androidlayout_widthmatch_parent"(ô„2:0ÿÿÿÿÿÿÿÿÿ"a
+*http://schemas.android.com/apk/res/androidlayout_heightmatch_parent"(õ„2:0ÿÿÿÿÿÿÿÿÿ"‹
+*http://schemas.android.com/apk/res/androidpadding@dimen/ucrop_padding_crop_frame"(Õ„2*
+(†˜ødimen/ucrop_padding_crop_frame0@*ì
+ã#com.yalantis.ucrop.view.OverlayView"i
+*http://schemas.android.com/apk/res/androidid@+id/view_overlay"(Ğ„2
+Ø øid/view_overlay0"`
+*http://schemas.android.com/apk/res/androidlayout_widthmatch_parent"(ô„2:0ÿÿÿÿÿÿÿÿÿ"a
+*http://schemas.android.com/apk/res/androidlayout_heightmatch_parent"(õ„2:0ÿÿÿÿÿÿÿÿÿ"‹
+*http://schemas.android.com/apk/res/androidpadding@dimen/ucrop_padding_crop_frame"(Õ„2*
+(†˜ødimen/ucrop_padding_crop_frame0@

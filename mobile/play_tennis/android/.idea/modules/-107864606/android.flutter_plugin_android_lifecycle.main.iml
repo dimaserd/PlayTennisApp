@@ -23,11 +23,17 @@
       <sourceFolder url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.13/android/src/main/java" isTestSource="false" />
     </content>
     <content url="file://$MODULE_DIR$/../../../../build/flutter_plugin_android_lifecycle/generated/aidl_source_output_dir/debug/out" />
-    <content url="file://$MODULE_DIR$/../../../../build/flutter_plugin_android_lifecycle/generated/ap_generated_sources/debug/out" />
+    <content url="file://$MODULE_DIR$/../../../../build/flutter_plugin_android_lifecycle/generated/ap_generated_sources/debug/out">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../build/flutter_plugin_android_lifecycle/generated/ap_generated_sources/debug/out" isTestSource="false" generated="true" />
+    </content>
     <content url="file://$MODULE_DIR$/../../../../build/flutter_plugin_android_lifecycle/generated/renderscript_source_output_dir/debug/out" />
-    <content url="file://$MODULE_DIR$/../../../../build/flutter_plugin_android_lifecycle/generated/res/resValues/debug" />
+    <content url="file://$MODULE_DIR$/../../../../build/flutter_plugin_android_lifecycle/generated/res/resValues/debug">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../build/flutter_plugin_android_lifecycle/generated/res/resValues/debug" type="java-resource" />
+    </content>
     <content url="file://$MODULE_DIR$/../../../../build/flutter_plugin_android_lifecycle/generated/res/rs/debug" />
-    <content url="file://$MODULE_DIR$/../../../../build/flutter_plugin_android_lifecycle/generated/source/buildConfig/debug" />
+    <content url="file://$MODULE_DIR$/../../../../build/flutter_plugin_android_lifecycle/generated/source/buildConfig/debug">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../build/flutter_plugin_android_lifecycle/generated/source/buildConfig/debug" isTestSource="false" generated="true" />
+    </content>
     <orderEntry type="jdk" jdkName="Android API 33, extension level 3 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Gradle: io.flutter:flutter_embedding_debug:1.0.0-1a65d409c7a1438a34d21b60bf30a6fd5db59314" level="project" />

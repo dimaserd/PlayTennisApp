@@ -1,4 +1,4 @@
-package com.example.play_tennis
+package com.crocosoft.play_tennis
 
 import io.flutter.embedding.android.FlutterActivity
 

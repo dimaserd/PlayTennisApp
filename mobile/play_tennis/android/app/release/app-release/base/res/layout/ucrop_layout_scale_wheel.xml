@@ -1,0 +1,18 @@
+
+³
+;
+android*http://schemas.android.com/apk/res/androidRelativeLayout"`
+*http://schemas.android.com/apk/res/androidlayout_widthmatch_parent"(ô„2:0ÿÿÿÿÿÿÿÿÿ"a
+*http://schemas.android.com/apk/res/androidlayout_heightmatch_parent"(õ„2:0ÿÿÿÿÿÿÿÿÿ*Ÿ
+–TextView"o
+*http://schemas.android.com/apk/res/androidid@+id/text_view_scale"	(Ğ„2
+Ã øid/text_view_scale0"Zstyle@style/ucrop_TextViewWidgetText"	2,
+*ã‚Àøstyle/ucrop_TextViewWidgetText0ÿÿ"=
+*http://schemas.android.com/apk/res/androidtext100%(Ï‚„	*ü
+ó:com.yalantis.ucrop.view.widget.HorizontalProgressWheelView"u
+*http://schemas.android.com/apk/res/androidid@+id/scale_scroll_wheel"(Ğ„2!
+ øid/scale_scroll_wheel0"`
+*http://schemas.android.com/apk/res/androidlayout_widthmatch_parent"(ô„2:0ÿÿÿÿÿÿÿÿÿ"a
+*http://schemas.android.com/apk/res/androidlayout_heightmatch_parent"(õ„2:0ÿÿÿÿÿÿÿÿÿ"y
+*http://schemas.android.com/apk/res/androidlayout_below@+id/text_view_scale"(…ƒ„2
+Ã øid/text_view_scale0

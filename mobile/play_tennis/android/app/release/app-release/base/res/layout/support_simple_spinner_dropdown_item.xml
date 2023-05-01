@@ -1,0 +1,13 @@
+
+´
+;
+android*http://schemas.android.com/apk/res/androidTextView"i
+*http://schemas.android.com/apk/res/androidid@android:id/text1"(Ğ„2
+”€ˆandroid:id/text10"Zstyle?attr/spinnerDropDownItemStyle"2-
++èŒøattr/spinnerDropDownItemStyle0ÿÿ"M
+*http://schemas.android.com/apk/res/android
+singleLinetrue"(İ‚„2:@"`
+*http://schemas.android.com/apk/res/androidlayout_widthmatch_parent"(ô„2:0ÿÿÿÿÿÿÿÿÿ"¡
+*http://schemas.android.com/apk/res/androidlayout_height%?attr/dropdownListPreferredItemHeight"(õ„24
+2ı€Œø$attr/dropdownListPreferredItemHeight0À€"O
+*http://schemas.android.com/apk/res/android	ellipsizemarquee"(«„2:0

@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.play_tennis">
+    package="com.crocosoft.play_tennis">
    <application
         android:label="Play Tennis"
         android:name="${applicationName}"
