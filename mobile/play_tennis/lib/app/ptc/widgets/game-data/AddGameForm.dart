@@ -98,6 +98,7 @@ class _AddGameFormState extends State<AddGameForm> {
   @override
   void initState() {
     super.initState();
+    print("add game form 123123123123");
     AppServices.playerService.getPlayerLocationData((e) => {}).then((value) {
       if (value != null) {
         countryAndCitySelectController.city = value.city;
@@ -174,7 +175,7 @@ class _AddGameFormState extends State<AddGameForm> {
           height: 10,
         ),
         SizedBox(
-          height: MediaQuery.of(context).size.height - 120,
+          height: MediaQuery.of(context).size.height * 0.8,
           width: double.infinity,
           child: SearchPlayersForm(
             locationData: LocationDataMappingExtensions.toLocationData(

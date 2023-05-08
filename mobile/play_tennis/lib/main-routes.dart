@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/screens/ChangeAvatarScreen.dart';
 import 'package:play_tennis/app/main/screens/CheckAuthScreen.dart';
 import 'package:play_tennis/app/main/screens/LoginScreen.dart';
+import 'package:play_tennis/app/main/screens/MenuTop.dart';
 import 'package:play_tennis/app/main/screens/NotificationsScreen.dart';
 import 'package:play_tennis/app/main/screens/ProfileScreen.dart';
 import 'package:play_tennis/app/main/screens/RegistrationScreen.dart';
 import 'package:play_tennis/app/main/screens/RouteNotFoundScreen.dart';
 import 'package:play_tennis/app/main/screens/SetLocationScreenWidget.dart';
+import 'package:play_tennis/app/main/widgets/MenuSelector.dart';
 import 'package:play_tennis/app/ptc/screens/TelegramProfileScreen.dart';
 import 'package:play_tennis/app/main/widgets/images/ImageViewWidget.dart';
 import 'package:play_tennis/app/ptc/screens/AboutApplicationScreen.dart';
@@ -56,7 +58,7 @@ class MainRoutes {
 
     if (settings.name == home) {
       return MaterialPageRoute(
-        builder: (context) => const MainScreen(),
+        builder: (context) => const MenuSelector(),
       );
     }
 
