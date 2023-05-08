@@ -58,7 +58,7 @@ class MainRoutes {
 
     if (settings.name == home) {
       return MaterialPageRoute(
-        builder: (context) => const MenuSelector(),
+        builder: (context) => const MainScreen(),
       );
     }
 
