@@ -8,12 +8,13 @@ class MenuSelector extends StatelessWidget {
     return MaterialApp(
         home: Scaffold(
       appBar: AppBar(title: const Text('Выбор элементов')),
-      body: Center(child: SelectionWidget()),
+      body: const Center(child: SelectionWidget()),
     ));
   }
 }
 
 class SelectionWidget extends StatefulWidget {
+  const SelectionWidget({Key? key}) : super(key: key);
   @override
   State<SelectionWidget> createState() => _SelectionWidgetState();
 }
@@ -51,18 +52,19 @@ class _SelectionWidgetState extends State<SelectionWidget> {
       Icons.emoji_events
     ];
     final isSelected = _selectedIndex == index;
-    final backgroundColor = isSelected ? const Color(0xFF70A50C) : const Color(0xFFE4EBEB);
+    final backgroundColor =
+        isSelected ? const Color(0xFF70A50C) : const Color(0xFFE4EBEB);
     final colorElement = isSelected ? Colors.white : const Color(0xFF5C676C);
     final BorderRadius borderRadius = isSelected
-    ? const BorderRadius.all(Radius.circular(10))
-    : (index == 0
-        ? const BorderRadius.only(
-            topLeft: Radius.circular(10), bottomLeft: Radius.circular(10))
-        : (index == 3
+        ? const BorderRadius.all(Radius.circular(10))
+        : (index == 0
             ? const BorderRadius.only(
-                topRight: Radius.circular(10), bottomRight: Radius.circular(10))
-            : BorderRadius.circular(0)));
-
+                topLeft: Radius.circular(10), bottomLeft: Radius.circular(10))
+            : (index == 3
+                ? const BorderRadius.only(
+                    topRight: Radius.circular(10),
+                    bottomRight: Radius.circular(10))
+                : BorderRadius.circular(0)));
 
     return InkWell(
       onTap: () => setState(() => _selectedIndex = index),
@@ -78,7 +80,10 @@ class _SelectionWidgetState extends State<SelectionWidget> {
             Icon(icons[index], color: colorElement),
             Text(
               items[index],
-              style: TextStyle(color: colorElement, fontSize: 14, fontFamily: 'OpenSans-Bold'),
+              style: TextStyle(
+                  color: colorElement,
+                  fontSize: 14,
+                  fontFamily: 'OpenSans-Bold'),
             )
           ],
         ),

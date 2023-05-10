@@ -98,7 +98,6 @@ class _AddGameFormState extends State<AddGameForm> {
   @override
   void initState() {
     super.initState();
-    print("add game form 123123123123");
     AppServices.playerService.getPlayerLocationData((e) => {}).then((value) {
       if (value != null) {
         countryAndCitySelectController.city = value.city;
