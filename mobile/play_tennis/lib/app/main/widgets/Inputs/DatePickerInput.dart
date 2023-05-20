@@ -68,7 +68,7 @@ class _DatePickerInputState extends State<DatePickerInput> {
             context: context,
             locale: const Locale('ru'),
             initialDate: widget.value,
-            firstDate: widget.startDateValue,
+            firstDate: DateTime.utc(0),
             //DateTime.now() - not to allow to choose before today.
             lastDate: widget.lastDateValue,
           );
