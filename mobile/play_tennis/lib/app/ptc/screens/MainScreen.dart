@@ -11,6 +11,7 @@ import 'package:play_tennis/main-routes.dart';
 import 'package:play_tennis/main-services.dart';
 import 'package:play_tennis/web-app-routes.dart';
 import 'package:uni_links/uni_links.dart';
+import 'package:play_tennis/app/main/widgets/MenuSelector.dart';
 import 'dart:async';
 
 class MainScreen extends StatefulWidget {
@@ -76,33 +77,46 @@ class _MainScreenState extends State<MainScreen> {
       child: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Scaffold(
-          appBar: AppBar(
-            bottom: const TabBar(
-              isScrollable: true,
-              tabs: [
-                Tab(
-                  text: "Игроки",
-                ),
-                Tab(
-                  text: "Сообщества",
-                ),
-                Tab(
-                  text: "Тренеры",
-                ),
-                Tab(
-                  text: "Корты",
+          body: SafeArea(
+            child: Stack(
+              children: [
+                Column(
+                  children: [
+                     const Padding(
+                        padding: const EdgeInsets.only(right: 10, left: 10, bottom: 20),
+                        child: SelectionWidget(),
+                      ),
+                    Container(
+                      color: Theme.of(context).primaryColor,
+                      child: const TabBar(
+                        isScrollable: true,
+                        tabs: [
+                          Tab(
+                            text: "Игроки",
+                          ),
+                          Tab(
+                            text: "Сообщества",
+                          ),
+                          Tab(
+                            text: "Тренеры",
+                          ),
+                          Tab(
+                            text: "Корты",
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: TabBarView(
+                        children: getWidgets(),
+                      ),
+                    )
+                  ],
                 ),
               ],
             ),
-            title: const Text('Главная'),
           ),
           drawer: const SideDrawer(),
-          body: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: TabBarView(
-              children: getWidgets(),
-            ),
-          ),
         ),
       ),
     );

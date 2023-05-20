@@ -174,7 +174,7 @@ class _AddGameFormState extends State<AddGameForm> {
           height: 10,
         ),
         SizedBox(
-          height: MediaQuery.of(context).size.height - 120,
+          height: MediaQuery.of(context).size.height * 0.8,
           width: double.infinity,
           child: SearchPlayersForm(
             locationData: LocationDataMappingExtensions.toLocationData(

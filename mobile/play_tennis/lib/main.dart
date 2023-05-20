@@ -11,6 +11,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
   // make sure you call `initializeApp` before using other Firebase services.
@@ -58,6 +60,9 @@ void main() async {
     print(e);
   }
 
+  FirebaseMessaging.onMessageOpenedApp
+      .listen((RemoteMessage message) => _handleMessage(message));
+
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     print('Got a message whilst in the foreground!');
     print('Message data: ${message.data}');
@@ -82,6 +87,10 @@ void main() async {
   );
 }
 
+void _handleMessage(RemoteMessage message) {
+  navigatorKey.currentState?.pushNamed(MainRoutes.notifications);
+}
+
 class MyApp extends StatelessWidget {
   static bool inProccess = false;
 
@@ -94,6 +103,7 @@ class MyApp extends StatelessWidget {
     _initializeFlutterFire();
     return GlobalLoaderOverlay(
       child: MaterialApp(
+        navigatorKey: navigatorKey,
         title: MainSettings.appName,
         localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,
