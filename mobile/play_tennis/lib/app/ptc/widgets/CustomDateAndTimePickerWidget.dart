@@ -164,9 +164,7 @@ class _CustomDateAndTimePickerWidgetState
                     onDataChanged();
                   }
                 },
-                startDate: DateTime.now().add(
-                  const Duration(days: 2),
-                ),
+                startDate: DateTime.utc(0),
                 lastDate: DateTime.now().add(
                   const Duration(days: 10),
                 ),

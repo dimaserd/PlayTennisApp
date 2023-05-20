@@ -221,6 +221,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
         padding: padding,
         child: DatePickerInput(
           label: "Дата рождения",
+          startDate: DateTime.utc(0),
           dateChanged: (p) {
             if (p != null) {
               birthDate = p;
