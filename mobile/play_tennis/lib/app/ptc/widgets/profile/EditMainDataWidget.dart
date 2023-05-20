@@ -101,6 +101,7 @@ class _EditMainDataWidgetState extends State<EditMainDataWidget> {
             horizontal: 15.0,
           ),
           child: DatePickerInput(
+            startDate: DateTime.utc(0),
             label: "Дата рождения",
             dateChanged: (p) {
               if (p != null) {
