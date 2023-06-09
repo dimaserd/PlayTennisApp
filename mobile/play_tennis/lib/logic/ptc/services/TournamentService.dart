@@ -1,6 +1,190 @@
 import 'dart:convert';
 import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
 import 'package:play_tennis/logic/core/NetworkService.dart';
+import 'package:play_tennis/logic/ptc/models/games/CreateSinglesGame.dart';
+import 'package:play_tennis/logic/ptc/services/GameService.dart';
+
+class TournamentDetailedModel {
+  late String? id;
+  late bool openForParticipantsJoining;
+  late TournamentActivityStatus activityStatus;
+  late TournamentDurationType durationType;
+  late String? name;
+  late String? description;
+  late String? newsHtml;
+  late int maxNumberOfParticipants;
+  late bool isInTournament;
+  late bool? genderRestriction;
+  late bool hidden;
+  late String? type;
+  late String? cityId;
+  late int participationCostRub;
+  late bool isExternal;
+  late ExternalTournamentDataModel? external;
+  late List<TournamentEventModel>? events;
+  late List<PlayerSimpleModel>? players;
+
+  TournamentDetailedModel({
+    required this.id,
+    required this.openForParticipantsJoining,
+    required this.activityStatus,
+    required this.durationType,
+    required this.name,
+    required this.description,
+    required this.newsHtml,
+    required this.maxNumberOfParticipants,
+    required this.isInTournament,
+    required this.genderRestriction,
+    required this.hidden,
+    required this.type,
+    required this.cityId,
+    required this.participationCostRub,
+    required this.isExternal,
+    required this.external,
+    required this.events,
+    required this.players,
+  });
+
+  factory TournamentDetailedModel.fromJson(Map<String, dynamic> json) =>
+      TournamentDetailedModel(
+        id: json["id"],
+        openForParticipantsJoining: json["openForParticipantsJoining"],
+        activityStatus: TournamentActivityStatusDartJsonGenerator.getFromString(
+            json["activityStatus"]),
+        durationType: TournamentDurationTypeDartJsonGenerator.getFromString(
+            json["durationType"]),
+        name: json["name"],
+        description: json["description"],
+        newsHtml: json["newsHtml"],
+        maxNumberOfParticipants: json["maxNumberOfParticipants"],
+        isInTournament: json["isInTournament"],
+        genderRestriction: json["genderRestriction"],
+        hidden: json["hidden"],
+        type: json["type"],
+        cityId: json["cityId"],
+        participationCostRub: json["participationCostRub"],
+        isExternal: json["isExternal"],
+        external: json["external"] != null
+            ? ExternalTournamentDataModel?.fromJson(json["external"])
+            : null,
+        events: List<TournamentEventModel>.from(
+            json["events"].map((x) => TournamentEventModel.fromJson(x))),
+        players: List<PlayerSimpleModel>.from(
+            json["players"].map((x) => PlayerSimpleModel.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'openForParticipantsJoining': openForParticipantsJoining,
+        'activityStatus': activityStatus,
+        'durationType': durationType,
+        'name': name,
+        'description': description,
+        'newsHtml': newsHtml,
+        'maxNumberOfParticipants': maxNumberOfParticipants,
+        'isInTournament': isInTournament,
+        'genderRestriction': genderRestriction,
+        'hidden': hidden,
+        'type': type,
+        'cityId': cityId,
+        'participationCostRub': participationCostRub,
+        'isExternal': isExternal,
+        'external': external?.toJson(),
+        'events': events?.map((e) => e.toJson()).toList(),
+        'players': players?.map((e) => e.toJson()).toList(),
+      };
+}
+
+class TournamentEventModel {
+  late String? id;
+  late int eventNumberIdentifier;
+  late String? gameTypeName;
+  late bool isParticipantsDataReady;
+  late bool resultConfirmed;
+  late bool hasScoreData;
+  late String? description;
+  late String? scoreDataUpdatedByUserId;
+  late List<GamePlayerModel>? players;
+  late TennisMatchData? scoreData;
+  late DateTime? dateRestrictionUtc;
+  late bool canSetScore;
+  late int? imageFileId;
+
+  TournamentEventModel({
+    required this.id,
+    required this.eventNumberIdentifier,
+    required this.gameTypeName,
+    required this.isParticipantsDataReady,
+    required this.resultConfirmed,
+    required this.hasScoreData,
+    required this.description,
+    required this.scoreDataUpdatedByUserId,
+    required this.players,
+    required this.scoreData,
+    required this.dateRestrictionUtc,
+    required this.canSetScore,
+    required this.imageFileId,
+  });
+
+  factory TournamentEventModel.fromJson(Map<String, dynamic> json) =>
+      TournamentEventModel(
+        id: json["id"],
+        eventNumberIdentifier: json["eventNumberIdentifier"],
+        gameTypeName: json["gameTypeName"],
+        isParticipantsDataReady: json["isParticipantsDataReady"],
+        resultConfirmed: json["resultConfirmed"],
+        hasScoreData: json["hasScoreData"],
+        description: json["description"],
+        scoreDataUpdatedByUserId: json["scoreDataUpdatedByUserId"],
+        players: List<GamePlayerModel>.from(
+            json["players"].map((x) => GamePlayerModel.fromJson(x))),
+        scoreData: json["scoreData"] != null
+            ? TennisMatchData?.fromJson(json["scoreData"])
+            : null,
+        dateRestrictionUtc: json["dateRestrictionUtc"] != null
+            ? DateTime.parse(json["dateRestrictionUtc"])
+            : null,
+        canSetScore: json["canSetScore"],
+        imageFileId: json["imageFileId"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'eventNumberIdentifier': eventNumberIdentifier,
+        'gameTypeName': gameTypeName,
+        'isParticipantsDataReady': isParticipantsDataReady,
+        'resultConfirmed': resultConfirmed,
+        'hasScoreData': hasScoreData,
+        'description': description,
+        'scoreDataUpdatedByUserId': scoreDataUpdatedByUserId,
+        'players': players?.map((e) => e.toJson()).toList(),
+        'scoreData': scoreData?.toJson(),
+        'dateRestrictionUtc': dateRestrictionUtc,
+        'canSetScore': canSetScore,
+        'imageFileId': imageFileId,
+      };
+}
+
+class GamePlayerModel {
+  late String? userId;
+  late bool isWinner;
+
+  GamePlayerModel({
+    required this.userId,
+    required this.isWinner,
+  });
+
+  factory GamePlayerModel.fromJson(Map<String, dynamic> json) =>
+      GamePlayerModel(
+        userId: json["userId"],
+        isWinner: json["isWinner"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        'userId': userId,
+        'isWinner': isWinner,
+      };
+}
 
 class GetTournamentsRequest {
   late bool? openForParticipantsJoining;
@@ -243,6 +427,29 @@ class TournamentService {
       );
 
       return result;
+    }
+  }
+
+  Future<TournamentDetailedModel?> getById(
+    String id,
+    Function(String) errorHandler,
+  ) async {
+    var response = await networkService.getDataInner(
+      '${baseUrl}getById/$id',
+      errorHandler,
+    );
+
+    if (response == "null") {
+      return null;
+    }
+
+    try {
+      var json = jsonDecode(response!);
+
+      return TournamentDetailedModel.fromJson(json);
+    } catch (e) {
+      errorHandler(e.toString());
+      return null;
     }
   }
 }
