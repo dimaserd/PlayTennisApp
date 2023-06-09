@@ -41,10 +41,10 @@ class _TournamentsScreenState extends State<TournamentsScreen> {
               isScrollable: false,
               tabs: [
                 Tab(
-                  text: "Однодневные",
+                  text: "Многодневные",
                 ),
                 Tab(
-                  text: "Многодневные",
+                  text: "Однодневные",
                 ),
               ],
             ),
@@ -65,17 +65,17 @@ class _TournamentsScreenState extends State<TournamentsScreen> {
   List<Widget> getWidgets() {
     if (locationData == null) {
       return [
-        const Loading(text: "Однодневные турниры пока не реализованы"),
-        const Loading(text: "Многодневные турниры пока не реализованы"),
+        const Loading(text: "Загрузка"),
+        const Loading(text: "Загрузка"),
       ];
     }
 
     return [
       SearchTournamentsForm(
         locationData: locationData!,
-        onTapHandler: (trainer) {},
+        onTapHandler: (tournament) {},
       ),
-      const Loading(text: "Многодневные турниры пока не реализованы"),
+      const Loading(text: "Однодневные турниры пока не реализованы"),
     ];
   }
 }

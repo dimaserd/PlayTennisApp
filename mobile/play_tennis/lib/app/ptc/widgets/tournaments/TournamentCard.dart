@@ -18,42 +18,54 @@ class TournamentCard extends StatelessWidget {
         // onTapHandler(trainers[index]);
       },
       child: Card(
-          margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
+          margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
           elevation: 4,
-          child: ListTile(
-            title: Text(
-              "${tournament.name!} ",
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                const SizedBox(
-                  height: 5,
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
                 ),
-                const SizedBox(
-                  height: 5,
-                ),
-                tournament.description != null
-                    ? HtmlViewWidget(html: tournament.description!)
-                    : const SizedBox.shrink(),
-                const SizedBox(
-                  height: 5,
-                ),
-                RichText(
-                  text: TextSpan(
-                    text: "Перейти на сайт",
-                    style: const TextStyle(color: Colors.blue),
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                        _launchUrl();
-                      },
+                child: Container(
+                  alignment: Alignment.centerLeft,
+                  child: InkWell(
+                    child: Text(
+                      tournament.name!,
+                      style: const TextStyle(
+                        color: Colors.blue,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    onTap: () {
+                      _launchUrl();
+                    },
                   ),
                 ),
-              ],
-              // ),
-            ),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  tournament.description != null
+                      ? HtmlViewWidget(html: tournament.description!)
+                      : const SizedBox.shrink(),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                ],
+                // ),
+              )
+            ],
           )),
     );
   }

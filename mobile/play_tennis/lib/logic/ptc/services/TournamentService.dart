@@ -48,7 +48,10 @@ class GetTournamentsRequest {
   Map<String, dynamic> toJson() => {
         'openForParticipantsJoining': openForParticipantsJoining,
         'cityId': cityId,
-        'activityStatus': activityStatus,
+        'activityStatus': activityStatus != null
+            ? TournamentActivityStatusDartJsonGenerator.enumToString(
+                activityStatus!)
+            : null,
         'durationType': durationType,
         'showMine': showMine,
         'useHiddenFilter': useHiddenFilter,
@@ -201,7 +204,7 @@ class ExternalTournamentDataModel {
 
 class TournamentService {
   final NetworkService networkService;
-  final String baseUrl = "/api/ptc/tournament-admin/";
+  final String baseUrl = "/api/ptc/tournament/query/";
   TournamentService(this.networkService);
 
   Future<GetListResult<TournamentSimpleModel>> search(

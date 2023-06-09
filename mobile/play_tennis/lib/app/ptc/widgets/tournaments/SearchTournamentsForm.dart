@@ -73,10 +73,10 @@ class _SearchTournamentsForm extends State<SearchTournamentsForm> {
                 CountryAndCitySelect(
                   showDistrictSelect: false,
                   onCityChanged: (p) {
-                    onCountryChanged();
+                    onCountryOrCityChanged();
                   },
                   onCountryChanged: (p) {
-                    onCountryChanged();
+                    onCountryOrCityChanged();
                   },
                   controller: countryAndCitySelectController,
                 ),
@@ -132,28 +132,29 @@ class _SearchTournamentsForm extends State<SearchTournamentsForm> {
     });
   }
 
-  void onCountryChanged() {
+  void onCountryOrCityChanged() {
     _offSet = 0;
     getData();
   }
 
   getData() {
+    print("Поиск турниров");
     var cityId = countryAndCitySelectController.city?.id;
 
-    var trainerRequest = GetTournamentsRequest(
+    var searchRequest = GetTournamentsRequest(
       openForParticipantsJoining: null,
-      activityStatus: null,
+      activityStatus: TournamentActivityStatus.Active,
       durationType: null,
       showMine: null,
       useHiddenFilter: false,
-      hidden: null,
-      isExternal: null,
+      hidden: false,
+      isExternal: false,
       cityId: cityId,
       count: 10,
       offSet: _offSet,
     );
 
-    AppServices.tournamentService.search(trainerRequest, (e) {
+    AppServices.tournamentService.search(searchRequest, (e) {
       BaseApiResponseUtils.showError(
           context, "Произошла ошибка при поиске турниров.");
     }).then((value) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/ptc/widgets/tournaments/TournamentCard.dart';
+import 'package:play_tennis/app/ptc/widgets/trainers/ShowAlertContact.dart';
 import 'package:play_tennis/logic/ptc/services/TournamentService.dart';
-import '../trainers/ShowAlertContact.dart';
 
 class TournamentsList extends StatelessWidget {
   List<TournamentSimpleModel> tournaments;
@@ -55,9 +55,13 @@ class TournamentsList extends StatelessWidget {
             itemBuilder: (context, index) {
               if (index == tournaments.length) {
                 if (isActiveLoader == false || tournaments.length < 5) {
-                  return const ShowAlertContact(
-                    title: "Создать турнир",
-                    subTitle: "Для добавления тренера пожалуйста напишите мне.",
+                  return const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 5.0),
+                    child: ShowAlertContact(
+                      title: "Создать турнир",
+                      subTitle:
+                          "Для того чтобы администрировать свои собственные турниры пожалуйста напишите мне.",
+                    ),
                   );
                 } else {
                   // Вернуть заглушку для отображения индикатора загрузки
