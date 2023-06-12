@@ -15,6 +15,7 @@ class TournamentsScreen extends StatefulWidget {
 class _TournamentsScreenState extends State<TournamentsScreen> {
   LocationData? locationData;
 
+
   void loadLocationData() {
     AppServices.playerService.getLocationData((e) => {}).then((value) {
       setState(() {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 import 'package:play_tennis/app/ptc/widgets/CountryAndCitySelectWidget.dart';
-import 'package:play_tennis/app/ptc/widgets/cities/CityChatAndChannelWidget.dart';
-import 'package:play_tennis/app/ptc/widgets/tournaments/TournamentsList.dart';
+import 'package:play_tennis/app/ptc/widgets/tournaments/StickyHeaderList.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/ptc/models/LocationData.dart';
 import 'package:play_tennis/logic/ptc/models/cities/PublicTelegramChatForCityModel.dart';
@@ -32,12 +32,15 @@ class _SearchTournamentsForm extends State<SearchTournamentsForm> {
   final TextEditingController _searchController = TextEditingController();
   Timer? _debounce;
 
-  List<TournamentSimpleModel> tournaments = [];
+  List<TournamentSimpleModel> activeTournaments = [];
+  List<TournamentSimpleModel> plannedTournaments = [];
+  List<TournamentSimpleModel> finishedTournaments = [];
   PublicTelegramChatForCityModel? cityModel;
 
   int _offSet = 0;
   bool _isTapSearch = false;
   bool _isActiveLoader = true;
+  bool _isShowMine = false;
 
   @override
   void initState() {
@@ -58,69 +61,95 @@ class _SearchTournamentsForm extends State<SearchTournamentsForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Card(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 15,
-            ),
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 5,
-                ),
-                CountryAndCitySelect(
-                  showDistrictSelect: false,
-                  onCityChanged: (p) {
-                    onCountryOrCityChanged();
-                  },
-                  onCountryChanged: (p) {
-                    onCountryOrCityChanged();
-                  },
-                  controller: countryAndCitySelectController,
-                ),
-                TextField(
-                  controller: _searchController,
-                  onChanged: _onSearchChanged,
-                  decoration: const InputDecoration(
-                    hintText: 'Поисковая строка',
-                    suffixIcon: Icon(Icons.search),
+    return CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(
+          child: Card(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 15,
+              ),
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 5,
                   ),
+                  CountryAndCitySelect(
+                    showDistrictSelect: false,
+                    onCityChanged: (p) {
+                      onCountryOrCityChanged();
+                    },
+                    onCountryChanged: (p) {
+                      onCountryOrCityChanged();
+                    },
+                    controller: countryAndCitySelectController,
+                  ),
+                  TextField(
+                    controller: _searchController,
+                    onChanged: _onSearchChanged,
+                    decoration: const InputDecoration(
+                      hintText: 'Поисковая строка',
+                      suffixIcon: Icon(Icons.search),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: Card(
+            child: Row(
+              children: [
+                Checkbox(
+                  fillColor: MaterialStateColor.resolveWith(
+                      (states) => Color.fromARGB(255, 51, 187, 255)),
+                  checkColor:
+                      MaterialStateColor.resolveWith((states) => Colors.white),
+                  value: _isShowMine,
+                  onChanged: (bool? newValue) {
+                    setState(() {
+                      _isShowMine = newValue!;
+                    });
+                  },
                 ),
-                const SizedBox(
-                  height: 15,
-                ),
+                const Text("Мои турниры")
               ],
             ),
           ),
         ),
-        cityModel != null
-            ? CityChatAndChannelWidget(
-                text:
-                    "Все результаты и новости турнира попадают в специальный чат связанный с городом.",
-                model: cityModel!,
-                cityName: countryAndCitySelectController.city?.name ?? "Город",
-              )
-            : const SizedBox.shrink(),
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 8, bottom: 0),
-            child: TournamentsList(
-              isActiveLoader: _isActiveLoader,
-              offset: _offSet,
-              tournaments: tournaments,
-              getData: (offSet) {
-                _offSet = offSet;
-                getData();
-              },
-              onTapHandler: (id) {
-                // widget.onTapHandler(id);
-              },
+        if (activeTournaments.isEmpty &&
+            plannedTournaments.isEmpty &&
+            finishedTournaments.isEmpty) ...{
+          const SliverToBoxAdapter(
+          child: Center(
+            child: Text(
+              "По вашему запросу турниры не найдены",
+              style: TextStyle(
+                fontSize: 16,
+              ),
             ),
-          ),
-        ),
+          )),
+        } else ...{
+          if (activeTournaments.isNotEmpty) ...{
+            StickyHeaderList(
+                tournaments: activeTournaments, text: "Текущие турниры:")
+          },
+          if (plannedTournaments.isNotEmpty) ...{
+            StickyHeaderList(
+                tournaments: plannedTournaments,
+                text: "Открытые для записи турниры:")
+          },
+          if (finishedTournaments.isNotEmpty) ...{
+            StickyHeaderList(
+                tournaments: finishedTournaments, text: "Завершенные")
+          }
+        }
       ],
+      reverse: false,
     );
   }
 
@@ -138,14 +167,13 @@ class _SearchTournamentsForm extends State<SearchTournamentsForm> {
   }
 
   getData() {
-    print("Поиск турниров");
     var cityId = countryAndCitySelectController.city?.id;
 
-    var searchRequest = GetTournamentsRequest(
+    var activeRequest = GetTournamentsRequest(
       openForParticipantsJoining: null,
       activityStatus: TournamentActivityStatus.Active,
       durationType: null,
-      showMine: null,
+      showMine: _isShowMine,
       useHiddenFilter: false,
       hidden: false,
       isExternal: false,
@@ -154,7 +182,7 @@ class _SearchTournamentsForm extends State<SearchTournamentsForm> {
       offSet: _offSet,
     );
 
-    AppServices.tournamentService.search(searchRequest, (e) {
+    AppServices.tournamentService.search(activeRequest, (e) {
       BaseApiResponseUtils.showError(
           context, "Произошла ошибка при поиске турниров.");
     }).then((value) {
@@ -170,11 +198,67 @@ class _SearchTournamentsForm extends State<SearchTournamentsForm> {
       if (_offSet == 0 || _isTapSearch == true) {
         _isTapSearch = false;
         setState(() {
-          tournaments = value.list;
+          activeTournaments = value.list;
         });
       } else {
         setState(() {
-          tournaments += value.list;
+          activeTournaments += value.list;
+        });
+      }
+    });
+
+    var finishedRequest = activeRequest;
+    finishedRequest.activityStatus = TournamentActivityStatus.Finished;
+
+    AppServices.tournamentService.search(finishedRequest, (e) {
+      BaseApiResponseUtils.showError(
+          context, "Произошла ошибка при поиске турниров.");
+    }).then((value) {
+      if (!mounted) {
+        return;
+      }
+      if (value.list.isEmpty) {
+        setState(() {
+          _isActiveLoader = false;
+        });
+      }
+
+      if (_offSet == 0 || _isTapSearch == true) {
+        _isTapSearch = false;
+        setState(() {
+          finishedTournaments = value.list;
+        });
+      } else {
+        setState(() {
+          finishedTournaments += value.list;
+        });
+      }
+    });
+
+    var plannedRequest = activeRequest;
+    finishedRequest.activityStatus = TournamentActivityStatus.Planned;
+
+    AppServices.tournamentService.search(plannedRequest, (e) {
+      BaseApiResponseUtils.showError(
+          context, "Произошла ошибка при поиске турниров.");
+    }).then((value) {
+      if (!mounted) {
+        return;
+      }
+      if (value.list.isEmpty) {
+        setState(() {
+          _isActiveLoader = false;
+        });
+      }
+
+      if (_offSet == 0 || _isTapSearch == true) {
+        _isTapSearch = false;
+        setState(() {
+          plannedTournaments = value.list;
+        });
+      } else {
+        setState(() {
+          plannedTournaments += value.list;
         });
       }
     });
