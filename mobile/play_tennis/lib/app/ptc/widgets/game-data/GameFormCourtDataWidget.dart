@@ -29,7 +29,7 @@ class GameFormCourtDataWidget extends StatelessWidget {
 
   final Function(String error) errorHandler;
   final Function(GameFormCourtData data) successHandler;
-  final Function() scroll;
+  final VoidCallback scroll;
 
   const GameFormCourtDataWidget({
     super.key,

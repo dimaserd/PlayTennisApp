@@ -8,7 +8,7 @@ import 'package:play_tennis/logic/ptc/services/GameService.dart';
 class GameToSelect extends StatelessWidget {
   final SinglesGameSimpleModel game;
 
-  final Function onChange;
+  final VoidCallback onChange;
   final List<String> ignorePlayerIds;
   final GameDataWidgetController gameDataWidgetController =
       GameDataWidgetController();

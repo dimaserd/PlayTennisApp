@@ -14,7 +14,7 @@ class GameResponseToSelect extends StatelessWidget {
   final GameRequestResponseSimpleModel response;
   final CurrentLoginData loginData;
   final GameRequestDetailedModel request;
-  final Function onChanged;
+  final VoidCallback onChanged;
   const GameResponseToSelect({
     super.key,
     required this.response,

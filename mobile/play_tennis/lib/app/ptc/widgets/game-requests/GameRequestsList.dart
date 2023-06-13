@@ -7,7 +7,7 @@ import 'package:play_tennis/logic/ptc/models/game-requests/GameRequestSimpleMode
 class GameRequestsList extends StatelessWidget {
   final List<GameRequestSimpleModel> requests;
   final CurrentLoginData loginData;
-  final Function onChange;
+  final VoidCallback onChange;
   final bool isLoader;
 
   const GameRequestsList({

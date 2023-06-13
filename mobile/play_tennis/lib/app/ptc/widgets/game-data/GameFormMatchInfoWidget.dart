@@ -15,7 +15,7 @@ class GameFormMatchInfoWidget extends StatelessWidget {
     required this.customWidgets,
   }) : super(key: key);
 
-  final Function backBtnHandler;
+  final VoidCallback backBtnHandler;
   final BuildContext context;
   final PlayerModel opponent;
   final GameDataWidgetController gameDataWidgetController;

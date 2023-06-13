@@ -34,7 +34,7 @@ class _SearchMyGamesWidgetState extends State<SearchMyGamesWidget> {
             ignorePlayerIds: [
               widget.loginData.userId!,
             ],
-            onChange: (p) {},
+            onChange: () {},
           )
         : const SizedBox.shrink();
   }

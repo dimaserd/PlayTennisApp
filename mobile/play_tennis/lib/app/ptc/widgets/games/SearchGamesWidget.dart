@@ -40,7 +40,7 @@ class _SearchGamesWidgetState extends State<SearchGamesWidget> {
                   widget.loginData.userId!,
                   widget.playerId,
                 ],
-                onChange: (p) {},
+                onChange: () {},
               )
             : const SizedBox.shrink(),
       ],

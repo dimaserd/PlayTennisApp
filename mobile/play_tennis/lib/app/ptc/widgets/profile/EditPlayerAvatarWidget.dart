@@ -7,7 +7,7 @@ import 'package:play_tennis/main-services.dart';
 
 class EditPlayerAvatarWidget extends StatefulWidget {
   final int? avatarFileId;
-  final Function onSucceess;
+  final VoidCallback onSucceess;
   const EditPlayerAvatarWidget({
     super.key,
     required this.avatarFileId,

@@ -6,7 +6,7 @@ import 'GameToSelect.dart';
 class GamesList extends StatelessWidget {
   final List<SinglesGameSimpleModel> games;
   final List<String> ignorePlayerIds;
-  final Function onChange;
+  final VoidCallback onChange;
 
   const GamesList({
     super.key,

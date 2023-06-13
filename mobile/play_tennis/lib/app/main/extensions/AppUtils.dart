@@ -3,7 +3,7 @@ import 'package:play_tennis/baseApiResponseUtils.dart';
 
 class AppUtils {
   static void tryAndShowMessageIfError(
-    Function() someCall,
+    VoidCallback someCall,
     BuildContext context,
     String errorMessage,
   ) {

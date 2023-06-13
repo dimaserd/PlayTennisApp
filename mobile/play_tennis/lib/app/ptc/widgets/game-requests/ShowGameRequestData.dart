@@ -13,7 +13,7 @@ class ShowGameRequestData extends StatelessWidget {
   final GameRequestDetailedModel request;
   final List<GameRequestResponseSimpleModel> responses;
   final CurrentLoginData loginData;
-  final Function onChange;
+  final VoidCallback onChange;
 
   const ShowGameRequestData({
     super.key,

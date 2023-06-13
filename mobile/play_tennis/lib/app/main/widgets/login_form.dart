@@ -10,7 +10,7 @@ import 'package:play_tennis/main-settings.dart';
 import 'package:play_tennis/main-state.dart';
 
 class LoginForm extends StatefulWidget {
-  final Function onLogin;
+  final VoidCallback onLogin;
   const LoginForm({
     super.key,
     required this.onLogin,

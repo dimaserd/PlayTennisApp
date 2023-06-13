@@ -6,8 +6,8 @@ import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
 
 class FinalGameImageCardWidget extends StatefulWidget {
   final Future<BaseApiResponse> Function() createClickHandler;
-  final Function() goBackClickHandler;
-  final Function() onSuccess;
+  final VoidCallback goBackClickHandler;
+  final VoidCallback onSuccess;
 
   const FinalGameImageCardWidget({
     Key? key,

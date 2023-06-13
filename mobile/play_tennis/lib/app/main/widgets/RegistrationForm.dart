@@ -25,7 +25,7 @@ class RegistrationFormOptions {
 }
 
 class RegistrationForm extends StatefulWidget {
-  final Function onLogin;
+  final VoidCallback onLogin;
   final RegistrationFormOptions options;
   const RegistrationForm({
     super.key,

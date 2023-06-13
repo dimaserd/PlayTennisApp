@@ -9,7 +9,7 @@ import 'GameRequestExtensions.dart';
 class GameRequestRepondingWidget extends StatelessWidget {
   final CurrentLoginData loginData;
   final GameRequestSimpleModel request;
-  final Function onChange;
+  final VoidCallback onChange;
 
   const GameRequestRepondingWidget({
     super.key,

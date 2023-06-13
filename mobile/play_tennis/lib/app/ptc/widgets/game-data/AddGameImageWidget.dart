@@ -6,7 +6,7 @@ import 'package:play_tennis/main-services.dart';
 
 class AddGameImageWidget extends StatefulWidget {
   final Function(int fileId, File fileImage) imageReady;
-  final Function() withoutImageClickHandler;
+  final VoidCallback withoutImageClickHandler;
 
   const AddGameImageWidget({
     required this.imageReady,
