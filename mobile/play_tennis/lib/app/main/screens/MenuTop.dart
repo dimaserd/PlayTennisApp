@@ -13,7 +13,7 @@ class MenuTop extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Column(children: [
+                 Column(children: [
                   Text("Сетка",
                       style: TextStyle(
                           color: Color(0xFF333A3B),

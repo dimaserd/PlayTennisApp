@@ -38,7 +38,7 @@ class PlayersList extends StatelessWidget {
 
   Widget getChild() {
     return players.isEmpty
-        ? const Column(children: [
+        ?  Column(children: [
             Center(
               child: Text(
                 "Игроки не найдены",

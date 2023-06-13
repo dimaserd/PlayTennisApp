@@ -123,7 +123,7 @@ class _AddGameFormState extends State<AddGameForm> {
             minWidth: double.infinity,
             minHeight: double.infinity,
           ),
-          child: const SizedBox(
+          child:  SizedBox(
             child: Column(
               children: [
                 Loading(text: "Загрузка"),

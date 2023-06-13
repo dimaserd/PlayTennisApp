@@ -30,7 +30,7 @@ class GameResponseActions extends StatelessWidget {
 
     if (response.acceptedByRequestAuthor) {
       return [
-        const Expanded(
+         Expanded(
           child: Column(
             children: [
               Text(
@@ -50,7 +50,7 @@ class GameResponseActions extends StatelessWidget {
 
     if (response.declinedByRequestAuthor) {
       return [
-        const Expanded(
+         Expanded(
           child: Column(
             children: [
               Text(
