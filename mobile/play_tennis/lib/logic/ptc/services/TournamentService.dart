@@ -399,7 +399,7 @@ class TournamentService {
     var bodyJson = jsonEncode(map);
 
     var responseBody = await networkService.postDataV2(
-        '${baseUrl}Get/List', bodyJson, onError);
+        '${baseUrl}Get/List', bodyJson, onError,);
 
     try {
       var json = await jsonDecode(responseBody);

@@ -28,39 +28,40 @@ class LoginByEmailOrPhoneNumber {
       };
 }
 
-class CreateLoginLinkResult {
-  late bool isSucceeded;
-  late String? errorMessage;
-  late String? loginId;
-  late String? password;
+class CreateLoginLinkResult
+{
+	late bool isSucceeded; 
+	late String? errorMessage; 
+	late String? linkId; 
+	late String? password; 
 
-  CreateLoginLinkResult({
-    required this.isSucceeded,
-    required this.errorMessage,
-    required this.loginId,
-    required this.password,
-  });
+	CreateLoginLinkResult({
+		required this.isSucceeded,
+		required this.errorMessage,
+		required this.linkId,
+		required this.password,
+	});
 
-  factory CreateLoginLinkResult.fromJson(Map<String, dynamic> json) =>
-      CreateLoginLinkResult(
-        isSucceeded: json["isSucceeded"],
-        errorMessage: json["errorMessage"],
-        loginId: json["loginId"],
-        password: json["password"],
-      );
+	factory CreateLoginLinkResult.fromJson(Map<String, dynamic> json) =>
+	 CreateLoginLinkResult(
+		isSucceeded: json["isSucceeded"],
+		errorMessage: json["errorMessage"],
+		linkId: json["linkId"],
+		password: json["password"],
+	);
 
-  Map<String, dynamic> toJson() => {
-        'isSucceeded': isSucceeded,
-        'errorMessage': errorMessage,
-        'loginId': loginId,
-        'password': password,
-      };
+	Map<String, dynamic> toJson() => {
+		'isSucceeded': isSucceeded,
+		'errorMessage': errorMessage,
+		'linkId': linkId,
+		'password': password,
+	};
 }
 
-class PlayerLoginLinkService {
+class LoginLinkService {
   final NetworkService networkService;
 
-  PlayerLoginLinkService(this.networkService);
+  LoginLinkService(this.networkService);
 
   Future<CreateLoginLinkResult> createLoginLink(
     Function(String) onError,
@@ -77,7 +78,7 @@ class PlayerLoginLinkService {
     var bodyJson = jsonEncode(map);
 
     var response = await networkService.postDataInner(
-        '/api/ptc/player-login/link/create', bodyJson, onError);
+        '/api/account/link/create', bodyJson, onError);
 
     if (response == null) {
       return CreateLoginLinkResult(
