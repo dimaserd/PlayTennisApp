@@ -1,4 +1,5 @@
 import 'package:play_tennis/logic/clt/services/ClientService.dart';
+import 'package:play_tennis/logic/clt/services/LoginLinkService.dart';
 import 'package:play_tennis/logic/clt/services/LoginService.dart';
 import 'package:play_tennis/logic/clt/services/NotificationService.dart';
 import 'package:play_tennis/logic/clt/services/RegistrationService.dart';
@@ -12,7 +13,6 @@ import 'package:play_tennis/logic/ptc/services/DeletePlayerService.dart';
 import 'package:play_tennis/logic/ptc/services/FlutterNotificationAppTokenService.dart';
 import 'package:play_tennis/logic/ptc/services/GameRequestsService.dart';
 import 'package:play_tennis/logic/ptc/services/GameService.dart';
-import 'package:play_tennis/logic/ptc/services/PlayerLoginLinkService.dart';
 import 'package:play_tennis/logic/ptc/services/PlayerRegistrationService.dart';
 import 'package:play_tennis/logic/ptc/services/PlayerService.dart';
 import 'package:play_tennis/logic/ptc/services/TelegramPlayerService.dart';
@@ -41,8 +41,8 @@ class AppServices {
   static final FilesService filesService = FilesService(networkService);
   static final PlayerRegistrationService playerRegistrationService =
       PlayerRegistrationService(networkService);
-  static final PlayerLoginLinkService playerLoginLinkService =
-      PlayerLoginLinkService(networkService);
+  static final LoginLinkService playerLoginLinkService =
+      LoginLinkService(networkService);
   static final CityService cityService = CityService(networkService);
   static final CommunityCardService communityService =
       CommunityCardService(networkService);

@@ -98,7 +98,7 @@ class Round extends StatelessWidget {
 class TeamTile extends StatelessWidget {
   final String name;
 
-  TeamTile({required this.name});
+  const TeamTile({super.key, required this.name});
 
   @override
   Widget build(BuildContext context) {

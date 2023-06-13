@@ -23,7 +23,7 @@ class MainAppExtensions {
     var dottedUrl = appRelativeUrl.replaceAll(RegExp(r'/'), '.');
 
     var url =
-        "${MainSettings.domain}/ptc/player-login/${result.loginId!}/${result.password!}/$dottedUrl";
+        "${MainSettings.domain}/ptc/player-login/${result.linkId!}/${result.password!}/$dottedUrl";
 
     await launchUrlInBrowser(url, onError);
   }

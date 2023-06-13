@@ -28,34 +28,33 @@ class LoginByEmailOrPhoneNumber {
       };
 }
 
-class CreateLoginLinkResult
-{
-	late bool isSucceeded; 
-	late String? errorMessage; 
-	late String? linkId; 
-	late String? password; 
+class CreateLoginLinkResult {
+  late bool isSucceeded;
+  late String? errorMessage;
+  late String? linkId;
+  late String? password;
 
-	CreateLoginLinkResult({
-		required this.isSucceeded,
-		required this.errorMessage,
-		required this.linkId,
-		required this.password,
-	});
+  CreateLoginLinkResult({
+    required this.isSucceeded,
+    required this.errorMessage,
+    required this.linkId,
+    required this.password,
+  });
 
-	factory CreateLoginLinkResult.fromJson(Map<String, dynamic> json) =>
-	 CreateLoginLinkResult(
-		isSucceeded: json["isSucceeded"],
-		errorMessage: json["errorMessage"],
-		linkId: json["linkId"],
-		password: json["password"],
-	);
+  factory CreateLoginLinkResult.fromJson(Map<String, dynamic> json) =>
+      CreateLoginLinkResult(
+        isSucceeded: json["isSucceeded"],
+        errorMessage: json["errorMessage"],
+        linkId: json["linkId"],
+        password: json["password"],
+      );
 
-	Map<String, dynamic> toJson() => {
-		'isSucceeded': isSucceeded,
-		'errorMessage': errorMessage,
-		'linkId': linkId,
-		'password': password,
-	};
+  Map<String, dynamic> toJson() => {
+        'isSucceeded': isSucceeded,
+        'errorMessage': errorMessage,
+        'linkId': linkId,
+        'password': password,
+      };
 }
 
 class LoginLinkService {
@@ -84,7 +83,7 @@ class LoginLinkService {
       return CreateLoginLinkResult(
         errorMessage: "Ссылка для авторизации не была получена c сервера",
         isSucceeded: false,
-        loginId: null,
+        linkId: null,
         password: null,
       );
     }

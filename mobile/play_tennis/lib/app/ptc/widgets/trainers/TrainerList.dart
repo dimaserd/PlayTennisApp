@@ -39,7 +39,7 @@ class TrainerList extends StatelessWidget {
 
   Widget getChild() {
     return trainers.isEmpty
-        ? Column(children: const [
+        ? const Column(children: [
             Center(
               child: Text(
                 "Тренеры не найдены",

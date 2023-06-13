@@ -106,7 +106,7 @@ class _SearchTournamentsForm extends State<SearchTournamentsForm> {
               children: [
                 Checkbox(
                   fillColor: MaterialStateColor.resolveWith(
-                      (states) => Color.fromARGB(255, 51, 187, 255)),
+                      (states) => const Color.fromARGB(255, 51, 187, 255)),
                   checkColor:
                       MaterialStateColor.resolveWith((states) => Colors.white),
                   value: _isShowMine,
@@ -125,7 +125,7 @@ class _SearchTournamentsForm extends State<SearchTournamentsForm> {
             plannedTournaments.isEmpty &&
             finishedTournaments.isEmpty) ...{
           const SliverToBoxAdapter(
-          child: Center(
+              child: Center(
             child: Text(
               "По вашему запросу турниры не найдены",
               style: TextStyle(
