@@ -38,7 +38,7 @@ class CommunityList extends StatelessWidget {
 
   Widget getChild() {
     return community.isEmpty
-        ? const Column(children: [
+        ? Column(children: const [
             Padding(
               padding: EdgeInsets.all(8.0),
               child: Center(

@@ -73,9 +73,9 @@ class _AddGameRequestFormState extends State<AddGameRequestForm> {
   @override
   Widget build(BuildContext context) {
     if (locationData == null || playerData == null) {
-      return const SizedBox(
+      return SizedBox(
         child: Column(
-          children: [
+          children: const [
             Loading(
               text: "Загрузка",
             ),

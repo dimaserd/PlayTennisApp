@@ -19,7 +19,7 @@ class GamesList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: games.isEmpty
-          ? const Column(children: [
+          ?  Column(children: [
               SizedBox(
                 height: 20,
               ),
