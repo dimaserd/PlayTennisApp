@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 import 'package:play_tennis/app/ptc/widgets/CountryAndCitySelectWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/tournaments/StickyHeaderList.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';

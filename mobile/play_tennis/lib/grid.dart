@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:play_tennis/app/ptc/widgets/games/GamesList.dart';
 
 class TournamentBracket extends StatefulWidget {
   @override
@@ -39,7 +38,7 @@ class _TournamentBracketState extends State<TournamentBracket> {
 
 class Round extends StatelessWidget {
   final List<String> teams;
-  Round({required this.teams});
+  const Round({super.key, required this.teams});
 
   Widget buildStack() {
     switch (teams.length) {

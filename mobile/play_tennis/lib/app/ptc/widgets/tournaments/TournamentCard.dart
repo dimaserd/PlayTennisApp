@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:play_tennis/logic/ptc/services/TournamentService.dart';
 import 'package:play_tennis/app/ptc/widgets/html/HtmlViewWidget.dart';

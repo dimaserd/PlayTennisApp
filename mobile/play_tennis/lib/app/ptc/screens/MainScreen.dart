@@ -9,7 +9,6 @@ import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/ptc/models/LocationData.dart';
 import 'package:play_tennis/main-routes.dart';
 import 'package:play_tennis/main-services.dart';
-import 'package:play_tennis/main-settings.dart';
 import 'package:play_tennis/web-app-routes.dart';
 import 'package:uni_links/uni_links.dart';
 import 'dart:async';
