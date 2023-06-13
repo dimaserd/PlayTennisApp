@@ -40,7 +40,7 @@ class CourtsList extends StatelessWidget {
 
   Widget getChild() {
     return courts.isEmpty
-        ? Column(children: const [
+        ? const Column(children: [
             Center(
               child: Text("Корты не найдены"),
             ),

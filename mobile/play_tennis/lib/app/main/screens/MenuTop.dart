@@ -13,7 +13,7 @@ class MenuTop extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(children: const [
+                const Column(children: [
                   Text("Сетка",
                       style: TextStyle(
                           color: Color(0xFF333A3B),
@@ -46,17 +46,16 @@ class MenuTop extends StatelessWidget {
             TextField(
               onChanged: (value) {},
               decoration: InputDecoration(
-                hintText: 'Поиск корта и игрока',
-                filled: true, 
-                fillColor: Colors.grey[200], 
-                suffixIcon: const Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide.none, 
-                  borderRadius:
-                      BorderRadius.circular(8), 
-                ),
-                contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 5.0)
-              ),
+                  hintText: 'Поиск корта и игрока',
+                  filled: true,
+                  fillColor: Colors.grey[200],
+                  suffixIcon: const Icon(Icons.search),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide.none,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  contentPadding:
+                      const EdgeInsets.symmetric(vertical: 0, horizontal: 5.0)),
             ),
           ]),
         ),

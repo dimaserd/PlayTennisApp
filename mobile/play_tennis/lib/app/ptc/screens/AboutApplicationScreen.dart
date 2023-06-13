@@ -233,7 +233,7 @@ class ToWebAppWidget extends StatelessWidget {
           },
         );
       },
-      child: SizedBox(
+      child: const SizedBox(
         height: 50,
         width: double.infinity,
         child: Card(
