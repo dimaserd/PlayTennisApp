@@ -39,7 +39,7 @@ class NotificationsList extends StatelessWidget {
 
   Widget getChild() {
     return notifications.isEmpty
-        ?  Column(children: [
+        ? Column(children: const [
             Center(
               child: Text(
                 "У вас нет уведомлений",
