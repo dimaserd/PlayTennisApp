@@ -57,8 +57,8 @@ class _TelegramLinkScreen extends State<TelegramLinkScreen>
           title: const Text('Привязать Telegram'),
         ),
         drawer: null,
-        body: const Padding(
-          padding: EdgeInsets.all(20.0),
+        body: Padding(
+          padding: const EdgeInsets.all(20.0),
           child: TelegramLinkWidget(),
         ),
       ),

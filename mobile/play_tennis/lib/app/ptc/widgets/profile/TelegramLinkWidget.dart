@@ -8,7 +8,9 @@ import 'package:play_tennis/main.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class TelegramLinkWidget extends StatelessWidget {
-  const TelegramLinkWidget({
+  bool linkCopied = false;
+
+  TelegramLinkWidget({
     super.key,
   });
 
@@ -44,14 +46,13 @@ class TelegramLinkWidget extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
-          onTap: () => _tapHandler(context),
+          onTap: () => _createLinkClickHandler(context),
         ),
         const SizedBox(height: 10),
         ToTelegramButton(
           text: "Бот ${MainSettings.appName}",
           tapHandler: () {
-            var uri = Uri.parse(TelegramBotSettings.link());
-            launchUrl(uri);
+            _toBotClickHandler(context);
           },
         ),
         const SizedBox(
@@ -61,7 +62,18 @@ class TelegramLinkWidget extends StatelessWidget {
     );
   }
 
-  _tapHandler(BuildContext context) async {
+  _toBotClickHandler(BuildContext context) {
+    if (!linkCopied) {
+      BaseApiResponseUtils.showInfo(context,
+          "Перед переходом в Telegram-бот вам необходимо скопировать команду. Нажмите на текст выделенный голубым. Это скопирует вам специальную команду в буфео обмена, которую вы потом передадите в Telegram бот.");
+      return;
+    }
+
+    var uri = Uri.parse(TelegramBotSettings.link());
+    launchUrl(uri);
+  }
+
+  _createLinkClickHandler(BuildContext context) async {
     if (MyApp.inProccess) {
       return;
     }
@@ -106,6 +118,8 @@ class TelegramLinkWidget extends StatelessWidget {
         backgroundColor: Colors.blueAccent,
       ));
     });
+
+    linkCopied = true;
 
     MyApp.inProccess = false;
   }
