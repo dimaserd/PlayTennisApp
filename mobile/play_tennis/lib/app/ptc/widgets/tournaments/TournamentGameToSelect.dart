@@ -4,29 +4,39 @@ import 'package:play_tennis/app/ptc/widgets/games/GameDataWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/games/GameSetScores.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerSetScores.dart';
 import 'package:play_tennis/logic/ptc/services/GameService.dart';
+import 'package:play_tennis/logic/ptc/services/TournamentService.dart';
 
-class GameToSelect extends StatelessWidget {
-  final SinglesGameSimpleModel game;
+class TournamentGameToSelect extends StatelessWidget {
+  final TournamentEventModel game;
+  final TournamentDetailedModel tournament;
 
   final VoidCallback onChange;
   final List<String> ignorePlayerIds;
   final GameDataWidgetController gameDataWidgetController =
       GameDataWidgetController();
-  GameToSelect({
+
+  TournamentGameToSelect({
     super.key,
     required this.game,
+    required this.tournament,
     required this.ignorePlayerIds,
     required this.onChange,
   });
 
   GameSetScoresModel getScoresModel() {
-    var player1 = game.players![0].player!;
-    var player2 = game.players![1].player!;
+    var player1Id = game.players![0].userId!;
+    var player2Id = game.players![1].userId!;
+
+    var player1 = tournament.players!.firstWhere((e) => e.id! == player1Id);
+    var player2 = tournament.players!.firstWhere((e) => e.id! == player2Id);
 
     var player1Scores = toGameScores(0);
     var player2Scores = toGameScores(1);
 
-    var winner = game.players!.firstWhere((e) => e.isWinner).player!;
+    var winner = game.players!.firstWhere(
+      (e) => e.isWinner,
+      orElse: () => GamePlayerModel(userId: "default", isWinner: true),
+    );
 
     var sets = game.scoreData!.sets;
 
@@ -36,7 +46,7 @@ class GameToSelect extends StatelessWidget {
       sets: sets!,
       player1Scores: player1Scores,
       player2Scores: player2Scores,
-      winnerId: winner.id!,
+      winnerId: winner.userId!,
     );
   }
 

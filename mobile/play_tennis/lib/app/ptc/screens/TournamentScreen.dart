@@ -3,6 +3,7 @@ import 'package:play_tennis/app/main/widgets/Loading.dart';
 import 'package:play_tennis/app/ptc/widgets/html/HtmlViewWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/tournaments/JoinTournamentButton.dart';
 import 'package:play_tennis/app/ptc/widgets/tournaments/LeaveTournamentButton.dart';
+import 'package:play_tennis/app/ptc/widgets/tournaments/TournamentGamesList.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerModel.dart';
@@ -151,8 +152,8 @@ class _TournamentScreenState extends State<TournamentScreen> {
           ],
         ),
       ),
-      const Loading(
-        text: "Список игр пока не реализован. Воспользуйтесь Турнирной сеткой",
+      TournamentGamesList(
+        tournament: tournament!,
       ),
     ];
   }
