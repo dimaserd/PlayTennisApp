@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/images/CrocoAppImage.dart';
 import 'package:play_tennis/app/ptc/widgets/games/GameDataWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/games/GameSetScores.dart';
+import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerSetScores.dart';
 import 'package:play_tennis/logic/ptc/services/GameService.dart';
 import 'package:play_tennis/logic/ptc/services/TournamentService.dart';
@@ -21,6 +22,20 @@ class TournamentGameToSelect extends StatelessWidget {
     required this.onChange,
   });
 
+  GameSetScoresModelSafe getScoresModelSafe() {
+    if (game.players!.isEmpty) {
+      return GameSetScoresModelSafe(
+        succeeded: false,
+        model: null,
+      );
+    }
+
+    return GameSetScoresModelSafe(
+      succeeded: true,
+      model: getScoresModel(),
+    );
+  }
+
   GameSetScoresModel getScoresModel() {
     var player1Id = game.players![0].userId!;
     var player2Id = game.players![1].userId!;
@@ -33,7 +48,10 @@ class TournamentGameToSelect extends StatelessWidget {
 
     var winner = game.players!.firstWhere(
       (e) => e.isWinner,
-      orElse: () => GamePlayerModel(userId: "default", isWinner: true),
+      orElse: () => GamePlayerModel(
+        userId: "default",
+        isWinner: true,
+      ),
     );
 
     var sets = game.scoreData!.sets;
@@ -50,7 +68,7 @@ class TournamentGameToSelect extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var gameModel = getScoresModel();
+    var gameModelSafe = getScoresModelSafe();
     return GestureDetector(
       onTap: () {},
       child: Card(
@@ -68,6 +86,16 @@ class TournamentGameToSelect extends StatelessWidget {
           ),
           child: Column(
             children: [
+              Text(
+                game.description!,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
               game.imageFileId != null
                   ? CrocoAppImage(
                       imageFileId: game.imageFileId!,
@@ -76,12 +104,14 @@ class TournamentGameToSelect extends StatelessWidget {
               Container(
                 height: 10,
               ),
-              GameSetScores(
-                model: gameModel,
-                onTapped: (p) {
-                  onTappedHandler(p, context);
-                },
-              ),
+              gameModelSafe.succeeded && gameModelSafe.model != null
+                  ? GameSetScores(
+                      model: gameModelSafe.model!,
+                      onTapped: (p) {
+                        onTappedHandler(p, context);
+                      },
+                    )
+                  : const SizedBox.shrink(),
             ],
           ),
         ),
@@ -90,7 +120,11 @@ class TournamentGameToSelect extends StatelessWidget {
   }
 
   onTappedHandler(PlayerSimpleModel player, BuildContext context) {
-    Navigator.of(context).pushNamed("/tournament-game/${tournament.id!}");
+    BaseApiResponseUtils.showError(
+      context,
+      "Редактирование турнирных игр через приложение пока недоступно. Перейдите в сетку турнира и внесите матч через веб-версию",
+    );
+    //Navigator.of(context).pushNamed("/tournament-game/${tournament.id!}");
   }
 
   PlayerSetScores toGameScores(int numberPlayer) {
@@ -98,4 +132,14 @@ class TournamentGameToSelect extends StatelessWidget {
         game.scoreData!.sets!, numberPlayer);
     return gamePlayer;
   }
+}
+
+class GameSetScoresModelSafe {
+  final bool succeeded;
+  final GameSetScoresModel? model;
+
+  GameSetScoresModelSafe({
+    required this.succeeded,
+    required this.model,
+  });
 }
