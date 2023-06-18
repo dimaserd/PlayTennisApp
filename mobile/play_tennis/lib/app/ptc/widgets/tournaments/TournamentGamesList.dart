@@ -30,7 +30,6 @@ class TournamentGamesList extends StatelessWidget {
                 return TournamentGameToSelect(
                   tournament: tournament,
                   game: games[index],
-                  ignorePlayerIds: const [],
                   onChange: () {},
                 );
               },

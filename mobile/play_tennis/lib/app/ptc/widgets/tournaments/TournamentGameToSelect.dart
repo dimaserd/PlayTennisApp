@@ -11,7 +11,6 @@ class TournamentGameToSelect extends StatelessWidget {
   final TournamentDetailedModel tournament;
 
   final VoidCallback onChange;
-  final List<String> ignorePlayerIds;
   final GameDataWidgetController gameDataWidgetController =
       GameDataWidgetController();
 
@@ -19,7 +18,6 @@ class TournamentGameToSelect extends StatelessWidget {
     super.key,
     required this.game,
     required this.tournament,
-    required this.ignorePlayerIds,
     required this.onChange,
   });
 
@@ -92,11 +90,7 @@ class TournamentGameToSelect extends StatelessWidget {
   }
 
   onTappedHandler(PlayerSimpleModel player, BuildContext context) {
-    if (ignorePlayerIds.any((x) => x == player.id)) {
-      return;
-    }
-
-    Navigator.of(context).pushNamed("/player/${player.id!}");
+    Navigator.of(context).pushNamed("/tournament-game/${tournament.id!}");
   }
 
   PlayerSetScores toGameScores(int numberPlayer) {
