@@ -90,8 +90,8 @@ enum TournamentLeavingErrorType {
 
 class TournamentLeavingErrorTypeDartJsonGenerator {
   static TournamentLeavingErrorType getFromString(String value) {
-    return TournamentLeavingErrorType.values.firstWhere(
-        (e) => e.toString() == 'TournamentLeavingErrorType.' + value);
+    return TournamentLeavingErrorType.values
+        .firstWhere((e) => e.toString() == 'TournamentLeavingErrorType.$value');
   }
 
   static TournamentLeavingErrorType? getFromStringOrNull(String? value) {

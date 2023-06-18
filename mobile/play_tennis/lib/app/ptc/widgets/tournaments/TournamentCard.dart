@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/logic/ptc/services/TournamentService.dart';
 import 'package:play_tennis/app/ptc/widgets/html/HtmlViewWidget.dart';
-import 'package:play_tennis/main-extensions.dart';
 import 'package:play_tennis/main-routes.dart';
+import 'JoinTournamentButton.dart';
 
 class TournamentCard extends StatelessWidget {
   final TournamentSimpleModel tournament;
@@ -76,24 +76,13 @@ class TournamentCard extends StatelessWidget {
     if (!tournament.isInTournament && tournament.openForParticipantsJoining) {
       return Padding(
         padding: const EdgeInsets.all(10.0),
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.black,
-            minimumSize: const Size.fromHeight(36),
-          ),
-          onPressed: () {},
-          child: Text(
-            "Записаться ${tournament.participationCostRub}₽",
-          ),
+        child: JoinTournamentButton(
+          participationCostRub: tournament.participationCostRub,
+          tournamentId: tournament.id!,
         ),
       );
     }
 
     return const SizedBox.shrink();
-  }
-
-  void _launchUrl() async {
-    var url = "ptc/tournament/${tournament.id}";
-    MainAppExtensions.trylaunchAppUrl(url, (p0) => null);
   }
 }

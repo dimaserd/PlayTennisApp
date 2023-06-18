@@ -71,8 +71,18 @@ class _TournamentScreenState extends State<TournamentScreen> {
               ],
             ),
             title: loaded && tournament != null
-                ? Text(tournament!.name!)
-                : const Text("Загрузка турнира..."),
+                ? Text(
+                    tournament!.name!,
+                    style: const TextStyle(
+                      fontSize: 16,
+                    ),
+                  )
+                : const Text(
+                    "Загрузка турнира...",
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
           ),
           body: Padding(
             padding: const EdgeInsets.all(0.0),
@@ -139,7 +149,9 @@ class _TournamentScreenState extends State<TournamentScreen> {
           ],
         ),
       ),
-      const Loading(text: "Список игр"),
+      const Loading(
+        text: "Список игр пока не реализован. Воспользуйтесь Турнирной сеткой",
+      ),
     ];
   }
 
