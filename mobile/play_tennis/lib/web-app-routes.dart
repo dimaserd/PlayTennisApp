@@ -29,7 +29,17 @@ class WebAppRoutes {
 
       return WebAppRouteMatchResult(
         succeeded: true,
-        appRoute: MainRoutes.toPlayerCardRoute(gameRequestId),
+        appRoute: MainRoutes.toGameRequestCardRoute(gameRequestId),
+        webRoute: webRoute,
+      );
+    }
+
+    if (webRoute.contains("/ptc/tournament/")) {
+      var tournamentId = webRoute.replaceAll("/ptc/tournament/", "");
+
+      return WebAppRouteMatchResult(
+        succeeded: true,
+        appRoute: MainRoutes.toTournamentCardRoute(tournamentId),
         webRoute: webRoute,
       );
     }

@@ -30,9 +30,9 @@ class GameResponseActions extends StatelessWidget {
 
     if (response.acceptedByRequestAuthor) {
       return [
-         Expanded(
+        Expanded(
           child: Column(
-            children: [
+            children: const [
               Text(
                 "Вы приняли отклик этого игрока. Его контактные данные отправлены вам. Проверьте список уведомлений.",
                 style: TextStyle(
@@ -50,9 +50,9 @@ class GameResponseActions extends StatelessWidget {
 
     if (response.declinedByRequestAuthor) {
       return [
-         Expanded(
+        Expanded(
           child: Column(
-            children: [
+            children: const [
               Text(
                 "Вы не приняли отклик этого игрока.",
                 style: TextStyle(

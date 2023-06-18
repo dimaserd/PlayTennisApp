@@ -20,6 +20,7 @@ import 'package:play_tennis/app/ptc/screens/PlayScreen.dart';
 import 'package:play_tennis/app/ptc/screens/PlayerScreen.dart';
 import 'package:play_tennis/app/ptc/screens/TelegramLinkScreen.dart';
 import 'package:play_tennis/app/ptc/screens/TournamentsScreen.dart';
+import 'package:play_tennis/app/ptc/screens/TournamentScreen.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerModel.dart';
 
 class MainRoutes {
@@ -35,7 +36,15 @@ class MainRoutes {
     return '/player/$playerId';
   }
 
+  static String toTournamentCardRoute(String tournamentId) {
+    return '/tournament/$tournamentId';
+  }
+
   static void toPlayerCard(BuildContext context, String playerId) {
+    Navigator.of(context).pushNamed(toPlayerCardRoute(playerId));
+  }
+
+  static void toTournamentCard(BuildContext context, String playerId) {
     Navigator.of(context).pushNamed(toPlayerCardRoute(playerId));
   }
 
@@ -168,6 +177,15 @@ class MainRoutes {
       var id = uri.pathSegments[1];
       return MaterialPageRoute(
         builder: (context) => PlayerScreen(id: id),
+      );
+    }
+
+    // Обработка '/player/:id'
+    if (uri.pathSegments.length == 2 &&
+        uri.pathSegments.first == 'tournament') {
+      var id = uri.pathSegments[1];
+      return MaterialPageRoute(
+        builder: (context) => TournamentScreen(id: id),
       );
     }
 
