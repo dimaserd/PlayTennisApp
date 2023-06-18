@@ -45,7 +45,7 @@ class MainRoutes {
   }
 
   static void toTournamentCard(BuildContext context, String playerId) {
-    Navigator.of(context).pushNamed(toPlayerCardRoute(playerId));
+    Navigator.of(context).pushNamed(toTournamentCardRoute(playerId));
   }
 
   static String toGameRequestCardRoute(String requestId) {

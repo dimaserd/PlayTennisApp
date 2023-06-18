@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/Loading.dart';
-import 'package:play_tennis/app/ptc/widgets/games/SearchGamesWidget.dart';
-import 'package:play_tennis/app/ptc/widgets/players/ShowPlayerData.dart';
+import 'package:play_tennis/app/ptc/widgets/html/HtmlViewWidget.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerModel.dart';
 import 'package:play_tennis/logic/ptc/services/TournamentService.dart';
+import 'package:play_tennis/main-extensions.dart';
 import 'package:play_tennis/main-services.dart';
-import 'package:play_tennis/main-state.dart';
 
 class TournamentScreen extends StatefulWidget {
   final String id;
@@ -26,18 +25,8 @@ class _TournamentScreenState extends State<TournamentScreen> {
   @override
   void initState() {
     super.initState();
-    getPlayer();
     getLoginData();
-  }
-
-  void getPlayer() {
-    AppServices.playerService.getById(widget.id).then((value) {
-      setState(() {
-        loaded = true;
-        MainState.isAuthorized = player != null;
-        player = value;
-      });
-    });
+    getTournament();
   }
 
   void getTournament() {
@@ -81,8 +70,8 @@ class _TournamentScreenState extends State<TournamentScreen> {
                 ),
               ],
             ),
-            title: loaded && player != null
-                ? Text("${player!.surname!} ${player!.name!}")
+            title: loaded && tournament != null
+                ? Text(tournament!.name!)
                 : const Text("Загрузка турнира..."),
           ),
           body: Padding(
@@ -97,7 +86,7 @@ class _TournamentScreenState extends State<TournamentScreen> {
   }
 
   List<Widget> getWidgets() {
-    if (player == null || loginData == null) {
+    if (tournament == null || loginData == null) {
       return const [
         Loading(text: "Загрузка"),
         Loading(text: "Загрузка"),
@@ -105,14 +94,99 @@ class _TournamentScreenState extends State<TournamentScreen> {
     }
 
     return [
-      ShowPlayerData(
-        player: player!,
-        loginData: loginData!,
+      Card(
+        margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+        elevation: 4,
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 10,
+              ),
+              child: Container(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  tournament!.name!,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                const SizedBox(
+                  height: 5,
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                tournament!.description != null
+                    ? HtmlViewWidget(html: tournament!.description!)
+                    : const SizedBox.shrink(),
+                const SizedBox(
+                  height: 5,
+                ),
+                ...getActions(),
+              ],
+            )
+          ],
+        ),
       ),
-      SearchGamesWidget(
-        loginData: loginData!,
-        playerId: player!.id!,
-      )
+      const Loading(text: "Список игр"),
     ];
+  }
+
+  List<Widget> getActions() {
+    List<Widget> result = [];
+
+    if (!tournament!.isInTournament && tournament!.openForParticipantsJoining) {
+      result.add(
+        Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.blueAccent,
+              minimumSize: const Size.fromHeight(36),
+            ),
+            onPressed: () {},
+            child: Text(
+              "Записаться ${tournament!.participationCostRub}₽",
+            ),
+          ),
+        ),
+      );
+    }
+
+    result.add(
+      Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.black,
+            minimumSize: const Size.fromHeight(36),
+          ),
+          onPressed: () {
+            _launchUrl();
+          },
+          child: const Text(
+            "Турнирная сетка",
+          ),
+        ),
+      ),
+    );
+
+    return result;
+  }
+
+  void _launchUrl() async {
+    var url = "ptc/tournament/${tournament!.id}";
+    MainAppExtensions.trylaunchAppUrl(url, (p0) => null);
   }
 }

@@ -190,11 +190,7 @@ class GetTournamentsRequest {
   late bool? openForParticipantsJoining;
   late String? cityId;
   late TournamentActivityStatus? activityStatus;
-  late TournamentDurationType? durationType;
   late bool? showMine;
-  late bool useHiddenFilter;
-  late bool? hidden;
-  late bool? isExternal;
   late int? count;
   late int offSet;
 
@@ -202,11 +198,7 @@ class GetTournamentsRequest {
     required this.openForParticipantsJoining,
     required this.cityId,
     required this.activityStatus,
-    required this.durationType,
     required this.showMine,
-    required this.useHiddenFilter,
-    required this.hidden,
-    required this.isExternal,
     required this.count,
     required this.offSet,
   });
@@ -218,13 +210,7 @@ class GetTournamentsRequest {
         activityStatus:
             TournamentActivityStatusDartJsonGenerator.getFromStringOrNull(
                 json["activityStatus"]),
-        durationType:
-            TournamentDurationTypeDartJsonGenerator.getFromStringOrNull(
-                json["durationType"]),
         showMine: json["showMine"],
-        useHiddenFilter: json["useHiddenFilter"],
-        hidden: json["hidden"],
-        isExternal: json["isExternal"],
         count: json["count"],
         offSet: json["offSet"],
       );
@@ -236,11 +222,7 @@ class GetTournamentsRequest {
             ? TournamentActivityStatusDartJsonGenerator.enumToString(
                 activityStatus!)
             : null,
-        'durationType': durationType,
         'showMine': showMine,
-        'useHiddenFilter': useHiddenFilter,
-        'hidden': hidden,
-        'isExternal': isExternal,
         'count': count,
         'offSet': offSet,
       };
@@ -414,7 +396,9 @@ class TournamentService {
       var result = GetListResult(
         totalCount: 0,
         list: List<TournamentSimpleModel>.from(
-          json["list"].map((x) => TournamentSimpleModel.fromJson(x)),
+          json["list"].map(
+            (x) => TournamentSimpleModel.fromJson(x),
+          ),
         ),
         count: json["count"],
         offSet: json["offSet"],

@@ -32,6 +32,7 @@ class _SearchTournamentsForm extends State<SearchTournamentsForm> {
   Timer? _debounce;
 
   List<TournamentSimpleModel> activeTournaments = [];
+  List<TournamentSimpleModel> openedForParticipationTournaments = [];
   List<TournamentSimpleModel> plannedTournaments = [];
   List<TournamentSimpleModel> finishedTournaments = [];
   PublicTelegramChatForCityModel? cityModel;
@@ -122,7 +123,8 @@ class _SearchTournamentsForm extends State<SearchTournamentsForm> {
         ),
         if (activeTournaments.isEmpty &&
             plannedTournaments.isEmpty &&
-            finishedTournaments.isEmpty) ...{
+            finishedTournaments.isEmpty &&
+            openedForParticipationTournaments.isEmpty) ...{
           const SliverToBoxAdapter(
               child: Center(
             child: Text(
@@ -135,16 +137,21 @@ class _SearchTournamentsForm extends State<SearchTournamentsForm> {
         } else ...{
           if (activeTournaments.isNotEmpty) ...{
             StickyHeaderList(
-                tournaments: activeTournaments, text: "Текущие турниры:")
+              tournaments: activeTournaments,
+              text: "Текущие турниры:",
+            )
           },
-          if (plannedTournaments.isNotEmpty) ...{
+          if (openedForParticipationTournaments.isNotEmpty) ...{
             StickyHeaderList(
-                tournaments: plannedTournaments,
-                text: "Открытые для записи турниры:")
+              tournaments: openedForParticipationTournaments,
+              text: "Открытые для записи турниры:",
+            )
           },
           if (finishedTournaments.isNotEmpty) ...{
             StickyHeaderList(
-                tournaments: finishedTournaments, text: "Завершенные")
+              tournaments: finishedTournaments,
+              text: "Завершенные",
+            )
           }
         }
       ],
@@ -165,21 +172,22 @@ class _SearchTournamentsForm extends State<SearchTournamentsForm> {
     getData();
   }
 
-  getData() {
+  GetTournamentsRequest getBaseRequest() {
     var cityId = countryAndCitySelectController.city?.id;
 
-    var activeRequest = GetTournamentsRequest(
+    return GetTournamentsRequest(
       openForParticipantsJoining: null,
       activityStatus: TournamentActivityStatus.Active,
-      durationType: null,
-      showMine: _isShowMine,
-      useHiddenFilter: false,
-      hidden: false,
-      isExternal: false,
+      showMine: null,
       cityId: cityId,
       count: 10,
       offSet: _offSet,
     );
+  }
+
+  getActiveTournaments() {
+    var activeRequest = getBaseRequest();
+    activeRequest.activityStatus = TournamentActivityStatus.Active;
 
     AppServices.tournamentService.search(activeRequest, (e) {
       BaseApiResponseUtils.showError(
@@ -188,6 +196,9 @@ class _SearchTournamentsForm extends State<SearchTournamentsForm> {
       if (!mounted) {
         return;
       }
+
+      print("Active ${value.list.length}");
+
       if (value.list.isEmpty) {
         setState(() {
           _isActiveLoader = false;
@@ -205,8 +216,10 @@ class _SearchTournamentsForm extends State<SearchTournamentsForm> {
         });
       }
     });
+  }
 
-    var finishedRequest = activeRequest;
+  getFinishedTournaments() {
+    var finishedRequest = getBaseRequest();
     finishedRequest.activityStatus = TournamentActivityStatus.Finished;
 
     AppServices.tournamentService.search(finishedRequest, (e) {
@@ -233,9 +246,11 @@ class _SearchTournamentsForm extends State<SearchTournamentsForm> {
         });
       }
     });
+  }
 
-    var plannedRequest = activeRequest;
-    finishedRequest.activityStatus = TournamentActivityStatus.Planned;
+  getPlannedTournaments() {
+    var plannedRequest = getBaseRequest();
+    plannedRequest.activityStatus = TournamentActivityStatus.Planned;
 
     AppServices.tournamentService.search(plannedRequest, (e) {
       BaseApiResponseUtils.showError(
@@ -261,8 +276,44 @@ class _SearchTournamentsForm extends State<SearchTournamentsForm> {
         });
       }
     });
+  }
 
-    getCityData();
+  getOpenedForParticipationTournaments() {
+    var plannedRequest = getBaseRequest();
+    plannedRequest.activityStatus = TournamentActivityStatus.Planned;
+    plannedRequest.openForParticipantsJoining = true;
+
+    AppServices.tournamentService.search(plannedRequest, (e) {
+      BaseApiResponseUtils.showError(
+          context, "Произошла ошибка при поиске турниров.");
+    }).then((value) {
+      if (!mounted) {
+        return;
+      }
+      if (value.list.isEmpty) {
+        setState(() {
+          _isActiveLoader = false;
+        });
+      }
+
+      if (_offSet == 0 || _isTapSearch == true) {
+        _isTapSearch = false;
+        setState(() {
+          openedForParticipationTournaments = value.list;
+        });
+      } else {
+        setState(() {
+          openedForParticipationTournaments += value.list;
+        });
+      }
+    });
+  }
+
+  getData() {
+    getActiveTournaments();
+    getOpenedForParticipationTournaments();
+    getFinishedTournaments();
+    getPlannedTournaments();
   }
 
   getCityData() {
