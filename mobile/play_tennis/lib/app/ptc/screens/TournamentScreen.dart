@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/Loading.dart';
 import 'package:play_tennis/app/ptc/widgets/html/HtmlViewWidget.dart';
+import 'package:play_tennis/app/ptc/widgets/tournaments/JoinTournamentButton.dart';
+import 'package:play_tennis/app/ptc/widgets/tournaments/LeaveTournamentButton.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerModel.dart';
@@ -158,19 +160,34 @@ class _TournamentScreenState extends State<TournamentScreen> {
   List<Widget> getActions() {
     List<Widget> result = [];
 
-    if (!tournament!.isInTournament && tournament!.openForParticipantsJoining) {
+    var t = tournament!;
+    if (!t.isInTournament && t.openForParticipantsJoining) {
       result.add(
         Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blueAccent,
-              minimumSize: const Size.fromHeight(36),
-            ),
-            onPressed: () {},
-            child: Text(
-              "Записаться ${tournament!.participationCostRub}₽",
-            ),
+          padding: const EdgeInsets.only(
+            top: 10.0,
+            left: 10.0,
+            right: 10.0,
+          ),
+          child: JoinTournamentButton(
+            participationCostRub: t.participationCostRub,
+            tournamentId: t.id!,
+          ),
+        ),
+      );
+    }
+
+    if (t.isInTournament && t.openForParticipantsJoining) {
+      result.add(
+        Padding(
+          padding: const EdgeInsets.only(
+            top: 10.0,
+            left: 10.0,
+            right: 10.0,
+          ),
+          child: LeaveTournamentButton(
+            participationCostRub: t.participationCostRub,
+            tournamentId: t.id!,
           ),
         ),
       );
@@ -178,7 +195,11 @@ class _TournamentScreenState extends State<TournamentScreen> {
 
     result.add(
       Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.only(
+          top: 10.0,
+          left: 10.0,
+          right: 10.0,
+        ),
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.black,

@@ -16,7 +16,7 @@ class JoinTournamentButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.blue,
         minimumSize: const Size.fromHeight(36),
       ),
       onPressed: () {
