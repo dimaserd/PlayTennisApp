@@ -32,6 +32,7 @@ class MainRoutes {
   static String play = "/play";
   static String notifications = "/notificatins";
   static String profile = "/profile";
+  static String registration = '/registration';
 
   static String toPlayerCardRoute(String playerId) {
     return '/player/$playerId';
@@ -127,7 +128,7 @@ class MainRoutes {
       );
     }
 
-    if (settings.name == '/registration') {
+    if (settings.name == registration) {
       return MaterialPageRoute(
         builder: (context) => const RegistrationScreen(),
       );

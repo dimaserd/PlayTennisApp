@@ -70,10 +70,24 @@ class SetLocationScreenWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 10.0),
               child: TextButton(
+                child: const Text("Зарегистрироваться"),
+                onPressed: () {
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                    MainRoutes.registration,
+                    (r) => true,
+                  );
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 10.0),
+              child: TextButton(
                 child: const Text("Авторизоваться"),
                 onPressed: () {
-                  Navigator.of(context)
-                      .pushNamedAndRemoveUntil(MainRoutes.login, (r) => true);
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                    MainRoutes.login,
+                    (r) => true,
+                  );
                 },
               ),
             ),

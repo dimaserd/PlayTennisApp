@@ -37,7 +37,7 @@ class JoinTournamentButton extends StatelessWidget {
 
         if (value.responseObject!.errorType ==
             TournamentJoiningErrorType.NotEnoughMoney) {
-          //Показать голубую кнопку (Пополнить баланс) эта кнопка откроет браузер
+          //TODO Показать голубую кнопку (Пополнить баланс) эта кнопка откроет браузер
         } else {
           //TODO Скрыть кнопку
         }
