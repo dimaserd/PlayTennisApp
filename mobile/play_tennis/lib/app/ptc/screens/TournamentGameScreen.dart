@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/Loading.dart';
-import 'package:play_tennis/app/ptc/widgets/html/HtmlViewWidget.dart';
-import 'package:play_tennis/app/ptc/widgets/tournaments/JoinTournamentButton.dart';
-import 'package:play_tennis/app/ptc/widgets/tournaments/LeaveTournamentButton.dart';
-import 'package:play_tennis/app/ptc/widgets/tournaments/TournamentGamesList.dart';
+import 'package:play_tennis/app/main/widgets/images/CrocoAppImage.dart';
+import 'package:play_tennis/app/ptc/widgets/games/GameSetScores.dart';
+import 'package:play_tennis/app/ptc/widgets/tournaments/TournamentGameScoresWidgetExtensions.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
-import 'package:play_tennis/logic/ptc/models/PlayerModel.dart';
-import 'package:play_tennis/logic/ptc/services/TournamentService.dart';
-import 'package:play_tennis/main-extensions.dart';
+import 'package:play_tennis/logic/ptc/services/TournamentGameService.dart';
+import 'package:play_tennis/main-routes.dart';
 import 'package:play_tennis/main-services.dart';
 
 class TournamentGameScreen extends StatefulWidget {
@@ -20,8 +18,7 @@ class TournamentGameScreen extends StatefulWidget {
 }
 
 class _TournamentGameScreenState extends State<TournamentGameScreen> {
-  PlayerModel? player;
-  TournamentDetailedModel? tournament;
+  TournamentGameDetailedModel? game;
   bool loaded = false;
   CurrentLoginData? loginData;
 
@@ -33,15 +30,15 @@ class _TournamentGameScreenState extends State<TournamentGameScreen> {
   }
 
   void getTournament() {
-    AppServices.tournamentService.getById(widget.id, (e) {
+    AppServices.tournamentGameService.getByIdDetailed(widget.id, (e) {
       BaseApiResponseUtils.showError(
         (context),
-        "Произошла ошибка при загрузке турнира",
+        "Произошла ошибка при загрузке игры для турнира",
       );
     }).then((value) {
       setState(() {
         loaded = true;
-        tournament = value;
+        game = value;
       });
     });
   }
@@ -66,22 +63,22 @@ class _TournamentGameScreenState extends State<TournamentGameScreen> {
             bottom: const TabBar(
               tabs: [
                 Tab(
-                  text: "Главная",
+                  text: "Игра",
                 ),
                 Tab(
-                  text: "Игры",
+                  text: "Дополнительно",
                 ),
               ],
             ),
-            title: loaded && tournament != null
+            title: loaded && game != null
                 ? Text(
-                    tournament!.name!,
+                    game!.game!.description!,
                     style: const TextStyle(
                       fontSize: 16,
                     ),
                   )
                 : const Text(
-                    "Загрузка турнира...",
+                    "Загрузка игры",
                     style: TextStyle(
                       fontSize: 16,
                     ),
@@ -99,128 +96,116 @@ class _TournamentGameScreenState extends State<TournamentGameScreen> {
   }
 
   List<Widget> getWidgets() {
-    if (tournament == null || loginData == null) {
+    if (game == null || loginData == null) {
       return const [
         Loading(text: "Загрузка"),
         Loading(text: "Загрузка"),
       ];
     }
 
+    var scoresSafe = TournamentGameScoresWidgetExtensions.getScoresModelSafe(
+      game!.game!,
+      game!.players!,
+    );
+
     return [
-      Card(
-        margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-        elevation: 4,
+      Expanded(
         child: Column(
           children: [
-            const SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10,
-              ),
-              child: Container(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  tournament!.name!,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                  ),
+            Card(
+              margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+              elevation: 4,
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                      ),
+                      child: Container(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          game!.game!.description!,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    game!.game!.imageFileId != null
+                        ? CrocoAppImage(
+                            imageFileId: game!.game!.imageFileId!,
+                          )
+                        : const SizedBox.shrink(),
+                    Container(
+                      height: 10,
+                    ),
+                    scoresSafe.succeeded
+                        ? Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: GameSetScores(
+                              model: scoresSafe.model!,
+                              onTapped: (p) {
+                                MainRoutes.toPlayerCard(context, p.id!);
+                              },
+                            ),
+                          )
+                        : const SizedBox.shrink(),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    ...getActions(),
+                  ],
                 ),
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                const SizedBox(
-                  height: 5,
+            Card(
+              margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+              elevation: 4,
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  children: const [
+                    SizedBox(
+                      height: 10,
+                    )
+                  ],
                 ),
-                const SizedBox(
-                  height: 5,
-                ),
-                tournament!.description != null
-                    ? HtmlViewWidget(html: tournament!.description!)
-                    : const SizedBox.shrink(),
-                const SizedBox(
-                  height: 5,
-                ),
-                ...getActions(),
-              ],
-            )
+              ),
+            ),
           ],
         ),
       ),
-      TournamentGamesList(
-        tournament: tournament!,
-      ),
+      const SizedBox.shrink()
     ];
   }
 
   List<Widget> getActions() {
     List<Widget> result = [];
 
-    var t = tournament!;
-    if (!t.isInTournament && t.openForParticipantsJoining) {
-      result.add(
-        Padding(
-          padding: const EdgeInsets.only(
-            top: 10.0,
-            left: 10.0,
-            right: 10.0,
-          ),
-          child: JoinTournamentButton(
-            participationCostRub: t.participationCostRub,
-            tournamentId: t.id!,
-          ),
-        ),
-      );
-    }
-
-    if (t.isInTournament && t.openForParticipantsJoining) {
-      result.add(
-        Padding(
-          padding: const EdgeInsets.only(
-            top: 10.0,
-            left: 10.0,
-            right: 10.0,
-          ),
-          child: LeaveTournamentButton(
-            participationCostRub: t.participationCostRub,
-            tournamentId: t.id!,
-          ),
-        ),
-      );
-    }
-
     result.add(
-      Padding(
-        padding: const EdgeInsets.only(
-          top: 10.0,
-          left: 10.0,
-          right: 10.0,
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.black,
+          minimumSize: const Size.fromHeight(36),
         ),
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.black,
-            minimumSize: const Size.fromHeight(36),
-          ),
-          onPressed: () {
-            _launchUrl();
-          },
-          child: const Text(
-            "Турнирная сетка",
-          ),
+        onPressed: () {},
+        child: const Text(
+          "Редактировать счет",
         ),
       ),
     );
-
     return result;
-  }
-
-  void _launchUrl() async {
-    var url = "ptc/tournament/${tournament!.id}";
-    MainAppExtensions.trylaunchAppUrl(url, (p0) => null);
   }
 }

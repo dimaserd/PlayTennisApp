@@ -19,6 +19,7 @@ import 'package:play_tennis/app/ptc/screens/MainScreen.dart';
 import 'package:play_tennis/app/ptc/screens/PlayScreen.dart';
 import 'package:play_tennis/app/ptc/screens/PlayerScreen.dart';
 import 'package:play_tennis/app/ptc/screens/TelegramLinkScreen.dart';
+import 'package:play_tennis/app/ptc/screens/TournamentGameScreen.dart';
 import 'package:play_tennis/app/ptc/screens/TournamentsScreen.dart';
 import 'package:play_tennis/app/ptc/screens/TournamentScreen.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerModel.dart';
@@ -40,12 +41,27 @@ class MainRoutes {
     return '/tournament/$tournamentId';
   }
 
-  static void toPlayerCard(BuildContext context, String playerId) {
-    Navigator.of(context).pushNamed(toPlayerCardRoute(playerId));
+  static String toTournamentGameCardRoute(String tournamentGameId) {
+    return '/tournament-game/$tournamentGameId';
   }
 
-  static void toTournamentCard(BuildContext context, String playerId) {
-    Navigator.of(context).pushNamed(toTournamentCardRoute(playerId));
+  static void toPlayerCard(BuildContext context, String playerId) {
+    Navigator.of(context).pushNamed(
+      toPlayerCardRoute(playerId),
+    );
+  }
+
+  static void toTournamentCard(BuildContext context, String tournamentId) {
+    Navigator.of(context).pushNamed(
+      toTournamentCardRoute(tournamentId),
+    );
+  }
+
+  static void toTournamentGameCard(
+      BuildContext context, String tournamentGameId) {
+    Navigator.of(context).pushNamed(
+      toTournamentGameCardRoute(tournamentGameId),
+    );
   }
 
   static String toGameRequestCardRoute(String requestId) {
@@ -180,12 +196,21 @@ class MainRoutes {
       );
     }
 
-    // Обработка '/player/:id'
+    // Обработка '/tournament/:id'
     if (uri.pathSegments.length == 2 &&
         uri.pathSegments.first == 'tournament') {
       var id = uri.pathSegments[1];
       return MaterialPageRoute(
         builder: (context) => TournamentScreen(id: id),
+      );
+    }
+
+    // Обработка '/tournament/:id'
+    if (uri.pathSegments.length == 2 &&
+        uri.pathSegments.first == 'tournament-game') {
+      var id = uri.pathSegments[1];
+      return MaterialPageRoute(
+        builder: (context) => TournamentGameScreen(id: id),
       );
     }
 
