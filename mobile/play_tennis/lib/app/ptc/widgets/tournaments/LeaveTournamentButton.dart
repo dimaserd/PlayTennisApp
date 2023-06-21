@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/main-services.dart';
 
-class LeaveTournamentButton extends StatelessWidget {
+class LeaveTournamentButton extends StatefulWidget {
   final int participationCostRub;
   final String tournamentId;
   const LeaveTournamentButton({
@@ -12,29 +12,40 @@ class LeaveTournamentButton extends StatelessWidget {
   });
 
   @override
+  State<LeaveTournamentButton> createState() => _LeaveTournamentButton();
+}
+
+class _LeaveTournamentButton extends State<LeaveTournamentButton> {
+  bool isHidePaymentButton = true;
+
+  @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.red,
-        minimumSize: const Size.fromHeight(36),
-      ),
-      onPressed: () {
-        clickHandler(context);
-      },
-      child: const Text(
-        "Покинуть турнир",
+    return Visibility(
+      visible: isHidePaymentButton,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.red,
+          minimumSize: const Size.fromHeight(36),
+        ),
+        onPressed: () {
+          clickHandler(context);
+        },
+        child: const Text(
+          "Покинуть турнир",
+        ),
       ),
     );
   }
 
   clickHandler(BuildContext context) {
-    AppServices.tournamentPlayerService.leave(tournamentId).then((value) {
-      if (!value.isSucceeded) {
-        BaseApiResponseUtils.showError(context, value.message);
-      } else {
+    AppServices.tournamentPlayerService.leave(widget.tournamentId).then((value) {
+      if (value.isSucceeded) {
         BaseApiResponseUtils.showSuccess(context, value.message);
-
-        //TODO Скрыть кнопку
+      } else {
+        BaseApiResponseUtils.showError(context, value.message);
+        setState(() {
+          isHidePaymentButton = false;
+        });
       }
     });
   }

@@ -5,6 +5,8 @@ import 'package:play_tennis/main-services.dart';
 import 'package:play_tennis/main-settings.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+enum PaymentType { mobile, webSite }
+
 class JoinTournamentButton extends StatefulWidget {
   final int participationCostRub;
   final String tournamentId;
@@ -20,24 +22,41 @@ class JoinTournamentButton extends StatefulWidget {
 
 class _JoinTournamentButton extends State<JoinTournamentButton> {
   bool isHidePaymentButton = true;
+  PaymentType type = PaymentType.mobile;
 
   @override
   Widget build(BuildContext context) {
-    return Visibility(
-      visible: isHidePaymentButton,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.blue,
-          minimumSize: const Size.fromHeight(36),
+    if (type == PaymentType.mobile) {
+      return Visibility(
+        visible: isHidePaymentButton,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.blue,
+            minimumSize: const Size.fromHeight(36),
+          ),
+          onPressed: () {
+            clickHandler(context);
+          },
+          child: Text(
+            "Записаться ${widget.participationCostRub}",
+          ),
         ),
-        onPressed: () {
-          clickHandler(context);
-        },
-        child: Text(
-          "Записаться ${widget.participationCostRub}",
-        ),
-      ),
-    );
+      );
+    } else {
+      return ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.blue,
+            minimumSize: const Size.fromHeight(36),
+          ),
+          onPressed: () {
+            var uri = Uri.parse(MainSettings.domain);
+            launchUrl(uri);
+          },
+          child: const Text(
+            "Пополнить баланс",
+          ),
+      );
+    }
   }
 
   clickHandler(BuildContext context) {
@@ -48,8 +67,9 @@ class _JoinTournamentButton extends State<JoinTournamentButton> {
         if (value.responseObject!.errorType ==
             TournamentJoiningErrorType.NotEnoughMoney) {
           BaseApiResponseUtils.showError(context, value.message);
-          var uri = Uri.parse(MainSettings.domain);
-          launchUrl(uri);
+          setState(() {
+            type = PaymentType.webSite;
+          });
         } else {
           setState(() {
             isHidePaymentButton = false;
