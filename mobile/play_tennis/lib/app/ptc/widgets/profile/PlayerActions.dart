@@ -44,7 +44,9 @@ class _PlayerActionsState extends State<PlayerActions> {
 
                   if (widget.loginData.userId == widget.player.id) {
                     BaseApiResponseUtils.showError(
-                        context, "Вы не можете внести игру против самого себя");
+                      context,
+                      "Вы не можете внести игру против самого себя",
+                    );
                     return;
                   }
 

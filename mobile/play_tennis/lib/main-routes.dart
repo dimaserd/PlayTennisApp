@@ -19,7 +19,9 @@ import 'package:play_tennis/app/ptc/screens/MainScreen.dart';
 import 'package:play_tennis/app/ptc/screens/PlayScreen.dart';
 import 'package:play_tennis/app/ptc/screens/PlayerScreen.dart';
 import 'package:play_tennis/app/ptc/screens/TelegramLinkScreen.dart';
+import 'package:play_tennis/app/ptc/screens/TournamentGameScreen.dart';
 import 'package:play_tennis/app/ptc/screens/TournamentsScreen.dart';
+import 'package:play_tennis/app/ptc/screens/TournamentScreen.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerModel.dart';
 
 class MainRoutes {
@@ -30,13 +32,37 @@ class MainRoutes {
   static String play = "/play";
   static String notifications = "/notificatins";
   static String profile = "/profile";
+  static String registration = '/registration';
 
   static String toPlayerCardRoute(String playerId) {
     return '/player/$playerId';
   }
 
+  static String toTournamentCardRoute(String tournamentId) {
+    return '/tournament/$tournamentId';
+  }
+
+  static String toTournamentGameCardRoute(String tournamentGameId) {
+    return '/tournament-game/$tournamentGameId';
+  }
+
   static void toPlayerCard(BuildContext context, String playerId) {
-    Navigator.of(context).pushNamed(toPlayerCardRoute(playerId));
+    Navigator.of(context).pushNamed(
+      toPlayerCardRoute(playerId),
+    );
+  }
+
+  static void toTournamentCard(BuildContext context, String tournamentId) {
+    Navigator.of(context).pushNamed(
+      toTournamentCardRoute(tournamentId),
+    );
+  }
+
+  static void toTournamentGameCard(
+      BuildContext context, String tournamentGameId) {
+    Navigator.of(context).pushNamed(
+      toTournamentGameCardRoute(tournamentGameId),
+    );
   }
 
   static String toGameRequestCardRoute(String requestId) {
@@ -102,7 +128,7 @@ class MainRoutes {
       );
     }
 
-    if (settings.name == '/registration') {
+    if (settings.name == registration) {
       return MaterialPageRoute(
         builder: (context) => const RegistrationScreen(),
       );
@@ -168,6 +194,24 @@ class MainRoutes {
       var id = uri.pathSegments[1];
       return MaterialPageRoute(
         builder: (context) => PlayerScreen(id: id),
+      );
+    }
+
+    // Обработка '/tournament/:id'
+    if (uri.pathSegments.length == 2 &&
+        uri.pathSegments.first == 'tournament') {
+      var id = uri.pathSegments[1];
+      return MaterialPageRoute(
+        builder: (context) => TournamentScreen(id: id),
+      );
+    }
+
+    // Обработка '/tournament/:id'
+    if (uri.pathSegments.length == 2 &&
+        uri.pathSegments.first == 'tournament-game') {
+      var id = uri.pathSegments[1];
+      return MaterialPageRoute(
+        builder: (context) => TournamentGameScreen(id: id),
       );
     }
 

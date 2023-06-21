@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/images/CrocoAppImage.dart';
 import 'package:play_tennis/app/ptc/widgets/games/GameDataWidget.dart';
-import 'package:play_tennis/app/ptc/widgets/PlayerSetsScoreList.dart';
+import 'package:play_tennis/app/ptc/widgets/games/GameSetScores.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerSetScores.dart';
 import 'package:play_tennis/logic/ptc/services/GameService.dart';
 
@@ -19,14 +19,30 @@ class GameToSelect extends StatelessWidget {
     required this.onChange,
   });
 
-  @override
-  Widget build(BuildContext context) {
+  GameSetScoresModel getScoresModel() {
     var player1 = game.players![0].player!;
     var player2 = game.players![1].player!;
 
-    var gamePlayer1 = toGameScores(0);
-    var gamePlayer2 = toGameScores(1);
+    var player1Scores = toGameScores(0);
+    var player2Scores = toGameScores(1);
 
+    var winner = game.players!.firstWhere((e) => e.isWinner).player!;
+
+    var sets = game.scoreData!.sets;
+
+    return GameSetScoresModel(
+      player1: player1,
+      player2: player2,
+      sets: sets!,
+      player1Scores: player1Scores,
+      player2Scores: player2Scores,
+      winnerId: winner.id!,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var gameModel = getScoresModel();
     return GestureDetector(
       onTap: () {},
       child: Card(
@@ -52,38 +68,12 @@ class GameToSelect extends StatelessWidget {
               Container(
                 height: 10,
               ),
-              Column(
-                children: [
-                  PlayerSetsScoreList(
-                    sets: game.scoreData!.sets,
-                    player: player1,
-                    gameScores: gamePlayer1,
-                    playerId: 0,
-                    onTapped: (p) {
-                      onTappedHandler(p, context);
-                    },
-                    isWinner: game.players!
-                            .firstWhere((e) => e.isWinner)
-                            .player!
-                            .id ==
-                        player1.id,
-                  ),
-                  PlayerSetsScoreList(
-                    sets: game.scoreData!.sets,
-                    player: player2,
-                    gameScores: gamePlayer2,
-                    playerId: 1,
-                    onTapped: (p) {
-                      onTappedHandler(p, context);
-                    },
-                    isWinner: game.players!
-                            .firstWhere((e) => e.isWinner)
-                            .player!
-                            .id ==
-                        player2.id,
-                  )
-                ],
-              )
+              GameSetScores(
+                model: gameModel,
+                onTapped: (p) {
+                  onTappedHandler(p, context);
+                },
+              ),
             ],
           ),
         ),

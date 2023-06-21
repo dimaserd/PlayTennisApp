@@ -16,6 +16,8 @@ import 'package:play_tennis/logic/ptc/services/GameService.dart';
 import 'package:play_tennis/logic/ptc/services/PlayerRegistrationService.dart';
 import 'package:play_tennis/logic/ptc/services/PlayerService.dart';
 import 'package:play_tennis/logic/ptc/services/TelegramPlayerService.dart';
+import 'package:play_tennis/logic/ptc/services/TournamentGameService.dart';
+import 'package:play_tennis/logic/ptc/services/TournamentPlayerService.dart';
 import 'package:play_tennis/logic/ptc/services/TournamentService.dart';
 import 'package:play_tennis/logic/ptc/services/TrainerCardService.dart';
 import 'main-settings.dart';
@@ -56,4 +58,8 @@ class AppServices {
       DeletePlayerService(networkService);
   static final TelegramPlayerService telegramPlayerService =
       TelegramPlayerService(networkService);
+  static final TournamentPlayerService tournamentPlayerService =
+      TournamentPlayerService(networkService);
+  static final TournamentGameService tournamentGameService =
+      TournamentGameService(networkService);
 }

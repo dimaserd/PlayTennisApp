@@ -49,10 +49,10 @@ class CheckAuthScreenState extends State<CheckAuthScreen> {
               alignment: Alignment.center,
               height: MediaQuery.of(context).size.height,
               color: const Color.fromRGBO(82, 186, 141, 1),
-              child:  Column(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
+                children: const [
                   AnimatedLoading(),
                 ],
               ),

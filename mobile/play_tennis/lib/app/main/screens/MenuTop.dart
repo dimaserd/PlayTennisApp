@@ -13,18 +13,20 @@ class MenuTop extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                 Column(children: [
-                  Text("Сетка",
-                      style: TextStyle(
-                          color: Color(0xFF333A3B),
-                          fontFamily: "OpenSans-Bold",
-                          fontSize: 45)),
-                  Text("пятница, 5 мая",
-                      style: TextStyle(
-                          fontFamily: "Quicksand",
-                          fontSize: 18,
-                          color: Color(0xFF5A6569)))
-                ]),
+                Column(
+                  children: const [
+                    Text("Сетка",
+                        style: TextStyle(
+                            color: Color(0xFF333A3B),
+                            fontFamily: "OpenSans-Bold",
+                            fontSize: 45)),
+                    Text("пятница, 5 мая",
+                        style: TextStyle(
+                            fontFamily: "Quicksand",
+                            fontSize: 18,
+                            color: Color(0xFF5A6569)))
+                  ],
+                ),
                 Row(
                   children: [
                     Image.asset(
