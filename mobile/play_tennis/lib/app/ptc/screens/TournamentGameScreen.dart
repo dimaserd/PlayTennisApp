@@ -110,81 +110,69 @@ class _TournamentGameScreenState extends State<TournamentGameScreen> {
 
     return [
       Expanded(
-        child: Column(
-          children: [
-            Card(
-              margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-              elevation: 4,
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Card(
+                margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+                elevation: 4,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 10,
                       ),
-                      child: Container(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          game!.game!.description!,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                        ),
+                        child: Container(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            game!.game!.description!,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    game!.game!.imageFileId != null
-                        ? CrocoAppImage(
-                            imageFileId: game!.game!.imageFileId!,
-                          )
-                        : const SizedBox.shrink(),
-                    Container(
-                      height: 10,
-                    ),
-                    scoresSafe.succeeded
-                        ? Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: GameSetScores(
-                              model: scoresSafe.model!,
-                              onTapped: (p) {
-                                MainRoutes.toPlayerCard(context, p.id!);
-                              },
-                            ),
-                          )
-                        : const SizedBox.shrink(),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    ...getActions(),
-                  ],
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      game!.game!.imageFileId != null
+                          ? CrocoAppImage(
+                              imageFileId: game!.game!.imageFileId!,
+                            )
+                          : const SizedBox.shrink(),
+                      Container(
+                        height: 10,
+                      ),
+                      scoresSafe.succeeded
+                          ? Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 10),
+                              child: GameSetScores(
+                                model: scoresSafe.model!,
+                                onTapped: (p) {
+                                  MainRoutes.toPlayerCard(context, p.id!);
+                                },
+                              ),
+                            )
+                          : const SizedBox.shrink(),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      ...getActions(),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Card(
-              margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-              elevation: 4,
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  children: const [
-                    SizedBox(
-                      height: 10,
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       const SizedBox.shrink()
