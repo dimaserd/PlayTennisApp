@@ -63,7 +63,7 @@ class _TournamentGameScreenState extends State<TournamentGameScreen> {
             bottom: const TabBar(
               tabs: [
                 Tab(
-                  text: "Игра1",
+                  text: "Игра",
                 ),
                 Tab(
                   text: "Дополнительно",
