@@ -13,6 +13,8 @@ import 'package:play_tennis/web-app-routes.dart';
 import 'package:uni_links/uni_links.dart';
 import 'dart:async';
 
+import 'package:url_launcher/url_launcher.dart';
+
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
@@ -47,6 +49,7 @@ class _MainScreenState extends State<MainScreen> {
     _sub?.cancel();
     _sub = uriLinkStream.listen(
       (Uri? uri) {
+        print(uri);
         if (uri != null) {
           var path = uri.path;
 
@@ -55,12 +58,9 @@ class _MainScreenState extends State<MainScreen> {
           if (matchResult.succeeded) {
             Navigator.of(context).pushNamed(matchResult.appRoute);
             return;
+          } else {
+            launchUrl(uri);
           }
-
-          BaseApiResponseUtils.showInfo(
-            context,
-            "Приложение не смогло обработать маршрут = ${matchResult.webRoute}.",
-          );
         }
       },
       onError: (err) {
