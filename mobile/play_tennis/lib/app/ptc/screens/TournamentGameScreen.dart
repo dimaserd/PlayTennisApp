@@ -6,6 +6,7 @@ import 'package:play_tennis/app/ptc/widgets/tournaments/TournamentGameScoresWidg
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
 import 'package:play_tennis/logic/ptc/services/TournamentGameService.dart';
+import 'package:play_tennis/main-extensions.dart';
 import 'package:play_tennis/main-routes.dart';
 import 'package:play_tennis/main-services.dart';
 
@@ -195,12 +196,19 @@ class _TournamentGameScreenState extends State<TournamentGameScreen> {
           backgroundColor: Colors.black,
           minimumSize: const Size.fromHeight(36),
         ),
-        onPressed: () {},
+        onPressed: () {
+          _launchUrl();
+        },
         child: const Text(
           "Редактировать счет",
         ),
       ),
     );
     return result;
+  }
+
+  void _launchUrl() async {
+    var url = "ptc/tournament/game/${game!.game!.id!}";
+    MainAppExtensions.trylaunchAppUrl(url, (p0) => null);
   }
 }
