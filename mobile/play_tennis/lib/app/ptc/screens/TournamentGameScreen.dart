@@ -154,7 +154,8 @@ class _TournamentGameScreenState extends State<TournamentGameScreen> {
                       ),
                       scoresSafe.succeeded
                           ? Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 10),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
                               child: GameSetScores(
                                 model: scoresSafe.model!,
                                 onTapped: (p) {
@@ -164,12 +165,18 @@ class _TournamentGameScreenState extends State<TournamentGameScreen> {
                             )
                           : const SizedBox.shrink(),
                       const SizedBox(
-                        height: 5,
+                        height: 15,
                       ),
                       ...getActions(),
+                      const SizedBox(
+                        height: 15,
+                      ),
                     ],
                   ),
                 ),
+              ),
+              const SizedBox(
+                height: 30,
               ),
             ],
           ),

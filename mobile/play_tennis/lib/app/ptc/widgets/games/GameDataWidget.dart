@@ -161,12 +161,12 @@ class GameDataWidgetController {
       return false;
     }
 
-    if (score1 == 7 && score2 != 6) {
+    if (score1 == 7 && score2 != 6 && score2 != 5) {
       onError("Неправильно указан счёт в ${setNum + 1} сете. 3");
       return false;
     }
 
-    if (score1 != 6 && score2 == 7) {
+    if (score1 != 6 && score1 != 5 && score2 == 7) {
       onError("Неправильно указан счёт в ${setNum + 1} сете. 4");
       return false;
     }
