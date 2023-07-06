@@ -5,16 +5,11 @@ import 'package:play_tennis/app/ptc/widgets/CountryAndCitySelectWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/CustomDateAndTimePickerWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/game-data/AddGameImageWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/game-data/FinalGameImageCardWidget.dart';
-import 'package:play_tennis/app/ptc/widgets/game-data/GameFormExtensions.dart';
-import 'package:play_tennis/app/ptc/widgets/game-data/GameFormMatchInfoWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/games/GameDataWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/courts/CourtTypeSelect.dart';
 import 'package:play_tennis/app/ptc/widgets/game-data/GameFormCourtDataWidget.dart';
-import 'package:play_tennis/app/ptc/widgets/players/SearchPlayersForm.dart';
-import 'package:play_tennis/app/ptc/widgets/players/ShowPlayerData.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
-import 'package:play_tennis/logic/ptc/models/LocationData.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerModel.dart';
 import 'package:play_tennis/logic/ptc/models/cities/CityModel.dart';
@@ -27,7 +22,6 @@ import 'package:play_tennis/main.dart';
 class TournamentGameData {
   String courtType;
   String courtName;
-  PlayerModel opponent;
   List<TennisSetData> score;
   CityModel courtCity;
   CountrySimpleModel courtCountry;
@@ -38,7 +32,6 @@ class TournamentGameData {
   TournamentGameData({
     required this.courtType,
     required this.courtName,
-    required this.opponent,
     required this.score,
     required this.courtCity,
     required this.courtCountry,
@@ -85,7 +78,6 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
       CourtTypeSelectController();
   final ScrollController _scrollController = ScrollController();
 
-  PlayerModel? opponent;
   int step = 0;
   bool hasScore = false;
   int? imageFileId;
@@ -116,18 +108,19 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
   Widget build(BuildContext context) {
     if (locationData == null) {
       return ConstrainedBox(
-          key: UniqueKey(), // добавлен ключ
-          constraints: const BoxConstraints(
-            minWidth: double.infinity,
-            minHeight: double.infinity,
+        key: UniqueKey(), // добавлен ключ
+        constraints: const BoxConstraints(
+          minWidth: double.infinity,
+          minHeight: double.infinity,
+        ),
+        child: SizedBox(
+          child: Column(
+            children: const [
+              Loading(text: "Загрузка"),
+            ],
           ),
-          child: SizedBox(
-            child: Column(
-              children: const [
-                Loading(text: "Загрузка"),
-              ],
-            ),
-          ));
+        ),
+      );
     }
 
     return GestureDetector(
@@ -151,7 +144,6 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
 
   void setOpponent(PlayerModel player) {
     if (mounted) {
-      opponent = player;
       setState(() {
         step = 1;
       });
@@ -161,52 +153,6 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
   List<Widget> getStepWidgets() {
     if (step == 0) {
       return [
-        const Text(
-          "Выберите соперника",
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        SizedBox(
-          height: MediaQuery.of(context).size.height * 0.8,
-          width: double.infinity,
-          child: SearchPlayersForm(
-            locationData: LocationDataMappingExtensions.toLocationData(
-              locationData!,
-            ),
-            onTapHandler: (p) {
-              setOpponent(p);
-            },
-          ),
-        )
-      ];
-    }
-
-    if (step == 1) {
-      return [
-        PlayerCard(
-          player: opponent!,
-          margin: const EdgeInsets.only(top: 0, left: 0, right: 0),
-        ),
-        const SizedBox(
-          height: 5,
-        ),
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.redAccent,
-            minimumSize: const Size.fromHeight(36),
-          ),
-          onPressed: () {
-            setState(() {
-              step = 0;
-            });
-          },
-          child: const Text("Выбрать другого соперника"),
-        ),
         const SizedBox(
           height: 5,
         ),
@@ -253,56 +199,38 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
                 elevation: 5,
                 child: Padding(
                   padding: const EdgeInsets.all(12),
-                  child: Column(children: [
-                    ...GameFormExtensions.getMatchText(
-                      context,
-                      opponent!,
-                      gameDataWidgetController.isWinning(),
-                      gameDataWidgetController.getStringValue(),
-                      [],
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.black,
-                        minimumSize: const Size.fromHeight(40),
+                  child: Column(
+                    children: [
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.black,
+                          minimumSize: const Size.fromHeight(40),
+                        ),
+                        onPressed: () => _setStepHandler(2),
+                        child: const Text("Подтвердить"),
                       ),
-                      onPressed: () => _setStepHandler(2),
-                      child: const Text("Подтвердить"),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white10,
-                        minimumSize: const Size.fromHeight(40),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white10,
+                          minimumSize: const Size.fromHeight(40),
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            hasScore = false;
+                          });
+                        },
+                        child: const Text("Назад"),
                       ),
-                      onPressed: () {
-                        setState(() {
-                          hasScore = false;
-                        });
-                      },
-                      child: const Text("Назад"),
-                    ),
-                  ]),
+                    ],
+                  ),
                 ),
               )
             : const SizedBox.shrink()
       ];
     }
 
-    if (step == 2) {
+    if (step == 1) {
       return [
-        SizedBox(
-          width: double.infinity,
-          height: 115,
-          child: GameFormMatchInfoWidget(
-            context: context,
-            opponent: opponent!,
-            gameDataWidgetController: gameDataWidgetController,
-            backBtnHandler: () => _setStepHandler(1),
-            courtType: courtTypeSelectController.value,
-            showCourtType: false,
-            customWidgets: const [],
-          ),
-        ),
         const SizedBox(
           height: 10,
         ),
@@ -323,27 +251,9 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
       ];
     }
 
-    if (step == 3) {
+    if (step == 2) {
       scrollMove(ScrollDirection.top);
       return [
-        FractionallySizedBox(
-            widthFactor: 1.0,
-            child: SizedBox(
-              child: GameFormMatchInfoWidget(
-                context: context,
-                opponent: opponent!,
-                gameDataWidgetController: gameDataWidgetController,
-                backBtnHandler: () => _setStepHandler(2),
-                courtType: courtTypeSelectController.value,
-                showCourtType: true,
-                customWidgets: [
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  ...getGameDataExtraWidgets()
-                ],
-              ),
-            )),
         const SizedBox(
           height: 10,
         ),
@@ -401,29 +311,8 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
       ];
     }
 
-    if (step == 4) {
+    if (step == 3) {
       return [
-        FractionallySizedBox(
-            widthFactor: 1.0,
-            child: SizedBox(
-              child: GameFormMatchInfoWidget(
-                context: context,
-                opponent: opponent!,
-                gameDataWidgetController: gameDataWidgetController,
-                backBtnHandler: () => _setStepHandler(3),
-                courtType: courtTypeSelectController.value,
-                showCourtType: true,
-                customWidgets: [
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  ...getGameDataExtraWidgets()
-                ],
-              ),
-            )),
-        const SizedBox(
-          height: 10,
-        ),
         FinalGameImageCardWidget(
           fileImage: fileImage,
           onSuccess: widget.onSuccess,
@@ -493,7 +382,6 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
       courtType: data.courtType,
       courtCity: data.selectedCity,
       courtCountry: data.selectedCountry,
-      opponent: opponent!,
       score: gameDataWidgetController.getValue(),
       isWinning: gameDataWidgetController.isWinning(),
       imageFileId: imageFileId,
@@ -539,11 +427,6 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
 
   void _gameFormCourtDataWidgetHandler(GameFormCourtData data) {
     courtData = data;
-
-    if (opponent == null) {
-      _errorHandler("Ошибка. Соперник не указан.");
-      return;
-    }
 
     _setStepHandler(3);
   }

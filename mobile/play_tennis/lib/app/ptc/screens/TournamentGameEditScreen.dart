@@ -66,12 +66,11 @@ class _TournamentGameEditScreenState extends State<TournamentGameEditScreen> {
 
     var matchData = TennisMatchData(
       sets: gameData.score,
-      winnerPlayerId:
-          gameData.isWinning ? loginData!.userId : gameData.opponent.id!,
+      winnerPlayerId: gameData.isWinning ? loginData!.userId : "",
     );
 
     var model = CreateSinglesGame(
-      opponentPlayerId: gameData.opponent.id,
+      opponentPlayerId: "",
       imageFileId: gameData.imageFileId,
       cityId: gameData.courtCity.id!,
       court: gameData.courtName,
