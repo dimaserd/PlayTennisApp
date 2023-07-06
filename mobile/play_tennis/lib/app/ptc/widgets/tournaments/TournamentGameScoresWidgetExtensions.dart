@@ -15,6 +15,13 @@ class TournamentGameScoresWidgetExtensions {
       );
     }
 
+    if (game.players!.length == 1) {
+      return GameSetScoresModelSafe(
+        succeeded: false,
+        model: null,
+      );
+    }
+
     return GameSetScoresModelSafe(
       succeeded: true,
       model: getScoresModel(game, players),
