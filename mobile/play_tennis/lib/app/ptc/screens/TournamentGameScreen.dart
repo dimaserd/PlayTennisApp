@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/Loading.dart';
 import 'package:play_tennis/app/main/widgets/images/CrocoAppImage.dart';
+import 'package:play_tennis/app/ptc/screens/TournamentGameEditScreen.dart';
 import 'package:play_tennis/app/ptc/widgets/games/GameSetScores.dart';
 import 'package:play_tennis/app/ptc/widgets/tournaments/TournamentGameScoresWidgetExtensions.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
@@ -197,13 +198,39 @@ class _TournamentGameScreenState extends State<TournamentGameScreen> {
           minimumSize: const Size.fromHeight(36),
         ),
         onPressed: () {
-          _launchUrl();
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => TournamentGameEditScreen(game: game!),
+            ),
+          );
         },
         child: const Text(
-          "Редактировать счет",
+          "Редактировать счёт",
         ),
       ),
     );
+
+    result.add(
+      const SizedBox(
+        height: 10,
+      ),
+    );
+
+    result.add(
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.black,
+          minimumSize: const Size.fromHeight(36),
+        ),
+        onPressed: () {
+          _launchUrl();
+        },
+        child: const Text(
+          "Web версия",
+        ),
+      ),
+    );
+
     return result;
   }
 
