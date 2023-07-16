@@ -47,13 +47,15 @@ class EditTournamentGameForm extends StatefulWidget {
   final Future<BaseApiResponse> Function(TournamentGameData) createGameClick;
   final Function() onSuccess;
   final TournamentGameDetailedModel game;
+  final bool isEdit;
 
-  const EditTournamentGameForm({
-    Key? key,
-    required this.createGameClick,
-    required this.onSuccess,
-    required this.game,
-  }) : super(key: key);
+  const EditTournamentGameForm(
+      {Key? key,
+      required this.createGameClick,
+      required this.onSuccess,
+      required this.game,
+      this.isEdit = false})
+      : super(key: key);
 
   @override
   State<EditTournamentGameForm> createState() => _EditTournamentGameFormState();
@@ -153,6 +155,7 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
   List<Widget> getStepWidgets() {
     if (step == 0) {
       return [
+        if (widget.isEdit) ...{ showPlayers() },
         const SizedBox(
           height: 5,
         ),
@@ -206,7 +209,13 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
                           backgroundColor: Colors.black,
                           minimumSize: const Size.fromHeight(40),
                         ),
-                        onPressed: () => _setStepHandler(2),
+                        onPressed: () {
+                          if (widget.isEdit) {
+                            _setStepHandler(1);
+                          } else {
+                            _setStepHandler(2);
+                          }
+                        },
                         child: const Text("Подтвердить"),
                       ),
                       ElevatedButton(
@@ -231,6 +240,7 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
 
     if (step == 1) {
       return [
+        if (widget.isEdit) ...{ showPlayers() },
         const SizedBox(
           height: 10,
         ),
@@ -254,6 +264,7 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
     if (step == 2) {
       scrollMove(ScrollDirection.top);
       return [
+        if (widget.isEdit) ...{ showPlayers() },
         const SizedBox(
           height: 10,
         ),
@@ -313,6 +324,7 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
 
     if (step == 3) {
       return [
+        if (widget.isEdit) ...{ showPlayers() },
         FinalGameImageCardWidget(
           fileImage: fileImage,
           onSuccess: widget.onSuccess,
@@ -372,6 +384,56 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
         ),
       ),
     ];
+  }
+
+  Widget showPlayers() {
+    var firstName = "";
+    var secondName = "";
+    if (widget.game.players?.isNotEmpty ?? false) {
+      firstName = (widget.game.players?.first.surname ?? "") +
+          " " +
+          (widget.game.players?.first.name ?? "");
+      secondName = (widget.game.players?.last.surname ?? "") +
+          " " +
+          (widget.game.players?.last.name ?? "");
+    }
+    return SizedBox(
+        height: MediaQuery.of(context).size.width * 0.55,
+        child: Card(
+          margin: const EdgeInsets.all(0.0),
+            child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Column(
+              children: [
+                const SizedBox(height: 20),
+                SizedBox(
+                    height: MediaQuery.of(context).size.width * 0.4,
+                    width: MediaQuery.of(context).size.width * 0.40,
+                    child: Image.asset("assets/icons/player.png",
+                        fit: BoxFit.fitHeight)),
+                Text(firstName,
+                    style: const TextStyle(
+                        fontFamily: "OpenSans-Bold", fontSize: 15),
+                    textAlign: TextAlign.center),
+              ],
+            ),
+            Column(
+              children: [
+                const SizedBox(height: 20),
+                SizedBox(
+                    height: MediaQuery.of(context).size.width * 0.4,
+                    width: MediaQuery.of(context).size.width * 0.40,
+                    child: Image.asset("assets/icons/player.png",
+                        fit: BoxFit.fitHeight)),
+                Text(secondName,
+                    style: const TextStyle(
+                        fontFamily: "OpenSans-Bold", fontSize: 15),
+                    textAlign: TextAlign.center),
+              ],
+            ),
+          ],
+        )));
   }
 
   Future<BaseApiResponse> createGameHandler() async {

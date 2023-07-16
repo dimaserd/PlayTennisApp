@@ -200,7 +200,7 @@ class _TournamentGameScreenState extends State<TournamentGameScreen> {
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => TournamentGameEditScreen(game: game!),
+              builder: (context) => TournamentGameEditScreen(game: game!, isEdit: true),
             ),
           );
         },

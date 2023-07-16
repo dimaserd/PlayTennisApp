@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/Loading.dart';
 import 'package:play_tennis/app/ptc/widgets/tournaments/EditTournamentGameForm.dart';
@@ -11,10 +13,10 @@ import 'package:play_tennis/main.dart';
 
 class TournamentGameEditScreen extends StatefulWidget {
   final TournamentGameDetailedModel game;
-  const TournamentGameEditScreen({
-    Key? key,
-    required this.game,
-  }) : super(key: key);
+  final bool isEdit;
+  const TournamentGameEditScreen(
+      {Key? key, required this.game, this.isEdit = false})
+      : super(key: key);
 
   @override
   State<TournamentGameEditScreen> createState() =>
@@ -40,20 +42,24 @@ class _TournamentGameEditScreenState extends State<TournamentGameEditScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: loginData != null
-          ? EditTournamentGameForm(
-              game: widget.game,
-              createGameClick: _createGameClickHandler,
-              onSuccess: () {
-                Navigator.of(context)
-                    .pushNamedAndRemoveUntil('/profile', (route) => true);
-              },
-            )
-          : const Loading(text: "Загрузка"),
+      body: getBody(context),
       appBar: AppBar(
         title: const Text("Создать игру"),
       ),
     );
+  }
+
+  Widget getBody(BuildContext context) {
+    return loginData != null
+        ? EditTournamentGameForm(
+                game: widget.game,
+                createGameClick: _createGameClickHandler,
+                isEdit: widget.isEdit,
+                onSuccess: () {
+                  Navigator.of(context)
+                      .pushNamedAndRemoveUntil('/profile', (route) => true);
+                },
+              ) : const Loading(text: "Загрузка");
   }
 
   Future<BaseApiResponse> _createGameClickHandler(
