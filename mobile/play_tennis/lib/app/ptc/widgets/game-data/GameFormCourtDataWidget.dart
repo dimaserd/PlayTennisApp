@@ -22,6 +22,7 @@ class GameFormCourtData {
 }
 
 class GameFormCourtDataWidget extends StatelessWidget {
+  final String label;
   final CustomDateAndTimePickerWidgetController dateAndTimePickerController;
   final TextEditingController courtNameController;
   final CourtTypeSelectController courtTypeSelectController;
@@ -33,6 +34,7 @@ class GameFormCourtDataWidget extends StatelessWidget {
 
   const GameFormCourtDataWidget({
     super.key,
+    required this.label,
     required this.scroll,
     required this.errorHandler,
     required this.successHandler,
@@ -58,11 +60,14 @@ class GameFormCourtDataWidget extends StatelessWidget {
 
   List<Widget> getWidgets() {
     return [
-      const Align(
+      Align(
         alignment: Alignment.centerLeft,
         child: Text(
-          "3. Укажите время и место игры",
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+          label,
+          style: const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
       const SizedBox(

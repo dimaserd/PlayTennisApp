@@ -216,6 +216,7 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
           height: 10,
         ),
         GameFormCourtDataWidget(
+          label: "Укажите время и место игры:",
           countryAndCitySelectController: countryAndCitySelectController,
           errorHandler: _errorHandler,
           successHandler: _gameFormCourtDataWidgetHandler,
@@ -235,6 +236,7 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
     if (step == 2) {
       scrollMove(ScrollDirection.top);
       return [
+        showScore(),
         const SizedBox(
           height: 10,
         ),
@@ -294,6 +296,10 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
 
     if (step == 3) {
       return [
+        showScore(),
+        const SizedBox(
+          height: 10,
+        ),
         FinalGameImageCardWidget(
           fileImage: fileImage,
           onSuccess: widget.onSuccess,

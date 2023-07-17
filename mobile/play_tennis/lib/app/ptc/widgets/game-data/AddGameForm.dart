@@ -310,6 +310,7 @@ class _AddGameFormState extends State<AddGameForm> {
           height: 10,
         ),
         GameFormCourtDataWidget(
+          label: "3. Укажите время и место игры",
           countryAndCitySelectController: countryAndCitySelectController,
           errorHandler: _errorHandler,
           successHandler: _gameFormCourtDataWidgetHandler,
