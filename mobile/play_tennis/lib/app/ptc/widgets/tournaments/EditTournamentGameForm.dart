@@ -8,11 +8,13 @@ import 'package:play_tennis/app/ptc/widgets/game-data/FinalGameImageCardWidget.d
 import 'package:play_tennis/app/ptc/widgets/games/GameDataWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/courts/CourtTypeSelect.dart';
 import 'package:play_tennis/app/ptc/widgets/game-data/GameFormCourtDataWidget.dart';
+import 'package:play_tennis/app/ptc/widgets/games/GameSetScores.dart';
 import 'package:play_tennis/app/ptc/widgets/tournaments/PlayerColumnWidget.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerModel.dart';
+import 'package:play_tennis/logic/ptc/models/PlayerSetScores.dart';
 import 'package:play_tennis/logic/ptc/models/cities/CityModel.dart';
 import 'package:play_tennis/logic/ptc/models/cities/CountrySimpleModel.dart';
 import 'package:play_tennis/logic/ptc/models/games/TennisSetData.dart';
@@ -209,7 +211,7 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
 
     if (step == 1) {
       return [
-        showPlayers(),
+        showScore(),
         const SizedBox(
           height: 10,
         ),
@@ -233,7 +235,6 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
     if (step == 2) {
       scrollMove(ScrollDirection.top);
       return [
-        if (widget.isEdit) ...{showPlayers()},
         const SizedBox(
           height: 10,
         ),
@@ -293,7 +294,6 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
 
     if (step == 3) {
       return [
-        if (widget.isEdit) ...{showPlayers()},
         FinalGameImageCardWidget(
           fileImage: fileImage,
           onSuccess: widget.onSuccess,
@@ -308,6 +308,59 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
     }
 
     return [];
+  }
+
+  Widget showScore() {
+    var setData = gameDataWidgetController.getValue();
+
+    var isWinning = gameDataWidgetController.isWinning();
+
+    var player1 = widget.game.players!.first;
+    var player2 = widget.game.players!.last;
+
+    var gameScores = GameSetScoresModel(
+      sets: setData,
+      player1: player1,
+      player2: player2,
+      player1Scores: toGameScores(0, setData),
+      player2Scores: toGameScores(1, setData),
+      winnerId: isWinning ? player1.id! : player2.id!,
+    );
+
+    return Card(
+      margin: const EdgeInsets.only(
+        top: 0,
+        left: 0,
+        right: 0,
+      ),
+      elevation: 5,
+      child: Padding(
+        padding: const EdgeInsets.all(15),
+        child: Column(
+          children: [
+            GameSetScores(
+              model: gameScores,
+              onTapped: (p) {},
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.redAccent,
+                minimumSize: const Size.fromHeight(36),
+              ),
+              onPressed: () {
+                setState(() {
+                  step = 0;
+                });
+              },
+              child: const Text("Изменить счёт"),
+            )
+          ],
+        ),
+      ),
+    );
   }
 
   Widget showPlayers() {
@@ -341,6 +394,12 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
     );
 
     return widget.createGameClick(gameData);
+  }
+
+  PlayerSetScores toGameScores(
+      int numberPlayer, List<TennisSetData> scoreData) {
+    return GameDataWidgetExtensions.getStringValueGames(
+        scoreData, numberPlayer);
   }
 
   void scrollMove(ScrollDirection scroll) {
@@ -388,7 +447,7 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
       return;
     }
     setState(() {
-      hasScore = true;
+      step = 1;
     });
   }
 
