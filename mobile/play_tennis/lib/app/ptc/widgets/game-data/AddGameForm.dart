@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/Loading.dart';
 import 'package:play_tennis/app/ptc/widgets/CountryAndCitySelectWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/CustomDateAndTimePickerWidget.dart';
+import 'package:play_tennis/app/ptc/widgets/game-data/AboutCourtTextDataWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/game-data/AddGameImageWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/game-data/FinalGameImageCardWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/game-data/GameFormExtensions.dart';
@@ -342,7 +343,7 @@ class _AddGameFormState extends State<AddGameForm> {
                   const SizedBox(
                     height: 10,
                   ),
-                  ...getGameDataExtraWidgets()
+                  getGameDataExtraWidget(),
                 ],
               ),
             )),
@@ -419,7 +420,7 @@ class _AddGameFormState extends State<AddGameForm> {
                   const SizedBox(
                     height: 10,
                   ),
-                  ...getGameDataExtraWidgets()
+                  getGameDataExtraWidget(),
                 ],
               ),
             )),
@@ -442,49 +443,12 @@ class _AddGameFormState extends State<AddGameForm> {
     return [];
   }
 
-  List<Widget> getGameDataExtraWidgets() {
-    return [
-      Align(
-        alignment: Alignment.centerLeft,
-        child: Text(
-          "Страна: ${courtData!.selectedCountry.name}",
-          style: const TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ),
-      Align(
-        alignment: Alignment.centerLeft,
-        child: Text(
-          "Город: ${courtData!.selectedCity.name}",
-          style: const TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ),
-      Align(
-        alignment: Alignment.centerLeft,
-        child: Text(
-          "Корт: ${courtNameController.text}",
-          style: const TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ),
-      Align(
-        alignment: Alignment.centerLeft,
-        child: Text(
-          "Покрытие: ${CourtTypeConsts.texts[courtTypeSelectController.value]}",
-          style: const TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ),
-    ];
+  Widget getGameDataExtraWidget() {
+    return AboutCourtTextDataWidget(
+      courtData: courtData,
+      courtName: courtNameController.text,
+      courtType: courtTypeSelectController.value,
+    );
   }
 
   Future<BaseApiResponse> createGameHandler() async {

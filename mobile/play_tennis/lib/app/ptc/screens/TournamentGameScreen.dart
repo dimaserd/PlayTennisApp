@@ -200,12 +200,15 @@ class _TournamentGameScreenState extends State<TournamentGameScreen> {
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => TournamentGameEditScreen(game: game!, isEdit: true),
+              builder: (context) => TournamentGameEditScreen(
+                game: game!,
+                isEdit: true,
+              ),
             ),
           );
         },
         child: const Text(
-          "Редактировать счёт",
+          "Указать счёт",
         ),
       ),
     );

@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/Loading.dart';
 import 'package:play_tennis/app/ptc/widgets/tournaments/EditTournamentGameForm.dart';
@@ -44,7 +42,7 @@ class _TournamentGameEditScreenState extends State<TournamentGameEditScreen> {
       resizeToAvoidBottomInset: false,
       body: getBody(context),
       appBar: AppBar(
-        title: const Text("Создать игру"),
+        title: const Text("Указать счёт"),
       ),
     );
   }
@@ -52,14 +50,15 @@ class _TournamentGameEditScreenState extends State<TournamentGameEditScreen> {
   Widget getBody(BuildContext context) {
     return loginData != null
         ? EditTournamentGameForm(
-                game: widget.game,
-                createGameClick: _createGameClickHandler,
-                isEdit: widget.isEdit,
-                onSuccess: () {
-                  Navigator.of(context)
-                      .pushNamedAndRemoveUntil('/profile', (route) => true);
-                },
-              ) : const Loading(text: "Загрузка");
+            game: widget.game,
+            createGameClick: _createGameClickHandler,
+            isEdit: widget.isEdit,
+            onSuccess: () {
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil('/profile', (route) => true);
+            },
+          )
+        : const Loading(text: "Загрузка");
   }
 
   Future<BaseApiResponse> _createGameClickHandler(

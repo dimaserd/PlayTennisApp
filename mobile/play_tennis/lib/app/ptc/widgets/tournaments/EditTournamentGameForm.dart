@@ -8,6 +8,7 @@ import 'package:play_tennis/app/ptc/widgets/game-data/FinalGameImageCardWidget.d
 import 'package:play_tennis/app/ptc/widgets/games/GameDataWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/courts/CourtTypeSelect.dart';
 import 'package:play_tennis/app/ptc/widgets/game-data/GameFormCourtDataWidget.dart';
+import 'package:play_tennis/app/ptc/widgets/tournaments/PlayerColumnWidget.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerLocationData.dart';
@@ -155,7 +156,7 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
   List<Widget> getStepWidgets() {
     if (step == 0) {
       return [
-        if (widget.isEdit) ...{ showPlayers() },
+        showPlayers(),
         const SizedBox(
           height: 5,
         ),
@@ -165,82 +166,50 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
                   FocusScope.of(context).unfocus();
                 },
                 child: Card(
-                  margin: const EdgeInsets.only(top: 0, left: 0, right: 0),
+                  margin: const EdgeInsets.only(
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                  ),
                   elevation: 5,
                   child: Padding(
                     padding: const EdgeInsets.all(12),
-                    child: Column(children: [
-                      const Text(
-                        "Счёт матча",
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w600,
+                    child: Column(
+                      children: [
+                        const Text(
+                          "Счёт матча",
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                      ),
-                      GameDataWidget(controller: gameDataWidgetController),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.black,
-                          minimumSize: const Size.fromHeight(48),
+                        GameDataWidget(controller: gameDataWidgetController),
+                        const SizedBox(
+                          height: 20,
                         ),
-                        onPressed: _saveScore,
-                        child: const Text("Далее"),
-                      )
-                    ]),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.black,
+                            minimumSize: const Size.fromHeight(48),
+                          ),
+                          onPressed: _saveScore,
+                          child: const Text("Далее"),
+                        )
+                      ],
+                    ),
                   ),
-                ))
+                ),
+              )
             : const SizedBox.shrink(),
         const SizedBox(
           height: 10,
         ),
-        hasScore
-            ? Card(
-                margin: const EdgeInsets.only(top: 0, left: 0, right: 0),
-                elevation: 5,
-                child: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: Column(
-                    children: [
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.black,
-                          minimumSize: const Size.fromHeight(40),
-                        ),
-                        onPressed: () {
-                          if (widget.isEdit) {
-                            _setStepHandler(1);
-                          } else {
-                            _setStepHandler(2);
-                          }
-                        },
-                        child: const Text("Подтвердить"),
-                      ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white10,
-                          minimumSize: const Size.fromHeight(40),
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            hasScore = false;
-                          });
-                        },
-                        child: const Text("Назад"),
-                      ),
-                    ],
-                  ),
-                ),
-              )
-            : const SizedBox.shrink()
       ];
     }
 
     if (step == 1) {
       return [
-        if (widget.isEdit) ...{ showPlayers() },
+        showPlayers(),
         const SizedBox(
           height: 10,
         ),
@@ -264,7 +233,7 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
     if (step == 2) {
       scrollMove(ScrollDirection.top);
       return [
-        if (widget.isEdit) ...{ showPlayers() },
+        if (widget.isEdit) ...{showPlayers()},
         const SizedBox(
           height: 10,
         ),
@@ -324,7 +293,7 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
 
     if (step == 3) {
       return [
-        if (widget.isEdit) ...{ showPlayers() },
+        if (widget.isEdit) ...{showPlayers()},
         FinalGameImageCardWidget(
           fileImage: fileImage,
           onSuccess: widget.onSuccess,
@@ -341,99 +310,20 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
     return [];
   }
 
-  List<Widget> getGameDataExtraWidgets() {
-    return [
-      Align(
-        alignment: Alignment.centerLeft,
-        child: Text(
-          "Страна: ${courtData!.selectedCountry.name}",
-          style: const TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ),
-      Align(
-        alignment: Alignment.centerLeft,
-        child: Text(
-          "Город: ${courtData!.selectedCity.name}",
-          style: const TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ),
-      Align(
-        alignment: Alignment.centerLeft,
-        child: Text(
-          "Корт: ${courtNameController.text}",
-          style: const TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ),
-      Align(
-        alignment: Alignment.centerLeft,
-        child: Text(
-          "Покрытие: ${CourtTypeConsts.texts[courtTypeSelectController.value]}",
-          style: const TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ),
-    ];
-  }
-
   Widget showPlayers() {
-    var firstName = "";
-    var secondName = "";
-    if (widget.game.players?.isNotEmpty ?? false) {
-      firstName = (widget.game.players?.first.surname ?? "") +
-          " " +
-          (widget.game.players?.first.name ?? "");
-      secondName = (widget.game.players?.last.surname ?? "") +
-          " " +
-          (widget.game.players?.last.name ?? "");
-    }
     return SizedBox(
-        height: MediaQuery.of(context).size.width * 0.55,
-        child: Card(
-          margin: const EdgeInsets.all(0.0),
-            child: Row(
+      height: MediaQuery.of(context).size.width * 0.55,
+      child: Card(
+        margin: const EdgeInsets.all(0.0),
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Column(
-              children: [
-                const SizedBox(height: 20),
-                SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.4,
-                    width: MediaQuery.of(context).size.width * 0.40,
-                    child: Image.asset("assets/icons/player.png",
-                        fit: BoxFit.fitHeight)),
-                Text(firstName,
-                    style: const TextStyle(
-                        fontFamily: "OpenSans-Bold", fontSize: 15),
-                    textAlign: TextAlign.center),
-              ],
-            ),
-            Column(
-              children: [
-                const SizedBox(height: 20),
-                SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.4,
-                    width: MediaQuery.of(context).size.width * 0.40,
-                    child: Image.asset("assets/icons/player.png",
-                        fit: BoxFit.fitHeight)),
-                Text(secondName,
-                    style: const TextStyle(
-                        fontFamily: "OpenSans-Bold", fontSize: 15),
-                    textAlign: TextAlign.center),
-              ],
-            ),
+            PlayerColumnWidget(player: widget.game.players!.first),
+            PlayerColumnWidget(player: widget.game.players!.last),
           ],
-        )));
+        ),
+      ),
+    );
   }
 
   Future<BaseApiResponse> createGameHandler() async {
