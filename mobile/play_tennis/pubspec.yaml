@@ -38,7 +38,6 @@ dependencies:
   flutter_html: ^2.2.1
   loader_overlay: 2.0.2+1
 
-  # advance_notification: ^1.0.6
   photo_view: ^0.14.0
   badges: ^2.0.2
   dropdown_search: ^5.0.6
