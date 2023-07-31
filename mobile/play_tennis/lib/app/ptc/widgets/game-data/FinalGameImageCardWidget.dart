@@ -5,6 +5,7 @@ import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
 
 class FinalGameImageCardWidget extends StatefulWidget {
+  final String createGameButtonText;
   final Future<BaseApiResponse> Function() createClickHandler;
   final VoidCallback goBackClickHandler;
   final VoidCallback onSuccess;
@@ -15,6 +16,7 @@ class FinalGameImageCardWidget extends StatefulWidget {
     required this.createClickHandler,
     required this.goBackClickHandler,
     required this.onSuccess,
+    required this.createGameButtonText,
   }) : super(key: key);
 
   final File? fileImage;
@@ -104,7 +106,7 @@ class _FinalGameImageCardWidgetState extends State<FinalGameImageCardWidget> {
             }
           });
         },
-        child: const Text("Создать игру"),
+        child: Text(widget.createGameButtonText),
       ),
       widget.fileImage == null
           ? Padding(

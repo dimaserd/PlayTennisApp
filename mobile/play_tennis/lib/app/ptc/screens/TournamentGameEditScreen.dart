@@ -4,7 +4,6 @@ import 'package:play_tennis/app/ptc/widgets/tournaments/EditTournamentGameForm.d
 import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
 import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
-import 'package:play_tennis/logic/ptc/models/games/CreateSinglesGame.dart';
 import 'package:play_tennis/logic/ptc/models/games/TennisSetData.dart';
 import 'package:play_tennis/logic/ptc/services/TournamentGameService.dart';
 import 'package:play_tennis/main-services.dart';
@@ -71,20 +70,17 @@ class _TournamentGameEditScreenState extends State<TournamentGameEditScreen> {
 
     var matchData = TennisMatchData(
       sets: gameData.score,
-      winnerPlayerId: gameData.isWinning ? loginData!.userId : "",
+      winnerPlayerId: gameData.gameScores.winnerId,
     );
 
-    var model = CreateSinglesGame(
-      opponentPlayerId: "",
+    var model = UpdateGameScoreData(
       imageFileId: gameData.imageFileId,
-      cityId: gameData.courtCity.id!,
-      court: gameData.courtName,
-      courtType: gameData.courtType,
-      playedOnUtc: gameData.gameDate,
+      gameId: widget.game.game!.id!,
       gameData: matchData,
     );
 
-    var result = await AppServices.gameService.create(model, (e) {
+    var result =
+        await AppServices.tournamentGameService.updateScore(model, (e) {
       BaseApiResponseUtils.showError(
         context,
         "Произошла ошибка при создании игры. Пожалуйста, попробуйте еще раз.",

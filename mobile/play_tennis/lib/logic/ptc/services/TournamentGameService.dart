@@ -91,8 +91,7 @@ class TournamentGameService {
   }
 
   Future<BaseApiResponse> updateScore(
-    String id,
-    model,
+    UpdateGameScoreData model,
     Function(String) onError,
   ) async {
     var map = model.toJson();
@@ -109,7 +108,7 @@ class TournamentGameService {
     }
 
     try {
-      var json = jsonDecode(response!);
+      var json = jsonDecode(response);
 
       return BaseApiResponse.fromJson(json);
     } catch (e) {

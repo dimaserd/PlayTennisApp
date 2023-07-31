@@ -437,6 +437,7 @@ class _AddGameFormState extends State<AddGameForm> {
               step = 3;
             });
           },
+          createGameButtonText: "Создать игру",
         ),
       ];
     }

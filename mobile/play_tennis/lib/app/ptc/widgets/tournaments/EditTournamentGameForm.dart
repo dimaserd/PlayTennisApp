@@ -31,6 +31,7 @@ class TournamentGameData {
   bool isWinning;
   DateTime gameDate;
   int? imageFileId;
+  GameSetScoresModel gameScores;
 
   TournamentGameData({
     required this.courtType,
@@ -41,6 +42,7 @@ class TournamentGameData {
     required this.isWinning,
     required this.imageFileId,
     required this.gameDate,
+    required this.gameScores,
   });
 }
 
@@ -288,7 +290,10 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
                     ],
                   ),
                 ),
-              )
+              ),
+        const SizedBox(
+          height: 50,
+        ),
       ];
     }
 
@@ -307,6 +312,10 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
               step = 2;
             });
           },
+          createGameButtonText: "Указать счëт",
+        ),
+        const SizedBox(
+          height: 50,
         ),
       ];
     }
@@ -328,7 +337,7 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
     ];
   }
 
-  Widget showScore() {
+  GameSetScoresModel getGameScoresModel() {
     var setData = gameDataWidgetController.getValue();
 
     var isWinning = gameDataWidgetController.isWinning();
@@ -336,7 +345,7 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
     var player1 = widget.game.players!.first;
     var player2 = widget.game.players!.last;
 
-    var gameScores = GameSetScoresModel(
+    return GameSetScoresModel(
       sets: setData,
       player1: player1,
       player2: player2,
@@ -344,7 +353,10 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
       player2Scores: toGameScores(1, setData),
       winnerId: isWinning ? player1.id! : player2.id!,
     );
+  }
 
+  Widget showScore() {
+    var gameScores = getGameScoresModel();
     return Card(
       margin: const EdgeInsets.only(
         top: 0,
@@ -409,6 +421,7 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
       isWinning: gameDataWidgetController.isWinning(),
       imageFileId: imageFileId,
       gameDate: dateAndTimePickerController.value.dateTime,
+      gameScores: getGameScoresModel(),
     );
 
     return widget.createGameClick(gameData);
