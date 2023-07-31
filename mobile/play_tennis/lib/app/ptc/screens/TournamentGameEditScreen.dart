@@ -5,16 +5,17 @@ import 'package:play_tennis/baseApiResponseUtils.dart';
 import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
 import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
 import 'package:play_tennis/logic/ptc/models/games/CreateSinglesGame.dart';
+import 'package:play_tennis/logic/ptc/models/games/TennisSetData.dart';
 import 'package:play_tennis/logic/ptc/services/TournamentGameService.dart';
 import 'package:play_tennis/main-services.dart';
 import 'package:play_tennis/main.dart';
 
 class TournamentGameEditScreen extends StatefulWidget {
   final TournamentGameDetailedModel game;
-  final bool isEdit;
-  const TournamentGameEditScreen(
-      {Key? key, required this.game, this.isEdit = false})
-      : super(key: key);
+  const TournamentGameEditScreen({
+    Key? key,
+    required this.game,
+  }) : super(key: key);
 
   @override
   State<TournamentGameEditScreen> createState() =>
@@ -52,7 +53,6 @@ class _TournamentGameEditScreenState extends State<TournamentGameEditScreen> {
         ? EditTournamentGameForm(
             game: widget.game,
             createGameClick: _createGameClickHandler,
-            isEdit: widget.isEdit,
             onSuccess: () {
               Navigator.of(context)
                   .pushNamedAndRemoveUntil('/profile', (route) => true);

@@ -50,15 +50,13 @@ class EditTournamentGameForm extends StatefulWidget {
   final Future<BaseApiResponse> Function(TournamentGameData) createGameClick;
   final Function() onSuccess;
   final TournamentGameDetailedModel game;
-  final bool isEdit;
 
-  const EditTournamentGameForm(
-      {Key? key,
-      required this.createGameClick,
-      required this.onSuccess,
-      required this.game,
-      this.isEdit = false})
-      : super(key: key);
+  const EditTournamentGameForm({
+    Key? key,
+    required this.createGameClick,
+    required this.onSuccess,
+    required this.game,
+  }) : super(key: key);
 
   @override
   State<EditTournamentGameForm> createState() => _EditTournamentGameFormState();
@@ -306,14 +304,28 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
           createClickHandler: createGameHandler,
           goBackClickHandler: () {
             setState(() {
-              step = 3;
+              step = 2;
             });
           },
         ),
       ];
     }
 
-    return [];
+    return [
+      Text("step = $step"),
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.redAccent,
+          minimumSize: const Size.fromHeight(36),
+        ),
+        onPressed: () {
+          setState(() {
+            step = step - 1;
+          });
+        },
+        child: const Text("Step - 1"),
+      )
+    ];
   }
 
   Widget showScore() {
@@ -432,20 +444,20 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
 
     setState(() {
       fileImage = file;
-      step = 4;
+      step = 3;
     });
   }
 
   void _noImageHandler() {
     setState(() {
-      step = 4;
+      step = 3;
     });
   }
 
   void _gameFormCourtDataWidgetHandler(GameFormCourtData data) {
     courtData = data;
 
-    _setStepHandler(3);
+    _setStepHandler(2);
   }
 
   void _saveScore() {

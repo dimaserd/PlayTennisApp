@@ -42,25 +42,3 @@ class CreateSinglesGame {
         'gameData': gameData?.toJson(),
       };
 }
-
-class TennisMatchData {
-  late List<TennisSetData>? sets;
-  late String? winnerPlayerId;
-
-  TennisMatchData({
-    required this.sets,
-    required this.winnerPlayerId,
-  });
-
-  factory TennisMatchData.fromJson(Map<String, dynamic> json) =>
-      TennisMatchData(
-        sets: List<TennisSetData>.from(
-            json["sets"].map((x) => TennisSetData.fromJson(x))),
-        winnerPlayerId: json["winnerPlayerId"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        'sets': sets?.map((x) => x.toJson()).toList(),
-        'winnerPlayerId': winnerPlayerId,
-      };
-}

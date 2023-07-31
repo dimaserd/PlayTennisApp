@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
 import 'package:play_tennis/logic/core/NetworkService.dart';
-import 'package:play_tennis/logic/ptc/models/games/CreateSinglesGame.dart';
+import 'package:play_tennis/logic/ptc/models/games/TennisSetData.dart';
 import 'package:play_tennis/logic/ptc/services/GameService.dart';
 
 class TournamentDetailedModel {

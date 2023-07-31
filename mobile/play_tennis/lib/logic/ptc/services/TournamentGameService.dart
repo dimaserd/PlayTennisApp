@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
 import 'package:play_tennis/logic/core/NetworkService.dart';
+import 'package:play_tennis/logic/ptc/models/games/TennisSetData.dart';
 import 'package:play_tennis/logic/ptc/services/GameService.dart';
 import 'package:play_tennis/logic/ptc/services/TournamentService.dart';
 
@@ -33,6 +35,33 @@ class TournamentGameDetailedModel {
       };
 }
 
+class UpdateGameScoreData {
+  late String? gameId;
+  late int? imageFileId;
+  late TennisMatchData? gameData;
+
+  UpdateGameScoreData({
+    required this.gameId,
+    required this.imageFileId,
+    required this.gameData,
+  });
+
+  factory UpdateGameScoreData.fromJson(Map<String, dynamic> json) =>
+      UpdateGameScoreData(
+        gameId: json["gameId"],
+        imageFileId: json["imageFileId"],
+        gameData: json["gameData"] != null
+            ? TennisMatchData?.fromJson(json["gameData"])
+            : null,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'gameId': gameId,
+        'imageFileId': imageFileId,
+        'gameData': gameData?.toJson(),
+      };
+}
+
 class TournamentGameService {
   final NetworkService networkService;
   final String baseUrl = "/api/ptc/tournament/game/";
@@ -59,5 +88,34 @@ class TournamentGameService {
       errorHandler(e.toString());
       return null;
     }
+  }
+
+  Future<BaseApiResponse> updateScore(
+    String id,
+    model,
+    Function(String) onError,
+  ) async {
+    var map = model.toJson();
+    var bodyJson = jsonEncode(map);
+
+    var response = await networkService.postDataV2(
+      '/api/ptc/tournament/game/Score/Update',
+      bodyJson,
+      onError,
+    );
+
+    if (response == "null") {
+      return BaseApiResponse(isSucceeded: false, message: "Произошла ошибка");
+    }
+
+    try {
+      var json = jsonDecode(response!);
+
+      return BaseApiResponse.fromJson(json);
+    } catch (e) {
+      onError(e.toString());
+    }
+
+    return BaseApiResponse(isSucceeded: false, message: "Произошла ошибка");
   }
 }

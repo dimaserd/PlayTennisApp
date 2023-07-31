@@ -202,7 +202,6 @@ class _TournamentGameScreenState extends State<TournamentGameScreen> {
             MaterialPageRoute(
               builder: (context) => TournamentGameEditScreen(
                 game: game!,
-                isEdit: true,
               ),
             ),
           );
