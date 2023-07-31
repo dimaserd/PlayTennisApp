@@ -178,7 +178,7 @@ class _TournamentGameScreenState extends State<TournamentGameScreen> {
                 ),
               ),
               const SizedBox(
-                height: 30,
+                height: 50,
               ),
             ],
           ),
@@ -191,32 +191,34 @@ class _TournamentGameScreenState extends State<TournamentGameScreen> {
   List<Widget> getActions() {
     List<Widget> result = [];
 
-    result.add(
-      ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.black,
-          minimumSize: const Size.fromHeight(36),
-        ),
-        onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => TournamentGameEditScreen(
-                game: game!,
+    if (!game!.game!.resultConfirmed) {
+      result.add(
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.black,
+            minimumSize: const Size.fromHeight(36),
+          ),
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => TournamentGameEditScreen(
+                  game: game!,
+                ),
               ),
-            ),
-          );
-        },
-        child: const Text(
-          "Указать счёт",
+            );
+          },
+          child: const Text(
+            "Указать счёт",
+          ),
         ),
-      ),
-    );
+      );
 
-    result.add(
-      const SizedBox(
-        height: 10,
-      ),
-    );
+      result.add(
+        const SizedBox(
+          height: 10,
+        ),
+      );
+    }
 
     result.add(
       ElevatedButton(

@@ -38,23 +38,25 @@ class _JoinTournamentButton extends State<JoinTournamentButton> {
             clickHandler(context);
           },
           child: Text(
-            "Записаться ${widget.participationCostRub}",
+            widget.participationCostRub == 0
+                ? "Записаться бесплатно"
+                : "Записаться ${widget.participationCostRub}₽",
           ),
         ),
       );
     } else {
       return ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.blue,
-            minimumSize: const Size.fromHeight(36),
-          ),
-          onPressed: () {
-            var uri = Uri.parse(MainSettings.domain);
-            launchUrl(uri);
-          },
-          child: const Text(
-            "Пополнить баланс",
-          ),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.blue,
+          minimumSize: const Size.fromHeight(36),
+        ),
+        onPressed: () {
+          var uri = Uri.parse(MainSettings.domain);
+          launchUrl(uri);
+        },
+        child: const Text(
+          "Пополнить баланс",
+        ),
       );
     }
   }

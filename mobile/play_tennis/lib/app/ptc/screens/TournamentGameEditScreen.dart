@@ -53,8 +53,7 @@ class _TournamentGameEditScreenState extends State<TournamentGameEditScreen> {
             game: widget.game,
             createGameClick: _createGameClickHandler,
             onSuccess: () {
-              Navigator.of(context)
-                  .pushNamedAndRemoveUntil('/profile', (route) => true);
+              Navigator.of(context).pop();
             },
           )
         : const Loading(text: "Загрузка");
