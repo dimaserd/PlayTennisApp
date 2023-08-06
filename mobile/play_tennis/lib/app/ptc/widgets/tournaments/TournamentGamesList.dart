@@ -14,8 +14,7 @@ class TournamentGamesList extends StatelessWidget {
   Widget build(BuildContext context) {
     var games = tournament.events!;
 
-    return Expanded(
-      child: games.isEmpty
+    return games.isEmpty
           ? Column(
               children: const [
                 SizedBox(
@@ -26,7 +25,8 @@ class TournamentGamesList extends StatelessWidget {
                 ),
               ],
             )
-          : ListView.builder(
+          : 
+          ListView.builder(
               itemBuilder: (ctx, index) {
                 return TournamentGameToSelect(
                   tournament: tournament,
@@ -35,7 +35,7 @@ class TournamentGamesList extends StatelessWidget {
                 );
               },
               itemCount: games.length,
-            ),
+            // ),
     );
   }
 }
