@@ -15,27 +15,25 @@ class TournamentGamesList extends StatelessWidget {
     var games = tournament.events!;
 
     return games.isEmpty
-          ? Column(
-              children: const [
-                SizedBox(
-                  height: 20,
-                ),
-                Center(
-                  child: Loading(text: "Игры не найдены"),
-                ),
-              ],
-            )
-          : 
-          ListView.builder(
-              itemBuilder: (ctx, index) {
-                return TournamentGameToSelect(
-                  tournament: tournament,
-                  game: games[index],
-                  onChange: () {},
-                );
-              },
-              itemCount: games.length,
-            // ),
-    );
+        ? Column(
+            children: const [
+              SizedBox(
+                height: 20,
+              ),
+              Center(
+                child: Loading(text: "Игры не найдены"),
+              ),
+            ],
+          )
+        : ListView.builder(
+            itemBuilder: (ctx, index) {
+              return TournamentGameToSelect(
+                tournament: tournament,
+                game: games[index],
+                onChange: () {},
+              );
+            },
+            itemCount: games.length,
+          );
   }
 }
