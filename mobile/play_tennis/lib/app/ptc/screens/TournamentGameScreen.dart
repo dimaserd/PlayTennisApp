@@ -111,8 +111,7 @@ class _TournamentGameScreenState extends State<TournamentGameScreen> {
     );
 
     return [
-      Expanded(
-        child: SingleChildScrollView(
+       SingleChildScrollView(
           child: Column(
             children: [
               Card(
@@ -183,7 +182,6 @@ class _TournamentGameScreenState extends State<TournamentGameScreen> {
             ],
           ),
         ),
-      ),
       const SizedBox.shrink()
     ];
   }
