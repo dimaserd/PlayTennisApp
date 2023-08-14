@@ -60,14 +60,15 @@ class HtmlViewWidget extends StatelessWidget {
       //Если поставить true то стили не будут приниматься
       shrinkWrap: false,
       data: html,
-      customRender: {
-        "file-image": (RenderContext context, Widget child) {
-          var fileId = context.tree.element!.attributes['file-id']!;
+      extensions: [
+        TagExtension(
+            tagsToExtend: {"file-image"},
+            builder: (extensionContext) {
+              var fileId = extensionContext.element!.attributes['file-id']!;
 
-          return HtmlImageViewWidget(fileId: fileId);
-        },
-      },
-      tagsList: Html.tags..addAll(["file-image"]),
+              return HtmlImageViewWidget(fileId: fileId);
+            }),
+      ],
     );
   }
 }
