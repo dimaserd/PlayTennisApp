@@ -1,3 +1,5 @@
+https://pub.dev/packages/flutter_html/versions/3.0.0-beta.2
+
 # Play tennis
 
 ## Для андроида

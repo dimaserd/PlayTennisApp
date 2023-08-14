@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'HtmlImageViewWidget.dart';
 
+//https://pub.dev/packages/flutter_html/versions/3.0.0-beta.2
+
 class HtmlViewWidget extends StatelessWidget {
   late final String html;
 
