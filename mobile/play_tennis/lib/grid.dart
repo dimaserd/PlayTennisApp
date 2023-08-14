@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class TournamentBracket extends StatefulWidget {
+  const TournamentBracket({super.key});
+
   @override
-  _TournamentBracketState createState() => _TournamentBracketState();
+  State<TournamentBracket> createState() => _TournamentBracketState();
 }
 
 class _TournamentBracketState extends State<TournamentBracket> {
