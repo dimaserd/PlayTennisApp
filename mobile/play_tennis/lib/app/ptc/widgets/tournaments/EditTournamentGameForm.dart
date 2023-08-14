@@ -118,9 +118,9 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
           minWidth: double.infinity,
           minHeight: double.infinity,
         ),
-        child: SizedBox(
+        child: const SizedBox(
           child: Column(
-            children: const [
+            children: [
               Loading(text: "Загрузка"),
             ],
           ),

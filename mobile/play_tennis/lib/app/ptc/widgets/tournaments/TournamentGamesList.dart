@@ -15,8 +15,8 @@ class TournamentGamesList extends StatelessWidget {
     var games = tournament.events!;
 
     return games.isEmpty
-        ? Column(
-            children: const [
+        ? const Column(
+            children: [
               SizedBox(
                 height: 20,
               ),

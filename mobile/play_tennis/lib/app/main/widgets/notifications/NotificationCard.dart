@@ -60,8 +60,8 @@ class NotificationCardActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const [],
+    return const Column(
+      children: [],
     );
   }
 }

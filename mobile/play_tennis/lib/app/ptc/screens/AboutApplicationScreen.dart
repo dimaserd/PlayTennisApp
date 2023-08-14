@@ -233,19 +233,19 @@ class ToWebAppWidget extends StatelessWidget {
           },
         );
       },
-      child: SizedBox(
+      child: const SizedBox(
         height: 50,
         width: double.infinity,
         child: Card(
           color: Colors.black,
-          margin: const EdgeInsets.only(
+          margin: EdgeInsets.only(
             top: 5,
           ),
           elevation: 5,
           child: Center(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
+              children: [
                 SizedBox(
                   width: 10,
                 ),
