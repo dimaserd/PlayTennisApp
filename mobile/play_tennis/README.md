@@ -25,7 +25,9 @@ flutter run --release
 flutter build ipa --release
 должно поднять версию
 
-через Xcode необходимо выбрать Runner any device
+через Xcode открыть Runner.xcworkspace
+необходимо выбрать Runner any device
+
 затем Product -> Archive
 
 Публикация посредством нажатия кнопок далее
