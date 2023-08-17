@@ -49,9 +49,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Photo Library Access Warning</string>
+	<string>Разрешите приложению доступ к фотокамере, чтобы отправлять картинки в чате с поддержкой, прикладывать фотографии к турнирам и загружать аватарки юзеров.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Photo Library Access Warning</string>
+	<string>Разрешите приложению доступ к галерее, чтобы отправлять картинки в чате с поддержкой, прикладывать фотографии к турнирам и загружать аватарки юзеров.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>
