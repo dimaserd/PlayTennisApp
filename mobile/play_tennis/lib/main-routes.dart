@@ -22,7 +22,10 @@ import 'package:play_tennis/app/ptc/screens/TelegramLinkScreen.dart';
 import 'package:play_tennis/app/ptc/screens/TournamentGameScreen.dart';
 import 'package:play_tennis/app/ptc/screens/TournamentsScreen.dart';
 import 'package:play_tennis/app/ptc/screens/TournamentScreen.dart';
+import 'package:play_tennis/app/ptc/widgets/tournaments/StickyHeaderList.dart';
+import 'package:play_tennis/app/ptc/widgets/tournaments/TournamentAllGames/TournamentAllGames.dart';
 import 'package:play_tennis/logic/ptc/models/PlayerModel.dart';
+import 'package:play_tennis/logic/ptc/services/TournamentService.dart';
 
 class MainRoutes {
   static String checkAuth = '/';
@@ -33,6 +36,7 @@ class MainRoutes {
   static String notifications = "/notificatins";
   static String profile = "/profile";
   static String registration = '/registration';
+  static String tournamentAllGames = '/tournamentAllGames';
 
   static String toPlayerCardRoute(String playerId) {
     return '/player/$playerId';
@@ -173,6 +177,11 @@ class MainRoutes {
       return MaterialPageRoute(
         builder: (context) => const EditProfileScreen(),
       );
+    }
+
+    if (settings.name == '/tournamentAllGames') {
+      var argument = settings.arguments as TournamentArgument;
+      return MaterialPageRoute(builder: ((context) => TournamentAllGames(tournamentArgument: argument)));
     }
 
     //Многоуровневые маршруты

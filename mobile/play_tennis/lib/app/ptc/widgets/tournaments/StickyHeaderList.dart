@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:play_tennis/app/ptc/widgets/tournaments/TournamentCard.dart';
 import 'package:play_tennis/logic/ptc/services/TournamentService.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
+import 'package:play_tennis/main-routes.dart';
 
 class StickyHeaderList extends StatelessWidget {
   const StickyHeaderList({
@@ -22,14 +23,33 @@ class StickyHeaderList extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(
-            text,
-            style: const TextStyle(
-              color: Color(0xFF333A3B),
-              fontFamily: "OpenSans-Bold",
-              fontSize: 20,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+            Text(
+              text,
+              style: const TextStyle(
+                color: Color(0xFF333A3B),
+                fontFamily: "OpenSans-Bold",
+                fontSize: 20,
+              ),
             ),
-          ),
+            const Spacer(),
+            InkWell(
+              onTap: () {
+                var argument = TournamentArgument(text: text, tournaments: tournaments);
+                Navigator.of(context).pushNamed(MainRoutes.tournamentAllGames, arguments: argument);
+              },
+              child: const Text("Показать все",
+              style: TextStyle(
+                  color: Colors.grey,
+                  decoration: TextDecoration.underline,
+                  fontFamily: "OpenSans-Bold",
+                  fontSize: 14,
+                ),
+              ),
+            ),
+          ]),
         ),
       ),
       sliver: SliverList(
@@ -42,4 +62,11 @@ class StickyHeaderList extends StatelessWidget {
       ),
     );
   }
+}
+
+class TournamentArgument {
+  final String text;
+  final List<TournamentSimpleModel> tournaments;
+
+  TournamentArgument({required this.text, required this.tournaments}); 
 }
