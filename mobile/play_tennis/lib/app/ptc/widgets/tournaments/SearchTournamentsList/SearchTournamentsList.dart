@@ -2,18 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:play_tennis/app/ptc/widgets/tournaments/StickyHeaderList.dart';
 import 'package:play_tennis/app/ptc/widgets/tournaments/TournamentCard.dart';
 import 'package:play_tennis/logic/ptc/services/TournamentService.dart';
-import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 
-class TournamentAllGames extends StatefulWidget {
+class SearchTournamentsList extends StatefulWidget {
   final TournamentArgument tournamentArgument;
-  const TournamentAllGames({Key? key, required this.tournamentArgument})
+  const SearchTournamentsList({Key? key, required this.tournamentArgument})
       : super(key: key);
 
   @override
-  State<TournamentAllGames> createState() => _TournamentAllGames();
+  State<SearchTournamentsList> createState() => _SearchTournamentsList();
 }
 
-class _TournamentAllGames extends State<TournamentAllGames> {
+class _SearchTournamentsList extends State<SearchTournamentsList> {
   final TextEditingController _searchController = TextEditingController();
   late List<TournamentSimpleModel> tournaments;
   bool isShowNothingFind = false;
@@ -36,8 +35,6 @@ class _TournamentAllGames extends State<TournamentAllGames> {
   }
 
   void _onSearchChanged() {
-    // Ваш код для выполнения поиска
-    print('Search text: ${_searchController.text}');
     var text = _searchController.text;
     setState(() {
       count = 1;

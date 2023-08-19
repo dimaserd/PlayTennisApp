@@ -38,7 +38,7 @@ class StickyHeaderList extends StatelessWidget {
             InkWell(
               onTap: () {
                 var argument = TournamentArgument(text: text, tournaments: tournaments);
-                Navigator.of(context).pushNamed(MainRoutes.tournamentAllGames, arguments: argument);
+                Navigator.of(context).pushNamed(MainRoutes.tournamentAll, arguments: argument);
               },
               child: const Text("Показать все",
               style: TextStyle(
