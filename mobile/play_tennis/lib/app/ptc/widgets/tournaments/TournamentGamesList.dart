@@ -5,10 +5,13 @@ import 'TournamentGameToSelect.dart';
 
 class TournamentGamesList extends StatelessWidget {
   final TournamentDetailedModel tournament;
-  const TournamentGamesList({
-    super.key,
-    required this.tournament,
-  });
+  final Function pullRefresh;
+  const TournamentGamesList(
+      {super.key, required this.tournament, required this.pullRefresh});
+
+  Future<void> _refreshData() async {
+    pullRefresh();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,15 +28,18 @@ class TournamentGamesList extends StatelessWidget {
               ),
             ],
           )
-        : ListView.builder(
-            itemBuilder: (ctx, index) {
-              return TournamentGameToSelect(
-                tournament: tournament,
-                game: games[index],
-                onChange: () {},
-              );
-            },
-            itemCount: games.length,
+        : RefreshIndicator(
+            onRefresh: _refreshData,
+            child: ListView.builder(
+              itemBuilder: (ctx, index) {
+                return TournamentGameToSelect(
+                  tournament: tournament,
+                  game: games[index],
+                  onChange: () {},
+                );
+              },
+              itemCount: games.length,
+            ),
           );
   }
 }

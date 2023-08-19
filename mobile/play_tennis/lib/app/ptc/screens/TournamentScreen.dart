@@ -154,6 +154,9 @@ class _TournamentScreenState extends State<TournamentScreen> {
       ),
       TournamentGamesList(
         tournament: tournament!,
+        pullRefresh: (){
+          getTournament();
+        },
       ),
     ];
   }
