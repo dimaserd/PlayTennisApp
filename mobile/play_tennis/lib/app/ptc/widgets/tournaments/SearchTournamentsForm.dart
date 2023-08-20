@@ -144,7 +144,7 @@ class _SearchTournamentsForm extends State<SearchTournamentsForm> {
           if (openedForParticipationTournaments.isNotEmpty) ...{
             StickyHeaderList(
               tournaments: openedForParticipationTournaments,
-              text: "Открытые для записи турниры:",
+              text: "Открытые для записи:",
             )
           },
           if (finishedTournaments.isNotEmpty) ...{
