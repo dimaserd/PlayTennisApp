@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:play_tennis/app/ptc/widgets/CountryAndCitySelectWidget.dart';
 import 'package:play_tennis/app/ptc/widgets/tournaments/StickyHeaderList.dart';
 import 'package:play_tennis/baseApiResponseUtils.dart';
+import 'package:play_tennis/logic/ptc/extensions/TournamentSearchExtensions.dart';
 import 'package:play_tennis/logic/ptc/models/LocationData.dart';
 import 'package:play_tennis/logic/ptc/models/cities/PublicTelegramChatForCityModel.dart';
 import 'package:play_tennis/logic/ptc/services/TournamentService.dart';
@@ -106,9 +107,11 @@ class _SearchTournamentsForm extends State<SearchTournamentsForm> {
               children: [
                 Checkbox(
                   fillColor: MaterialStateColor.resolveWith(
-                      (states) => const Color.fromARGB(255, 51, 187, 255)),
-                  checkColor:
-                      MaterialStateColor.resolveWith((states) => Colors.white),
+                    (states) => const Color.fromARGB(255, 51, 187, 255),
+                  ),
+                  checkColor: MaterialStateColor.resolveWith(
+                    (states) => Colors.white,
+                  ),
                   value: _isShowMine,
                   onChanged: (bool? newValue) {
                     setState(() {
@@ -139,18 +142,21 @@ class _SearchTournamentsForm extends State<SearchTournamentsForm> {
             StickyHeaderList(
               tournaments: activeTournaments,
               text: "Текущие турниры:",
+              tournamentsRequest: getActiveTournamentsRequest(),
             )
           },
           if (openedForParticipationTournaments.isNotEmpty) ...{
             StickyHeaderList(
               tournaments: openedForParticipationTournaments,
               text: "Открытые для записи:",
+              tournamentsRequest: getOpenedTournamentsRequest(),
             )
           },
           if (finishedTournaments.isNotEmpty) ...{
             StickyHeaderList(
               tournaments: finishedTournaments,
               text: "Завершенные",
+              tournamentsRequest: getFinishedTournamentsRequest(),
             )
           }
         }
@@ -173,21 +179,47 @@ class _SearchTournamentsForm extends State<SearchTournamentsForm> {
   }
 
   GetTournamentsRequest getBaseRequest() {
+    var internalRequest = getInternalRequest();
+
+    return TournamentSearchExtensions.getBaseRequest(internalRequest);
+  }
+
+  SearchTournamentsInternalRequest getInternalRequest() {
     var cityId = countryAndCitySelectController.city?.id;
 
-    return GetTournamentsRequest(
-      openForParticipantsJoining: null,
-      activityStatus: TournamentActivityStatus.Active,
-      showMine: null,
+    return SearchTournamentsInternalRequest(
       cityId: cityId,
       count: 10,
       offSet: _offSet,
     );
   }
 
-  getActiveTournaments() {
-    var activeRequest = getBaseRequest();
-    activeRequest.activityStatus = TournamentActivityStatus.Active;
+  GetTournamentsRequest getActiveTournamentsRequest() {
+    return TournamentSearchExtensions.getActiveTournamentsRequest(
+      getInternalRequest(),
+    );
+  }
+
+  GetTournamentsRequest getFinishedTournamentsRequest() {
+    return TournamentSearchExtensions.getFinishedTournamentsRequest(
+      getInternalRequest(),
+    );
+  }
+
+  GetTournamentsRequest getOpenedTournamentsRequest() {
+    return TournamentSearchExtensions.getOpenedTournamentsRequest(
+      getInternalRequest(),
+    );
+  }
+
+  GetTournamentsRequest getPlannedTournamentsRequest() {
+    return TournamentSearchExtensions.getPlannedTournamentsRequest(
+      getInternalRequest(),
+    );
+  }
+
+  void getActiveTournaments() {
+    var activeRequest = getActiveTournamentsRequest();
 
     AppServices.tournamentService.search(activeRequest, (e) {
       BaseApiResponseUtils.showError(
@@ -196,8 +228,6 @@ class _SearchTournamentsForm extends State<SearchTournamentsForm> {
       if (!mounted) {
         return;
       }
-
-      print("Active ${value.list.length}");
 
       if (value.list.isEmpty) {
         setState(() {
@@ -218,14 +248,18 @@ class _SearchTournamentsForm extends State<SearchTournamentsForm> {
     });
   }
 
-  getFinishedTournaments() {
-    var finishedRequest = getBaseRequest();
-    finishedRequest.activityStatus = TournamentActivityStatus.Finished;
+  void getFinishedTournaments() {
+    var finishedRequest = getFinishedTournamentsRequest();
 
-    AppServices.tournamentService.search(finishedRequest, (e) {
-      BaseApiResponseUtils.showError(
-          context, "Произошла ошибка при поиске турниров.");
-    }).then((value) {
+    AppServices.tournamentService.search(
+      finishedRequest,
+      (e) {
+        BaseApiResponseUtils.showError(
+          context,
+          "Произошла ошибка при поиске турниров.",
+        );
+      },
+    ).then((value) {
       if (!mounted) {
         return;
       }
@@ -248,7 +282,7 @@ class _SearchTournamentsForm extends State<SearchTournamentsForm> {
     });
   }
 
-  getPlannedTournaments() {
+  void getPlannedTournaments() {
     var plannedRequest = getBaseRequest();
     plannedRequest.activityStatus = TournamentActivityStatus.Planned;
 
@@ -278,15 +312,20 @@ class _SearchTournamentsForm extends State<SearchTournamentsForm> {
     });
   }
 
-  getOpenedForParticipationTournaments() {
+  void getOpenedForParticipationTournaments() {
     var plannedRequest = getBaseRequest();
     plannedRequest.activityStatus = TournamentActivityStatus.Planned;
     plannedRequest.openForParticipantsJoining = true;
 
-    AppServices.tournamentService.search(plannedRequest, (e) {
-      BaseApiResponseUtils.showError(
-          context, "Произошла ошибка при поиске турниров.");
-    }).then((value) {
+    AppServices.tournamentService.search(
+      plannedRequest,
+      (e) {
+        BaseApiResponseUtils.showError(
+          context,
+          "Произошла ошибка при поиске турниров.",
+        );
+      },
+    ).then((value) {
       if (!mounted) {
         return;
       }
@@ -309,14 +348,14 @@ class _SearchTournamentsForm extends State<SearchTournamentsForm> {
     });
   }
 
-  getData() {
+  void getData() {
     getActiveTournaments();
     getOpenedForParticipationTournaments();
     getFinishedTournaments();
     getPlannedTournaments();
   }
 
-  getCityData() {
+  void getCityData() {
     var cityId = countryAndCitySelectController.city?.id;
 
     if (cityId != null) {
