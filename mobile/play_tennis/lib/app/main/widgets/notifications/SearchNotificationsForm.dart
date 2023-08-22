@@ -70,14 +70,6 @@ class _SearchNotificationsFormState extends State<SearchNotificationsForm> {
     );
   }
 
-  void _onSearchChanged(String query) {
-    if (_debounce?.isActive ?? false) _debounce?.cancel();
-    _debounce = Timer(const Duration(milliseconds: 500), () {
-      // Здесь вы можете добавить логику поиска
-      getData();
-    });
-  }
-
   void onCountryChanged() {
     _offSet = 0;
     getData();
