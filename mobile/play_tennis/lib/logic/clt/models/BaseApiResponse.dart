@@ -51,3 +51,23 @@ class GetListResult<T> {
         offSet: json["offSet"],
       );
 }
+
+class SettingsApplication {
+  late String? applicationName;
+  late String? applicationUrl;
+  late String? publicImageUrlFormat;
+
+   SettingsApplication({
+    required this.applicationName,
+    required this.applicationUrl,
+    required this.publicImageUrlFormat
+  });
+
+  factory SettingsApplication.fromJson(Map<String, dynamic> json) {
+    return SettingsApplication(
+      applicationName: json["applicationName"],
+      applicationUrl: json["applicationUrl"],
+      publicImageUrlFormat: json["publicImageUrlFormat"]
+    );
+    }
+}

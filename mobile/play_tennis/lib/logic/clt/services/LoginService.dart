@@ -1,6 +1,6 @@
 import 'dart:convert';
+import 'package:play_tennis/LogoutResponse.dart';
 import 'package:play_tennis/logic/clt/consts/SharedKeys.dart';
-import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
 import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
 import 'package:play_tennis/logic/clt/models/LoginResultModel.dart';
 import 'package:play_tennis/logic/core/NetworkService.dart';
@@ -69,14 +69,14 @@ class LoginService {
     return result;
   }
 
-  Future<BaseApiResponse> logOut() async {
+  Future<LogoutRespone> logOut() async {
     var prefs = await SharedPreferences.getInstance();
     prefs.remove(SharedKeys.login);
     prefs.remove(SharedKeys.pass);
 
     var response = await networkService.postData('/api/account/logout', "{}");
     var json = jsonDecode(response);
-    return BaseApiResponse.fromJson(json);
+    return LogoutRespone.fromJson(json);
   }
 
   Future<CurrentLoginData> getLoginData() async {

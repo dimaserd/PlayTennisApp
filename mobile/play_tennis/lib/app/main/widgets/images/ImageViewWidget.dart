@@ -4,12 +4,28 @@ import 'package:play_tennis/app/main/widgets/Loading.dart';
 import 'package:play_tennis/main-settings.dart';
 
 class ImageViewWidgetExtensions {
+  static String? publicImageUrlFormat;
+
+  static void setImageUrl(String? image) {
+    publicImageUrlFormat = image;
+  }
+
+  static String _buildUrl(int fileId, String sizeType) {
+    if (publicImageUrlFormat != null && publicImageUrlFormat!.isNotEmpty) {
+      return publicImageUrlFormat!
+          .replaceAll("{sizeType}", sizeType)
+          .replaceAll("{fileId}", fileId.toString());
+    } else {
+      return '${MainSettings.domain}/FileCopies/Images/$sizeType/$fileId.png';
+    }
+  }
+
   static String buildOriginalUrl(int fileId) {
-    return '${MainSettings.domain}/FileCopies/Images/Original/$fileId.jpg';
+    return _buildUrl(fileId, "Original");
   }
 
   static String buildMediumUrl(int fileId) {
-    return '${MainSettings.domain}/FileCopies/Images/Medium/$fileId.jpg';
+    return _buildUrl(fileId, "Medium");
   }
 
   static Scaffold getScaffold(String originalUrl) {
