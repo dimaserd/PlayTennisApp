@@ -3,7 +3,7 @@ import 'logic/clt/models/BaseApiResponse.dart';
 
 class BaseApiResponseUtils {
   static void handleResponse(BuildContext context, BaseApiResponse response) {
-    if (response.isSucceeded != null) {
+    if (response.isSucceeded) {
       showSuccess(context, response.message);
     } else {
       showError(context, response.message);
