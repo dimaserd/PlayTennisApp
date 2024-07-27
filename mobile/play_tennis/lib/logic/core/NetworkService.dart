@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
+import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
 
 class HeaderNames {
   static const authenticated = "X-Authenticated";
@@ -166,4 +169,23 @@ class NetworkService {
 
     return null;
   }
-}
+
+  Future<SettingsApplication?> settingsApplication(String url) async {
+    var client = http.Client();
+
+      var uri = Uri.parse(domain + url);
+
+      var response = await client.get(uri, headers: headers);
+
+        response = await client.get(uri, headers: headers);
+
+        if (response == null) {
+          return null;
+        }
+
+      var decoded = jsonDecode(response.body);
+
+      return SettingsApplication.fromJson(decoded);
+    } 
+  }
+

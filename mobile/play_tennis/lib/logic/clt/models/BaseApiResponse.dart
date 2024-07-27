@@ -15,6 +15,26 @@ class BaseApiResponse {
   }
 }
 
+class LogoutRespone {
+  final bool succeeded;
+  final String errorMessage;
+  final String errorType;
+
+  LogoutRespone({
+      required this.succeeded,
+      required this.errorMessage,
+      required this.errorType
+    });
+
+    factory LogoutRespone.fromJson(Map<String, dynamic> json) {
+    return LogoutRespone(
+      succeeded: json["succeeded"],
+      errorMessage: json["errorMessage"],
+      errorType: json["errorType"]
+    );
+  }
+}
+
 class GenericBaseApiResponse<T> {
   late bool isSucceeded;
   late String message;
@@ -50,4 +70,24 @@ class GetListResult<T> {
         count: json["count"],
         offSet: json["offSet"],
       );
+}
+
+class SettingsApplication {
+  late String? applicationName;
+  late String? applicationUrl;
+  late String? publicImageUrlFormat;
+
+   SettingsApplication({
+    required this.applicationName,
+    required this.applicationUrl,
+    required this.publicImageUrlFormat
+  });
+
+  factory SettingsApplication.fromJson(Map<String, dynamic> json) {
+    return SettingsApplication(
+      applicationName: json["applicationName"],
+      applicationUrl: json["applicationUrl"],
+      publicImageUrlFormat: json["publicImageUrlFormat"]
+    );
+    }
 }

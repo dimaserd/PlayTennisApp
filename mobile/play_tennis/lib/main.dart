@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:play_tennis/app/main/widgets/images/ImageViewWidget.dart';
 import 'package:play_tennis/app/main/widgets/palette.dart';
 import 'package:play_tennis/main-services.dart';
 import 'main-routes.dart';
@@ -101,6 +102,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _initializeFlutterFire();
+    _getSettingsApplication();
     return GlobalLoaderOverlay(
       child: MaterialApp(
         navigatorKey: navigatorKey,
@@ -134,5 +136,11 @@ class MyApp extends StatelessWidget {
     // Force enable crashlytics collection enabled if we're testing it.
     await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+  }
+
+  Future<void> _getSettingsApplication() async {
+    var model = await AppServices.networkService.settingsApplication("/api/ptc/settings/application");
+    var imageUrl = model?.publicImageUrlFormat;
+    ImageViewWidgetExtensions.setImageUrl(imageUrl);
   }
 }
