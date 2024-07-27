@@ -12,4 +12,13 @@ class ClientService {
     var json = jsonDecode(response);
     return BaseApiResponse.fromJson(json);
   }
+
+  Future<SettingsApplication?> settingsApplication(String url) async {
+    var response = await networkService.getData(url);
+    if (response == null) {
+      return null;
+    }
+    var json = jsonDecode(response);
+    return SettingsApplication.fromJson(json);
+    } 
 }
