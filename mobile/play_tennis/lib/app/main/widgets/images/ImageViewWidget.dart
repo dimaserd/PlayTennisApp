@@ -10,24 +10,22 @@ class ImageViewWidgetExtensions {
     publicImageUrlFormat = image;
   }
 
-  static String buildOriginalUrl(int fileId) {
+  static String _buildUrl(int fileId, String sizeType) {
     if (publicImageUrlFormat != null && publicImageUrlFormat!.isNotEmpty) {
       return publicImageUrlFormat!
-          .replaceAll("{sizeType}", "Original")
+          .replaceAll("{sizeType}", sizeType)
           .replaceAll("{fileId}", fileId.toString());
     } else {
-      return '${MainSettings.domain}/FileCopies/Images/Original/$fileId.png';
+      return '${MainSettings.domain}/FileCopies/Images/$sizeType/$fileId.png';
     }
   }
 
+  static String buildOriginalUrl(int fileId) {
+    return _buildUrl(fileId, "Original");
+  }
+
   static String buildMediumUrl(int fileId) {
-    if (publicImageUrlFormat != null && publicImageUrlFormat!.isNotEmpty) {
-      return publicImageUrlFormat!
-          .replaceAll("{sizeType}", "Medium")
-          .replaceAll("{fileId}", fileId.toString());
-    } else {
-      return '${MainSettings.domain}/FileCopies/Images/Medium/$fileId.png';
-    }
+    return _buildUrl(fileId, "Medium");
   }
 
   static Scaffold getScaffold(String originalUrl) {

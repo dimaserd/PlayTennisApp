@@ -1,6 +1,6 @@
 import 'dart:convert';
+import 'package:play_tennis/LogoutResponse.dart';
 import 'package:play_tennis/logic/clt/consts/SharedKeys.dart';
-import 'package:play_tennis/logic/clt/models/BaseApiResponse.dart';
 import 'package:play_tennis/logic/clt/models/CurrentLoginData.dart';
 import 'package:play_tennis/logic/clt/models/LoginResultModel.dart';
 import 'package:play_tennis/logic/core/NetworkService.dart';
