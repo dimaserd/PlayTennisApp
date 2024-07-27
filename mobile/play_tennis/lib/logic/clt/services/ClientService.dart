@@ -13,8 +13,8 @@ class ClientService {
     return BaseApiResponse.fromJson(json);
   }
 
-  Future<SettingsApplication?> settingsApplication(String url) async {
-    var response = await networkService.getData(url);
+  Future<SettingsApplication?> settingsApplication() async {
+    var response = await networkService.getData("/api/ptc/settings/application");
     if (response == null) {
       return null;
     }

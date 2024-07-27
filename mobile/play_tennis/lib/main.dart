@@ -139,7 +139,7 @@ class MyApp extends StatelessWidget {
   }
 
   Future<void> _getSettingsApplication() async {
-    var model = await AppServices.clientService.settingsApplication("/api/ptc/settings/application");
+    var model = await AppServices.clientService.settingsApplication();
     var imageUrl = model?.publicImageUrlFormat;
     ImageViewWidgetExtensions.setImageUrl(imageUrl);
   }
