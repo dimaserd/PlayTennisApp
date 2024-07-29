@@ -118,6 +118,7 @@ class MyApp extends StatelessWidget {
         ],
         theme: ThemeData(
           fontFamily: 'Roboto',
+          scaffoldBackgroundColor: Colors.white,
           bottomAppBarTheme: const BottomAppBarTheme(
             color: mainMaterialColor,
           ),
