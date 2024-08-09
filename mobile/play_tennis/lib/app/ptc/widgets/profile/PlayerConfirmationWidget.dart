@@ -5,6 +5,7 @@ import 'package:play_tennis/main-services.dart';
 
 class PlayerConfirmationWidget extends StatefulWidget {
   final PlayerData player;
+
   const PlayerConfirmationWidget({super.key, required this.player});
 
   @override
@@ -58,6 +59,7 @@ class _PlayerConfirmationWidgetState extends State<PlayerConfirmationWidget> {
 
 class EmailConfirmationWidget extends StatefulWidget {
   final PlayerData player;
+
   const EmailConfirmationWidget({super.key, required this.player});
 
   @override
@@ -102,7 +104,10 @@ class _EmailConfirmationWidgetState extends State<EmailConfirmationWidget> {
                         minimumSize: const Size.fromHeight(30), // NEW
                       ),
                       onPressed: confirmEmail,
-                      child: const Text("Подтвердить"),
+                      child: const Text(
+                        "Подтвердить",
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                   ),
                 ],

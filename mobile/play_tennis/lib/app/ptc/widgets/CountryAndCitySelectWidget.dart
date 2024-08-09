@@ -94,6 +94,20 @@ class _CountryAndCitySelectState extends State<CountryAndCitySelect> {
             disabledItemFn: (CityModel s) => false,
             showSearchBox: true,
             isFilterOnline: true,
+            searchFieldProps: TextFieldProps(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(color: Colors.black),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(color: Colors.black),
+                ),
+                hintText: "Поиск города",
+                hintStyle: TextStyle(color: Colors.black.withOpacity(0.3)),
+              ),
+            ),
           ),
           compareFn: (item1, item2) => item1.id == item2.id,
           filterFn: (country, filter) => country.name!.contains(filter),
@@ -121,6 +135,21 @@ class _CountryAndCitySelectState extends State<CountryAndCitySelect> {
                   disabledItemFn: (CityDistrictModel s) => false,
                   showSearchBox: true,
                   isFilterOnline: true,
+                  searchFieldProps: TextFieldProps(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(color: Colors.black),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(color: Colors.black),
+                      ),
+                      hintText: "Поиск района",
+                      hintStyle:
+                          TextStyle(color: Colors.black.withOpacity(0.3)),
+                    ),
+                  ),
                 ),
                 compareFn: (item1, item2) => item1.id == item2.id,
                 filterFn: (country, filter) => country.name!.contains(filter),

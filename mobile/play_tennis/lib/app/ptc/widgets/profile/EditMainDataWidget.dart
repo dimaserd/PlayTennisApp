@@ -136,7 +136,10 @@ class _EditMainDataWidgetState extends State<EditMainDataWidget> {
               minimumSize: const Size.fromHeight(40), // NEW
             ),
             onPressed: clickHandler,
-            child: const Text("Сохранить"),
+            child: const Text(
+              "Сохранить",
+              style: TextStyle(color: Colors.white),
+            ),
           ),
         ),
         const SizedBox(

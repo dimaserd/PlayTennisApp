@@ -185,7 +185,11 @@ class ProfileDataState extends State<ProfileData> {
         builder: (BuildContext context) {
           return AlertDialog(
             actionsAlignment: MainAxisAlignment.center,
-            title: const Text('Вы действительно хотите удалить аккаунт?'),
+            title: const Text(
+              'Вы действительно хотите удалить аккаунт?',
+              style: TextStyle(color: Colors.white),
+            ),
+            backgroundColor: Colors.black.withOpacity(0.8),
             actions: [
               ElevatedButton(
                 child: const Text('Отменить'),

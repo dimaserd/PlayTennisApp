@@ -27,6 +27,7 @@ class RegistrationFormOptions {
 class RegistrationForm extends StatefulWidget {
   final VoidCallback onLogin;
   final RegistrationFormOptions options;
+
   const RegistrationForm({
     super.key,
     required this.options,
@@ -273,7 +274,10 @@ class _RegistrationFormState extends State<RegistrationForm> {
             minimumSize: const Size.fromHeight(40), // NEW
           ),
           onPressed: () => submitSecondStep(),
-          child: const Text("Далее"),
+          child: const Text(
+            "Далее",
+            style: TextStyle(color: Colors.white),
+          ),
         ),
       ),
       getBackBtn(),
@@ -300,7 +304,10 @@ class _RegistrationFormState extends State<RegistrationForm> {
             minimumSize: const Size.fromHeight(40),
           ),
           onPressed: () => submitFirstStep(),
-          child: const Text("Далее"),
+          child: const Text(
+            "Далее",
+            style: TextStyle(color: Colors.white),
+          ),
         ),
       ),
       getAuthorizationBtn()
@@ -332,7 +339,10 @@ class _RegistrationFormState extends State<RegistrationForm> {
             step--;
           })
         },
-        child: const Text("Назад"),
+        child: const Text(
+          "Назад",
+          style: TextStyle(color: Colors.white),
+        ),
       ),
     );
   }
@@ -346,7 +356,10 @@ class _RegistrationFormState extends State<RegistrationForm> {
           minimumSize: const Size.fromHeight(40), // NEW
         ),
         onPressed: () => onPressed(context),
-        child: const Text("Зарегистрироваться"),
+        child: const Text(
+          "Зарегистрироваться",
+          style: TextStyle(color: Colors.white),
+        ),
       ),
     );
   }
