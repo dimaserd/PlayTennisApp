@@ -11,6 +11,7 @@ import 'package:play_tennis/main-state.dart';
 
 class LoginForm extends StatefulWidget {
   final VoidCallback onLogin;
+
   const LoginForm({
     super.key,
     required this.onLogin,
@@ -74,7 +75,10 @@ class _LoginFormState extends State<LoginForm> {
             minimumSize: const Size.fromHeight(40),
           ),
           onPressed: () => onPressed(context),
-          child: const Text("Войти"),
+          child: const Text(
+            "Войти",
+            style: TextStyle(color: Colors.white),
+          ),
         ),
       ),
       Padding(

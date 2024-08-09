@@ -106,7 +106,10 @@ class _FinalGameImageCardWidgetState extends State<FinalGameImageCardWidget> {
             }
           });
         },
-        child: Text(widget.createGameButtonText),
+        child: Text(
+          widget.createGameButtonText,
+          style: const TextStyle(color: Colors.white),
+        ),
       ),
       widget.fileImage == null
           ? Padding(
@@ -121,7 +124,10 @@ class _FinalGameImageCardWidgetState extends State<FinalGameImageCardWidget> {
                 onPressed: () {
                   widget.goBackClickHandler();
                 },
-                child: const Text("Назад"),
+                child: const Text(
+                  "Назад",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             )
           : const SizedBox.shrink()

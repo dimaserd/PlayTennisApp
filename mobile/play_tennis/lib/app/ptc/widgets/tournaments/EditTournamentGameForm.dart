@@ -195,7 +195,10 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
                             minimumSize: const Size.fromHeight(48),
                           ),
                           onPressed: _saveScore,
-                          child: const Text("Далее"),
+                          child: const Text(
+                            "Далее",
+                            style: TextStyle(color: Colors.white),
+                          ),
                         )
                       ],
                     ),
@@ -267,7 +270,10 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
                               step = 4;
                             });
                           },
-                          child: const Text("Далее"),
+                          child: const Text(
+                            "Далее",
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                       ),
                       Padding(
@@ -284,7 +290,10 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
                               fileImage = null;
                             });
                           },
-                          child: const Text("Изменить фото"),
+                          child: const Text(
+                            "Изменить фото",
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                       )
                     ],
@@ -332,7 +341,10 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
             step = step - 1;
           });
         },
-        child: const Text("Step - 1"),
+        child: const Text(
+          "Step - 1",
+          style: TextStyle(color: Colors.white),
+        ),
       )
     ];
   }
@@ -385,7 +397,10 @@ class _EditTournamentGameFormState extends State<EditTournamentGameForm> {
                   step = 0;
                 });
               },
-              child: const Text("Изменить счёт"),
+              child: const Text(
+                "Изменить счёт",
+                style: TextStyle(color: Colors.white),
+              ),
             )
           ],
         ),

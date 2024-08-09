@@ -253,7 +253,10 @@ class _GameDataWidgetState extends State<GameDataWidget> {
                     });
                     widget.controller._setCount = setSize;
                   },
-                  child: const Text("Добавить сет"),
+                  child: const Text(
+                    "Добавить сет",
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ),
               const SizedBox(
@@ -276,7 +279,10 @@ class _GameDataWidgetState extends State<GameDataWidget> {
                     });
                     widget.controller._setCount = setSize;
                   },
-                  child: const Text("Удалить нижний"),
+                  child: const Text(
+                    "Удалить нижний",
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ),
             ],

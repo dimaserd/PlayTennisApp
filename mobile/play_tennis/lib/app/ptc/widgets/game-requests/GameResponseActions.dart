@@ -78,7 +78,10 @@ class GameResponseActions extends StatelessWidget {
                 minimumSize: const Size.fromHeight(40),
               ),
               onPressed: () => _acceptHandler(context),
-              child: const Text("Принять"),
+              child: const Text(
+                "Принять",
+                style: TextStyle(color: Colors.white),
+              ),
             ),
             const SizedBox(
               height: 20,
@@ -93,7 +96,10 @@ class GameResponseActions extends StatelessWidget {
             minimumSize: const Size.fromHeight(40),
           ),
           onPressed: () => _declineHandler(context),
-          child: const Text("Отказать"),
+          child: const Text(
+            "Отказать",
+            style: TextStyle(color: Colors.white),
+          ),
         ),
       ),
     ];
@@ -122,7 +128,10 @@ class GameResponseActions extends StatelessWidget {
             minimumSize: const Size.fromHeight(36),
           ),
           onPressed: () => _contactsHandler(context),
-          child: const Text("Запросить контакты"),
+          child: const Text(
+            "Запросить контакты",
+            style: TextStyle(color: Colors.white),
+          ),
         ),
       ),
       const SizedBox(

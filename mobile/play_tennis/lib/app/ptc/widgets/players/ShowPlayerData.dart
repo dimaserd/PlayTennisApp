@@ -10,6 +10,7 @@ import 'package:url_launcher/url_launcher.dart';
 class ShowPlayerData extends StatelessWidget {
   final PlayerModel player;
   final CurrentLoginData loginData;
+
   const ShowPlayerData({
     super.key,
     required this.player,

@@ -47,7 +47,10 @@ class GameFormMatchInfoWidget extends StatelessWidget {
               onPressed: () {
                 backBtnHandler();
               },
-              child: const Text("Назад"),
+              child: const Text(
+                "Назад",
+                style: TextStyle(color: Colors.white),
+              ),
             )
           ],
         ),

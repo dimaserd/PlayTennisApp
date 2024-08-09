@@ -150,7 +150,10 @@ class _MyStatefulWidgetState extends State<EditProfileWidget> {
                       );
                     }
                   },
-                  child: const Text("Сохранить"),
+                  child: const Text(
+                    "Сохранить",
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ),
               const SizedBox(

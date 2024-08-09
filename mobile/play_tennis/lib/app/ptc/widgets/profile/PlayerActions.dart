@@ -6,6 +6,7 @@ import 'package:play_tennis/logic/ptc/models/PlayerModel.dart';
 class PlayerActions extends StatefulWidget {
   final PlayerModel player;
   final CurrentLoginData loginData;
+
   const PlayerActions({
     Key? key,
     required this.player,
@@ -53,7 +54,10 @@ class _PlayerActionsState extends State<PlayerActions> {
                   Navigator.of(context)
                       .pushNamed('/create/game', arguments: widget.player);
                 },
-                child: const Text("Внести игру"),
+                child: const Text(
+                  "Внести игру",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],

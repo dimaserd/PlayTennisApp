@@ -82,7 +82,10 @@ class GameRequestRepondingWidget extends StatelessWidget {
               onPressed: () {
                 respond(context);
               },
-              child: const Text("Откликнуться"),
+              child: const Text(
+                "Откликнуться",
+                style: TextStyle(color: Colors.white),
+              ),
             ));
     }
 
@@ -95,7 +98,10 @@ class GameRequestRepondingWidget extends StatelessWidget {
         onPressed: () {
           delete(context);
         },
-        child: const Text("Удалить заявку"),
+        child: const Text(
+          "Удалить заявку",
+          style: TextStyle(color: Colors.white),
+        ),
       ));
     }
     return result;

@@ -54,7 +54,10 @@ class _AddGameImageWidgetState extends State<AddGameImageWidget> {
               onPressed: () {
                 widget.withoutImageClickHandler();
               },
-              child: const Text("Продолжить без фотографии"),
+              child: const Text(
+                "Продолжить без фотографии",
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ),
         )

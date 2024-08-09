@@ -5,6 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 class ShowAlertContact extends StatelessWidget {
   final String title;
   final String subTitle;
+
   const ShowAlertContact(
       {super.key, required this.title, required this.subTitle});
 
@@ -26,7 +27,11 @@ class ShowAlertContact extends StatelessWidget {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text(title),
+            backgroundColor: Colors.black.withOpacity(0.8),
+            title: Text(
+              title,
+              style: const TextStyle(color: Colors.white),
+            ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,6 +39,7 @@ class ShowAlertContact extends StatelessWidget {
               children: [
                 Text(
                   subTitle,
+                  style: const TextStyle(color: Colors.white),
                 ),
                 const SizedBox(height: 16),
                 const Text(
@@ -41,6 +47,7 @@ class ShowAlertContact extends StatelessWidget {
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
+                    color: Colors.white,
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -70,7 +77,11 @@ class ShowAlertContact extends StatelessWidget {
             ),
             actions: [
               TextButton(
-                child: const Center(child: Text('OK')),
+                child: const Center(
+                    child: Text(
+                  'OK',
+                  style: TextStyle(color: Colors.white),
+                )),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },

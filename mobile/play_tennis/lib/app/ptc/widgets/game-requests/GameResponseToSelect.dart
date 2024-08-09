@@ -15,6 +15,7 @@ class GameResponseToSelect extends StatelessWidget {
   final CurrentLoginData loginData;
   final GameRequestDetailedModel request;
   final VoidCallback onChanged;
+
   const GameResponseToSelect({
     super.key,
     required this.response,
@@ -68,7 +69,10 @@ class GameResponseToSelect extends StatelessWidget {
         onPressed: () {
           BaseApiResponseUtils.showError(context, "Не реализовано");
         },
-        child: const Text("Удалить отклик"),
+        child: const Text(
+          "Удалить отклик",
+          style: TextStyle(color: Colors.white),
+        ),
       ),
     );
   }

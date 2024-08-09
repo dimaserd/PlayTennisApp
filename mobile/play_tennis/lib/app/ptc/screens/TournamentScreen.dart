@@ -13,6 +13,7 @@ import 'package:play_tennis/main-services.dart';
 
 class TournamentScreen extends StatefulWidget {
   final String id;
+
   const TournamentScreen({super.key, required this.id});
 
   @override
@@ -154,7 +155,7 @@ class _TournamentScreenState extends State<TournamentScreen> {
       ),
       TournamentGamesList(
         tournament: tournament!,
-        pullRefresh: (){
+        pullRefresh: () {
           getTournament();
         },
       ),
@@ -214,6 +215,7 @@ class _TournamentScreenState extends State<TournamentScreen> {
           },
           child: const Text(
             "Турнирная сетка",
+            style: TextStyle(color: Colors.white),
           ),
         ),
       ),
