@@ -10,38 +10,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b9948d64-541c-4a6a-82e4-0ffea12a8f72" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/main/screens/SetLocationScreenWidget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/main/screens/SetLocationScreenWidget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/main/widgets/ProfileData.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/main/widgets/ProfileData.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/main/widgets/RegistrationForm.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/main/widgets/RegistrationForm.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/main/widgets/login_form.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/main/widgets/login_form.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/ptc/screens/TournamentGameScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/ptc/screens/TournamentGameScreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/ptc/screens/TournamentScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/ptc/screens/TournamentScreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/ptc/widgets/CountryAndCitySelectWidget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/ptc/widgets/CountryAndCitySelectWidget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/ptc/widgets/game-data/AddGameForm.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/ptc/widgets/game-data/AddGameForm.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/ptc/widgets/game-data/AddGameImageWidget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/ptc/widgets/game-data/AddGameImageWidget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/ptc/widgets/game-data/FinalGameImageCardWidget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/ptc/widgets/game-data/FinalGameImageCardWidget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/ptc/widgets/game-data/GameFormCourtDataWidget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/ptc/widgets/game-data/GameFormCourtDataWidget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/ptc/widgets/game-data/GameFormMatchInfoWidget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/ptc/widgets/game-data/GameFormMatchInfoWidget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/ptc/widgets/game-requests/AddGameRequestForm.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/ptc/widgets/game-requests/AddGameRequestForm.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/ptc/widgets/game-requests/GameRequestRepondingWidget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/ptc/widgets/game-requests/GameRequestRepondingWidget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/ptc/widgets/game-requests/GameResponseActions.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/ptc/widgets/game-requests/GameResponseActions.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/ptc/widgets/game-requests/GameResponseToSelect.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/ptc/widgets/game-requests/GameResponseToSelect.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/ptc/widgets/game-requests/SearchGameRequestsForm.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/ptc/widgets/game-requests/SearchGameRequestsForm.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/ptc/widgets/games/GameDataWidget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/ptc/widgets/games/GameDataWidget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/ptc/widgets/players/ShowPlayerData.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/ptc/widgets/players/ShowPlayerData.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/ptc/widgets/profile/EditMainDataWidget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/ptc/widgets/profile/EditMainDataWidget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/ptc/widgets/profile/EditProfileWidget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/ptc/widgets/profile/EditProfileWidget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/ptc/widgets/profile/PlayerActions.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/ptc/widgets/profile/PlayerActions.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/ptc/widgets/profile/PlayerConfirmationWidget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/ptc/widgets/profile/PlayerConfirmationWidget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/ptc/widgets/tournaments/EditTournamentGameForm.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/ptc/widgets/tournaments/EditTournamentGameForm.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/ptc/widgets/tournaments/JoinTournamentButton.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/ptc/widgets/tournaments/JoinTournamentButton.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/ptc/widgets/tournaments/LeaveTournamentButton.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/ptc/widgets/tournaments/LeaveTournamentButton.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/ptc/widgets/tournaments/SearchTournamentsList/SearchTournamentsList.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/ptc/widgets/tournaments/SearchTournamentsList/SearchTournamentsList.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/ptc/widgets/trainers/ShowAlertContact.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/ptc/widgets/trainers/ShowAlertContact.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
@@ -56,12 +31,24 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;AlaaGitHub2020&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/dimaserd/PlayTennisApp.git&quot;,
+    &quot;accountId&quot;: &quot;48c1d444-756e-4b6e-91e7-97d54fe57a2d&quot;
+  }
+}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2UIolWWax5pRRhgEJrR8RiVOuum" />
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1" />
@@ -85,10 +72,14 @@
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "moreFixes__Alaa__Mashkouk",
+    "git-widget-placeholder": "#39 on moreFixes__Alaa__Mashkouk",
     "io.flutter.reload.alreadyRun": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/alaam/AndroidStudioProjects/PlayTennisApp/mobile/play_tennis",
+    "last_opened_file_path": "C:/Users/alaam/AndroidStudioProjects/alaamashkouk.ru",
+    "project.structure.last.edited": "Problems",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "show.migrate.to.gradle.popup": "false"
   }
 }]]></component>

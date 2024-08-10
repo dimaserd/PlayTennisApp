@@ -30,9 +30,6 @@ class Utils {
           ratioX: 1,
           ratioY: 1,
         ),
-        aspectRatioPresets: [
-          CropAspectRatioPreset.square
-        ],
         uiSettings: [
           iosUiSettings(),
           androidUiSettings(),
