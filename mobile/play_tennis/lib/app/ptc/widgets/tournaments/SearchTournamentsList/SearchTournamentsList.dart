@@ -5,6 +5,7 @@ import 'package:play_tennis/logic/ptc/services/TournamentService.dart';
 
 class SearchTournamentsList extends StatefulWidget {
   final TournamentArgument tournamentArgument;
+
   const SearchTournamentsList({Key? key, required this.tournamentArgument})
       : super(key: key);
 

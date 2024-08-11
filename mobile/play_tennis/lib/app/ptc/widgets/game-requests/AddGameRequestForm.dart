@@ -172,6 +172,7 @@ class _AddGameRequestFormState extends State<AddGameRequestForm> {
               "Создать",
               style: TextStyle(
                 fontWeight: FontWeight.w600,
+                color: Colors.white,
               ),
             ),
           )

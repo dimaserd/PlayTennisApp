@@ -16,6 +16,7 @@ class JoinTournamentButton extends StatefulWidget {
     required this.participationCostRub,
     required this.tournamentId,
   });
+
   @override
   State<JoinTournamentButton> createState() => _JoinTournamentButton();
 }
@@ -41,6 +42,7 @@ class _JoinTournamentButton extends State<JoinTournamentButton> {
             widget.participationCostRub == 0
                 ? "Записаться бесплатно"
                 : "Записаться ${widget.participationCostRub}₽",
+            style: const TextStyle(color: Colors.white),
           ),
         ),
       );
@@ -56,6 +58,7 @@ class _JoinTournamentButton extends State<JoinTournamentButton> {
         },
         child: const Text(
           "Пополнить баланс",
+          style: TextStyle(color: Colors.white),
         ),
       );
     }

@@ -117,7 +117,10 @@ class GameFormCourtDataWidget extends StatelessWidget {
           minimumSize: const Size.fromHeight(45),
         ),
         onPressed: _clickHandler,
-        child: const Text("Далее"),
+        child: const Text(
+          "Далее",
+          style: TextStyle(color: Colors.white),
+        ),
       ),
     ];
   }

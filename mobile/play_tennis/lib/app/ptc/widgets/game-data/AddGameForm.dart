@@ -208,7 +208,10 @@ class _AddGameFormState extends State<AddGameForm> {
               step = 0;
             });
           },
-          child: const Text("Выбрать другого соперника"),
+          child: const Text(
+            "Выбрать другого соперника",
+            style: TextStyle(color: Colors.white),
+          ),
         ),
         const SizedBox(
           height: 5,
@@ -241,7 +244,10 @@ class _AddGameFormState extends State<AddGameForm> {
                           minimumSize: const Size.fromHeight(48),
                         ),
                         onPressed: _saveScore,
-                        child: const Text("Далее"),
+                        child: const Text(
+                          "Далее",
+                          style: TextStyle(color: Colors.white),
+                        ),
                       )
                     ]),
                   ),
@@ -270,7 +276,10 @@ class _AddGameFormState extends State<AddGameForm> {
                         minimumSize: const Size.fromHeight(40),
                       ),
                       onPressed: () => _setStepHandler(2),
-                      child: const Text("Подтвердить"),
+                      child: const Text(
+                        "Подтвердить",
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
@@ -282,7 +291,10 @@ class _AddGameFormState extends State<AddGameForm> {
                           hasScore = false;
                         });
                       },
-                      child: const Text("Назад"),
+                      child: const Text(
+                        "Назад",
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                   ]),
                 ),
@@ -378,7 +390,10 @@ class _AddGameFormState extends State<AddGameForm> {
                               step = 4;
                             });
                           },
-                          child: const Text("Далее"),
+                          child: const Text(
+                            "Далее",
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                       ),
                       Padding(
@@ -395,7 +410,10 @@ class _AddGameFormState extends State<AddGameForm> {
                               fileImage = null;
                             });
                           },
-                          child: const Text("Изменить фото"),
+                          child: const Text(
+                            "Изменить фото",
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                       )
                     ],

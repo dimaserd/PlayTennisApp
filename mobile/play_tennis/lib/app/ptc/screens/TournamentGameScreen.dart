@@ -13,6 +13,7 @@ import 'package:play_tennis/main-services.dart';
 
 class TournamentGameScreen extends StatefulWidget {
   final String id;
+
   const TournamentGameScreen({super.key, required this.id});
 
   @override
@@ -111,77 +112,76 @@ class _TournamentGameScreenState extends State<TournamentGameScreen> {
     );
 
     return [
-       SingleChildScrollView(
-          child: Column(
-            children: [
-              Card(
-                margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-                elevation: 4,
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 10,
+      SingleChildScrollView(
+        child: Column(
+          children: [
+            Card(
+              margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+              elevation: 4,
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 10,
-                        ),
-                        child: Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            game!.game!.description!,
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                            ),
+                      child: Container(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          game!.game!.description!,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      game!.game!.imageFileId != null
-                          ? CrocoAppImage(
-                              imageFileId: game!.game!.imageFileId!,
-                            )
-                          : const SizedBox.shrink(),
-                      Container(
-                        height: 10,
-                      ),
-                      scoresSafe.succeeded
-                          ? Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              child: GameSetScores(
-                                model: scoresSafe.model!,
-                                onTapped: (p) {
-                                  MainRoutes.toPlayerCard(context, p.id!);
-                                },
-                              ),
-                            )
-                          : const SizedBox.shrink(),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      ...getActions(),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    game!.game!.imageFileId != null
+                        ? CrocoAppImage(
+                            imageFileId: game!.game!.imageFileId!,
+                          )
+                        : const SizedBox.shrink(),
+                    Container(
+                      height: 10,
+                    ),
+                    scoresSafe.succeeded
+                        ? Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: GameSetScores(
+                              model: scoresSafe.model!,
+                              onTapped: (p) {
+                                MainRoutes.toPlayerCard(context, p.id!);
+                              },
+                            ),
+                          )
+                        : const SizedBox.shrink(),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    ...getActions(),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(
-                height: 50,
-              ),
-            ],
-          ),
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+          ],
         ),
+      ),
       const SizedBox.shrink()
     ];
   }
@@ -207,6 +207,9 @@ class _TournamentGameScreenState extends State<TournamentGameScreen> {
           },
           child: const Text(
             "Указать счёт",
+            style: TextStyle(
+              color: Colors.white,
+            ),
           ),
         ),
       );
@@ -229,6 +232,9 @@ class _TournamentGameScreenState extends State<TournamentGameScreen> {
         },
         child: const Text(
           "Web версия",
+          style: TextStyle(
+            color: Colors.white,
+          ),
         ),
       ),
     );
