@@ -79,7 +79,10 @@ class _SearchGameRequestsFormState extends State<SearchGameRequestsForm> {
                         onPressed: () {
                           getData();
                         },
-                        child: const Text("Поиск"),
+                        child: const Text(
+                          "Поиск",
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ],
                   ),

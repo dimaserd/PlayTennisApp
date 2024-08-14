@@ -62,7 +62,10 @@ class SetLocationScreenWidget extends StatelessWidget {
                     onPressed: () {
                       _clickHandler(context);
                     },
-                    child: const Text("Далее"),
+                    child: const Text(
+                      "Далее",
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ],
               ),

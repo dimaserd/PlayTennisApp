@@ -5,6 +5,7 @@ import 'package:play_tennis/main-services.dart';
 class LeaveTournamentButton extends StatefulWidget {
   final int participationCostRub;
   final String tournamentId;
+
   const LeaveTournamentButton({
     super.key,
     required this.participationCostRub,
@@ -32,13 +33,16 @@ class _LeaveTournamentButton extends State<LeaveTournamentButton> {
         },
         child: const Text(
           "Покинуть турнир",
+          style: TextStyle(color: Colors.white),
         ),
       ),
     );
   }
 
   clickHandler(BuildContext context) {
-    AppServices.tournamentPlayerService.leave(widget.tournamentId).then((value) {
+    AppServices.tournamentPlayerService
+        .leave(widget.tournamentId)
+        .then((value) {
       if (value.isSucceeded) {
         BaseApiResponseUtils.showSuccess(context, value.message);
       } else {
