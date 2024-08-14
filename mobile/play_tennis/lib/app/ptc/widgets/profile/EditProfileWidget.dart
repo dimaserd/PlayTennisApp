@@ -80,7 +80,7 @@ class _MyStatefulWidgetState extends State<EditProfileWidget> {
     return ExpansionPanelList(
       expansionCallback: (int index, bool isExpanded) {
         setState(() {
-          _data[index].isExpanded = !isExpanded;
+          _data[index].isExpanded = !_data[index].isExpanded;
         });
       },
       children: [
