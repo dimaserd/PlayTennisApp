@@ -43,11 +43,12 @@ class ShowPlayerData extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 const Padding(
-                  padding: EdgeInsets.all(5.0),
+                  padding: EdgeInsets.only(top: 24.0, bottom: 16.0, left: 16.0),
                   child: Text("Обо мне:"),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(5.0),
+                  padding: const EdgeInsets.only(
+                      right: 16.0, bottom: 16.0, left: 16.0),
                   child: Text(player.aboutMe!),
                 ),
               ],
