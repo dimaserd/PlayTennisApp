@@ -80,11 +80,10 @@ class _ImageViewWidgetState extends State<ImageViewWidget> {
   late Future<Image> _imageFuture;
   Image? _cachedImage;
 
-
   @override
   void initState() {
     super.initState();
-  ;
+
     if (_cachedImage == null) {
       _imageFuture = _loadAndCorrectImage(
               ImageViewWidgetExtensions.buildMediumUrl(widget.fileId))
@@ -112,18 +111,10 @@ class _ImageViewWidgetState extends State<ImageViewWidget> {
         File correctedFile =
             await FlutterExifRotation.rotateImage(path: tempFile.path);
         Uint8List correctedBytes = await correctedFile.readAsBytes();
-        return Image.memory(
-          correctedBytes,
-          width:350,
-          height: 500,
-        );
+        return Image.memory(correctedBytes, width: 350, height: 500);
       } catch (e) {
         print('Error rotating image: $e');
-        return Image.memory(
-          response.bodyBytes,
-          width:350,
-          height: 500
-        );
+        return Image.memory(response.bodyBytes, width: 350, height: 500);
       }
     }
     throw Exception('Failed to load image');

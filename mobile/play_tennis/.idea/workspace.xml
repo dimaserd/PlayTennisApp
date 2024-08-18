@@ -11,7 +11,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b9948d64-541c-4a6a-82e4-0ffea12a8f72" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/app/main/widgets/images/CrocoAppImage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/main/widgets/images/CrocoAppImage.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/app/main/widgets/images/ImageViewWidget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/main/widgets/images/ImageViewWidget.dart" afterDir="false" />
