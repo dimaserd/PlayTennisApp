@@ -20,6 +20,7 @@ class PlayersList extends StatelessWidget {
   }) {
     addScrollListener();
   }
+
   final ScrollController _scrollController = ScrollController();
 
   void addScrollListener() {
@@ -71,8 +72,12 @@ class PlayersList extends StatelessWidget {
                     elevation: 4,
                     clipBehavior: Clip.antiAliasWithSaveLayer,
                     child: ListTile(
-                      leading: PlayerAvatar(
-                          avatarFileId: players[index].avatarFileId),
+                      leading: SizedBox(
+                        width: 56.0,
+                        height: 56.0,
+                        child: PlayerAvatar(
+                            avatarFileId: players[index].avatarFileId),
+                      ),
                       title: Text(
                         "${players[index].surname!} ${players[index].name!}",
                         style: Theme.of(context).textTheme.titleLarge,

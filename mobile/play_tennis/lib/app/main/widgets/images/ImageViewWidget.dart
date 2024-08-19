@@ -65,12 +65,8 @@ class ImageViewWidgetExtensions {
 
 class ImageViewWidget extends StatefulWidget {
   final int fileId;
-  final bool fromTournamentGameToSelect;
 
-  const ImageViewWidget(
-      {super.key,
-      required this.fileId,
-      this.fromTournamentGameToSelect = false});
+  const ImageViewWidget({super.key, required this.fileId});
 
   @override
   State<ImageViewWidget> createState() => _ImageViewWidgetState();
@@ -126,23 +122,18 @@ class _ImageViewWidgetState extends State<ImageViewWidget> {
       onTap: () {
         Navigator.of(context).pushNamed('/show-image/${widget.fileId}');
       },
-      child: widget.fromTournamentGameToSelect
-          ? FutureBuilder<Image>(
-              future: _imageFuture,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Container();
-                } else if (snapshot.hasError) {
-                  return const Text('Error loading image');
-                } else {
-                  return snapshot.data!;
-                }
-              },
-            )
-          : Image(
-              image: NetworkImage(
-                  ImageViewWidgetExtensions.buildMediumUrl(widget.fileId)),
-            ),
+      child: FutureBuilder<Image>(
+        future: _imageFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Container();
+          } else if (snapshot.hasError) {
+            return const Text('Error loading image');
+          } else {
+            return snapshot.data!;
+          }
+        },
+      ),
     );
   }
 }
