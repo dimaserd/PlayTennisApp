@@ -121,7 +121,18 @@ class _ImageInputState extends State<ImageInput> {
             minimumSize: const Size.fromHeight(36),
           ),
           onPressed: (() async {
-            await pickImage(false, _errorHandler);
+            // await pickImage(false, _errorHandler);
+            await Navigator.of(context)
+                .pushNamed("/games/add/take-photo")
+                .then((imagePath) {
+              print("imagePath:$imagePath");
+              if (imagePath != null) {
+                image = File(imagePath
+                    .toString()
+                    .replaceAll('[', '')
+                    .replaceAll(']', ''));
+              }
+            });
           }),
           child: const Text(
             "с камеры",

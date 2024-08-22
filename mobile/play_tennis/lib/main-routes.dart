@@ -7,6 +7,7 @@ import 'package:play_tennis/app/main/screens/ProfileScreen.dart';
 import 'package:play_tennis/app/main/screens/RegistrationScreen.dart';
 import 'package:play_tennis/app/main/screens/RouteNotFoundScreen.dart';
 import 'package:play_tennis/app/main/screens/SetLocationScreenWidget.dart';
+import 'package:play_tennis/app/ptc/screens/takePhotoScreen.dart';
 import 'package:play_tennis/app/ptc/screens/TelegramProfileScreen.dart';
 import 'package:play_tennis/app/main/widgets/images/ImageViewWidget.dart';
 import 'package:play_tennis/app/ptc/screens/AboutApplicationScreen.dart';
@@ -180,7 +181,9 @@ class MainRoutes {
 
     if (settings.name == 'tournaments/all') {
       var argument = settings.arguments as TournamentArgument;
-      return MaterialPageRoute(builder: ((context) => SearchTournamentsList(tournamentArgument: argument)));
+      return MaterialPageRoute(
+          builder: ((context) =>
+              SearchTournamentsList(tournamentArgument: argument)));
     }
 
     //Многоуровневые маршруты
@@ -253,6 +256,12 @@ class MainRoutes {
           player: playerArguments,
           key: UniqueKey(),
         ),
+      );
+    }
+
+    if (settings.name == '/games/add/take-photo') {
+      return MaterialPageRoute(
+        builder: (context) => const TakePhotoScreen(),
       );
     }
 

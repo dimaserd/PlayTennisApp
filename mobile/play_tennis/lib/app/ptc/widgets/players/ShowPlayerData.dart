@@ -82,7 +82,10 @@ class PlayerCard extends StatelessWidget {
       margin: margin,
       elevation: 5,
       child: ListTile(
-        leading: PlayerAvatar(avatarFileId: player.avatarFileId),
+        leading: SizedBox(
+            width: 60,
+            height: 60,
+            child: PlayerAvatar(avatarFileId: player.avatarFileId)),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.end,
