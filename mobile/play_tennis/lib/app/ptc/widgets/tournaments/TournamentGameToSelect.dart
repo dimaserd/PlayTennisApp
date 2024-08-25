@@ -59,9 +59,7 @@ class TournamentGameToSelect extends StatelessWidget {
                 height: 10,
               ),
               game.imageFileId != null
-                  ? CrocoAppImage(
-                      imageFileId: game.imageFileId!,
-                    )
+                  ? CrocoAppImage(imageFileId: game.imageFileId!)
                   : const SizedBox.shrink(),
               Container(
                 height: 10,

@@ -33,6 +33,7 @@ class PlayerSetsScoreList extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           SizedBox(
+              width: 56,
               height: 60,
               child: ClipRRect(
                 borderRadius: const BorderRadius.only(

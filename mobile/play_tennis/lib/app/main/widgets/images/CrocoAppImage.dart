@@ -4,10 +4,7 @@ import 'package:play_tennis/app/main/widgets/images/ImageViewWidget.dart';
 class CrocoAppImage extends StatelessWidget {
   final int imageFileId;
 
-  const CrocoAppImage({
-    super.key,
-    required this.imageFileId,
-  });
+  const CrocoAppImage({super.key, required this.imageFileId});
 
   @override
   Widget build(BuildContext context) {
