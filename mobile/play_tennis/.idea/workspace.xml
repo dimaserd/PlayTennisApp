@@ -10,17 +10,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b9948d64-541c-4a6a-82e4-0ffea12a8f72" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/app/ptc/screens/takePhotoScreen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/other.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/other.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/debug/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/debug/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/main/widgets/Inputs/ImageInput.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/main/widgets/Inputs/ImageInput.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/ptc/widgets/players/ShowPlayerData.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/ptc/widgets/players/ShowPlayerData.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main-routes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main-routes.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/main/widgets/images/CrocoAppImage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/main/widgets/images/CrocoAppImage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/ptc/screens/takePhotoScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/ptc/screens/takePhotoScreen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

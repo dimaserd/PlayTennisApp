@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:play_tennis/app/main/widgets/images/ImageViewWidget.dart';
 
 class CrocoAppImage extends StatelessWidget {
-  final int? imageFileId;
+  final int imageFileId;
 
   const CrocoAppImage({super.key, required this.imageFileId});
 
@@ -14,11 +14,11 @@ class CrocoAppImage extends StatelessWidget {
   Widget ordinary() {
     return Image(
       image:
-          NetworkImage(ImageViewWidgetExtensions.buildMediumUrl(imageFileId!)),
+          NetworkImage(ImageViewWidgetExtensions.buildMediumUrl(imageFileId)),
     );
   }
 
   Widget imageView() {
-    return ImageViewWidget(fileId: imageFileId!);
+    return ImageViewWidget(fileId: imageFileId);
   }
 }
