@@ -35,22 +35,36 @@ class _ImageInputState extends State<ImageInput> {
     }
 
     MyApp.inProccess = true;
+    File? pickedImage;
     try {
-      final image = await Utils.pickMedia(
-        isGallery: isGallery,
-        cropImage: widget.useCropper ? Utils.cropSquareImage : null,
-      );
+      if (isGallery) {
+        pickedImage = await Utils.pickMedia(
+          isGallery: isGallery,
+          cropImage: widget.useCropper ? Utils.cropSquareImage : null,
+        );
+      } else {
+        pickedImage = await Navigator.of(context)
+            .pushNamed("/games/add/take-photo")
+            .then((imagePath) {
+          print("imagePath:$imagePath");
+          if (imagePath != null) {
+            return File(
+                imagePath.toString().replaceAll('[', '').replaceAll(']', ''));
+          }
+          return null;
+        });
+      }
 
-      if (image == null) {
+      if (pickedImage == null) {
         errorHandler("Не удалось выбрать изображение. NullRef");
         MyApp.inProccess = false;
         return;
       }
 
-      final imageTemp = File(image.path);
+      final imageTemp = File(pickedImage.path);
 
       setState(() {
-        this.image = imageTemp;
+        image = imageTemp;
       });
     } on PlatformException catch (e) {
       errorHandler('Не удалось выбрать изображение. $e');
@@ -121,18 +135,7 @@ class _ImageInputState extends State<ImageInput> {
             minimumSize: const Size.fromHeight(36),
           ),
           onPressed: (() async {
-            // await pickImage(false, _errorHandler);
-            await Navigator.of(context)
-                .pushNamed("/games/add/take-photo")
-                .then((imagePath) {
-              print("imagePath:$imagePath");
-              if (imagePath != null) {
-                image = File(imagePath
-                    .toString()
-                    .replaceAll('[', '')
-                    .replaceAll(']', ''));
-              }
-            });
+            await pickImage(false, _errorHandler);
           }),
           child: const Text(
             "с камеры",
