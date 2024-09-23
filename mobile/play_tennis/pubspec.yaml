@@ -55,6 +55,7 @@ dependencies:
   flutter_exif_rotation: ^0.5.1
   camera: ^0.11.0+2
   path_provider: ^2.1.4
+  package_info_plus: ^8.0.2
 
 
 dev_dependencies:
