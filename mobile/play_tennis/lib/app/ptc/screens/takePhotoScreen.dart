@@ -33,7 +33,6 @@ class _TakePhotoScreenState extends State<TakePhotoScreen> {
 
   void _listenToOrientation() {
     _accelerometerSubscription =
-        // accelerometerEvents.listen((AccelerometerEvent event) {
         accelerometerEventStream().listen((AccelerometerEvent event) {
       if (event.x.abs() > event.y.abs()) {
         if (mounted) {
