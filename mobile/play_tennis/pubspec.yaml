@@ -52,7 +52,9 @@ dependencies:
   webview_flutter: ^4.8.0
   uni_links: ^0.5.1
   go_router: ^14.2.3
-  flutter_exif_rotation: ^0.5.1
+  exif_reader: ^3.14.5
+  image: ^4.2.0
+  sensors_plus: ^6.0.1
   camera: ^0.11.0+2
   path_provider: ^2.1.4
   package_info_plus: ^8.0.2

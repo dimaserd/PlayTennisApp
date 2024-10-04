@@ -10,11 +10,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b9948d64-541c-4a6a-82e4-0ffea12a8f72" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/app/main/widgets/app_version_text.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/main/widgets/side_drawer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/main/widgets/side_drawer.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/main/widgets/images/ImageViewWidget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/main/widgets/images/ImageViewWidget.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app/ptc/screens/takePhotoScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/ptc/screens/takePhotoScreen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
@@ -83,7 +83,7 @@
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "update__version",
+    "git-widget-placeholder": "#42 on update__version",
     "io.flutter.reload.alreadyRun": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/alaam/AndroidStudioProjects/alaamashkouk.ru",
@@ -186,10 +186,6 @@
           <url>file://$PROJECT_DIR$/lib/utils.dart</url>
           <line>41</line>
           <option name="timeStamp" value="24" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/lib/main.dart</url>
-          <option name="timeStamp" value="30" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="Dart">
           <url>file://$PROJECT_DIR$/lib/app/ptc/screens/ChangePassScreen.dart</url>
