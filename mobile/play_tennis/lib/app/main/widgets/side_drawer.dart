@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:play_tennis/app/main/widgets/app_version_text.dart';
 import 'package:play_tennis/app/main/widgets/palette.dart';
 import 'package:play_tennis/main-routes.dart';
 import 'package:play_tennis/main-services.dart';
@@ -113,6 +114,9 @@ class SideDrawer extends StatelessWidget {
                   },
                 )
               : const SizedBox.shrink(),
+          const Spacer(),
+          const AppVersionText(),
+          const SizedBox(height: 24),
         ],
       ),
     );

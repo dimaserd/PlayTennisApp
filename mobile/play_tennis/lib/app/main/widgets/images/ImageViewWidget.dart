@@ -1,11 +1,12 @@
 import 'dart:io';
+import 'package:exif_reader/exif_reader.dart' as exif_reader;
 import 'package:flutter/material.dart';
-import 'package:flutter_exif_rotation/flutter_exif_rotation.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:play_tennis/app/main/widgets/Loading.dart';
 import 'package:play_tennis/main-settings.dart';
 import 'package:http/http.dart' as http;
 import 'dart:typed_data';
+import 'package:image/image.dart' as img;
 
 class ImageViewWidgetExtensions {
   static String? publicImageUrlFormat;
@@ -103,14 +104,48 @@ class _ImageViewWidgetState extends State<ImageViewWidget> {
       final tempFile = File('${tempDir.path}/temp_image_${widget.fileId}.png');
       await tempFile.writeAsBytes(response.bodyBytes);
 
+      /// Read EXIF data from the image
       try {
-        File correctedFile =
-            await FlutterExifRotation.rotateImage(path: tempFile.path);
-        Uint8List correctedBytes = await correctedFile.readAsBytes();
-        return Image.memory(correctedBytes, width: 350, height: 500);
+        final tags =
+            await exif_reader.readExifFromBytes(await tempFile.readAsBytes());
+
+        /// Load the image
+        img.Image? image = img.decodeImage(response.bodyBytes);
+
+        if (image == null) {
+          throw Exception("Error decoding the image");
+        }
+
+        for (final entry in tags.entries) {
+          if (entry.key == 'Image Orientation' && tags.isNotEmpty) {
+            String orientation = entry.value.toString();
+
+            /// Rotate the image based on EXIF orientation
+            switch (orientation) {
+              case 'Mirrored vertical':
+                image = img.copyRotate(image!, angle: 180);
+                break;
+              case 'Rotated 90 CW':
+                image = img.copyRotate(image!, angle: 90);
+                break;
+              default:
+                break;
+            }
+
+            /// Convert the rotated image back to bytes
+            Uint8List correctedBytes =
+                Uint8List.fromList(img.encodePng(image!));
+
+            /// Return the corrected image
+            return Image.memory(correctedBytes);
+          } else {
+            /// If no orientation tag, return the original image
+            return Image.memory(response.bodyBytes);
+          }
+        }
       } catch (e) {
-        print('Error rotating image: $e');
-        return Image.memory(response.bodyBytes, width: 350, height: 500);
+        print('Error reading EXIF or rotating image: $e');
+        return Image.memory(response.bodyBytes);
       }
     }
     throw Exception('Failed to load image');
@@ -128,6 +163,7 @@ class _ImageViewWidgetState extends State<ImageViewWidget> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Container();
           } else if (snapshot.hasError) {
+            print('snapshot${snapshot.error}');
             return const Text('Error loading image');
           } else {
             return snapshot.data!;
