@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 
 class AppVersionText extends StatefulWidget {
   const AppVersionText({super.key});
@@ -9,23 +8,17 @@ class AppVersionText extends StatefulWidget {
 }
 
 class _AppVersionTextState extends State<AppVersionText> {
-  PackageInfo? packageInfo;
-
-  Future<PackageInfo?> _getPackageInfo() async {
-    packageInfo = await PackageInfo.fromPlatform();
-    setState(() {});
-    return packageInfo;
-  }
+  String? appVersion;
 
   @override
   void initState() {
     super.initState();
-    _getPackageInfo();
+    appVersion = '1.0.0';
   }
 
   @override
   Widget build(BuildContext context) => Text(
-        'V ${packageInfo?.version ?? ''}',
+        'V $appVersion',
         style: const TextStyle().copyWith(
             fontSize: 9, fontStyle: FontStyle.italic, color: Colors.black),
       );
